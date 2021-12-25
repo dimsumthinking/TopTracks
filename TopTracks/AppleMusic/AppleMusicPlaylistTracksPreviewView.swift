@@ -1,20 +1,20 @@
 import SwiftUI
 import MusicKit
 
-struct AppleMusicPlaylistTracksView {
+struct AppleMusicPlaylistTracksPreviewView {
   @State var playlist: Playlist
 }
 
-extension AppleMusicPlaylistTracksView: View {
+extension AppleMusicPlaylistTracksPreviewView: View {
   var body: some View {
     List {
       ForEach(playlist.tracks ?? []) {track in
         if case Track.song(let song) = track {
-          AppleMusicPlaylistSongView(song: song)
+          AppleMusicPlaylistSongPreviewView(song: song)
         }
       }
     }
-    .modifier(InfoModifier(message: ""))
+    .modifier(StationBuildCancellation())
     .onAppear {
       Task.detached {
         playlist = try await playlist.with([.tracks])
@@ -22,4 +22,3 @@ extension AppleMusicPlaylistTracksView: View {
     }
   }
 }
-

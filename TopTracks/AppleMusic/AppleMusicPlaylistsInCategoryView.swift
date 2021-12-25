@@ -15,14 +15,22 @@ extension AppleMusicPlaylistsInCategoryView: View {
   var body: some View {
     List(playlistsWithArtwork) {playlist in
       NavigationLink {
-        AppleMusicPlaylistTracksView(playlist: playlist)
-          .navigationTitle(Text(playlist.name))
-          .navigationBarTitleDisplayMode(.inline)
+        StationBuilderStage("Look through this list of songs. Tap on them to sample them if you like. If there are enough here that you like, tap the button below to create the station.") {
+          VStack {
+            Button("Create Station from this Playlist",
+                   action: {})
+              .buttonStyle(.bordered)
+            AppleMusicPlaylistTracksPreviewView(playlist: playlist)
+              .navigationTitle(Text(playlist.name))
+              .navigationBarTitleDisplayMode(.inline)
+          }
+        }
+        
       } label: {
         AppleMusicPlaylistBillboardView(playlist: playlist)
       }
     }
-    .modifier(InfoModifier(message: "To create a station,\nnext Choose a Playlist"))
+    .modifier(StationBuildCancellation())
   }
 }
 

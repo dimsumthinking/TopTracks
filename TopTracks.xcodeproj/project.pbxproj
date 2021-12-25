@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		62293FF227753CB700D1A63C /* TopTracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 62293FF027753CB700D1A63C /* TopTracks.xcdatamodeld */; };
-		62293FF727756FBF00D1A63C /* InfoModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62293FF627756FBF00D1A63C /* InfoModifier.swift */; };
+		62293FF727756FBF00D1A63C /* StationBuildCancellation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62293FF627756FBF00D1A63C /* StationBuildCancellation.swift */; };
 		623B99EB276AC4F0004C17AE /* TopTracksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623B99EA276AC4F0004C17AE /* TopTracksApp.swift */; };
 		623B99ED276AC4F0004C17AE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623B99EC276AC4F0004C17AE /* ContentView.swift */; };
 		623B99EF276AC4F0004C17AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99EE276AC4F0004C17AE /* Assets.xcassets */; };
@@ -33,15 +33,17 @@
 		6288DAA62770137900DC6448 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6288DAA52770137900DC6448 /* Constants.swift */; };
 		6288DAA82770145B00DC6448 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6288DAA72770145B00DC6448 /* Utilities.swift */; };
 		62A6B9CD277621EE009518C5 /* BuildingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A6B9CC277621EE009518C5 /* BuildingStatus.swift */; };
-		62CC4F1127701BAD005A60A2 /* AppleMusicPlaylistTracksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CC4F1027701BAD005A60A2 /* AppleMusicPlaylistTracksView.swift */; };
-		62CC4F1327701C31005A60A2 /* AppleMusicPlaylistSongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CC4F1227701C31005A60A2 /* AppleMusicPlaylistSongView.swift */; };
+		62CC4F1127701BAD005A60A2 /* AppleMusicPlaylistTracksPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CC4F1027701BAD005A60A2 /* AppleMusicPlaylistTracksPreviewView.swift */; };
+		62CC4F1327701C31005A60A2 /* AppleMusicPlaylistSongPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CC4F1227701C31005A60A2 /* AppleMusicPlaylistSongPreviewView.swift */; };
 		62CC4F15277026FB005A60A2 /* AppleMusicSongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CC4F14277026FB005A60A2 /* AppleMusicSongView.swift */; };
+		62E01CFB27775B110059ED3D /* StationBuilderStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E01CFA27775B110059ED3D /* StationBuilderStage.swift */; };
+		62E01CFF27776F9F0059ED3D /* AppleMusicSongPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E01CFE27776F9F0059ED3D /* AppleMusicSongPreviewView.swift */; };
 		62F13BE4276E26B60096FDAF /* AppleMusicCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F13BE3276E26B60096FDAF /* AppleMusicCategoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		62293FF127753CB700D1A63C /* TopTracks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TopTracks.xcdatamodel; sourceTree = "<group>"; };
-		62293FF627756FBF00D1A63C /* InfoModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModifier.swift; sourceTree = "<group>"; };
+		62293FF627756FBF00D1A63C /* StationBuildCancellation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationBuildCancellation.swift; sourceTree = "<group>"; };
 		623B99E7276AC4F0004C17AE /* TopTracks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopTracks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		623B99EA276AC4F0004C17AE /* TopTracksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksApp.swift; sourceTree = "<group>"; };
 		623B99EC276AC4F0004C17AE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,9 +69,11 @@
 		6288DAA52770137900DC6448 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6288DAA72770145B00DC6448 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		62A6B9CC277621EE009518C5 /* BuildingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingStatus.swift; sourceTree = "<group>"; };
-		62CC4F1027701BAD005A60A2 /* AppleMusicPlaylistTracksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicPlaylistTracksView.swift; sourceTree = "<group>"; };
-		62CC4F1227701C31005A60A2 /* AppleMusicPlaylistSongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicPlaylistSongView.swift; sourceTree = "<group>"; };
+		62CC4F1027701BAD005A60A2 /* AppleMusicPlaylistTracksPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicPlaylistTracksPreviewView.swift; sourceTree = "<group>"; };
+		62CC4F1227701C31005A60A2 /* AppleMusicPlaylistSongPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicPlaylistSongPreviewView.swift; sourceTree = "<group>"; };
 		62CC4F14277026FB005A60A2 /* AppleMusicSongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicSongView.swift; sourceTree = "<group>"; };
+		62E01CFA27775B110059ED3D /* StationBuilderStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationBuilderStage.swift; sourceTree = "<group>"; };
+		62E01CFE27776F9F0059ED3D /* AppleMusicSongPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicSongPreviewView.swift; sourceTree = "<group>"; };
 		62F13BE3276E26B60096FDAF /* AppleMusicCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicCategoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,7 +93,6 @@
 			children = (
 				6288DAA52770137900DC6448 /* Constants.swift */,
 				6288DAA72770145B00DC6448 /* Utilities.swift */,
-				62293FF627756FBF00D1A63C /* InfoModifier.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -174,9 +177,10 @@
 				6288DA9F276FA59B00DC6448 /* AppleMusicPlaylistsInCategory.swift */,
 				6288DAA1276FB45E00DC6448 /* AppleMusicPlaylistBillboardView.swift */,
 				6288DAA32770125A00DC6448 /* AppleMusicArtworkDisplayable.swift */,
-				62CC4F1027701BAD005A60A2 /* AppleMusicPlaylistTracksView.swift */,
-				62CC4F1227701C31005A60A2 /* AppleMusicPlaylistSongView.swift */,
+				62CC4F1027701BAD005A60A2 /* AppleMusicPlaylistTracksPreviewView.swift */,
+				62CC4F1227701C31005A60A2 /* AppleMusicPlaylistSongPreviewView.swift */,
 				62CC4F14277026FB005A60A2 /* AppleMusicSongView.swift */,
+				62E01CFE27776F9F0059ED3D /* AppleMusicSongPreviewView.swift */,
 			);
 			path = AppleMusic;
 			sourceTree = "<group>";
@@ -195,8 +199,10 @@
 		625A6C1E276D30FA003A05E7 /* StationBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				62293FF627756FBF00D1A63C /* StationBuildCancellation.swift */,
 				623B9A0D276B797E004C17AE /* StationBuilderView.swift */,
 				6288DA9B276F76BE00DC6448 /* StationBuilderCancelConfirmationView.swift */,
+				62E01CFA27775B110059ED3D /* StationBuilderStage.swift */,
 			);
 			path = StationBuilder;
 			sourceTree = "<group>";
@@ -279,7 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62CC4F1327701C31005A60A2 /* AppleMusicPlaylistSongView.swift in Sources */,
+				62CC4F1327701C31005A60A2 /* AppleMusicPlaylistSongPreviewView.swift in Sources */,
 				623B99F4276AC4F0004C17AE /* Persistence.swift in Sources */,
 				6288DAA62770137900DC6448 /* Constants.swift in Sources */,
 				6288DA9E276FA51100DC6448 /* AppleMusicPlaylistsInCategoryView.swift in Sources */,
@@ -289,11 +295,12 @@
 				623B9A10276B7B5F004C17AE /* StationEditorView.swift in Sources */,
 				625A6C1D276D28F8003A05E7 /* RotationCategory.swift in Sources */,
 				6288DAA0276FA59C00DC6448 /* AppleMusicPlaylistsInCategory.swift in Sources */,
-				62CC4F1127701BAD005A60A2 /* AppleMusicPlaylistTracksView.swift in Sources */,
-				62293FF727756FBF00D1A63C /* InfoModifier.swift in Sources */,
+				62CC4F1127701BAD005A60A2 /* AppleMusicPlaylistTracksPreviewView.swift in Sources */,
+				62293FF727756FBF00D1A63C /* StationBuildCancellation.swift in Sources */,
 				6288DA9C276F76BE00DC6448 /* StationBuilderCancelConfirmationView.swift in Sources */,
 				625A6C24276D3DFD003A05E7 /* Hour.swift in Sources */,
 				6288DAA82770145B00DC6448 /* Utilities.swift in Sources */,
+				62E01CFB27775B110059ED3D /* StationBuilderStage.swift in Sources */,
 				623B99ED276AC4F0004C17AE /* ContentView.swift in Sources */,
 				62CC4F15277026FB005A60A2 /* AppleMusicSongView.swift in Sources */,
 				623B9A0E276B797E004C17AE /* StationBuilderView.swift in Sources */,
@@ -301,6 +308,7 @@
 				625A6C22276D3544003A05E7 /* ClockView.swift in Sources */,
 				623B9A0A276B7767004C17AE /* AppleMusicCategory.swift in Sources */,
 				62A6B9CD277621EE009518C5 /* BuildingStatus.swift in Sources */,
+				62E01CFF27776F9F0059ED3D /* AppleMusicSongPreviewView.swift in Sources */,
 				6288DAA2276FB45E00DC6448 /* AppleMusicPlaylistBillboardView.swift in Sources */,
 				623B99EB276AC4F0004C17AE /* TopTracksApp.swift in Sources */,
 				623B9A01276ACEBC004C17AE /* ReconsiderAuthorizationView.swift in Sources */,

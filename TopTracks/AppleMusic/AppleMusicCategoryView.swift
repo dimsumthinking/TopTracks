@@ -8,14 +8,16 @@ extension AppleMusicCategoryView: View {
     List {
       ForEach(appleMusicCategories) {category in
         NavigationLink {
+          StationBuilderStage("Next Choose a Playlist. Every station begins from a playlist.") {
           AppleMusicPlaylistsInCategoryView(for: category)
+          }
             .navigationTitle(category.description)
         } label: {
           Text(category.description)
         }
       }
     }
-    .modifier(InfoModifier(message: "To create a station,\n first Choose a category"))
+    .modifier(StationBuildCancellation())
   }
 }
 
