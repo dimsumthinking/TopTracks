@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="TopTracksSong" representedClassName="TopTracksSong" syncable="YES" codeGenerationType="class">
+        <relationship name="stack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="songs" inverseEntity="TopTracksStack"/>
+    </entity>
+    <entity name="TopTracksStack" representedClassName="TopTracksStack" syncable="YES" codeGenerationType="class">
+        <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TopTracksSong" inverseName="stack" inverseEntity="TopTracksSong"/>
+        <relationship name="stationForAddedStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStation" inverseName="addedStack" inverseEntity="TopTracksStation"/>
+        <relationship name="stationForCurrentStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStation" inverseName="currentStack" inverseEntity="TopTracksStation"/>
+        <relationship name="stationForGoldStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStation" inverseName="goldStack" inverseEntity="TopTracksStation"/>
+        <relationship name="stationForPowerStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStation" inverseName="powerStack" inverseEntity="TopTracksStation"/>
+    </entity>
+    <entity name="TopTracksStation" representedClassName="TopTracksStation" syncable="YES" codeGenerationType="class">
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="addedStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="stationForAddedStack" inverseEntity="TopTracksStack"/>
+        <relationship name="currentStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="stationForCurrentStack" inverseEntity="TopTracksStack"/>
+        <relationship name="goldStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="stationForGoldStack" inverseEntity="TopTracksStack"/>
+        <relationship name="powerStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="stationForPowerStack" inverseEntity="TopTracksStack"/>
+    </entity>
+    <elements>
+        <element name="TopTracksSong" positionX="42.03515625" positionY="-65.85546875" width="128" height="44"/>
+        <element name="TopTracksStack" positionX="30.66015625" positionY="-302.37890625" width="128" height="104"/>
+        <element name="TopTracksStation" positionX="-218.90625" positionY="-304.33203125" width="128" height="104"/>
+    </elements>
+</model>
