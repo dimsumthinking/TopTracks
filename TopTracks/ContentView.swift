@@ -5,7 +5,7 @@
 //    @Environment(\.managedObjectContext) private var viewContext
 //
 //    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Item.buttonPosition, ascending: true)],
 //        animation: .default)
 //    private var items: FetchedResults<Item>
 //
@@ -14,9 +14,9 @@
 //            List {
 //                ForEach(items) { item in
 //                    NavigationLink {
-//                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+//                        Text("Item at \(item.buttonPosition!, formatter: itemFormatter)")
 //                    } label: {
-//                        Text(item.timestamp!, formatter: itemFormatter)
+//                        Text(item.buttonPosition!, formatter: itemFormatter)
 //                    }
 //                }
 //                .onDelete(perform: deleteItems)
@@ -38,7 +38,7 @@
 //    private func addItem() {
 //        withAnimation {
 //            let newItem = Item(context: viewContext)
-//            newItem.timestamp = Date()
+//            newItem.buttonPosition = Date()
 //
 //            do {
 //                try viewContext.save()

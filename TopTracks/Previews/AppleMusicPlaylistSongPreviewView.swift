@@ -77,7 +77,6 @@ extension AppleMusicPlaylistSongPreviewView {
       preview.isPlaying = false
     }
   }
-  
 }
 
 

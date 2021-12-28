@@ -5,15 +5,15 @@ struct AppleMusicCategoryView {
 
 extension AppleMusicCategoryView: View {
   var body: some View {
-    List {
-      ForEach(appleMusicCategories) {category in
-        NavigationLink {
-          StationBuilderStage("Next Choose a Playlist. Every station begins from a playlist.") {
-          AppleMusicPlaylistsInCategoryView(for: category)
+    VStack {
+      InstructionView("Choose a category for your station.")
+      List {
+        ForEach(appleMusicCategories) {category in
+          NavigationLink {
+            AppleMusicPlaylistsInCategoryView(for: category)
+          } label: {
+            Text(category.description)
           }
-            .navigationTitle(category.description)
-        } label: {
-          Text(category.description)
         }
       }
     }

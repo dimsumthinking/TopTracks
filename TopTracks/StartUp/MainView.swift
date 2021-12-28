@@ -2,13 +2,14 @@ import SwiftUI
 import CoreData
 
 struct MainView {
-  @EnvironmentObject var buildingStatus: BuildingStatus
+  @EnvironmentObject var stationConstructionStatus: StationContructionStatus
 }
 
 extension MainView : View {
   var body: some View {
-    if buildingStatus.isBuilding {
+    if stationConstructionStatus.isCreatingNew {
       StationBuilderView()
+        .navigationBarTitleDisplayMode(.inline)
     } else {
       StationListView()
     }

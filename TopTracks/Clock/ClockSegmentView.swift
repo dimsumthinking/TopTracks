@@ -27,7 +27,7 @@ extension ClockSegmentView {
   }
   
   private var rotation: Angle {
-    .radians(2 * Double.pi *  ((segmentNumber /* - 1/2 */) / numberOfSegments - 1/4) )
+    .radians(2 * Double.pi *  ((segmentNumber  - 1/2 ) / numberOfSegments - 1/4) )
   }
 }
 

@@ -14,11 +14,13 @@ extension AppleMusicPlaylistTracksPreviewView: View {
         }
       }
     }
-    .modifier(StationBuildCancellation())
     .onAppear {
       Task.detached {
         playlist = try await playlist.with([.tracks])
       }
+    }
+    .onDisappear {
+      AppleMusicPlaylistSongPreviewView.audioPlayer = nil
     }
   }
 }

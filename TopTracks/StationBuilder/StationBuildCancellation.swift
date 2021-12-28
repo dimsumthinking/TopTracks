@@ -2,7 +2,7 @@ import SwiftUI
 
 struct StationBuildCancellation {
   @State private var showCancel = false
-  @EnvironmentObject private var buildingStatus: BuildingStatus
+  @EnvironmentObject private var stationConstructionStatus: StationContructionStatus
 }
 
 extension StationBuildCancellation: ViewModifier {
@@ -10,17 +10,17 @@ extension StationBuildCancellation: ViewModifier {
     content
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button("Stop Building",
+          Button("Cancel",
                  role:.destructive,
                  action: showCancelAlert)
         }
       }
-      .alert("Stop building this station?",
+      .alert("Stop creating this new station?",
              isPresented: $showCancel){
-        Button("No, keep building",
+        Button("No, keep going",
                role: .cancel,
                action: hideCancelAlert)
-        Button("Yes, delete this station",
+        Button("Yes",
                role: .destructive,
                action: stopBuilding)
       }
@@ -38,8 +38,7 @@ extension StationBuildCancellation {
 
 extension StationBuildCancellation {
   private func stopBuilding() {
-    AppleMusicPlaylistSongPreviewView.audioPlayer = nil
-    buildingStatus.isBuilding = false
+    stationConstructionStatus.isCreatingNew = false
   }
 }
 

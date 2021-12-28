@@ -6,10 +6,9 @@ struct StationBuilderView {
 extension StationBuilderView: View {
   var body: some View {
     NavigationView {
-      StationBuilderStage ("To create a station, first Choose a category") {
-        AppleMusicCategoryView()
-      }
-      .navigationTitle("Station Builder")
+      AppleMusicCategoryView()
+        .navigationTitle("Station Builder")
+        .navigationBarTitleDisplayMode(.inline)
     }
   }
 }

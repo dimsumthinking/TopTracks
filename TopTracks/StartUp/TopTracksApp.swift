@@ -20,11 +20,10 @@ struct TopTracksApp: App {
         //        if let subscription = subscription,
         //           subscription.canPlayCatalogContent {
         MainView()
-          .environmentObject(BuildingStatus())
+          .environmentObject(StationContructionStatus())
           .environment(\.managedObjectContext,
                         PersistenceController.shared.container.viewContext)
           .navigationViewStyle(.stack)
-        
         //        } else {
         //          LocalMusicOnlyView()
         //          Text("Local")

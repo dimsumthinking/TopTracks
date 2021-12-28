@@ -1,17 +1,30 @@
 import SwiftUI
 
 struct StationListView {
-  @EnvironmentObject var buildingStatus: BuildingStatus
+  @Environment(\.managedObjectContext) private var viewContext
+  @Environment(\.editMode) private var editMode
+  @EnvironmentObject var stationConstructionStatus: StationContructionStatus
   @FetchRequest(entity: TopTracksStation.entity(),
-                sortDescriptors: [NSSortDescriptor(key: "timestamp",
+                sortDescriptors: [NSSortDescriptor(key: "buttonPosition",
                                                    ascending: true)]) var stations: FetchedResults<TopTracksStation>
 }
 
 extension StationListView: View {
   var body: some View {
     NavigationView {
-      if stations.isEmpty {promptToCreateStation}
-      else {listAllStations.toolbar {addStationButton}}
+      if stations.isEmpty {
+        promptToCreateStation
+      } else {
+        listAllStations
+          .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+              EditButton()
+              Button(action: startBuilding) {
+                Image(systemName: "plus")
+              }
+            }
+          }
+      }
     }
   }
 }
@@ -25,25 +38,60 @@ extension StationListView {
   private var listAllStations: some View {
     List {
       ForEach(stations, id: \.self) {station in
-        Text("Station \(station)")
+        Text(station.stationName ?? "Unknown Station")
+        }
+      .onDelete {indexSet in
+        guard let first = indexSet.first else {
+          fatalError("Couldn't locate item to delete")
+        }
+        viewContext.delete(stations[first])
+        do {
+          try viewContext.save()
+        } catch {
+          fatalError("Couldn't save after deleting station")
+        }
+        renumberButtons()
+      }
+      .onMove {indexSet, offset in
+        guard let first = indexSet.first else {return}
+        if first < offset {
+          stations[first].buttonPosition = Int16(offset)
+          for (index, station) in stations.enumerated() where index > first && index < offset {
+            station.buttonPosition -= 1
+          }
+        } else {
+          stations[first].buttonPosition = Int16(offset) + 1
+          for (index, station) in stations.enumerated() where index >= offset && index < first {
+            station.buttonPosition += 1
+          }
+        }
+        do {
+          try viewContext.save()
+        } catch {
+          fatalError("Couldn't renumber button positions")
+        }
       }
     }
     .navigationTitle("Stations")
   }
+}
 
-  private var addStationButton: ToolbarItem<Void, Button<Image>> {
-    ToolbarItem(placement: .navigationBarTrailing) {
-      Button(action: startBuilding) {
-        Image(systemName: "plus")
+extension StationListView {
+  func renumberButtons() {
+    for (index, station) in stations.enumerated() {
+      station.buttonPosition = Int16(index + 1)
+      do {
+        try viewContext.save()
+      } catch {
+        fatalError("Couldn't renumber button positions")
       }
     }
   }
 }
 
-
 extension StationListView {
   private func startBuilding() {
-    buildingStatus.isBuilding = true
+    stationConstructionStatus.isCreatingNew = true
   }
 }
 
