@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="TopTracksSong" representedClassName="TopTracksSong" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="URI"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="albumTitle" optional="YES" attributeType="String"/>
+        <attribute name="artistName" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="String" defaultValueString=""/>
         <attribute name="stackPosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
         <relationship name="stack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="songs" inverseEntity="TopTracksStack"/>
     </entity>
     <entity name="TopTracksStack" representedClassName="TopTracksStack" syncable="YES" codeGenerationType="class">
@@ -15,22 +17,21 @@
         <relationship name="stationForPowerStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStation" inverseName="powerStack" inverseEntity="TopTracksStation"/>
     </entity>
     <entity name="TopTracksStation" representedClassName="TopTracksStation" syncable="YES" codeGenerationType="class">
-        <attribute name="addGold" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="addSpice" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="buttonPosition" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="clockPosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="enabled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="favorite" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="enabled" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="favorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="lastUpdated" attributeType="Date" defaultDateTimeInterval="662220960" usesScalarValueType="NO"/>
+        <attribute name="playlistID" attributeType="String" defaultValueString=""/>
         <attribute name="stationName" attributeType="String" defaultValueString="Unnamed station"/>
-        <relationship name="addedStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="stationForAddedStack" inverseEntity="TopTracksStack"/>
-        <relationship name="currentStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="stationForCurrentStack" inverseEntity="TopTracksStack"/>
-        <relationship name="goldStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="stationForGoldStack" inverseEntity="TopTracksStack"/>
-        <relationship name="powerStack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="stationForPowerStack" inverseEntity="TopTracksStack"/>
+        <relationship name="addedStack" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TopTracksStack" inverseName="stationForAddedStack" inverseEntity="TopTracksStack"/>
+        <relationship name="currentStack" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TopTracksStack" inverseName="stationForCurrentStack" inverseEntity="TopTracksStack"/>
+        <relationship name="goldStack" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TopTracksStack" inverseName="stationForGoldStack" inverseEntity="TopTracksStack"/>
+        <relationship name="powerStack" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TopTracksStack" inverseName="stationForPowerStack" inverseEntity="TopTracksStack"/>
     </entity>
     <elements>
-        <element name="TopTracksSong" positionX="42.03515625" positionY="-65.85546875" width="128" height="89"/>
+        <element name="TopTracksSong" positionX="42.03515625" positionY="-65.85546875" width="128" height="119"/>
         <element name="TopTracksStack" positionX="30.66015625" positionY="-302.37890625" width="128" height="119"/>
-        <element name="TopTracksStation" positionX="-218.90625" positionY="-304.33203125" width="128" height="209"/>
+        <element name="TopTracksStation" positionX="-218.90625" positionY="-304.33203125" width="128" height="194"/>
     </elements>
 </model>

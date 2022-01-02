@@ -1,5 +1,7 @@
 import CoreData
 
+let viewContext = PersistenceController.shared.container.viewContext
+
 struct PersistenceController {
     static let shared = PersistenceController()
 

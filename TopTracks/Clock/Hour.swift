@@ -1,34 +1,35 @@
 //let defaultHour
 //= Hour(with: [.power, .current, .added,
+//              .power, .current,
+//              .power, .current, .added,
+//              .power, .current,
+//              .power, .added,
+//              .power, .current, .added])
+
+//let hourWithGold
+//= Hour(with: [.power, .current, .added,
 //              .power, .current, .gold,
 //              .power, .added,
 //              .power, .current,
-//              .power, .added, .current,
-//              .power, .spice])
+//              .power, .added,
+//              .power, .current, .gold])
 
-let hourWithGold
-= Hour(with: [.power, .current, .added,
-              .power, .current, .gold,
-              .power, .added,
-              .power, .current,
-              .power, .added, .current,
-              .power, .gold])
-
-let hourWithSpice
+//let hourWithSpice
+let defaultHour
 = Hour(with: [.power, .current, .added,
               .power, .current, .spice,
               .power, .added,
               .power, .current,
-              .power, .added, .current,
-              .power, .spice])
-
-let hourWithGoldAndSpice
-= Hour(with: [.power, .current, .added,
-              .power, .current, .gold,
               .power, .added,
-              .power, .current,
-              .power, .added, .current,
-              .power, .spice])
+              .power, .current, .spice])
+
+//let hourWithGoldAndSpice
+//= Hour(with: [.power, .current, .added,
+//              .power, .current, .gold,
+//              .power, .added,
+//              .power, .current,
+//              .power, .added,
+//              .power, .current, .spice])
 
 class Hour {
   private let slots: [RotationCategory]

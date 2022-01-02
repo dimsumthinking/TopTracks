@@ -8,6 +8,7 @@ struct StationCreationView {
   let playlist: Playlist
   let existingPlaylistsWithName: NSFetchRequest<TopTracksStation>
   @State private var creatingStation = false
+
   
   @FetchRequest(entity: TopTracksStation.entity(),
                 sortDescriptors: [NSSortDescriptor(key: "buttonPosition", ascending: true)])
@@ -29,16 +30,29 @@ extension StationCreationView: View {
       HStack(spacing: 20) {
         Button("Yes, create a new station",
                action: addStation)
-        NavigationLink(destination: Text(playlist.name), isActive: $creatingStation) {
+        NavigationLink(destination: NewStationTriageView(playlistID: playlist.id.rawValue, songs:  songsInPlaylist), isActive: $creatingStation) {
           EmptyView()
         }
         Button("Cancel",
                role: .cancel,
                action: cancelStationConstruction)
       }
-      AppleMusicPlaylistTracksPreviewView(playlist: playlist)
+      AppleMusicPlaylistTracksPreviewView(songs: songsInPlaylist)
     }
     .navigationTitle(playlist.name)
+  }
+}
+
+extension StationCreationView {
+  var songsInPlaylist: [Song] {
+    var songs: [Song] = []
+    guard let tracks = playlist.tracks else {return [Song]()}
+    for track in tracks {
+      if case Track.song(let song) = track {
+        songs.append(song)
+      }
+    }
+    return songs
   }
 }
 
@@ -51,6 +65,8 @@ extension StationCreationView {
     newStation.stationName = stationName(for: results.count)
     newStation.buttonPosition = (stations.last?.buttonPosition ?? 0) + 1
     newStation.lastUpdated = Date()
+    newStation.playlistID = playlist.id.rawValue
+    
     do {
       try viewContext.save()
     } catch {

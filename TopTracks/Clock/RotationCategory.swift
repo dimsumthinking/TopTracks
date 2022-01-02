@@ -2,8 +2,8 @@ enum RotationCategory: String, CaseIterable, Equatable, Hashable {
   case power = "Top Tracks"
   case current = "Recent Favorites"
   case added = "Newly Added"
-  case gold = "Solid Gold"
-  case spice = "Spice"
+//  case gold = "Solid Gold"
+  case spice = "Extra Spice"
 }
 
 extension RotationCategory: CustomStringConvertible {
@@ -15,7 +15,7 @@ extension RotationCategory: CustomStringConvertible {
 extension RotationCategory {
   var capacity: Int {
     switch self {
-    case .gold: return 500
+    case .spice: return 500
     default: return 11
     }
   }
@@ -37,7 +37,7 @@ extension RotationCategory {
     case .power: return .red
     case .current: return .purple
     case .added: return .mint
-    case .gold: return .yellow
+//    case .gold: return  Color(red: 1, green: 0.85, blue: 0)
     case .spice: return .orange
     }
   }

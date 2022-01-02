@@ -9,19 +9,20 @@ extension AppleMusicArtworkDisplayable {
   var backgroundColor: Color {
     color(from: artwork?.backgroundColor,
           or: .systemBackground)
-          .opacity(0.8)
+//          .opacity(0.5)
   }
   
-  var playlistImage: ArtworkImage {
-    guard let artwork = artwork else {fatalError("Artwork is missing.")}
+  var playlistImage: ArtworkImage? {
+    guard let artwork = artwork else {return nil}
     return ArtworkImage(artwork,
                         width: playlistArtworkImageSize,
                         height: playlistArtworkImageSize)
-                        
+
   }
   
-  var playerImage: ArtworkImage {
-    guard let artwork = artwork else {fatalError("Artwork is missing.")}
+  
+  var playerImage: ArtworkImage? {
+    guard let artwork = artwork else {return nil}
     return ArtworkImage(artwork,
                         width: playerArtworkImageSize,
                         height: playerArtworkImageSize)
@@ -38,3 +39,5 @@ extension AppleMusicArtworkDisplayable {
           or: .secondary).opacity(0.8)
   }
 }
+
+

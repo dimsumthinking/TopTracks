@@ -14,7 +14,7 @@ extension InstructionView: View {
       .font(.callout)
       .foregroundColor(.secondary)
       .multilineTextAlignment(.center)
-      .padding()
+      .padding([.top, .horizontal])
   }
 }
 

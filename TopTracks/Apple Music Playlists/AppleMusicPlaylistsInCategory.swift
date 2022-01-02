@@ -2,11 +2,11 @@ import MusicKit
 import Foundation
 
 class AppleMusicPlaylistsInCategory: ObservableObject {
-  @Published var playlists: MusicItemCollection<Playlist> = []
+  @Published var playlists: [Playlist] = []
   
   init(_ category: AppleMusicCategory) {
-    Task.detached {
-      await  self.startSearch(for: category)
+    Task {
+      await self.startSearch(for: category)
     }
   }
 }
@@ -19,7 +19,6 @@ extension AppleMusicPlaylistsInCategory {
     request.limit = 25
     let response = try? await request.response()
     guard let playlists = response?.playlists else {return}
-    self.playlists = playlists
+    self.playlists = playlists.filter{playlist in playlist.artwork != nil}
   }
 }
-

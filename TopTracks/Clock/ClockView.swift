@@ -15,6 +15,11 @@ extension ClockView: View {
         }
         .aspectRatio(1.0, contentMode: .fit)
         .padding()
+        Circle().scale(0.33)
+        Text("Top\nTracks")
+          .font(.title.bold())
+          .foregroundColor(.white)
+          .multilineTextAlignment(.center)
       }
       
     }
@@ -22,6 +27,6 @@ extension ClockView: View {
   
   struct ClockView_Previews: PreviewProvider {
     static var previews: some View {
-      ClockView(hour: hourWithGoldAndSpice)
+      ClockView(hour: defaultHour)
     }
   }

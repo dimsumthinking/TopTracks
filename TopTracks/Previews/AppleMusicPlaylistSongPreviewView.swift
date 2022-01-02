@@ -13,26 +13,26 @@ struct AppleMusicPlaylistSongPreviewView {
 extension AppleMusicPlaylistSongPreviewView: View {
   var body: some View {
     HStack(alignment: .center) {
-      VStack {
+      ZStack {
         song.playlistImage
           .border(Color.primary.opacity(0.3))
           .padding()
+        Button(action: toggleIsPlaying){
+          Image(systemName: isPlaying ? "stop" : "play" )
+            .font(.largeTitle)
+            .foregroundColor(song.secondaryColor)
+            .background(song.backgroundColor.opacity(0.3))
+            .buttonStyle(.bordered)
+        }
       }
       VStack(alignment: .leading) {
         Text(song.title)
-          .padding(.top)
+          .padding(.bottom)
         Text(song.artistName)
           .foregroundColor(Color.secondary)
-          .padding(.top, 4)
       }
       Spacer()
-      Button(action: toggleIsPlaying){
-        Image(systemName: isPlaying ? "stop" : "play" )
-      }
-      .font(.title)
-      .padding(.trailing)
     }
-      .frame(maxWidth: .infinity)
   }
 }
 
@@ -58,12 +58,11 @@ extension AppleMusicPlaylistSongPreviewView {
   }
   }
   func stopPreviewingSong() {
-    AppleMusicPlaylistSongPreviewView.audioPlayer?.stop()
+    AppleMusicPlaylistSongPreviewView.audioPlayer = nil
   }
   func stopPlaying() {
-    if isPlaying {
-      toggleIsPlaying()
-    }
+    isPlaying = false
+    stopPreviewingSong()
   }
   
   class AppleMusicPlaylistSongPreviewViewDelegate: NSObject, AVAudioPlayerDelegate {
@@ -82,3 +81,4 @@ extension AppleMusicPlaylistSongPreviewView {
 
 
 extension Song: AppleMusicArtworkDisplayable {}
+
