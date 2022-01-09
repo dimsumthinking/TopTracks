@@ -1,35 +1,39 @@
-//let defaultHour
-//= Hour(with: [.power, .current, .added,
-//              .power, .current,
-//              .power, .current, .added,
-//              .power, .current,
-//              .power, .added,
-//              .power, .current, .added])
-
-//let hourWithGold
-//= Hour(with: [.power, .current, .added,
-//              .power, .current, .gold,
-//              .power, .added,
-//              .power, .current,
-//              .power, .added,
-//              .power, .current, .gold])
-
-//let hourWithSpice
+let builtinClocks: [String: Hour] = ["shortHour": shortHour,
+                                     "defaultHour": defaultHour,
+                                     "spiceHour": spiceHour,
+                                     "shortSpiceHour": shortSpiceHour]
 let defaultHour
 = Hour(with: [.power, .current, .added,
-              .power, .current, .spice,
+              .power, .current, .gold,
               .power, .added,
               .power, .current,
               .power, .added,
-              .power, .current, .spice])
+              .power, .current, .gold])
 
-//let hourWithGoldAndSpice
-//= Hour(with: [.power, .current, .added,
-//              .power, .current, .gold,
-//              .power, .added,
-//              .power, .current,
-//              .power, .added,
-//              .power, .current, .spice])
+let shortHour
+= Hour(with: [.power, .current, .added,
+              .power, .current,
+              .power, .added,
+              .power, .current,
+              .power, .added,
+              .power, .current])
+
+let spiceHour
+= Hour(with: [.power, .current, .added,
+              .power, .current, .gold,
+              .power, .added,
+              .power, .current, .spice,
+              .power, .added,
+              .power, .current, .gold])
+
+let shortSpiceHour
+= Hour(with: [.power, .current, .added,
+              .power, .current,
+              .power, .added,
+              .power, .current, .spice,
+              .power, .added,
+              .power, .current])
+
 
 class Hour {
   private let slots: [RotationCategory]

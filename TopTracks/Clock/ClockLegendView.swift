@@ -3,7 +3,7 @@ import SwiftUI
 struct ClockLegendView: View {
   var body: some View {
     VStack {
-      ForEach(RotationCategory.allCases) {category in
+      ForEach(standardCategories) {category in
         Text(category.description)
           .foregroundColor(category.color)
       }

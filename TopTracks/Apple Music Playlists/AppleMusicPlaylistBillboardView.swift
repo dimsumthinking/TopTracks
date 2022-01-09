@@ -2,7 +2,11 @@ import SwiftUI
 import MusicKit
 
 struct AppleMusicPlaylistBillboardView {
-  @State private(set) var playlist: AppleMusicPlaylistBillboard
+  let playlist: AppleMusicPlaylistBillboard
+  
+  init(for playlist: Playlist) {
+    self.playlist = AppleMusicPlaylistBillboard(playlist: playlist)
+  }
 }
 
 extension AppleMusicPlaylistBillboardView: View {

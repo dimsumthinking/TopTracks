@@ -1,8 +1,10 @@
+let standardCategories: [RotationCategory] = [.power, .current, .added, .gold]
+
 enum RotationCategory: String, CaseIterable, Equatable, Hashable {
   case power = "Top Tracks"
   case current = "Recent Favorites"
   case added = "Newly Added"
-//  case gold = "Solid Gold"
+  case gold = "Solid Gold"
   case spice = "Extra Spice"
 }
 
@@ -37,7 +39,7 @@ extension RotationCategory {
     case .power: return .red
     case .current: return .purple
     case .added: return .mint
-//    case .gold: return  Color(red: 1, green: 0.85, blue: 0)
+    case .gold: return  Color(red: 1, green: 0.85, blue: 0)
     case .spice: return .orange
     }
   }

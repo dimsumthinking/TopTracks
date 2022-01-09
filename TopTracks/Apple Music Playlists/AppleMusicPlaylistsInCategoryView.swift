@@ -16,7 +16,11 @@ extension AppleMusicPlaylistsInCategoryView {
 extension AppleMusicPlaylistsInCategoryView: View {
   var body: some View {
     List(playlistsInCategory.playlists) {playlist in
-      StationCreationAndBillboard(playlist: playlist)
+      NavigationLink {
+        NewStationTrackSelectionView(for: playlist)
+      } label: {
+        AppleMusicPlaylistBillboardView(for: playlist)
+      }
     }
     .modifier(StationBuildCancellation())
     .navigationTitle(name + " Playlists")

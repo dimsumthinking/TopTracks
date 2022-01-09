@@ -38,7 +38,15 @@ extension StationListView {
   private var listAllStations: some View {
     List {
       ForEach(stations, id: \.self) {station in
-        Text(station.stationName ?? "Unknown Station")
+        Text(station.stationName)
+          .onTapGesture {
+            for stack in station.stacks {
+                print(stack.stackName)
+                for song in stack.songs {
+                    print("\t", song.title)
+              }
+            }
+          }
         }
       .onDelete {indexSet in
         guard let first = indexSet.first else {
@@ -55,12 +63,12 @@ extension StationListView {
       .onMove {indexSet, offset in
         guard let first = indexSet.first else {return}
         if first < offset {
-          stations[first].buttonPosition = Int16(offset)
+          stations[first].buttonNumber = offset
           for (index, station) in stations.enumerated() where index > first && index < offset {
             station.buttonPosition -= 1
           }
         } else {
-          stations[first].buttonPosition = Int16(offset) + 1
+          stations[first].buttonNumber = offset + 1
           for (index, station) in stations.enumerated() where index >= offset && index < first {
             station.buttonPosition += 1
           }
@@ -79,7 +87,7 @@ extension StationListView {
 extension StationListView {
   func renumberButtons() {
     for (index, station) in stations.enumerated() {
-      station.buttonPosition = Int16(index + 1)
+      station.buttonNumber = index + 1
       do {
         try viewContext.save()
       } catch {

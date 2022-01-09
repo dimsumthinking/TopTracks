@@ -1,9 +1,12 @@
 import CoreData
 
-let viewContext = PersistenceController.shared.container.viewContext
+let sharedViewContext = PersistenceController.shared.container.viewContext
 
 struct PersistenceController {
     static let shared = PersistenceController()
+  static var newBackgroundContext: NSManagedObjectContext {
+    PersistenceController.shared.container.newBackgroundContext()
+  }
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)

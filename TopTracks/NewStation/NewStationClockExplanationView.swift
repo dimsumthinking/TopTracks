@@ -14,7 +14,7 @@ extension NewStationClockExplanationView: View {
       ClockView(hour: defaultHour)
       VStack {
 //      Text("Categories:")
-        ForEach(RotationCategory.allCases) {category in
+        ForEach(standardCategories) {category in
           Text(category.description)
             .font(.title3)
             .foregroundColor(category.color)

@@ -12,7 +12,7 @@ struct AppleMusicSongView {
 extension AppleMusicSongView: View {
     var body: some View {
       VStack(spacing: 20) {
-        song.playerImage.padding()
+//        song.playerImage.padding()
         Text(song.title)
         Text(song.artistName).foregroundColor(.secondary)
         Button(action: {Task{playOrPause}}){

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="TopTracksSong" representedClassName="TopTracksSong" syncable="YES">
+        <attribute name="artistName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="stackPosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="stack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="songs" inverseEntity="TopTracksStack"/>
+    </entity>
+    <entity name="TopTracksStack" representedClassName="TopTracksStack" syncable="YES">
+        <attribute name="stackName" optional="YES" attributeType="String"/>
+        <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TopTracksSong" inverseName="stack" inverseEntity="TopTracksSong"/>
+        <relationship name="station" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStation" inverseName="stacks" inverseEntity="TopTracksStation"/>
+    </entity>
+    <entity name="TopTracksStation" representedClassName="TopTracksStation" syncable="YES">
+        <attribute name="buttonPosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="clock" optional="YES" attributeType="String"/>
+        <attribute name="clockPosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="currentSong" optional="YES" attributeType="String"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isPlaying" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="playlistID" optional="YES" attributeType="String"/>
+        <attribute name="stationID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="stationName" optional="YES" attributeType="String"/>
+        <attribute name="updateAvailable" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="stacks" optional="YES" toMany="YES" minCount="4" maxCount="4" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="station" inverseEntity="TopTracksStack"/>
+    </entity>
+    <elements>
+        <element name="TopTracksSong" positionX="42.03515625" positionY="-65.85546875" width="128" height="104"/>
+        <element name="TopTracksStack" positionX="30.66015625" positionY="-302.37890625" width="128" height="74"/>
+        <element name="TopTracksStation" positionX="-218.90625" positionY="-304.33203125" width="128" height="209"/>
+    </elements>
+</model>
