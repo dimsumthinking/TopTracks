@@ -27,6 +27,6 @@ extension ClockView: View {
   
   struct ClockView_Previews: PreviewProvider {
     static var previews: some View {
-      ClockView(hour: defaultHour)
+      ClockView(hour: Hour(with: .standardHour))
     }
   }

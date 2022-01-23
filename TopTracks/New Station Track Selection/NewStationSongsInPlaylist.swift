@@ -35,11 +35,12 @@ extension NewStationSongsInPlaylist {
 }
 
 extension NewStationSongsInPlaylist {
+  @MainActor
   func createStation(among stationNames: [String],
                      context: NSManagedObjectContext = PersistenceController.newBackgroundContext) {
     let _ = TopTracksStation(stationName: playlist.name
                                    + decorationForStationName(given: stationNames),
-                                  playlistID: playlist.id.rawValue,
+                                  playlist: playlist,
                                    buttonPosition: stationNames.count,
                                   songsAndRatings: songsAndRatings,
                                   context: context)

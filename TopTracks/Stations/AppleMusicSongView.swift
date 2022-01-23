@@ -15,7 +15,7 @@ extension AppleMusicSongView: View {
 //        song.playerImage.padding()
         Text(song.title)
         Text(song.artistName).foregroundColor(.secondary)
-        Button(action: {Task{playOrPause}}){
+        Button(action: {Task{try await playOrPause()}}){
           Image(systemName: isPlaying ? "pause.fill" : "play.fill")
             .font(.largeTitle)
         }
@@ -25,6 +25,7 @@ extension AppleMusicSongView: View {
 
 extension AppleMusicSongView {
   private func playOrPause() async throws {
+    print("Here")
     if isPlaying {
       player.pause()
       isPlaying = false

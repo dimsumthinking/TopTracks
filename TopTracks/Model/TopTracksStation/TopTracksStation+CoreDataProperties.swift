@@ -9,18 +9,13 @@ extension TopTracksStation {
   }
   
   @NSManaged public var buttonPosition: Int16
-  @NSManaged public var clockPosition: Int16
   @NSManaged public var favorite: Bool
-  @NSManaged public var lastUpdated: Date
   @NSManaged public var updateAvailable: Bool
-  @NSManaged public var playlistID: String
   @NSManaged public var stationName: String
   @NSManaged public var stationID: UUID
-  @NSManaged public var isPlaying: Bool
-  @NSManaged public var currentSong: String?
-  @NSManaged public var clock: String
   @NSManaged public var stacks: Set<TopTracksStack>
-  
+  @NSManaged public var clock: TopTracksClock
+  @NSManaged public var playlist: TopTracksSourcePlaylist
 }
 
 // MARK: Generated accessors for stacks
@@ -55,10 +50,10 @@ extension TopTracksStation {
   }
   var currentClockPosiition: Int {
     get {
-      Int(clockPosition)
+      Int(clock.clockPosition)
     }
     set {
-      clockPosition = Int16(newValue)
+      clock.clockPosition = Int16(newValue)
     }
   }
 }

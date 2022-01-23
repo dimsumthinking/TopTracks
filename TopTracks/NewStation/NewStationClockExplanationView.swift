@@ -11,7 +11,7 @@ extension NewStationClockExplanationView: View {
   var body: some View {
     VStack {
       InstructionView("Each new station uses this rotation clock with fifteen songs in an 'hour'.")
-      ClockView(hour: defaultHour)
+      ClockView(hour: Hour(with: .standardHour))
       VStack {
 //      Text("Categories:")
         ForEach(standardCategories) {category in

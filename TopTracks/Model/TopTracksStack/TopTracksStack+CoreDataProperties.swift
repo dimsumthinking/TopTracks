@@ -34,3 +34,9 @@ extension TopTracksStack {
 extension TopTracksStack : Identifiable {
 
 }
+
+extension TopTracksStack {
+  var rotationCategory: RotationCategory? {
+    RotationCategory(rawValue: stackName)
+  }
+}

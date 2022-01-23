@@ -1,6 +1,6 @@
 let standardCategories: [RotationCategory] = [.power, .current, .added, .gold]
 
-enum RotationCategory: String, CaseIterable, Equatable, Hashable {
+enum RotationCategory: String, CaseIterable, Equatable, Hashable, Codable {
   case power = "Top Tracks"
   case current = "Recent Favorites"
   case added = "Newly Added"

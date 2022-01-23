@@ -34,53 +34,54 @@ extension StationListView {
     Button("Create your first Station",
            action: startBuilding)
   }
-
+  
   private var listAllStations: some View {
     List {
       ForEach(stations, id: \.self) {station in
-        Text(station.stationName)
-          .onTapGesture {
-            for stack in station.stacks {
-                print(stack.stackName)
-                for song in stack.songs {
-                    print("\t", song.title)
-              }
-            }
-          }
-        }
-      .onDelete {indexSet in
-        guard let first = indexSet.first else {
-          fatalError("Couldn't locate item to delete")
-        }
-        viewContext.delete(stations[first])
-        do {
-          try viewContext.save()
-        } catch {
-          fatalError("Couldn't save after deleting station")
-        }
-        renumberButtons()
-      }
-      .onMove {indexSet, offset in
-        guard let first = indexSet.first else {return}
-        if first < offset {
-          stations[first].buttonNumber = offset
-          for (index, station) in stations.enumerated() where index > first && index < offset {
-            station.buttonPosition -= 1
-          }
-        } else {
-          stations[first].buttonNumber = offset + 1
-          for (index, station) in stations.enumerated() where index >= offset && index < first {
-            station.buttonPosition += 1
-          }
-        }
-        do {
-          try viewContext.save()
-        } catch {
-          fatalError("Couldn't renumber button positions")
+        NavigationLink {
+          StationView(station: station)
+        } label: {
+          Text(station.stationName)
         }
       }
+      .onDelete(perform: deleteStation)
+      .onMove(perform: moveStation)
     }
     .navigationTitle("Stations")
+  }
+}
+
+extension StationListView {
+  private func deleteStation(at indexSet: IndexSet) {
+    guard let first = indexSet.first else {
+      fatalError("Couldn't locate item to delete")
+    }
+    viewContext.delete(stations[first])
+    do {
+      try viewContext.save()
+    } catch {
+      fatalError("Couldn't save after deleting station")
+    }
+    renumberButtons()
+  }
+  private func moveStation(at indexSet: IndexSet, offset: Int) {
+    guard let first = indexSet.first else {return}
+    if first < offset {
+      stations[first].buttonNumber = offset
+      for (index, station) in stations.enumerated() where index > first && index < offset {
+        station.buttonPosition -= 1
+      }
+    } else {
+      stations[first].buttonNumber = offset + 1
+      for (index, station) in stations.enumerated() where index >= offset && index < first {
+        station.buttonPosition += 1
+      }
+    }
+    do {
+      try viewContext.save()
+    } catch {
+      fatalError("Couldn't renumber button positions")
+    }
   }
 }
 

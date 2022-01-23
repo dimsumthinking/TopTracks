@@ -31,16 +31,24 @@ extension NewStationTrackPreviewPlayerView {
   }
   func previewSong() {
     guard let url = song.previewAssets?.first?.url else {return}
-    Task {let (data, _) = try await URLSession.shared.data(from: url)
+    Task {
+      print(url)
+      async let (data, _) = try URLSession.shared.data(from: url)
       if let player = previewPlayer.audioPlayer {
         player.delegate?.audioPlayerDidFinishPlaying?(player, successfully: true)
       }
-      previewPlayer.audioPlayer = try? AVAudioPlayer(data: data)
       delegate = NewStationTrackPreviewPlayerViewDelegate(self)
-      previewPlayer.audioPlayer?.delegate = delegate
-      previewPlayer.audioPlayer?.play()
+      do {
+        previewPlayer.audioPlayer = try AVAudioPlayer(data: await data)
+        previewPlayer.audioPlayer?.delegate = delegate
+        previewPlayer.audioPlayer?.play()
+      } catch {
+        print("Couldn't create the audio player for", song.title, "by", song.artistName, error)
+      }
     }
   }
+  
+  
   func stopPreviewingSong() {
     previewPlayer.audioPlayer = nil
   }

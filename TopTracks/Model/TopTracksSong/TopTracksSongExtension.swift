@@ -7,10 +7,8 @@ extension TopTracksSong {
                    stackPosition: Int,
                    context: NSManagedObjectContext = sharedViewContext) {
     self.init(context: context)
-    self.id = song.id.rawValue
-    self.title = song.title
-    self.artistName = song.artistName
     self.currentStackPosition = stackPosition
     self.stack = stack
+    self.songAsData = try? PropertyListEncoder().encode(song)
   }
 }

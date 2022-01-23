@@ -31,8 +31,8 @@ extension NewStationTrackSelectionView: View {
       List($songsInPlaylist.songsAndRatings) {$songAndRating in
         NewStationIndividualTrackView(songAndRating: $songAndRating)
       }
-      Text("Rank \(numberLeftToRank) more to unlock")
-        .foregroundColor(numberLeftToRank > 0 ? .primary : .clear)
+      Text(numberLeftToRank > 0 ? "Rank \(numberLeftToRank) more to unlock" : "Unlocked - Rank more if you can")
+        .foregroundColor(anyLeftToRank  ? .primary : .clear)
         .padding(.top)
       HStack {
         Button("Create a station",
@@ -62,6 +62,9 @@ extension NewStationTrackSelectionView {
   private var numberLeftToRank: Int {
     targetNumberOfSongsInPlaylist - numberOver0
   }
+  private var anyLeftToRank: Bool {
+    numberOver0 < songsInPlaylist.songsAndRatings.count
+  }
   private var targetNumberOfSongsInPlaylist: Int {
     min(preferredMinimumTracksForStation, songsInPlaylist.songsAndRatings.count)
   }
@@ -79,8 +82,5 @@ extension NewStationTrackSelectionView {
     songsInPlaylist.createStation(among: stations.map(\.stationName),
                                   context: viewContext)
     stationConstructionStatus.isCreatingNew = false
-
   }
 }
-
-
