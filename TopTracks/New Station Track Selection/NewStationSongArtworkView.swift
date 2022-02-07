@@ -13,7 +13,8 @@ struct NewStationSongArtworkView {
 extension NewStationSongArtworkView: View {
   var body: some View {
       ArtworkImage(artwork,
-                   width: songPreviewArtworkImageSize)
+                   width: songPreviewArtworkImageSize,
+                   height: songPreviewArtworkImageSize)
         .border(Color.primary.opacity(0.3))
         .padding()
   }

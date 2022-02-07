@@ -1,8 +1,8 @@
 let playlistArtworkImageSize: Double = 80
-let songPreviewArtworkImageSize: Double = 100
+let songPreviewArtworkImageSize: Double = 80
 
 
 let playerArtworkImageSize: Double = 300
 
-let preferredMinimumTracksForStation = 4//36
-let preferredMaximumSongsPerPlaylist = 12
+let preferredMinimumTracksForStation = 18
+let preferredMaximumSongsPerRotationCategory = 12

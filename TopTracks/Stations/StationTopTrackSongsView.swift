@@ -2,15 +2,17 @@ import MusicKit
 import SwiftUI
 
 
-struct AppleMusicSongsView {
+struct StationTopTracksSongsView {
   private let player = ApplicationMusicPlayer.shared
   @State private(set) var playbackQueueNeedsToBeSet = true
   @State private(set) var isPlaying = false
-  let songs: [Song]
+  let songs: [TopTracksSong]
   @ObservedObject var queue = ApplicationMusicPlayer.shared.queue
+  @State private(set) var index = 0
+  @State private var currentSong: TopTracksSong?
 }
 
-extension AppleMusicSongsView: View {
+extension StationTopTracksSongsView: View {
   var body: some View {
     VStack(spacing: 20) {
       Text(queue.currentEntry?.title ?? "no title")
@@ -33,10 +35,18 @@ extension AppleMusicSongsView: View {
       }
       .font(.title)
     }
+    .onChange(of: queue.currentEntry) {entry in
+      Task {
+        print("Changed", index.description)
+        try await add()
+        index += 1
+        }
+      
+    }
   }
 }
 @MainActor
-extension AppleMusicSongsView {
+extension StationTopTracksSongsView {
   private func playOrPause() async throws {
     print("Here")
     if isPlaying {
@@ -46,10 +56,9 @@ extension AppleMusicSongsView {
       if playbackQueueNeedsToBeSet {
         
         //        player.queue = songa
-        player.queue = ApplicationMusicPlayer.Queue(for: [songs[1]])
+        player.queue = ApplicationMusicPlayer.Queue(for: [songs[0], songs[1]])
         player.state.repeatMode = MusicPlayer.RepeatMode.none
       
-        try await player.queue.insert(songs, position: .tail)
 
 //        player.queue = ApplicationMusicPlayer.Queue(for: songs)
         //        player.setQueue(with: song)
@@ -60,7 +69,13 @@ extension AppleMusicSongsView {
     }
   }
   
+  private func add() async throws {
+//    try await player.queue.insert([songs[0], songs[(index + 2) % 4]], position: .tail)
+    player.queue = ApplicationMusicPlayer.Queue(for: [songs[(index % 4)], songs[(index + 1) % 4]])
+  }
+  
 }
+
 
 
 //

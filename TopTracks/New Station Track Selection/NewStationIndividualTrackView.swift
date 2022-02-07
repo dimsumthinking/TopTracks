@@ -6,7 +6,7 @@ struct NewStationIndividualTrackView {
 
 extension NewStationIndividualTrackView: View {
   var body: some View {
-    HStack {
+    HStack(spacing: 0) {
       NewStationTrackPreviewPlayerView(song: songAndRating.song)
       NewStationTrackRatingView(songAndRating: $songAndRating)
     }

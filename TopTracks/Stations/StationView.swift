@@ -3,7 +3,9 @@ import MusicKit
 
 struct StationView {
   let station: TopTracksStation
-  @State private var songs: [Song] = []
+//  @State private var songs: [Song] = []
+  @State private var songs: [TopTracksSong] = []
+
   @State private var song: Song?
 }
 
@@ -12,8 +14,9 @@ extension StationView: View {
       VStack {
         Text(song?.title ?? "no title")
 //        song.map{AppleMusicSongView(song: $0)}
-        AppleMusicSongsView(songs: songs)
+//        AppleMusicSongsView(songs: songs)
 //      StationSongsView(songs: songs)
+      StationTopTracksSongsView(songs: songs)
       }
       .onAppear {
         self.song = station.stacks.first?.songs.first?.song
@@ -23,9 +26,17 @@ extension StationView: View {
     }
 }
 
+//extension StationView {
+//  func getSongs() -> [Song] {
+//     var songs = station.stacks.flatMap(\.songs).compactMap(\.song)
+//    songs.append(songs[2])
+//    return songs
+//  }
+//}
+
 extension StationView {
-  func getSongs() -> [Song] {
-     var songs = station.stacks.flatMap(\.songs).compactMap(\.song)
+  func getSongs() -> [TopTracksSong] {
+     var songs = station.stacks.flatMap(\.songs)//.compactMap(\.song)
     songs.append(songs[2])
     return songs
   }

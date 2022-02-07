@@ -2,7 +2,7 @@ import SwiftUI
 
 struct StationBuildCancellation {
   @State private var showCancel = false
-  @EnvironmentObject private var stationConstructionStatus: StationContructionStatus
+  @EnvironmentObject private var topTracksStatus: TopTracksStatus
 }
 
 extension StationBuildCancellation: ViewModifier {
@@ -38,7 +38,7 @@ extension StationBuildCancellation {
 
 extension StationBuildCancellation {
   private func stopBuilding() {
-    stationConstructionStatus.isCreatingNew = false
+    topTracksStatus.isCreatingNew = false
   }
 }
 

@@ -37,7 +37,7 @@ extension NewStationSongsInPlaylist {
 extension NewStationSongsInPlaylist {
   @MainActor
   func createStation(among stationNames: [String],
-                     context: NSManagedObjectContext = PersistenceController.newBackgroundContext) {
+                     context: NSManagedObjectContext = PersistenceController.newBackgroundContext) {    
     let _ = TopTracksStation(stationName: playlist.name
                                    + decorationForStationName(given: stationNames),
                                   playlist: playlist,
@@ -48,7 +48,7 @@ extension NewStationSongsInPlaylist {
           try context.save()
           print("tried to save \(playlist.name)")
         } catch {
-          print("Not able to create a new station")
+          print("Not able to create a new station\n", error)
         }
   }
   
@@ -58,102 +58,33 @@ extension NewStationSongsInPlaylist {
     
     return numberWithSameStart == 0 ? "" : (" " + (numberWithSameStart + 1).description)
   }
-  
-//  func addStation(to stationNames: [String],
-//                  in context: NSManagedObjectContext,
-//                  with playlist: Playlist) {
-//
-//    
-//    let station = TopTracksStation(in: context,
-//                             playlistID: playlist.id.rawValue,
-//                             stationName: playlist.name + decorationForStationName(given: stationNames),
-//                             buttonPosition: stationNames.count)
-//    
-//    let selectedSongs = selectedSongs()
-//    let sortedSongs = stacks(from: selectedSongs)
-//    
-//    let power = TopTracksStack(rotationCategory: .power, in: context)
-//    let current = TopTracksStack(rotationCategory: .current, in: context)
-//    let added = TopTracksStack(rotationCategory: .added, in: context)
-//    let spice = TopTracksStack(rotationCategory: .spice, in: context)
-//    
-//    station.stacks = NSSet(array: [power, current, added, spice])
-//    power.station = station
-//    current.station = station
-//    added.station = station
-//    spice.station = station
-//
-//    if let powerList = sortedSongs[.power] {
-//      var stackSongs = [TopTracksSong]()
-//      for (index, song) in powerList.enumerated() {
-//        let tune = TopTracksSong(song: song, in: context, stackPosition: index)
-//        tune.stack = power
-//        stackSongs.append(tune)
-//      }
-//      power.songs = NSSet(array: stackSongs)
-//    }
-//    
-//    if let currentList = sortedSongs[.current] {
-//      var stackSongs = [TopTracksSong]()
-//      for (index, song) in currentList.enumerated() {
-//        let tune = TopTracksSong(song: song, in: context, stackPosition: index)
-//        tune.stack = current
-//        stackSongs.append(tune)
-//      }
-//      current.songs = NSSet(array: stackSongs)
-//    }
-//    
-//    if let addedList = sortedSongs[.added] {
-//      var stackSongs = [TopTracksSong]()
-//      for (index, song) in addedList.enumerated() {
-//        let tune = TopTracksSong(song: song, in: context, stackPosition: index)
-//        tune.stack = added
-//        stackSongs.append(tune)
-//      }
-//      added.songs = NSSet(array: stackSongs)
-//    }
-//    
-//    if let spiceList = sortedSongs[.spice] {
-//      var stackSongs = [TopTracksSong]()
-//      for (index, song) in spiceList.enumerated() {
-//        let tune = TopTracksSong(song: song, in: context, stackPosition: index)
-//        tune.stack = spice
-//        stackSongs.append(tune)
-//      }
-//      spice.songs = NSSet(array: stackSongs)
-//    }
-//    
-//    do {
-//      try context.save()
-//      print("tried to save \(playlist.name)")
-//    } catch {
-//      print("Not able to create a new station")
-//    }
-//  }
-//  
-//
-//  
-//  private func selectedSongs() -> [Song] {
-//     songsAndRatings
-//      .filter{item in item.rating > 0}
-//      .sorted{item1, item2 in item1.rating > item2.rating}
-//      .map(\.song)
-//  }
-//  
-//  
-//  private func stacks(from songs: [Song]) -> [RotationCategory: [Song]]{
-//    
-//    if songs.count < 36 {
-//      let n = Int(songs.count / 3)
-//      return [RotationCategory.power: Array(songs[..<n]),
-//              .current: Array(songs[n..<2*n]),
-//              .added: Array(songs[(2*n)...])]
-//    } else {
-//      let n = min(Int(songs.count / 4), preferredMaximumSongsPerPlaylist)
-//      return [RotationCategory.power: Array(songs[..<n]),
-//              .current: Array(songs[n..<2*n]),
-//              .added: Array(songs[2*n..<3*n]),
-//              .spice: Array(songs[(3*n)...])]
-//    }
-//  }
 }
+
+extension NewStationSongsInPlaylist {
+  func assignCategories(for numberRated: Int, outOf maximum: Int) {
+    let upper = min(numberRated, maximum)
+    let n = upper / 3
+    let firstLimit = n + min(1, upper % 3)
+    let secondLimit = 2 * n + upper % 3
+    let sortedSongs = songsAndRatings.sorted{$0.rating > $1.rating}
+    for index in sortedSongs.indices {
+      switch index {
+      case  0 ..< firstLimit:
+        assign(.power, to: sortedSongs[index])
+      case firstLimit..<secondLimit:
+        assign(.current, to: sortedSongs[index])
+      case secondLimit..<min(numberRated, maximum):
+        assign(.added, to: sortedSongs[index])
+      default:
+        assign(.spice, to: sortedSongs[index])
+      }
+    }
+  }
+  
+  private func assign(_ rotationCategory: RotationCategory,
+                      to song: NewStationSongRating) {
+    let index = songsAndRatings.firstIndex(of: song) ?? 0
+    songsAndRatings[index].rotationCategory = rotationCategory
+  }
+}
+

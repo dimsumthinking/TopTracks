@@ -7,6 +7,7 @@
     </entity>
     <entity name="TopTracksSong" representedClassName="TopTracksSong" syncable="YES">
         <attribute name="songAsData" optional="YES" attributeType="Binary"/>
+        <attribute name="songID" optional="YES" attributeType="String"/>
         <attribute name="stackPosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="upOrDown" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
         <relationship name="stack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="songs" inverseEntity="TopTracksStack"/>
@@ -31,13 +32,13 @@
         <attribute name="updateAvailable" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="clock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksClock" inverseName="station" inverseEntity="TopTracksClock"/>
         <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksSourcePlaylist" inverseName="station" inverseEntity="TopTracksSourcePlaylist"/>
-        <relationship name="stacks" optional="YES" toMany="YES" minCount="4" maxCount="4" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="station" inverseEntity="TopTracksStack"/>
+        <relationship name="stacks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="station" inverseEntity="TopTracksStack"/>
     </entity>
     <elements>
-        <element name="TopTracksSong" positionX="42.03515625" positionY="-65.85546875" width="128" height="89"/>
+        <element name="TopTracksClock" positionX="-81" positionY="-144" width="128" height="74"/>
+        <element name="TopTracksSong" positionX="42.03515625" positionY="-65.85546875" width="128" height="104"/>
+        <element name="TopTracksSourcePlaylist" positionX="-90" positionY="-153" width="128" height="74"/>
         <element name="TopTracksStack" positionX="30.66015625" positionY="-302.37890625" width="128" height="74"/>
         <element name="TopTracksStation" positionX="-218.90625" positionY="-304.33203125" width="128" height="179"/>
-        <element name="TopTracksSourcePlaylist" positionX="-90" positionY="-153" width="128" height="74"/>
-        <element name="TopTracksClock" positionX="-81" positionY="-144" width="128" height="74"/>
     </elements>
 </model>

@@ -1,8 +1,11 @@
 enum RotationClock: Codable {
   case standardHour
-  case shortHour
-  case spiceHour
-  case shortSpiceHour
+  case hourWithRecommendations
+  case shortHourWithRecommendations
+  case hourWithSpice
+  case shortHourWithSpice
+  case hourWithSpiceAndRecommendations
+  case shortHourWithSpiceAndRecommendations
 }
 
 extension RotationClock {
@@ -10,31 +13,53 @@ extension RotationClock {
     switch self {
     case .standardHour:
       return [.power, .current, .added,
-              .power, .current, .gold,
-              .power, .added,
-              .power, .current,
-              .power, .added,
-              .power, .current, .gold]
-    case .shortHour:
-      return [.power, .current, .added,
               .power, .current,
               .power, .added,
               .power, .current,
               .power, .added,
               .power, .current]
-    case .spiceHour:
+    case .hourWithRecommendations:
       return [.power, .current, .added,
-              .power, .current, .gold,
+              .power, .current, .recommended,
               .power, .added,
-              .power, .current, .spice,
+              .power, .current, .recommended,
               .power, .added,
-              .power, .current, .gold]
-    case .shortSpiceHour:
+              .power, .current]
+    case .shortHourWithRecommendations:
       return [.power, .current, .added,
               .power, .current,
               .power, .added,
+              .power, .current, .recommended,
+              .power, .added,
+              .power, .current]
+    case .hourWithSpice:
+      return [.power, .current, .added,
+              .power, .current,
+              .power, .added, .spice,
+              .power, .current,
+              .power, .added,
+              .power, .current, .spice]
+    case .shortHourWithSpice:
+      return [.power, .current, .added,
+              .power, .current,
+              .power, .added, .spice,
+              .power, .current,
+              .power, .added,
+              .power, .current]
+      
+    case .hourWithSpiceAndRecommendations:
+      return [.power, .current, .added,
+              .power, .current, .recommended,
+              .power, .added, .spice,
+              .power, .current, .recommended,
+              .power, .added,
+              .power, .current, .spice]
+    case .shortHourWithSpiceAndRecommendations:
+      return [.power, .current, .added,
               .power, .current, .spice,
               .power, .added,
+              .power, .current,
+              .power, .added, .recommended,
               .power, .current]
     }
   }

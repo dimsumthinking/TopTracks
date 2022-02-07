@@ -1,6 +1,7 @@
 import SwiftUI
 import MusicKit
 import AVFAudio
+import Foundation
 
 struct NewStationTrackPreviewPlayerView {
   let song: Song
@@ -13,8 +14,13 @@ extension NewStationTrackPreviewPlayerView: View {
     ZStack {
       NewStationSongArtworkView(for: song.artwork)
       Button(action: toggleIsPlaying){
-        NewStationSongPausePlayView(using: song.artwork,
-                                    isPlaying: isPlaying)
+//        NewStationSongPausePlayView(using: song.artwork,
+//                                    isPlaying: isPlaying)
+        Image(systemName: isPlaying ? "stop" : "play" )
+          .font(.largeTitle)
+          .foregroundColor(song.artwork?.secondaryTextColor.map(Color.init(cgColor:)) ?? .primary)
+          .background(song.artwork?.backgroundColor.map(Color.init(cgColor:)) ?? .secondary)
+          .buttonStyle(.bordered)
       }
     }
   }

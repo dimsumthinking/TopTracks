@@ -56,4 +56,7 @@ extension TopTracksStation {
       clock.clockPosition = Int16(newValue)
     }
   }
+//  var labeledStacks: [RotationCategory: TopTracksStack] {
+//    RotationCategory.allCases.
+//  }
 }

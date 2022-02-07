@@ -9,7 +9,7 @@ extension AppleMusicPlaylistFeaturedArtistView: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
       Text(playlist.name)
-        .font(.title3)
+        .bold()
       Text(names)
         .font(.caption)
         .multilineTextAlignment(.leading)

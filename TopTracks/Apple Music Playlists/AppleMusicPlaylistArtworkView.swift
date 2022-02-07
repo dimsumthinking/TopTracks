@@ -13,7 +13,8 @@ struct AppleMusicPlaylistArtworkView {
 extension AppleMusicPlaylistArtworkView: View {
   var body: some View {
     ArtworkImage(artwork,
-                 width: playlistArtworkImageSize)
+                 width: playlistArtworkImageSize,
+                 height: playlistArtworkImageSize)
       .padding()
   }
 }

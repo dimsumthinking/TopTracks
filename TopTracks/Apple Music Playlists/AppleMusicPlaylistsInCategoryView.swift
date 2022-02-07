@@ -17,7 +17,7 @@ extension AppleMusicPlaylistsInCategoryView: View {
   var body: some View {
     List(playlistsInCategory.playlists) {playlist in
       NavigationLink {
-        NewStationTrackSelectionView(for: playlist)
+        NewStationTrackSelectionView(playlist: playlist)
       } label: {
         AppleMusicPlaylistBillboardView(for: playlist)
       }

@@ -3,7 +3,7 @@ import SwiftUI
 struct StationListView {
   @Environment(\.managedObjectContext) private var viewContext
   @Environment(\.editMode) private var editMode
-  @EnvironmentObject var stationConstructionStatus: StationContructionStatus
+  @EnvironmentObject var topTracksStatus: TopTracksStatus
   @FetchRequest(entity: TopTracksStation.entity(),
                 sortDescriptors: [NSSortDescriptor(key: "buttonPosition",
                                                    ascending: true)]) var stations: FetchedResults<TopTracksStation>
@@ -13,16 +13,19 @@ extension StationListView: View {
   var body: some View {
     NavigationView {
       if stations.isEmpty {
-        promptToCreateStation
+        OnBoardingIntroView()
       } else {
         listAllStations
           .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
               EditButton()
+                .disabled(topTracksStatus.needsAppSubscription)
               Button(action: startBuilding) {
                 Image(systemName: "plus")
               }
+              .disabled(topTracksStatus.needsAppSubscription)
             }
+            ToolbarItem
           }
       }
     }
@@ -100,7 +103,7 @@ extension StationListView {
 
 extension StationListView {
   private func startBuilding() {
-    stationConstructionStatus.isCreatingNew = true
+    topTracksStatus.isCreatingNew = true
   }
 }
 

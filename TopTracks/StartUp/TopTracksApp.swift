@@ -4,7 +4,9 @@ import MusicKit
 @main
 struct TopTracksApp: App {
   @State private(set) var authorization = MusicAuthorization.Status.notDetermined
-  //    @State private(set) var subscription: MusicSubscription?
+  @State private var showSubscriptionView = false
+  @StateObject private var topTracksStatus = TopTracksStatus()
+  @Environment(\.scenePhase) var scenePhase
   
   let persistenceController = PersistenceController.shared
   
@@ -12,25 +14,41 @@ struct TopTracksApp: App {
     WindowGroup {
       switch authorization {
       case .notDetermined:
-        AuthorizationView(authorization: $authorization)//,
-        //                          subscription: $subscription)
-      case .denied, .restricted:
+        AuthorizationView(authorization: $authorization)
+      case .denied:
         ReconsiderAuthorizationView(authorization: $authorization)
+      case .restricted:
+        RestrictedAuthorizationView()
       case .authorized:
-        //        if let subscription = subscription,
-        //           subscription.canPlayCatalogContent {
         MainView()
-          .environmentObject(StationContructionStatus())
+          .environmentObject(topTracksStatus)
           .environment(\.managedObjectContext,
                         PersistenceController.shared.container.viewContext)
           .navigationViewStyle(.stack)
-        //        } else {
-        //          LocalMusicOnlyView()
-        //          Text("Local")
-        //        }
+          .task {
+            for await subscription in MusicSubscription.subscriptionUpdates {
+              updateSubscription(subscription)
+            }
+          }
+          .sheet(isPresented: $showSubscriptionView) {
+            SubscriptionView(topTracksStatus: topTracksStatus)
+          }
       @unknown default:
         Text("The status: \(authorization.rawValue) is not yet handled by this app")
       }
     }
+    .onChange(of: scenePhase) {phase in
+      if phase == .background {
+        previewPlayer.audioPlayer = nil
+      }
+    }
   }
 }
+
+extension TopTracksApp {
+  private func updateSubscription(_ subscription: MusicSubscription) {
+    showSubscriptionView = !subscription.canPlayCatalogContent
+    topTracksStatus.musicSubscription = subscription
+  }
+}
+

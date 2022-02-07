@@ -28,9 +28,13 @@ extension TopTracksClock {
     }
   }
   
-  var currentClock: RotationClock? {
-    guard let data = clockAsData else {return nil}
-    return try? PropertyListDecoder().decode(RotationClock.self, from: data)
+  var currentClock: RotationClock {
+    guard let data = clockAsData else {return .standardHour}
+    return (try? PropertyListDecoder().decode(RotationClock.self, from: data)) ?? .standardHour
+  }
+  
+  var numberOfTracksInTheHour: Int {
+    currentClock.slots.count
   }
   
   

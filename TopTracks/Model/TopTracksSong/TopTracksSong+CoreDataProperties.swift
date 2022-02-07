@@ -10,6 +10,7 @@ extension TopTracksSong {
   }
   @NSManaged public var stackPosition: Int16
   @NSManaged public var upOrDown: Int16
+  @NSManaged public var songID: String
   @NSManaged public var stack: TopTracksStack
   @NSManaged public var songAsData: Data?
 
@@ -50,6 +51,8 @@ extension TopTracksSong {
     upOrDown -= 1
   }
 }
+import SwiftUI
+
 
 extension TopTracksSong {
   var song: Song? {
@@ -66,5 +69,10 @@ extension TopTracksSong {
   }
   var url: URL? {
     return song?.url
+  }
+  
+  
+  var categoryColor: Color? {
+    stack.rotationCategory?.color
   }
 }
