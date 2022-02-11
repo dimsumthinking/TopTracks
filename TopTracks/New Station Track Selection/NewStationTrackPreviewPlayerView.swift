@@ -5,7 +5,7 @@ import Foundation
 
 struct NewStationTrackPreviewPlayerView {
   let song: Song
-  @State private var isPlaying = false
+  @Binding var isPlaying: Bool
   @State private var delegate: NewStationTrackPreviewPlayerViewDelegate?
 }
 
@@ -14,8 +14,6 @@ extension NewStationTrackPreviewPlayerView: View {
     ZStack {
       NewStationSongArtworkView(for: song.artwork)
       Button(action: toggleIsPlaying){
-//        NewStationSongPausePlayView(using: song.artwork,
-//                                    isPlaying: isPlaying)
         Image(systemName: isPlaying ? "stop" : "play" )
           .font(.largeTitle)
           .foregroundColor(song.artwork?.secondaryTextColor.map(Color.init(cgColor:)) ?? .primary)
@@ -38,7 +36,6 @@ extension NewStationTrackPreviewPlayerView {
   func previewSong() {
     guard let url = song.previewAssets?.first?.url else {return}
     Task {
-      print(url)
       async let (data, _) = try URLSession.shared.data(from: url)
       if let player = previewPlayer.audioPlayer {
         player.delegate?.audioPlayerDidFinishPlaying?(player, successfully: true)
@@ -72,6 +69,7 @@ extension NewStationTrackPreviewPlayerView {
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
       preview.isPlaying = false
+      previewPlayer.audioPlayer = nil
     }
   }
 }

@@ -23,27 +23,31 @@ extension StationTopTracksSongsView: View {
       //        Text(song.title)
       //        Text(song.artistName).foregroundColor(.secondary)
       HStack {
+        Spacer()
         Button(action: {Task{try await player.skipToPreviousEntry()}}){
           Image(systemName: "backward.fill")
         }
+        Spacer()
         Button(action: {Task{try await playOrPause()}}){
           Image(systemName: isPlaying ? "pause.fill" : "play.fill")
-          Button(action: {Task{try await player.skipToNextEntry()}}){
-            Image(systemName: "forward.fill")
-          }
         }
+        .font(.title)
+        Spacer()
+        Button(action: {Task{try await player.skipToNextEntry()}}){
+          Image(systemName: "forward.fill")
+        }
+        Spacer()
       }
-      .font(.title)
-    }
+  }
     .onChange(of: queue.currentEntry) {entry in
       Task {
         print("Changed", index.description)
         try await add()
         index += 1
-        }
+      }
       
     }
-  }
+}
 }
 @MainActor
 extension StationTopTracksSongsView {
@@ -56,11 +60,11 @@ extension StationTopTracksSongsView {
       if playbackQueueNeedsToBeSet {
         
         //        player.queue = songa
-        player.queue = ApplicationMusicPlayer.Queue(for: [songs[0], songs[1]])
+//        player.queue = ApplicationMusicPlayer.Queue(for: [songs[0], songs[1]])
         player.state.repeatMode = MusicPlayer.RepeatMode.none
-      
-
-//        player.queue = ApplicationMusicPlayer.Queue(for: songs)
+        
+        
+        //        player.queue = ApplicationMusicPlayer.Queue(for: songs)
         //        player.setQueue(with: song)
         playbackQueueNeedsToBeSet = false
       }
@@ -70,8 +74,8 @@ extension StationTopTracksSongsView {
   }
   
   private func add() async throws {
-//    try await player.queue.insert([songs[0], songs[(index + 2) % 4]], position: .tail)
-    player.queue = ApplicationMusicPlayer.Queue(for: [songs[(index % 4)], songs[(index + 1) % 4]])
+    //    try await player.queue.insert([songs[0], songs[(index + 2) % 4]], position: .tail)
+//    player.queue = ApplicationMusicPlayer.Queue(for: [songs[(index % 4)], songs[(index + 1) % 4]])
   }
   
 }

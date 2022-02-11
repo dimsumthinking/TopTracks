@@ -25,7 +25,11 @@ extension StationListView: View {
               }
               .disabled(topTracksStatus.needsAppSubscription)
             }
-            ToolbarItem
+            ToolbarItem(placement: .navigationBarLeading){
+              Button(action: {}){
+                Image(systemName: "gear")
+              }
+            }
           }
       }
     }

@@ -13,20 +13,11 @@ extension TopTracksStation {
     self.stationName = stationName
     self.stationID = UUID()
     self.favorite = false
-    
+    self.snapshots = Set<TopTracksArchivedStation>()
     self.stacks = topTracksStacks(songsAndRatings: songsAndRatings, context: context)
-    self.playlist = TopTracksSourcePlaylist(playlist: playlist,
-                                            station: self,
-                                            context: context)
-    self.clock = TopTracksClock(rotationClock: RotationClock.shortHourWithSpiceAndRecommendations,
-                                station: self,
-                                context: context)
-//    for stack in self.stacks {
-//      print("\n \n" + stack.stackName + "\n")
-//      for song in stack.songs {
-//        print(song.title)
-//      }
-//    }
+    self.playlistID = playlist.id.rawValue
+    self.lastUpdated = Date()
+    self.clockID = clockSelection(for: songsAndRatings).rawValue
   }
 }
 
@@ -43,6 +34,20 @@ extension TopTracksStation {
                                station: self,
                                context: context))
     }
-      return topTracksStacks
+    return topTracksStacks
   }
+}
+
+extension TopTracksStation {
+  private func clockSelection(for songsAndRatings: [NewStationSongRating]) -> RotationClock {
+    switch songsAndRatings.filter({$0.rotationCategory == .spice}).count {
+    case 0..<6:
+      return .standardHour
+    case 6..<12:
+      return .shortHourWithSpice
+    default:
+      return .hourWithSpice
+    }
+  }
+
 }

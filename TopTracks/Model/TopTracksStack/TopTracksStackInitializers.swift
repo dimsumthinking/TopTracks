@@ -7,7 +7,7 @@ extension TopTracksStack {
                    station: TopTracksStation,
                    context: NSManagedObjectContext = sharedViewContext) {
     self.init(context: context)
-    self.stackName = rotationCategory.description
+    self.stackName = rotationCategory.rawValue
     var topTracksSongs: [TopTracksSong] =  []
     for (index, song) in songs.enumerated() {
       topTracksSongs.append(TopTracksSong(song: song,

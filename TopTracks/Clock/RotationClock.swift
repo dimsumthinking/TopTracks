@@ -1,4 +1,4 @@
-enum RotationClock: Codable {
+enum RotationClock: String, Codable {
   case standardHour
   case hourWithRecommendations
   case shortHourWithRecommendations
@@ -6,6 +6,12 @@ enum RotationClock: Codable {
   case shortHourWithSpice
   case hourWithSpiceAndRecommendations
   case shortHourWithSpiceAndRecommendations
+}
+
+extension RotationClock {
+  var numberOfSlots: Int {
+    slots.count
+  }
 }
 
 extension RotationClock {

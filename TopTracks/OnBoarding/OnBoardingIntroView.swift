@@ -13,12 +13,11 @@ extension OnBoardingIntroView: View {
            rotate using this clock.
            """)
         .multilineTextAlignment(.center)
-      ClockView(hour: Hour(with: RotationClock.shortHourWithSpiceAndRecommendations))
+      ClockView(hour: Hour(with: RotationClock.hourWithSpice))
         .padding(.horizontal)
         .mask(Rectangle().aspectRatio(1.0, contentMode: .fit))
-      ForEach(RotationCategory.allCases) {category in
+      ForEach(expandedCategories) {category in
         Text(category.description)
-        //          .font(.title3)
           .foregroundColor(category.color)
       }
       Button("Next", action: {showNext = true})

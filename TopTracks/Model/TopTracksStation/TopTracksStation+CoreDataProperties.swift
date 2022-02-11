@@ -14,8 +14,10 @@ extension TopTracksStation {
   @NSManaged public var stationName: String
   @NSManaged public var stationID: UUID
   @NSManaged public var stacks: Set<TopTracksStack>
-  @NSManaged public var clock: TopTracksClock
-  @NSManaged public var playlist: TopTracksSourcePlaylist
+  @NSManaged public var snapshots: Set<TopTracksArchivedStation>
+  @NSManaged public var clockID: String
+  @NSManaged public var playlistID: String
+  @NSManaged public var lastUpdated: Date
 }
 
 // MARK: Generated accessors for stacks
@@ -33,6 +35,18 @@ extension TopTracksStation {
   @objc(removeStacks:)
   @NSManaged public func removeFromStacks(_ values: NSSet)
   
+  @objc(addSnapshotsObject:)
+  @NSManaged public func addToSnapshots(_ value: TopTracksStack)
+  
+  @objc(removeSnapshotsObject:)
+  @NSManaged public func removeFromSnapshots(_ value: TopTracksStack)
+  
+  @objc(addSnapshots:)
+  @NSManaged public func addToSnapshots(_ values: NSSet)
+  
+  @objc(removeSnapshots:)
+  @NSManaged public func removeFromSnapshots(_ values: NSSet)
+  
 }
 
 extension TopTracksStation : Identifiable {
@@ -48,15 +62,7 @@ extension TopTracksStation {
       buttonPosition = Int16(newValue)
     }
   }
-  var currentClockPosiition: Int {
-    get {
-      Int(clock.clockPosition)
-    }
-    set {
-      clock.clockPosition = Int16(newValue)
-    }
+  var clock: RotationClock {
+    RotationClock(rawValue: clockID) ?? .standardHour
   }
-//  var labeledStacks: [RotationCategory: TopTracksStack] {
-//    RotationCategory.allCases.
-//  }
 }
