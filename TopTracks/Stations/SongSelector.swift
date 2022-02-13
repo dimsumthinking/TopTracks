@@ -12,7 +12,6 @@ class SongSelector {
   let station: TopTracksStation
   let clock: RotationClock
   var songList = [Song]()
-//  var stacks = [RotationCategory: [PlayableSong]]()
   var stacks = [RotationCategory: [Song]]()
 
   init(station: TopTracksStation,

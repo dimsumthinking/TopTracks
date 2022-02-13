@@ -12,7 +12,6 @@ struct NewStationSongSelectionView {
 
   private let playlist: Playlist
   @Binding var moveOn: Bool
-  
 }
 
 extension NewStationSongSelectionView {
@@ -22,7 +21,6 @@ extension NewStationSongSelectionView {
               name: playlist.name,
     playlist: playlist,
     moveOn: moveOn)
-    
   }
 }
 

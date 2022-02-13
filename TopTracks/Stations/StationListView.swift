@@ -1,4 +1,5 @@
 import SwiftUI
+import MusicKit
 
 struct StationListView {
   @Environment(\.managedObjectContext) private var viewContext
@@ -7,6 +8,7 @@ struct StationListView {
   @FetchRequest(entity: TopTracksStation.entity(),
                 sortDescriptors: [NSSortDescriptor(key: "buttonPosition",
                                                    ascending: true)]) var stations: FetchedResults<TopTracksStation>
+  //  @State private var currentStationID: UUID?
 }
 
 extension StationListView: View {
@@ -44,11 +46,11 @@ extension StationListView {
   
   private var listAllStations: some View {
     List {
-      ForEach(stations, id: \.self) {station in
+      ForEach(stations) {station in
         NavigationLink {
           StationView(station: station)
         } label: {
-          Text(station.stationName)
+          StationBillboardView(station: station)
         }
       }
       .onDelete(perform: deleteStation)
@@ -62,6 +64,9 @@ extension StationListView {
   private func deleteStation(at indexSet: IndexSet) {
     guard let first = indexSet.first else {
       fatalError("Couldn't locate item to delete")
+    }
+    if stations[first].stationID == StationView.currentStationID {
+      ApplicationMusicPlayer.shared.pause()
     }
     viewContext.delete(stations[first])
     do {
