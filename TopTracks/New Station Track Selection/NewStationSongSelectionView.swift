@@ -9,7 +9,7 @@ struct NewStationSongSelectionView {
                 sortDescriptors: [NSSortDescriptor(key: "buttonPosition",
                                                    ascending: true)]) private var stations: FetchedResults<TopTracksStation>
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
-
+  
   private let playlist: Playlist
   @Binding var moveOn: Bool
 }
@@ -19,8 +19,8 @@ extension NewStationSongSelectionView {
        moveOn: Binding<Bool>) {
     self.init(songsInPlaylist: NewStationSongsInPlaylist(playlist),
               name: playlist.name,
-    playlist: playlist,
-    moveOn: moveOn)
+              playlist: playlist,
+              moveOn: moveOn)
   }
 }
 
@@ -28,14 +28,21 @@ extension NewStationSongSelectionView: View {
   var body: some View {
     VStack(spacing: 10) {
       HStack {
+        Text("This").foregroundColor(.red)
+        Text("That").foregroundColor(.purple)
+        Text("Other").foregroundColor(.teal)
+      }
+      HStack {
         Button("Create a station",
                action: createStation)
-          .disabled(notEnoughSongs)
+        .disabled(notEnoughSongs)
         
         Spacer()
-        Button("Sort top to bottom",
-               action: sortTheSongs)
-          .disabled(nothingToSort)
+        Button(action: sortTheSongs) {
+          Image(systemName: "arrow.up.arrow.down")
+        }
+        .disabled(nothingToSort)
+        
       }
       .buttonStyle(.borderedProminent)
       .padding()
@@ -46,16 +53,18 @@ extension NewStationSongSelectionView: View {
       }
       List($songsInPlaylist.songsAndRatings) {$songAndRating in
         NewStationIndividualTrackView(songAndRating: $songAndRating)
-          .foregroundColor(songAndRating.rotationCategory == .spice
-                           ? .primary
-                           : songAndRating.rotationCategory.color)
-          .onChange(of: songAndRating) {_ in self.assignCategories()}
+          .foregroundColor(songAndRating.rotationCategory.color)// ?? .primary)
+          .onChange(of: songAndRating) {_ in print(songAndRating.rotationCategory.description)}//self.assignCategories()}
       }
     }
-    .onDisappear {
-      previewPlayer.audioPlayer = nil
-    }
+//    .onDisappear {
+//      previewPlayer.audioPlayer = nil
+//    }
   }
+}
+
+extension NewStationSongSelectionView {
+  
 }
 
 extension NewStationSongSelectionView {

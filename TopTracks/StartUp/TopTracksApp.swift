@@ -30,7 +30,8 @@ struct TopTracksApp: App {
               updateSubscription(subscription)
             }
           }
-          .sheet(isPresented: $showSubscriptionView) {
+          .sheet(isPresented: $showSubscriptionView,
+                 onDismiss: {showSubscriptionView = !(topTracksStatus.musicSubscription?.canPlayCatalogContent ?? false)}) {
             SubscriptionView(topTracksStatus: topTracksStatus)
           }
       @unknown default:
@@ -39,7 +40,8 @@ struct TopTracksApp: App {
     }
     .onChange(of: scenePhase) {phase in
       if phase == .background {
-        previewPlayer.audioPlayer = nil
+        musicTestPreviewPlayer.audioPlayer = nil
+        topTracksStatus.isCreatingNew = false
       }
     }
   }

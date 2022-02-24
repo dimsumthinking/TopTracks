@@ -15,7 +15,7 @@ extension StationListView: View {
   var body: some View {
     NavigationView {
       if stations.isEmpty {
-        OnBoardingIntroView()
+        StationCreationOverview()
       } else {
         listAllStations
           .toolbar {

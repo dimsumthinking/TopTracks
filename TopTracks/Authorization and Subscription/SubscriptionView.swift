@@ -12,17 +12,14 @@ extension SubscriptionView: View {
     VStack(spacing: 40) {
       Text("""
            This app requires an
-           Individual, Student, or Family Plan
            Apple Music Subscription
+           Individual, Student, or Family Plan
            to create playlists and play music.
            """)
-        .multilineTextAlignment(.center)
-      if let subscription = topTracksStatus.musicSubscription {
-        Text(subscription.canBecomeSubscriber.description)
-        Text(subscription.canPlayCatalogContent.description)
-        if subscription.canBecomeSubscriber {
-          Button("Subscribe", action: subscribeButtonSelected)
-        }
+      .multilineTextAlignment(.center)
+      if let subscription = topTracksStatus.musicSubscription,
+         subscription.canBecomeSubscriber {
+        Button("Subscribe", action: subscribeButtonSelected)
       }
     }
     .musicSubscriptionOffer(isPresented: $isShowingSubscriptionOffer,

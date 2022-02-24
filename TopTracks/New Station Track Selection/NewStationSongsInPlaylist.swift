@@ -1,7 +1,8 @@
-import MusicKit
+@preconcurrency import MusicKit
 import Foundation
 import SwiftUI
 import CoreData
+
 
 class NewStationSongsInPlaylist: ObservableObject {
   @Published var songsAndRatings: [NewStationSongRating] = []
@@ -10,14 +11,14 @@ class NewStationSongsInPlaylist: ObservableObject {
   init(_ playlist: Playlist) {
     self.playlist = playlist
     Task {
-      await self.fetchSongs()
+      await self.fetchSongs(playlist: playlist)
     }
   }
 }
 
 extension NewStationSongsInPlaylist {
   @MainActor
-  private func fetchSongs()  async {
+  private func fetchSongs(playlist: Playlist)  async {
     async let results = playlist.with([.tracks])
     if let tracks = try? await results.tracks {
       self.songsAndRatings
@@ -76,7 +77,8 @@ extension NewStationSongsInPlaylist {
       case secondLimit..<min(numberRated, maximum):
         assign(.added, to: sortedSongs[index])
       default:
-        assign(.spice, to: sortedSongs[index])
+        assign(sortedSongs[index].rating < 1 ? .notIncluded : .spice,
+               to: sortedSongs[index])
       }
     }
   }
@@ -87,4 +89,3 @@ extension NewStationSongsInPlaylist {
     songsAndRatings[index].rotationCategory = rotationCategory
   }
 }
-

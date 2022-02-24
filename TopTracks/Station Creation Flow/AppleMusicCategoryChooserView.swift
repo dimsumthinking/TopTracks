@@ -1,14 +1,14 @@
 import SwiftUI
 
-struct AppleMusicCategoryView {
+struct AppleMusicCategoryChooserView {
   let categories: [AppleMusicCategory]
 }
 
-extension AppleMusicCategoryView: View {
+extension AppleMusicCategoryChooserView: View {
   var body: some View {
       List(categories) {category in
         NavigationLink {
-          AppleMusicPlaylistsInCategoryView(for: category)
+          AppleMusicPlaylistsInCategoryChooserView(for: category)
         } label: {
           Text(category.description)
         }
@@ -19,9 +19,9 @@ extension AppleMusicCategoryView: View {
   }
 }
 
-struct AppleMusicCategoryView_Previews: PreviewProvider {
+struct AppleMusicCategoryChooserView_Previews: PreviewProvider {
   static var previews: some View {
-    AppleMusicCategoryView(categories: appleMusicCategories)
+    AppleMusicCategoryChooserView(categories: appleMusicCategories)
   }
 }
 

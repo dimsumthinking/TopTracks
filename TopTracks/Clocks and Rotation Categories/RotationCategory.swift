@@ -1,5 +1,6 @@
 let standardCategories: [RotationCategory] = [.power, .current, .added]
 let expandedCategories: [RotationCategory] = [.power, .current, .added, .spice]
+let selectableCategories: [RotationCategory] = [.power, .current, .added, .spice, .notIncluded]
 
 enum RotationCategory: String, CaseIterable, Equatable, Hashable, Codable {
   case power
@@ -7,6 +8,7 @@ enum RotationCategory: String, CaseIterable, Equatable, Hashable, Codable {
   case added
   case spice
   case recommended
+  case notIncluded
 }
 
 extension RotationCategory: CustomStringConvertible {
@@ -17,6 +19,7 @@ extension RotationCategory: CustomStringConvertible {
     case .added: return "Newly Added"
     case .spice: return "Extra Spice"
     case .recommended: return "Recommended"
+    case .notIncluded: return "Not Included"
     }
   }
 }
@@ -48,6 +51,31 @@ extension RotationCategory {
     case .added: return .mint
     case .spice:  return .orange
     case .recommended: return  Color(red: 1, green: 0.85, blue: 0)
+    case .notIncluded: return .primary
+    }
+  }
+}
+
+extension RotationCategory {
+  var symbol: Image {
+    switch self {
+    case .power: return Image(systemName: "star")
+    case .current: return Image(systemName: "heart")
+    case .added: return Image(systemName: "plus")
+    case .spice:  return Image(systemName: "bolt")
+    case .recommended: return  Image(systemName: "text.bubble")
+    case .notIncluded: return Image(systemName: "circle.slash")
+    }
+  }
+  
+  var likeability: String {
+    switch self {
+    case .power: return "I love it"
+    case .current: return "Really good"
+    case .added: return "Pretty Nice"
+    case .spice: return "It's just OK"
+    case .recommended: return  "N/A"
+    case .notIncluded: return "Not for me"
     }
   }
 }

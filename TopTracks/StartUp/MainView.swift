@@ -8,7 +8,7 @@ struct MainView {
 extension MainView : View {
   var body: some View {
     if topTracksStatus.isCreatingNew {
-      StationBuilderView()
+      StationCreationOverview()
         .navigationBarTitleDisplayMode(.inline)
     } else {
       StationListView()

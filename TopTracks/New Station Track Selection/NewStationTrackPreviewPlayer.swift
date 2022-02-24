@@ -1,6 +1,6 @@
 import AVFAudio
 
-let previewPlayer = NewStationTrackPreviewPlayer()
+//let previewPlayer = NewStationTrackPreviewPlayer()
 
 class NewStationTrackPreviewPlayer {
   var audioPlayer: AVAudioPlayer?

@@ -14,9 +14,9 @@ extension NewStationTrackSelectionView: View {
       .navigationTitle(playlist.name)
     .navigationBarTitleDisplayMode(.inline)
     .modifier(StationBuildCancellation())
-    .onDisappear {
-      previewPlayer.audioPlayer = nil
-    }
+//    .onDisappear {
+//      previewPlayer.audioPlayer = nil
+//    }
   }
 }
 

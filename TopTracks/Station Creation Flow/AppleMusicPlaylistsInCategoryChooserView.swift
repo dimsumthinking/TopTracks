@@ -1,28 +1,29 @@
 import SwiftUI
 import MusicKit
 
-struct AppleMusicPlaylistsInCategoryView {
+struct AppleMusicPlaylistsInCategoryChooserView {
   @StateObject private var playlistsInCategory: AppleMusicPlaylistsInCategory
   private var name: String
 }
 
-extension AppleMusicPlaylistsInCategoryView {
+extension AppleMusicPlaylistsInCategoryChooserView {
   init(for category: AppleMusicCategory) {
     self.init(playlistsInCategory: AppleMusicPlaylistsInCategory(category),
               name: category.description)
   }
 }
 
-extension AppleMusicPlaylistsInCategoryView: View {
+extension AppleMusicPlaylistsInCategoryChooserView: View {
   var body: some View {
     List(playlistsInCategory.playlists) {playlist in
       NavigationLink {
-        NewStationTrackSelectionView(playlist: playlist)
+        MusicTestView(for: playlist)
       } label: {
         AppleMusicPlaylistBillboardView(for: playlist)
       }
     }
     .modifier(StationBuildCancellation())
-    .navigationTitle(name + " Playlists")
+    .navigationTitle(name)
   }
 }
+

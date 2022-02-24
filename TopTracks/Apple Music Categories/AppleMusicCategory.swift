@@ -41,6 +41,7 @@ enum AppleMusicCategory: String, CaseIterable {
   case decades
   case deutschpop
   case deutschrap
+  case devotional
   case djMixes = "DJ Mixes"
   case eatingAndCooking = "Eating and Cooking"
   case electronic
@@ -104,6 +105,7 @@ enum AppleMusicCategory: String, CaseIterable {
   case punjabi
   case rAndB = "R&B"
   case reggae
+  case religiKetuhanan = "Religi/Ketuhanan"
   case rock
   case rockInSpanish = "Rock in Spanish"
   case rockYAlternative = "Rock y Alternative"
