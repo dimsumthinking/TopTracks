@@ -5,7 +5,8 @@ extension TopTracksStation {
   convenience init(stationName: String,
                    playlist: Playlist,
                    buttonPosition: Int,
-                   songsAndRatings: [NewStationSongRating],
+                   songsAndCategories: [MusicTestResult],
+                   clock: RotationClock,
                    context: NSManagedObjectContext = sharedViewContext) {
     self.init(context: context)
     self.buttonPosition = Int16(buttonPosition)
@@ -14,15 +15,15 @@ extension TopTracksStation {
     self.stationID = UUID()
     self.favorite = false
     self.snapshots = Set<TopTracksArchivedStation>()
-    self.stacks = topTracksStacks(songsAndRatings: songsAndRatings, context: context)
+    self.stacks = topTracksStacks(songsAndRatings: songsAndCategories, context: context)
     self.playlistID = playlist.id.rawValue
     self.lastUpdated = Date()
-    self.clockID = clockSelection(for: songsAndRatings).rawValue
+    self.clockID = clock.rawValue
   }
 }
 
 extension TopTracksStation {
-  private func topTracksStacks(songsAndRatings: [NewStationSongRating],
+  private func topTracksStacks(songsAndRatings: [MusicTestResult],
                                context: NSManagedObjectContext) -> Set<TopTracksStack> {
     var topTracksStacks = Set<TopTracksStack>()
     for category in RotationCategory.allCases {
@@ -38,16 +39,3 @@ extension TopTracksStation {
   }
 }
 
-extension TopTracksStation {
-  private func clockSelection(for songsAndRatings: [NewStationSongRating]) -> RotationClock {
-    switch songsAndRatings.filter({$0.rotationCategory == .spice}).count {
-    case 0..<6:
-      return .standardHour
-    case 6..<12:
-      return .shortHourWithSpice
-    default:
-      return .hourWithSpice
-    }
-  }
-
-}
