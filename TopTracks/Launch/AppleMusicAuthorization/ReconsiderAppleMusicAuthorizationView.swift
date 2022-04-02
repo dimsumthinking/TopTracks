@@ -1,7 +1,7 @@
 import SwiftUI
 import MusicKit
 
-struct ReconsiderAuthorizationView: View {
+struct ReconsiderAppleMusicAuthorizationView: View {
     @Binding private(set) var authorization: MusicAuthorization.Status
     
   var body: some View {

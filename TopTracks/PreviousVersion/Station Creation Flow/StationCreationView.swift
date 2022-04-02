@@ -14,7 +14,7 @@ struct StationCreationView {
   
   init(songs: MusicTestSongs,
        spice: Bool) {
-    let categories = spice ? expandedCategories : standardCategories
+    let categories = spice ? standardRotationCategories : basicCategories
     self.results = songs.songs(categories: categories)
     self.playlist = songs.playlist
     self.clock = spice ? .hourWithSpice : .standardHour

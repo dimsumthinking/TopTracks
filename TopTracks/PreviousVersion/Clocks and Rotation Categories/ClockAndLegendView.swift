@@ -22,6 +22,6 @@ extension ClockAndLegendView: View {
 struct ClockAndLegend_Previews: PreviewProvider {
   static var previews: some View {
     ClockAndLegendView(clock: .hourWithSpice,
-                       categories: expandedCategories)
+                       categories: standardRotationCategories)
   }
 }

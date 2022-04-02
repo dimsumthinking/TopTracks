@@ -13,7 +13,7 @@ extension StationCreationOverview: View {
           .multilineTextAlignment(.center)
           .padding()
         ClockAndLegendView(clock: .hourWithSpice,
-                           categories: expandedCategories)
+                           categories: standardRotationCategories)
         Button("Next", action: {showNext = true})
           .buttonStyle(.borderedProminent)
           .padding()

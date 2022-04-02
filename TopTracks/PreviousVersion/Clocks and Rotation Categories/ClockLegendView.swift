@@ -19,6 +19,6 @@ extension ClockLegendView: View {
 
 struct ClockLegendView_Previews: PreviewProvider {
   static var previews: some View {
-    ClockLegendView(categories: standardCategories)
+    ClockLegendView(categories: basicCategories)
   }
 }

@@ -1,11 +1,11 @@
 import SwiftUI
 import MusicKit
 
-struct AuthorizationView {
+struct AppleMusicAuthorizationView {
   @Binding var authorization: MusicAuthorization.Status
 }
 
-extension AuthorizationView: View {
+extension AppleMusicAuthorizationView: View {
   var body: some View {
     Text("Checking Authorization")
       .task {

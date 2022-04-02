@@ -15,7 +15,7 @@ extension StationBuildCancellation: ViewModifier {
                  action: showCancelAlert)
         }
       }
-      .alert("Stop creating this new station?",
+      .alert("Stop creating a new station?",
              isPresented: $showCancel){
         Button("No, keep going",
                role: .cancel,

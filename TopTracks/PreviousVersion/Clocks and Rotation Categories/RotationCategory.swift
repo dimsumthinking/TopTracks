@@ -1,5 +1,5 @@
-let standardCategories: [RotationCategory] = [.power, .current, .added]
-let expandedCategories: [RotationCategory] = [.power, .current, .added, .spice]
+let basicCategories: [RotationCategory] = [.power, .current, .added]
+let standardRotationCategories: [RotationCategory] = [.power, .current, .added, .spice]
 let selectableCategories: [RotationCategory] = [.power, .current, .added, .spice, .notIncluded]
 
 enum RotationCategory: String, CaseIterable, Equatable, Hashable, Codable {
@@ -20,6 +20,18 @@ extension RotationCategory: CustomStringConvertible {
     case .spice: return "Extra Spice"
     case .recommended: return "Recommended"
     case .notIncluded: return "Not Included"
+    }
+  }
+}
+extension RotationCategory {
+  var rotationLevel: String {
+    switch self {
+    case .power: return "Top Tracks"
+    case .current: return "Heavy Rotation"
+    case .added: return "Medium Rotation"
+    case .spice: return "Light Rotation"
+    case .recommended: return ""
+    case .notIncluded: return ""
     }
   }
 }

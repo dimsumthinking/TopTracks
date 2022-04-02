@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct CategoryRepeatView {
-  let categories: [RotationCategory] = expandedCategories
+  let categories: [RotationCategory] = standardRotationCategories
   let repeatFrequencies: [String] = ["1-2 hours",
                                    "2-3 hours",
                                    "3-4 hours",

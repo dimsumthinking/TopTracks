@@ -18,7 +18,7 @@ class SongSelector {
        clock: RotationClock) {
     self.station = station
     self.clock = clock
-    expandedCategories.forEach{ category in
+    standardRotationCategories.forEach{ category in
       stacks[category] = initializeStack(in: station,
                                          category: category)
     }

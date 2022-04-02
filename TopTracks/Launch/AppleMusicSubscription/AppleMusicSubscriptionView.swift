@@ -2,12 +2,12 @@ import SwiftUI
 import MusicKit
 
 
-struct SubscriptionView {
+struct AppleMusicSubscriptionView {
   @ObservedObject private(set) var topTracksStatus: TopTracksStatus
   @State private var isShowingSubscriptionOffer = false
 }
 
-extension SubscriptionView: View {
+extension AppleMusicSubscriptionView: View {
   var body: some View {
     VStack(spacing: 40) {
       Text("""
@@ -27,7 +27,7 @@ extension SubscriptionView: View {
   }
 }
 
-extension SubscriptionView {
+extension AppleMusicSubscriptionView {
   private func subscribeButtonSelected() {
     isShowingSubscriptionOffer = true
   }
