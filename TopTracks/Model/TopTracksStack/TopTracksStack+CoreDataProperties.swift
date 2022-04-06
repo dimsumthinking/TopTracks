@@ -11,9 +11,8 @@ extension TopTracksStack {
   @NSManaged public var stackName: String
   @NSManaged public var songs: Set<TopTracksSong>
   @NSManaged public var station: TopTracksStation
-  @NSManaged public var snapshot: TopTracksStation?
-  
 }
+
 
 // MARK: Generated accessors for songs
 extension TopTracksStack {

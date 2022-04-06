@@ -40,14 +40,14 @@ extension StationCreationView: View {
           .foregroundColor(result.rotationCategory.color)
         }
       }
-      Button(action: createStation){
-        Text("Save your new station")
-          .padding()
-          .padding(.horizontal)
-      }
-      .padding(30)
-      .buttonStyle(.borderedProminent)
-      .padding()
+//      Button(action: createStation){
+//        Text("Save your new station")
+//          .padding()
+//          .padding(.horizontal)
+//      }
+//      .padding(30)
+//      .buttonStyle(.borderedProminent)
+//      .padding()
     }
     .navigationBarBackButtonHidden(true)
     .navigationBarTitleDisplayMode(.inline)
@@ -56,28 +56,28 @@ extension StationCreationView: View {
   }
 }
 
-extension StationCreationView {
-  func createStation() {
-    let context = PersistenceController.newBackgroundContext
-    let _ = TopTracksStation(stationName: playlist.name + decorationForStationName,
-                             playlist: playlist,
-                             buttonPosition: stations.count,
-                             songsAndCategories: results,
-                             clock: self.clock,
-                             context: context)
-    do {
-      topTracksStatus.isCreatingNew = false
-      try context.save()
-      print("tried to save \(playlist.name)")
-    } catch {
-      print("Not able to create a new station\n", error)
-    }
-  }
-  
-  private var decorationForStationName: String {
-    let numberWithSameStart = stations.map(\.stationName)
-      .filter{name in name.starts(with: playlist.name)}.count
-    
-    return numberWithSameStart == 0 ? "" : (" " + (numberWithSameStart + 1).description)
-  }
-}
+//extension StationCreationView {
+//  func createStation() {
+//    let context = PersistenceController.newBackgroundContext
+//    let _ = TopTracksStation(stationName: playlist.name + decorationForStationName,
+//                             playlist: playlist,
+//                             buttonPosition: stations.count,
+//                             songsAndCategories: results,
+//                             clock: self.clock,
+//                             context: context)
+//    do {
+//      topTracksStatus.isCreatingNew = false
+//      try context.save()
+//      print("tried to save \(playlist.name)")
+//    } catch {
+//      print("Not able to create a new station\n", error)
+//    }
+//  }
+//  
+//  private var decorationForStationName: String {
+//    let numberWithSameStart = stations.map(\.stationName)
+//      .filter{name in name.starts(with: playlist.name)}.count
+//    
+//    return numberWithSameStart == 0 ? "" : (" " + (numberWithSameStart + 1).description)
+//  }
+//}

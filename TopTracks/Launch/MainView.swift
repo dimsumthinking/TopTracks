@@ -12,8 +12,9 @@ extension MainView : View {
 //          await startSearch()
 //        }
     } else {
-      Text("Not yet")
-      //      MainStationView()
+//      Text("Not yet")
+//            MainStationView()
+      StationListView()
     }
   }
 }

@@ -38,7 +38,7 @@ extension StationBuildCancellation {
 
 extension StationBuildCancellation {
   private func stopBuilding() {
-    musicTestPreviewPlayer.audioPlayer = nil
+    songPreviewPlayer.audioPlayer = nil
     topTracksStatus.isCreatingNew = false
   }
 }

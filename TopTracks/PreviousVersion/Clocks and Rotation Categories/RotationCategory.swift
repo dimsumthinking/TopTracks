@@ -9,6 +9,7 @@ enum RotationCategory: String, CaseIterable, Equatable, Hashable, Codable {
   case spice
   case recommended
   case notIncluded
+  case notRated
 }
 
 extension RotationCategory: CustomStringConvertible {
@@ -20,6 +21,7 @@ extension RotationCategory: CustomStringConvertible {
     case .spice: return "Extra Spice"
     case .recommended: return "Recommended"
     case .notIncluded: return "Not Included"
+    case .notRated: return "Not Rated"
     }
   }
 }
@@ -30,8 +32,7 @@ extension RotationCategory {
     case .current: return "Heavy Rotation"
     case .added: return "Medium Rotation"
     case .spice: return "Light Rotation"
-    case .recommended: return ""
-    case .notIncluded: return ""
+    default : return ""
     }
   }
 }
@@ -39,8 +40,8 @@ extension RotationCategory {
 extension RotationCategory {
   var capacity: Int {
     switch self {
-    case .spice: return 500
-    default: return 12
+    case .recommended: return 500
+    default: return 10
     }
   }
 }
@@ -64,6 +65,7 @@ extension RotationCategory {
     case .spice:  return .orange
     case .recommended: return  Color(red: 1, green: 0.85, blue: 0)
     case .notIncluded: return .primary
+    case .notRated: return .secondary
     }
   }
 }
@@ -77,6 +79,8 @@ extension RotationCategory {
     case .spice:  return Image(systemName: "bolt")
     case .recommended: return  Image(systemName: "text.bubble")
     case .notIncluded: return Image(systemName: "circle.slash")
+    case .notRated: return Image(systemName: "questionmark")
+
     }
   }
   
@@ -86,8 +90,9 @@ extension RotationCategory {
     case .current: return "Really good"
     case .added: return "Pretty Nice"
     case .spice: return "It's just OK"
-    case .recommended: return  "N/A"
     case .notIncluded: return "Not for me"
+    default:  return  "N/A"
+
     }
   }
 }
@@ -105,6 +110,7 @@ extension RotationCategory: Comparable {
     case .spice: return 3
     case .recommended: return 4
     case .notIncluded: return 5
+    case .notRated: return 6
     }
   }
   
@@ -117,6 +123,6 @@ extension RotationCategory: Comparable {
     }
   }
   var hasNext: Bool {
-    next != .notIncluded
+    next != .notIncluded || next != .notRated
   }  
 }

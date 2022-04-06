@@ -1,4 +1,4 @@
-enum TopTracksChartType {
+enum TopTracksChartType: String {
   case topSongs
   case cityCharts
   case dailyTop100
@@ -24,13 +24,13 @@ extension TopTracksChartType {
   var imageName: String {
     switch self {
     case .topSongs:
-      return "music.note.list"
+      return genreIcon
     case .cityCharts:
-      return "mappin"
+      return cityChartIcon
     case .dailyTop100:
-      return "map"
+      return top100Icon
     case .playlists:
-      return "square.stack.3d.up"
+      return topPlaylistsIcon
     }
   }
 }

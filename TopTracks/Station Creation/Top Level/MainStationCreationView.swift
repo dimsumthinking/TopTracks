@@ -14,7 +14,7 @@ extension MainStationCreationView: View {
           StationCreationOptionView(stationType: .chart)
         }
         NavigationLink {
-          Text("Two")
+         AppleMusicCategoryChooserView()
         } label : {
           StationCreationOptionView(stationType: .playlist)
         }

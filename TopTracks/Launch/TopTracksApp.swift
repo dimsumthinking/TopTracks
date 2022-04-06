@@ -30,7 +30,6 @@ extension TopTracksApp: App {
     .onChange(of: scenePhase) {phase in
       if phase == .background {
         songPreviewPlayer.stop()
-//        musicTestPreviewPlayer.audioPlayer = nil
         topTracksStatus.isCreatingNew = false
       }
     }

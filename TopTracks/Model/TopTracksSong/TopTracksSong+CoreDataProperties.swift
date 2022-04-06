@@ -13,13 +13,12 @@ extension TopTracksSong {
   @NSManaged public var songID: String
   @NSManaged public var stack: TopTracksStack
   @NSManaged public var songAsData: Data?
-
-  
 }
+
 
 extension TopTracksSong : Identifiable {
-  
 }
+
 extension TopTracksSong {
   var currentStackPosition: Int {
     get {

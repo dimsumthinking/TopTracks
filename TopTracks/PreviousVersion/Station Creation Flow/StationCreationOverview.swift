@@ -18,8 +18,7 @@ extension StationCreationOverview: View {
           .buttonStyle(.borderedProminent)
           .padding()
         NavigationLink(isActive: $showNext) {
-          AppleMusicCategoryChooserView(categories: appleMusicCategories
-          )
+          AppleMusicCategoryChooserView()
         } label: {
           EmptyView()
         }
