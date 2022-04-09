@@ -22,7 +22,7 @@ extension MainStationCreationView: View {
       .navigationTitle("Station Type")
       .navigationBarTitleDisplayMode(.inline)
       .navigationViewStyle(.stack)
-      .modifier(StationBuildCancellation())
+      .modifier(NewStationCancellation())
     }
   }
 }

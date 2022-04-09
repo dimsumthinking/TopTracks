@@ -19,7 +19,7 @@ extension StationPreviewForMusicTestSongs: View {
       }
     }
     .navigationTitle(musicTestSongs.playlist.name)
-    .modifier(StationBuildCancellation())
+    .modifier(NewStationCancellation())
   }
 }
 

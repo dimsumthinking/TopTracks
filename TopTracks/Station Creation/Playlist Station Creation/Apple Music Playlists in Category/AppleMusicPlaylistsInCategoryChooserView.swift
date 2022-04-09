@@ -24,7 +24,7 @@ extension AppleMusicPlaylistsInCategoryChooserView: View {
       }
     }
     .searchable(text: $filterString)
-    .modifier(StationBuildCancellation())
+    .modifier(NewStationCancellation())
     .navigationTitle(name)
   }
 }

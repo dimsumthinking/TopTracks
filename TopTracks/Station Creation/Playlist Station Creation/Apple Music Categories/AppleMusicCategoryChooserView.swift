@@ -17,7 +17,7 @@ extension AppleMusicCategoryChooserView: View {
       .searchable(text: $filterString)
     .navigationTitle("Categories")
     .navigationBarTitleDisplayMode(.inline)
-    .modifier(StationBuildCancellation())
+    .modifier(NewStationCancellation())
   }
 }
 

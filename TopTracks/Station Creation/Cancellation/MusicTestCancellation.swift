@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct StationBuildCancellation {
+struct MusicTestCancellation {
   @State private var showCancel = false
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
 }
 
-extension StationBuildCancellation: ViewModifier {
+extension MusicTestCancellation: ViewModifier {
   func body(content: Content) -> some View {
     content
       .toolbar {
@@ -27,7 +27,7 @@ extension StationBuildCancellation: ViewModifier {
   }
 }
 
-extension StationBuildCancellation {
+extension MusicTestCancellation {
   private func showCancelAlert() {
     showCancel = true
   }
@@ -36,7 +36,7 @@ extension StationBuildCancellation {
   }
 }
 
-extension StationBuildCancellation {
+extension MusicTestCancellation {
   private func stopBuilding() {
     songPreviewPlayer.audioPlayer = nil
     topTracksStatus.isCreatingNew = false

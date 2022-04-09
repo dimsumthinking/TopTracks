@@ -8,13 +8,9 @@ extension MainView : View {
   var body: some View {
     if topTracksStatus.isCreatingNew {
       MainStationCreationView()
-//        .task {
-//          await startSearch()
-//        }
     } else {
-//      Text("Not yet")
-//            MainStationView()
-      StationListView()
+      MainStationPlayerView()
+//      StationsView()
     }
   }
 }

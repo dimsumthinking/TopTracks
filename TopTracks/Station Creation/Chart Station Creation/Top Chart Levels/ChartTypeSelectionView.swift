@@ -30,7 +30,7 @@ extension ChartTypeSelectionView: View {
     }
     .navigationTitle("Charts")
     .navigationBarTitleDisplayMode(.inline)
-    .modifier(StationBuildCancellation())
+    .modifier(NewStationCancellation())
   }
 }
 

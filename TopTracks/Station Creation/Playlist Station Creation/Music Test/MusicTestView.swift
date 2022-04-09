@@ -7,6 +7,12 @@ struct MusicTestView {
   @State private var testIsRunning = false
   @State private var index = 0
   @State private var moveOn = false
+  @FetchRequest(entity: TopTracksStation.entity(),
+                sortDescriptors: [NSSortDescriptor(key: "buttonPosition",
+                                                   ascending: true)])
+  private var stations: FetchedResults<TopTracksStation>
+  @State private var playlistIDs: [String] = []
+  @EnvironmentObject private var topTracksStatus: TopTracksStatus
 }
 
 extension MusicTestView {
@@ -35,17 +41,25 @@ extension MusicTestView: View {
             .padding()
         }
       } else {
+        if playlistIDs.contains(playlist.id.rawValue) {
+          Button("You've already hand-crafted\n\(playlist.name)"){topTracksStatus.isCreatingNew = false}
+        } else {
         MusicTestOverview(testIsRunning: $testIsRunning,
                           action: playSong,
                           count: songs.testResults.count)
-        
+        }
       }
     }
     .navigationTitle(playlist.name)
     .navigationBarTitleDisplayMode(.inline)
-    .modifier(StationBuildCancellation())
+    .modifier(MusicTestCancellation())
     .onDisappear {
       songPreviewPlayer.audioPlayer = nil
+    }
+    .onAppear {
+      playlistIDs = stations.filter {station in
+        station.stationType == .playlist
+      }.compactMap(\.playlistInfo).map(\.playlistID)
     }
   }
 }

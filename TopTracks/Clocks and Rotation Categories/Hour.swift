@@ -1,5 +1,5 @@
 class Hour {
-  private let slots: [RotationCategory]
+  let slots: [RotationCategory]
   private(set) var index = 0
   let numberOfSlots: Int
   

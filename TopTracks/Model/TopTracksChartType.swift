@@ -35,5 +35,20 @@ extension TopTracksChartType {
   }
 }
 
+import SwiftUI
 
+extension TopTracksChartType {
+  var imageColor: Color {
+    switch self {
+    case .topSongs:
+      return .mint
+    case .cityCharts:
+      return .purple
+    case .dailyTop100:
+      return .cyan
+    case .playlists:
+      return .orange
+    }
+  }
+}
 

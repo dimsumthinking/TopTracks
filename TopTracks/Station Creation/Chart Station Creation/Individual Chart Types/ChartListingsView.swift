@@ -30,7 +30,7 @@ extension ChartListingsView: View {
       chartsForType.search(for: chartType)
     }
     .navigationTitle(chartType.blurb)
-    .modifier(StationBuildCancellation())
+    .modifier(NewStationCancellation())
   }
 }
 

@@ -30,7 +30,7 @@ extension TopTracksApp: App {
     .onChange(of: scenePhase) {phase in
       if phase == .background {
         songPreviewPlayer.stop()
-        topTracksStatus.isCreatingNew = false
+//        topTracksStatus.isCreatingNew = false
       }
     }
   }

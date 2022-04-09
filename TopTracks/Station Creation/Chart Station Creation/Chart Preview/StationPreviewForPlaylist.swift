@@ -21,7 +21,7 @@ extension StationPreviewForPlaylist: View {
       }
     }
     .navigationTitle(playlistName)
-    .modifier(StationBuildCancellation())
+    .modifier(NewStationCancellation())
   }
 }
 

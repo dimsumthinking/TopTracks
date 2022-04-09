@@ -54,32 +54,38 @@ extension TopTracksStation {
   var clock: RotationClock {
     RotationClock(rawValue: clockID) ?? .standardHour
   }
+  var stationIDAsString: String {
+    stationID.description
+  }
 }
 
 extension TopTracksStation {
-  var stationType: TopTracksChartType? {
+  var stationType: TopTracksStationType {
+    chartType == nil ? .playlist : .chart
+  }
+  var chartType: TopTracksChartType? {
     TopTracksChartType(rawValue: chartInfo?.chartType ?? "")
   }
   var isGenreChart: Bool {
-    guard let stationType = stationType else {
+    guard let stationType = chartType else {
       return false
     }
     return stationType == .topSongs
   }
   var isCityChart: Bool {
-    guard let stationType = stationType else {
+    guard let stationType = chartType else {
       return false
     }
     return stationType == .cityCharts
   }
   var isDailyChart: Bool {
-    guard let stationType = stationType else {
+    guard let stationType = chartType else {
       return false
     }
     return stationType == .dailyTop100
   }
   var isPlaylistChart: Bool {
-    guard let stationType = stationType else {
+    guard let stationType = chartType else {
       return false
     }
     return stationType == .playlists

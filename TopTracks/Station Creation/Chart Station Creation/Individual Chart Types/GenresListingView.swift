@@ -34,7 +34,7 @@ extension GenresListingView: View {
       }
     }
     .navigationTitle("Top Songs")
-    .modifier(StationBuildCancellation())
+    .modifier(NewStationCancellation())
   }
 }
 

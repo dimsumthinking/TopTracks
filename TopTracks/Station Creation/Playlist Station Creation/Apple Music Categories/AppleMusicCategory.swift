@@ -6,6 +6,7 @@ let appleMusicDecades: [AppleMusicCategory]
 = [.fifties, .sixties, .seventies, .eighties, .nineties, .twoThousands, .twentyTens, .twentyTwenties]
 
 enum AppleMusicCategory: String, CaseIterable {
+  case spatialAudio = "Spatial Audio"
   case fifties = "'50s"
   case sixties = "`60s"
   case seventies = "`70s"
@@ -121,7 +122,7 @@ enum AppleMusicCategory: String, CaseIterable {
   case sleep
   case social
   case soulFunk = "Soul/Funk"
-  case spatialAudio = "Spatial Audio"
+//  case spatialAudio = "Spatial Audio"
   case sports
   case summertimeSounds = "Summertime Sounds"
   case tamil

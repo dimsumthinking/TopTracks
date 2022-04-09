@@ -33,7 +33,7 @@ extension StationCreationForGenreChart {
   private var isSubscribed: Bool {
     stations
       .filter {station in
-        guard let stationType = station.stationType else {return false}
+        guard let stationType = station.chartType else {return false}
         print(stationType)
         return stationType == .topSongs
       }

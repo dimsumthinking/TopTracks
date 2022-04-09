@@ -1,5 +1,7 @@
 let appleMusicChartIcon = "list.bullet.rectangle"
-let applePlaylistIcon = "antenna.radiowaves.left.and.right"
+let appleMusicPlaylistIcon = "rectangle.and.hand.point.up.left.filled"
+
+// let appleMusicStationIcon = "antenna.radiowaves.left.and.right"
 
 let genreIcon = "music.note.list"
 let top100Icon = "map"

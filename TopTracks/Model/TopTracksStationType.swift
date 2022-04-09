@@ -20,7 +20,7 @@ extension TopTracksStationType {
     case .chart:
       return appleMusicChartIcon
     case .playlist:
-      return applePlaylistIcon
+      return appleMusicPlaylistIcon
     }
   }
 }

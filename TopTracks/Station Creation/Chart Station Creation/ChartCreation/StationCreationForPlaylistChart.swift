@@ -34,7 +34,7 @@ extension StationCreationForPlaylistChart {
   private var isSubscribed: Bool {
     stations
       .filter {station in
-        guard let stationType = station.stationType else {return false}
+        guard let stationType = station.chartType else {return false}
         return stationType == chartType
       }
       .map{$0.chartInfo?.sourceID ?? ""}

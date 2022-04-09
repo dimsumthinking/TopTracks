@@ -19,7 +19,7 @@ extension StationPreviewForGenre: View {
       }
     }
     .navigationTitle("Top " + genre.name)
-    .modifier(StationBuildCancellation())
+    .modifier(NewStationCancellation())
   }
 }
 

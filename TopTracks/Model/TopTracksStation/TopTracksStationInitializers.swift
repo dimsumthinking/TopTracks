@@ -14,7 +14,7 @@ extension TopTracksStation { // init for City Chart, daily top 100, and top play
                                             context: context)
     self.buttonPosition = Int16(buttonPosition)
     self.favorite = false
-    self.stationName = playlist.name
+    self.stationName = playlist.name + (chartType == .playlists ? " (Chart)" : "")
     self.stationID = UUID()
     self.clockID = RotationClock.hourWithSpice.rawValue
     self.lastUpdated = Date()
@@ -61,27 +61,14 @@ extension TopTracksStation {
     self.favorite = false
     self.stacks = topTracksStacks(songsInCategories: songsInCategories,
                                   context: context)
+    self.playlistInfo = TopTracksPlaylistStation(playlist: playlist,
+                                                 station: self,
+                                                 context: context)
     self.lastUpdated = Date()
     self.clockID = clock.rawValue
   }
 }
 
-//extension TopTracksStation {
-//  private func topTracksStacks(songsAndRatings: [MusicTestResult],
-//                               context: NSManagedObjectContext) -> Set<TopTracksStack> {
-//    var topTracksStacks = Set<TopTracksStack>()
-//    for category in RotationCategory.allCases {
-//      topTracksStacks
-//        .insert(TopTracksStack(rotationCategory: category,
-//                               songs: songsAndRatings
-//          .filter{$0.rotationCategory == category}
-//          .map(\.song),
-//                               station: self,
-//                               context: context))
-//    }
-//    return topTracksStacks
-//  }
-//}
 
 extension TopTracksStation {
   private func topTracksStacks(songsInCategories: [SongInCategory],

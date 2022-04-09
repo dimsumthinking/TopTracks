@@ -11,7 +11,7 @@ extension ClockView: View {
         ClockSegmentView(segmentNumber: Double(index),
                          numberOfSegments: Double(hour.numberOfSlots),
                          category: hour.categoryFor(slot: index))
-        
+
       }
       .aspectRatio(1.0, contentMode: .fit)
       .padding()

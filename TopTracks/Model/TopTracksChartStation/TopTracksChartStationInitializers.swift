@@ -8,6 +8,7 @@ extension TopTracksChartStation {
                    context: NSManagedObjectContext) {
     self.init(context: context)
     self.sourceID = playlist.id.rawValue
+    print(chartType.rawValue)
     self.sourceName = playlist.name
     self.chartType = chartType.rawValue
   }
