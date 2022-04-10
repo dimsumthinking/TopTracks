@@ -61,12 +61,12 @@ extension StationView: View {
       Spacer()
     }
     .onAppear {
-      if StationView.currentStationID != station.stationID {
-        ApplicationMusicPlayer.shared.queue = musicQueue(for: station)
-        Task {try await ApplicationMusicPlayer.shared.prepareToPlay()
-          try await player.play()
-        }
-      }
+//      if StationView.currentStationID != station.stationID {
+//        ApplicationMusicPlayer.shared.queue = musicQueue(for: station)
+//        Task {try await ApplicationMusicPlayer.shared.prepareToPlay()
+//          try await player.play()
+//        }
+//      }
       StationView.currentStationID = station.stationID
     }
 //    .navigationTitle(station.stationName)

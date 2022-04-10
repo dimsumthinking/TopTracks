@@ -7,7 +7,6 @@ let playerArtworkImageSize: Double = 250
 let preferredMinimumTracksForStation = 18
 let preferredMaximumSongsPerRotationCategory = 12
 
-let numberOfSongsInMusicQueue = 1000
 
 import UIKit
 

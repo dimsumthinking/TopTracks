@@ -51,8 +51,8 @@ extension TopTracksStation {
       buttonPosition = Int16(newValue)
     }
   }
-  var clock: RotationClock {
-    RotationClock(rawValue: clockID) ?? .standardHour
+  var clock: RotationClock? {
+    RotationClock(rawValue: clockID)
   }
   var stationIDAsString: String {
     stationID.description

@@ -21,9 +21,18 @@ extension StationBillboardView: View {
     .contentShape(Rectangle())
     .onTapGesture {
       currentStationIDasString = station.stationIDAsString
+      Task {
+        try await stationSongPlayer.play(station)
+      }
     }
-    .border(currentStationIDasString == station.stationIDAsString ? Color.cyan : Color.secondary.opacity(0.4),
-            width: currentStationIDasString == station.stationIDAsString ? 4 : 1)
+    .border(isCurrentlyPlaying ? Color.cyan : Color.secondary.opacity(0.4),
+            width: isCurrentlyPlaying ? 3 : 1)
+  }
+}
+
+extension StationBillboardView {
+  private var isCurrentlyPlaying: Bool {
+    currentStationIDasString == station.stationIDAsString
   }
 }
 
