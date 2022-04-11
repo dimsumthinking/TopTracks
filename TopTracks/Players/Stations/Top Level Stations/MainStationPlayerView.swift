@@ -2,23 +2,39 @@ import SwiftUI
 import MusicKit
 
 struct MainStationPlayerView {
-  @State private var isShowingPlayer = false
+  @State private var isShowingFullPlayer = false
+  @ObservedObject private var queue = ApplicationMusicPlayer.shared.queue
+  @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
 }
 
 extension MainStationPlayerView: View {
   var body: some View {
     VStack {
       StationsView()
-      Text("This will be small player view")
+      MiniPlayer(currentSong: currentSong)
         .contentShape(Rectangle())
         .onTapGesture {
-          isShowingPlayer = true
+          isShowingFullPlayer = true
         }
     }
-    .sheet(isPresented: $isShowingPlayer) {
-      Image(systemName: "arrow.right")
-        .resizable()
-        .scaledToFit()
+    .sheet(isPresented: $isShowingFullPlayer) {
+    FullPlayer(currentSong: currentSong)
+    }
+  }
+}
+
+extension MainStationPlayerView {
+  private var currentSong: Song? {
+    guard let item =  queue.currentEntry?.item else {return nil}
+    switch item {
+    case .song(let innerSong):
+      if let station = currentlyPlaying.station {
+      station.markAsPlayed(songID: innerSong.id.rawValue)
+      }
+      currentlyPlaying.song = innerSong
+      return innerSong
+    default:
+      return nil
     }
   }
 }

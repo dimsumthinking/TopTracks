@@ -20,8 +20,12 @@ extension StationSongQueue {
     return songs
   }
   
-  func refillQueue(for station: TopTracksStation) {
-    
+  func refillQueue(for station: TopTracksStation,
+                   startingWith currentSong: Song? = nil) -> [Song]  {
+    stacks = stacks(for: station)
+    let songs = songList(for: station, currentSong: currentSong)
+    stacks.removeAll()
+    return songs
   }
   
   private func songList(for station: TopTracksStation,
@@ -52,8 +56,10 @@ extension StationSongQueue {
   private func stacks(for station: TopTracksStation) -> [RotationCategory: [Song]] {
     var stacks = [RotationCategory: [Song]]()
     standardRotationCategories.forEach{ category in
+//      print(category)
       stacks[category] = initializeStack(in: station,
                                          category: category)
+//      print(stacks[category]!.map(\.title))
     }
     return stacks
   }

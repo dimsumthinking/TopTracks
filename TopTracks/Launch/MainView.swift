@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MainView {
   @EnvironmentObject var topTracksStatus: TopTracksStatus
+  private var currentlyPlaying = CurrentlyPlaying()
 }
 
 extension MainView : View {
@@ -10,6 +11,7 @@ extension MainView : View {
       MainStationCreationView()
     } else {
       MainStationPlayerView()
+        .environmentObject(currentlyPlaying)
 //      StationsView()
     }
   }

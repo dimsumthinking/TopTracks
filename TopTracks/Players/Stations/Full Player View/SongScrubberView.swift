@@ -11,7 +11,7 @@ struct SongScrubberView {
 
 extension SongScrubberView: View {
   var body: some View {
-    Slider(value: $currentTime, in: 0...duration){editing in
+    Slider(value: $currentTime, in: 0...(currentSong.duration ?? 5 * 60)){editing in
       if !editing {
       ApplicationMusicPlayer.shared.playbackTime = currentTime
       }

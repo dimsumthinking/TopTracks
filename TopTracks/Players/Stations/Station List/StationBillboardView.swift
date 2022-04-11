@@ -4,6 +4,7 @@ import MusicKit
 struct StationBillboardView {
   let station: TopTracksStation
   @Binding var currentStationIDasString: String
+  @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
 }
 
 extension StationBillboardView: View {
@@ -20,6 +21,7 @@ extension StationBillboardView: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
+      currentlyPlaying.station = station
       currentStationIDasString = station.stationIDAsString
       Task {
         try await stationSongPlayer.play(station)

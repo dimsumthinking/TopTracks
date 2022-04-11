@@ -17,3 +17,6 @@ let stationTypeCellWidth = min(UIScreen.main.bounds.width * 7 / 8, 400)
 let chartTypeCellWidth = min(UIScreen.main.bounds.width * 7 / 8, 400)
 
 let stationListCellWidth = min(UIScreen.main.bounds.width * 1 / 8, 80)
+
+let miniArtworkImageSize = min(UIScreen.main.bounds.width * 1 / 8, 80)
+let fullArtworkImageSize = min(UIScreen.main.bounds.width * 2 / 3, 250)
