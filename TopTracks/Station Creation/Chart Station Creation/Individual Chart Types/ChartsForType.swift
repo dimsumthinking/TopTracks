@@ -20,7 +20,7 @@ class ChartsForType: ObservableObject {
 
 @MainActor
 extension ChartsForType {
-  private func citySearch()  async {
+    private func citySearch()  async {
     let request = MusicCatalogSearchRequest(term: "Top 25:",
                                             types: [Playlist.self])
     let response = try? await request.response()

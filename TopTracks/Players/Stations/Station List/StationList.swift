@@ -47,9 +47,13 @@ extension StationList {
 }
 
 extension StationList {
-  func deleteStation(at index: Int) {
-    if stations[index].stationID == StationView.currentStationID {
+  func deleteStation(at index: Int,
+                     currentlyPlaying: CurrentlyPlaying) {
+//    if stations[index].stationID == StationView.currentStationID {
+    if stations[index] == currentlyPlaying.station {
       ApplicationMusicPlayer.shared.pause()
+      stationSongPlayer.clearPlayer()
+      currentlyPlaying.song = nil
     }
     context.delete(stations[index])
     do {

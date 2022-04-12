@@ -11,6 +11,7 @@ extension TopTracksSong {
   @NSManaged public var stackPosition: Int16
   @NSManaged public var upOrDown: Int16
   @NSManaged public var songID: String
+  @NSManaged public var artworkAsData: Data?
   @NSManaged public var stack: TopTracksStack
   @NSManaged public var songAsData: Data?
 }
@@ -69,7 +70,10 @@ extension TopTracksSong {
   var url: URL? {
     return song?.url
   }
-  
+  var artwork: Artwork? {
+    guard let data = artworkAsData else {return nil}
+    return try? PropertyListDecoder().decode(Artwork.self, from: data)
+  }
   
   var categoryColor: Color? {
     stack.rotationCategory.color

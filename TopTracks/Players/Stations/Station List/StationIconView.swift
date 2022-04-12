@@ -10,6 +10,8 @@ extension StationIconView: View {
     Group {
       if station.stationType  == .playlist {
         playlistIcon
+      } else if station.stationType == .station {
+        stationIcon
       } else {
         chartIcon
       }
@@ -49,7 +51,16 @@ extension StationIconView {
         .foregroundColor(.secondary)
     }
   }
+  
+  private var stationIcon: some View {
+    return Image(systemName: TopTracksStationType.station.imageName)
+      .resizable()
+      .scaledToFit()
+      .scaleEffect(0.5)
+//      .foregroundColor(.secondary)
+  }
 }
+
 
 //struct StationIconView_Previews: PreviewProvider {
 //  static var previews: some View {

@@ -4,13 +4,12 @@ extension TopTracksStation {
   func markAsPlayed(songID: String) {
     let context = PersistenceController.newBackgroundContext
     guard songID != (currentSongID ?? ""),
-          let changedSong = fetchedSong(songID, using: context) else {return}
-//    printStack(changedSong.stack)
-//    print("changedSong: ", changedSong.title, "by", changedSong.artistName)
-//    changedSong.stackPosition = 100
+          let changedSong = fetchedSong(songID, using: sharedViewContext) else {return}
+//    let oldPosition = changedSong.currentStackPosition
     changedSong.currentStackPosition = 100
     renumberStack(changedSong.stack, using: context)
-//    printStack(changedSong.stack)
+//    print("changedSong: ", changedSong.title, "by", changedSong.artistName, " from ", oldPosition, " to ", changedSong.currentStackPosition )
+
   }
   
 }

@@ -3,8 +3,8 @@ import MusicKit
 
 struct StationBillboardView {
   let station: TopTracksStation
-  @Binding var currentStationIDasString: String
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
+  @State private var stationIsCurrentlyPlaying = false
 }
 
 extension StationBillboardView: View {
@@ -21,21 +21,25 @@ extension StationBillboardView: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
+      if currentlyPlaying.station == station {return}
       currentlyPlaying.station = station
-      currentStationIDasString = station.stationIDAsString
+      stationIsCurrentlyPlaying = true
       Task {
         try await stationSongPlayer.play(station)
       }
     }
-    .border(isCurrentlyPlaying ? Color.cyan : Color.secondary.opacity(0.4),
-            width: isCurrentlyPlaying ? 3 : 1)
+    .border(isCurrentStation ? Color.cyan : Color.secondary.opacity(0.4),
+            width: isCurrentStation ? 3 : 1)
+
   }
 }
 
 extension StationBillboardView {
-  private var isCurrentlyPlaying: Bool {
-    currentStationIDasString == station.stationIDAsString
+  private var isCurrentStation: Bool {
+    guard let currentlyPlayingStation = currentlyPlaying.station else {return false}
+    return (currentlyPlayingStation == station)
   }
 }
+
 
 

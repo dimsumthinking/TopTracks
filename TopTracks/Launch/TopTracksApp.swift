@@ -6,6 +6,7 @@ struct TopTracksApp {
   @State private var appleMusicAuthorization = MusicAuthorization.Status.notDetermined
   @State private var showAppleMusicSubscriptionView = false
   private var topTracksStatus = TopTracksStatus()
+  private var currentlyPlaying = CurrentlyPlaying()
   @Environment(\.scenePhase) var scenePhase
   
 //    let persistenceController = PersistenceController.shared
@@ -32,6 +33,7 @@ extension TopTracksApp: App {
         songPreviewPlayer.stop()
 //        topTracksStatus.isCreatingNew = false
       }
+      currentlyPlaying.hack.toggle()
     }
   }
 }
@@ -51,6 +53,7 @@ extension TopTracksApp {
       .environmentObject(topTracksStatus)
       .environment(\.managedObjectContext,
                     PersistenceController.shared.container.viewContext)
+      .environmentObject(currentlyPlaying)
       .navigationViewStyle(.stack)
       .task {
         for await subscription in MusicSubscription.subscriptionUpdates {

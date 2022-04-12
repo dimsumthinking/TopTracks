@@ -28,17 +28,35 @@ extension StationSongPlayer {
     
     func play(_ station: TopTracksStation) async throws {
       let songs = stationSongQueue.fillQueue(for: station)
+      print(station.stationName, station.stationType)
+      if station.stationType == .station {
+        try await queue(for: station)
+      } else {
       ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: songs)
+      }
       try await player.prepareToPlay()
       try await player.play()
     }
+  
+  private func queue(for station: TopTracksStation) async throws {
+    if let stationID = station.appleStationInfo?.appleStationID {
+    let musicID = MusicItemID(stationID)
+    let request = MusicCatalogResourceRequest<Station>(matching: \.id,
+                                                         equalTo: musicID)
+      print("loading queue for ", station.stationName)
+    let response = try await request.response()
+    guard let stationData = response.items.first else { return }
+    ApplicationMusicPlayer.shared.queue = [stationData]
+    }
+  }
     
     func restart() async throws {
       try await player.play()
     }
     
-    func restartCurrentEntry() {
-      
+    func clearPlayer() {
+      ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: [Song]())
+      ApplicationMusicPlayer.shared.queue.currentEntry = nil
     }
     func skipToNextEntry() async throws {
       try await player.skipToNextEntry()

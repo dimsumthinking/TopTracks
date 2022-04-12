@@ -17,6 +17,7 @@ extension TopTracksStation {
   @NSManaged public var lastUpdated: Date
   @NSManaged public var chartInfo: TopTracksChartStation?
   @NSManaged public var playlistInfo: TopTracksPlaylistStation?
+  @NSManaged public var appleStationInfo: TopTracksStationStation?
 }
 
 
@@ -61,7 +62,13 @@ extension TopTracksStation {
 
 extension TopTracksStation {
   var stationType: TopTracksStationType {
-    chartType == nil ? .playlist : .chart
+    if chartType != nil {
+      return .chart
+    } else if playlistInfo != nil {
+      return .playlist
+    } else {
+      return .station
+    }
   }
   var chartType: TopTracksChartType? {
     TopTracksChartType(rawValue: chartInfo?.chartType ?? "")

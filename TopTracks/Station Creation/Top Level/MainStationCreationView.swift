@@ -18,6 +18,11 @@ extension MainStationCreationView: View {
         } label : {
           StationCreationOptionView(stationType: .playlist)
         }
+        NavigationLink {
+         AppleMusicStationChooserView()
+        } label : {
+          StationCreationOptionView(stationType: .station)
+        }
       }
       .navigationTitle("Station Type")
       .navigationBarTitleDisplayMode(.inline)
