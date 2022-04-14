@@ -16,9 +16,9 @@ extension ChartListingsView: View {
                                     playlist: playlist)
         } label: {
           HStack {
-            if let artwork = playlist.artwork {
-              AppleMusicPlaylistArtworkView(for: artwork)
-            }
+//            if let artwork = playlist.artwork {
+            AppleMusicPlaylistArtworkView(artwork: playlist.artwork)
+//            }
             Text(playlist.name)
               .font(.headline)
           }

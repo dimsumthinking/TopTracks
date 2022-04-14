@@ -88,8 +88,8 @@ extension RotationCategory {
     switch self {
     case .power: return "I love it"
     case .current: return "Really good"
-    case .added: return "Pretty Nice"
-    case .spice: return "It's just OK"
+    case .added: return "Pretty nice"
+    case .spice: return "Just now and then"
     case .notIncluded: return "Not for me"
     default:  return  "N/A"
 

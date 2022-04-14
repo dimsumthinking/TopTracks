@@ -12,7 +12,16 @@ extension StationSongPreview: View {
   var body: some View {
     HStack (alignment: .top) {
       if let artwork = song.artwork {
-        ArtworkImage(artwork, width: songPreviewArtworkImageSize)
+//        ArtworkImage(artwork, width: songPreviewArtworkImageSize)
+        ZStack {
+          Rectangle()
+            .foregroundColor(.secondary.opacity(0.2))
+            .frame(width: songPreviewArtworkImageSize, height: songPreviewArtworkImageSize, alignment: .center)
+            .padding()
+        ArtworkImage(artwork,
+                     width: songPreviewArtworkImageSize)
+        .padding()
+        }
       }
       VStack (alignment: .leading) {
         Text(song.title)

@@ -5,6 +5,7 @@ import Foundation
 struct GenresListingView {
   @State private var genres: [Genre] = []
   @State private var filterText: String = ""
+  @State private var artworkForGenre: [Genre: Artwork] = [:]
 }
 extension GenresListingView: View {
   var body: some View {
@@ -13,16 +14,40 @@ extension GenresListingView: View {
         NavigationLink {
           StationPreviewForGenre(genre: genre)
         } label: {
-          VStack(alignment: .leading, spacing: 5) {
-            Text("Top Songs in")
-              .foregroundColor(.secondary)
-            HStack {
-              Spacer()
-              Text(genre.name)
-                .font(.title)
-                .padding(.trailing)
+          HStack {
+//            ZStack {
+//              Rectangle()
+//                .foregroundColor(.secondary.opacity(0.2))
+//                .frame(width: playlistArtworkImageSize, height: playlistArtworkImageSize, alignment: .center)
+//                .padding()
+//              if let artwork = artworkForGenre[genre] {
+//                ArtworkImage(artwork,
+//                             width: playlistArtworkImageSize)
+//                .padding()
+//              }
+//            }
+            AppleMusicPlaylistArtworkView(artwork: artworkForGenre[genre])
+            VStack(alignment: .leading) {
+              Text("Top Songs in:")
+                .foregroundColor(.secondary)
+              HStack{
+                Spacer()
+                Text(genre.name)
+                  .font(.headline)
+              }
             }
+            .padding()
           }
+          //          VStack(alignment: .leading, spacing: 5) {
+          //            Text("Top Songs in")
+          //              .foregroundColor(.secondary)
+          //            HStack {
+          //              Spacer()
+          //              Text(genre.name)
+          //                .font(.title)
+          //                .padding(.trailing)
+          //            }
+          //          }
         }
       }
     }
@@ -30,7 +55,7 @@ extension GenresListingView: View {
     .onAppear {
       Task {
         await genreSearch()
-        
+        await artworkForGenres()
       }
     }
     .navigationTitle("Top Songs")
@@ -65,6 +90,17 @@ extension GenresListingView {
   }
 }
 
+extension GenresListingView {
+  private func artworkForGenres() async {
+    for genre in genres {
+      Task {
+        if let artwork = await StationFiller.topArtwork(for: genre) {
+          artworkForGenre[genre] = artwork
+        }
+      }
+    }
+  }
+}
 
 
 struct GenresListingsView_Previews: PreviewProvider {

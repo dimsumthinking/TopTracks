@@ -8,12 +8,13 @@ struct AppleMusicStationDetailView {
 extension AppleMusicStationDetailView: View {
   var body: some View {
     HStack  {
-      if let artwork = station.artwork {
-        ArtworkImage(artwork,
-                     width: miniArtworkImageSize,
-                     height: miniArtworkImageSize)
-        
-      }
+//      if let artwork = station.artwork {
+//        ArtworkImage(artwork,
+//                     width: miniArtworkImageSize,
+//                     height: miniArtworkImageSize)
+//
+//      }
+      AppleMusicPlaylistArtworkView(artwork: station.artwork)
       VStack (alignment: .leading) {
         Text(station.name)
           .multilineTextAlignment(.leading)

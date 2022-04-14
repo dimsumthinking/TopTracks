@@ -12,7 +12,7 @@ struct AppleMusicPlaylistBillboardView {
 extension AppleMusicPlaylistBillboardView: View {
   var body: some View {
     return HStack(alignment: .top) {
-      AppleMusicPlaylistArtworkView(for: playlist.artwork)
+      AppleMusicPlaylistArtworkView(artwork: playlist.artwork)
       AppleMusicPlaylistFeaturedArtistView(playlist: playlist)
       Spacer()
     }

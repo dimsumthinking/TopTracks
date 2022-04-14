@@ -29,11 +29,13 @@ extension AppleMusicStationSearch {
   private func add(_ stations: [Station]) async {
     self.stations.append(contentsOf: stations)
     self.stations = Set(self.stations)
-      .sorted {
-        guard let tagline1 = $0.editorialNotes?.tagline,
-              let tagline2 = $1.editorialNotes?.tagline else {return true}
-        return tagline1 < tagline2
-      }
+      .filter{$0.isLive == false}
+
+//      .sorted {
+//        guard let tagline1 = $0.editorialNotes?.tagline,
+//              let tagline2 = $1.editorialNotes?.tagline else {return true}
+//        return tagline1 < tagline2
+//      }
     self.stationCategories
     = Set(self.stations.compactMap(\.editorialNotes?.tagline))
       .sorted().map(AppleMusicStationCategory.init(name: ))
@@ -46,7 +48,7 @@ extension AppleMusicStationSearch {
       var request = MusicCatalogSearchRequest(term: "Station",
                                             types: [Station.self])
       request.offset = self.stations.count
-      request.limit = 20
+      request.limit = 25
       let response = try? await request.response()
       guard let additionalStations = response?.stations else {return}
       let additionalAppleMusicStations = additionalStations

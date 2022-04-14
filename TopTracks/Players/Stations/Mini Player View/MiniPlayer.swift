@@ -4,17 +4,29 @@ import MusicKit
 struct MiniPlayer {
   let currentSong: Song?
   @ObservedObject private(set) var playerState = ApplicationMusicPlayer.shared.state
-  @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
+  @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying  
 }
 
 extension MiniPlayer: View {
   var body: some View {
     HStack {
       if let currentSong = currentSong {
-        if let artwork = currentSong.artwork {
-          ArtworkImage(artwork,
-                       width: miniArtworkImageSize)
-          .padding()
+        ZStack {
+          Rectangle()
+            .foregroundColor(.secondary.opacity(0.2))
+            .frame(width: miniArtworkImageSize, height: miniArtworkImageSize, alignment: .center)
+            .padding()
+          if let artwork = TopTracksSong.artwork(for: currentSong) {
+            ArtworkImage(artwork,
+                         width: miniArtworkImageSize)
+            .padding()
+          }  else {
+            if let artwork = currentSong.artwork {
+            ArtworkImage(artwork,
+                         width: miniArtworkImageSize)
+            .padding()
+            }
+          }
         }
         VStack(alignment: .leading) {
           Text(currentSong.title)
@@ -57,3 +69,16 @@ struct MiniPlayer_Previews: PreviewProvider {
     MiniPlayer(currentSong: nil)
   }
 }
+
+//if let artwork = currentSong.artwork {
+
+//ZStack {
+//  Rectangle()
+//    .foregroundColor(.secondary.opacity(0.2))
+//    .frame(width: miniArtworkImageSize, height: miniArtworkImageSize, alignment: .center)
+//    .padding()
+//ArtworkImage(artwork,
+//             width: miniArtworkImageSize)
+//.padding()
+//}
+//}

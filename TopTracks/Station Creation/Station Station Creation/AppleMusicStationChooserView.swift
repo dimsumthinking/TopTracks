@@ -9,9 +9,9 @@ struct AppleMusicStationChooserView {
 extension AppleMusicStationChooserView: View {
   var body: some View {
     List {
-      ForEach(appleMusicStationSearch.stationCategories) {category in
+      ForEach(filteredCategories) {category in
         Section(category.name) {
-          ForEach(appleMusicStationSearch.stations(in: category)) {station in
+          ForEach(filteredStations(in: category)) {station in
             NavigationLink {
               StationCreationForAppleMusicStation(station: station)
             } label : {
@@ -50,12 +50,17 @@ extension AppleMusicStationChooserView {
   }
   
   private func filteredStations(in category: AppleMusicStationCategory) -> [Station] {
-    guard !filterText.isEmpty else {return appleMusicStationSearch.stations(in: category)}
+    guard !filterText.isEmpty else {
+      return appleMusicStationSearch
+      .stations(in: category)
+      .sorted {$0.name < $1.name}
+    }
     return appleMusicStationSearch.stations(in: category)
       .filter {station in
         (category.name.lowercased().contains(filterText.lowercased()))
         || station.name.lowercased().contains(filterText.lowercased())
       }
+      .sorted {$0.name < $1.name}
   }
 }
 

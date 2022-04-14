@@ -140,7 +140,7 @@ extension StationSongQueue {
 //      }
 //    }
 //  }
-//  
+//
 //  private func nextSong(in category: RotationCategory) -> Song? {
 //    guard var stack = stacks[category],
 //          stack.count > 2 else {return nil}

@@ -85,3 +85,21 @@ fileprivate struct SongsWrapper: Codable {
 fileprivate struct SongsData: Codable {
   let data: [Song]
 }
+
+
+extension StationFiller {
+  static func topArtwork(for genre: Genre) async -> Artwork? {
+    var components = await baseChartComponents()
+    var queryItems: [URLQueryItem] = [URLQueryItem(name: "types", value: "songs")]
+    queryItems.append(URLQueryItem(name: "chart", value: "most-played"))
+    queryItems.append(URLQueryItem(name: "genre", value: genre.id.rawValue))
+    queryItems.append(URLQueryItem(name: "limit", value: "1"))
+    components.queryItems = queryItems
+    guard let url = components.url,
+          let response = try? await MusicDataRequest(urlRequest: URLRequest(url: url)).response(),
+          let container = try? JSONDecoder().decode(SongsResponse.self, from: response.data),
+          let songs = container.results.songs.first?.data
+    else {return nil}
+    return songs.first?.artwork
+  }
+}

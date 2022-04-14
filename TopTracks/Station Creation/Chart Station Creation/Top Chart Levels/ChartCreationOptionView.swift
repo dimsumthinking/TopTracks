@@ -15,6 +15,7 @@ extension ChartCreationOptionView: View {
     }
 
     .frame(width: chartTypeCellWidth)
+    .border(.secondary)
   }
 }
 

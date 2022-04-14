@@ -14,10 +14,40 @@ extension FullPlayer: View {
         Text(stationName)
           .padding()
       }
-      if let artwork = currentSong?.artwork {
-        ArtworkImage(artwork, width: fullArtworkImageSize)
-          .padding()
-        if let currentSong = currentSong {
+//      if let currentSong = currentSong,
+//          let artwork = TopTracksSong.artwork(for: currentSong) { //currentSong?.artwork {
+//        ZStack {
+//          Rectangle()
+//            .foregroundColor(.secondary.opacity(0.2))
+//            .frame(width: fullArtworkImageSize, height: fullArtworkImageSize, alignment: .center)
+//            .padding()
+//        ArtworkImage(artwork,
+//                     width: fullArtworkImageSize)
+//        .padding()
+//        }
+//      }
+//        ArtworkImage(artwork, width: fullArtworkImageSize)
+//          .padding()
+      
+      if let currentSong = currentSong {
+        ZStack {
+          Rectangle()
+            .foregroundColor(.secondary.opacity(0.2))
+            .frame(width: fullArtworkImageSize, height: fullArtworkImageSize, alignment: .center)
+            .padding()
+          if  let artwork = TopTracksSong.artwork(for: currentSong) { //currentSong?.artwork {
+            ArtworkImage(artwork,
+                         width: fullArtworkImageSize)
+            .padding()
+          } else {
+            if let artwork = currentSong.artwork {
+            ArtworkImage(artwork,
+                         width: fullArtworkImageSize)
+            .padding()
+            }
+          }
+        }
+          
           Text(currentSong.title)
             .multilineTextAlignment(.center)
             .foregroundColor(.secondary)
@@ -73,7 +103,7 @@ extension FullPlayer: View {
           .padding()
           .accentColor(.secondary)
           .padding(.horizontal)
-      }
+//      }
       
     }
   

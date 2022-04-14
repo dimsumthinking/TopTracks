@@ -14,6 +14,7 @@ extension StationCreationOptionView: View {
         .padding()
     }
     .frame(width: stationTypeCellWidth)
+    .border(.secondary)
   }
 }
 
