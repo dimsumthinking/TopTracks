@@ -5,20 +5,23 @@ struct MainStationPlayerView {
   @State private var isShowingFullPlayer = false
   @ObservedObject private var queue = ApplicationMusicPlayer.shared.queue
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
+  @State private var retrievedArtwork: Artwork?
 }
 
 extension MainStationPlayerView: View {
   var body: some View {
     VStack {
       StationsView()
-      MiniPlayer(currentSong: currentSong)
+      MiniPlayer(currentSong: currentSong,
+      retrievedArtwork: retrievedArtwork)
         .contentShape(Rectangle())
         .onTapGesture {
           isShowingFullPlayer = true
         }
     }
     .sheet(isPresented: $isShowingFullPlayer) {
-    FullPlayer(currentSong: currentSong)
+    FullPlayer(currentSong: currentSong,
+    retrievedArtwork: retrievedArtwork)
     }
   }
 }
@@ -30,6 +33,12 @@ extension MainStationPlayerView {
     case .song(let innerSong):
       if let station = currentlyPlaying.station {
       station.markAsPlayed(songID: innerSong.id.rawValue)
+        if station.stationType == .station && currentlyPlaying.song != innerSong {
+          Task {
+            retrievedArtwork = nil
+            retrievedArtwork = try await ArtworkRetrieverFromAppleMusic.artwork(for: innerSong)
+          }
+        }
       }
       currentlyPlaying.song = innerSong
       return innerSong

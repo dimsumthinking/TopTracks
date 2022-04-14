@@ -5,6 +5,7 @@ struct FullPlayer {
   let currentSong: Song?
   @ObservedObject private(set) var playerState = ApplicationMusicPlayer.shared.state
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
+  let retrievedArtwork: Artwork?
 }
 
 extension FullPlayer: View {
@@ -14,99 +15,70 @@ extension FullPlayer: View {
         Text(stationName)
           .padding()
       }
-//      if let currentSong = currentSong,
-//          let artwork = TopTracksSong.artwork(for: currentSong) { //currentSong?.artwork {
-//        ZStack {
-//          Rectangle()
-//            .foregroundColor(.secondary.opacity(0.2))
-//            .frame(width: fullArtworkImageSize, height: fullArtworkImageSize, alignment: .center)
-//            .padding()
-//        ArtworkImage(artwork,
-//                     width: fullArtworkImageSize)
-//        .padding()
-//        }
-//      }
-//        ArtworkImage(artwork, width: fullArtworkImageSize)
-//          .padding()
       
       if let currentSong = currentSong {
-        ZStack {
-          Rectangle()
-            .foregroundColor(.secondary.opacity(0.2))
-            .frame(width: fullArtworkImageSize, height: fullArtworkImageSize, alignment: .center)
-            .padding()
-          if  let artwork = TopTracksSong.artwork(for: currentSong) { //currentSong?.artwork {
-            ArtworkImage(artwork,
-                         width: fullArtworkImageSize)
-            .padding()
-          } else {
-            if let artwork = currentSong.artwork {
-            ArtworkImage(artwork,
-                         width: fullArtworkImageSize)
-            .padding()
-            }
-          }
-        }
-          
-          Text(currentSong.title)
-            .multilineTextAlignment(.center)
-            .foregroundColor(.secondary)
-            .font(.title2)
-          Text(currentSong.artistName)
-            .multilineTextAlignment(.center)
-            .foregroundColor(.secondary)
-          Spacer()
-          SongScrubberView(currentSong: currentSong)
-        }
-        Spacer()
+        PlayerArtwork(song: currentSong,
+                      size: fullArtworkImageSize,
+                      retrievedArtwork: retrievedArtwork)
         
-        HStack {
-          Spacer()
-          Button(action: {
-            Task{try await stationSongPlayer.skipToPreviousEntry()}}){
+        Text(currentSong.title)
+          .multilineTextAlignment(.center)
+          .foregroundColor(.secondary)
+          .font(.title2)
+        Text(currentSong.artistName)
+          .multilineTextAlignment(.center)
+          .foregroundColor(.secondary)
+        Spacer()
+        SongScrubberView(currentSong: currentSong)
+      }
+      Spacer()
+      
+      HStack {
+        Spacer()
+        Button(action: {
+          Task{try await stationSongPlayer.skipToPreviousEntry()}}){
             Image(systemName: "backward.fill")
           }
-          Spacer()
-          switch(playerState.playbackStatus) {
-          case .playing:
-            Button {
-              stationSongPlayer.pause(currentlyPlaying.station,
-                                      at: currentlyPlaying.song)
-              
-            } label: {
-              Image(systemName: "pause.fill")
-                .font(.largeTitle)
-                .padding()
-            }
-          default:
-            Button {
-              Task {
-                try await stationSongPlayer.restart()
-              }
-            } label: {
-              Image(systemName: "play.fill")
-                .font(.largeTitle)
-                .padding()
-            }
+        Spacer()
+        switch(playerState.playbackStatus) {
+        case .playing:
+          Button {
+            stationSongPlayer.pause(currentlyPlaying.station,
+                                    at: currentlyPlaying.song)
+            
+          } label: {
+            Image(systemName: "pause.fill")
+              .font(.largeTitle)
+              .padding()
           }
-          Spacer()
-          Button(action: {Task{try await stationSongPlayer.skipToNextEntry()}}){
-            Image(systemName: "forward.fill")
+        default:
+          Button {
+            Task {
+              try await stationSongPlayer.restart()
+            }
+          } label: {
+            Image(systemName: "play.fill")
+              .font(.largeTitle)
+              .padding()
           }
-          Spacer()
         }
-        .font(.title)
-        .foregroundColor(.primary)
-        .padding(.vertical)
-        SystemVolumeSlider()
-          .frame(height: 20)
-          .padding()
-          .accentColor(.secondary)
-          .padding(.horizontal)
-//      }
+        Spacer()
+        Button(action: {Task{try await stationSongPlayer.skipToNextEntry()}}){
+          Image(systemName: "forward.fill")
+        }
+        Spacer()
+      }
+      .font(.title)
+      .foregroundColor(.primary)
+      .padding(.vertical)
+      SystemVolumeSlider()
+        .frame(height: 20)
+        .padding()
+        .accentColor(.secondary)
+        .padding(.horizontal)
+      //      }
       
     }
-  
   }
 }
 
