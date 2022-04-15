@@ -13,6 +13,7 @@ struct MusicTestView {
   private var stations: FetchedResults<TopTracksStation>
   @State private var playlistIDs: [String] = []
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
+  @State private var noPreviousSong:  Bool = true
 }
 
 extension MusicTestView {
@@ -36,6 +37,18 @@ extension MusicTestView: View {
                                            musicTestSongs: songs)
           } label: {
             EmptyView()
+          }
+          .padding(.bottom)
+          HStack {
+            Button(action: previousSong){
+              Image(systemName: "arrow.left")
+                .padding(.horizontal)
+            }
+            .disabled(noPreviousSong)
+            .buttonStyle(.bordered)
+            .padding(.horizontal)
+            .padding(.leading)
+            Spacer()
           }
           ProgressView("", value: songs.numberOfRatedSongs, total: songs.numberOfSongsToBeRated)
             .padding()
@@ -75,8 +88,17 @@ extension MusicTestView {
         && songs.numberOfRatedSongs < songs.numberOfSongsToBeRated {
       index += 1
       playSong()
+      noPreviousSong = (index <= 0)
     } else {
       moveOn = true
+    }
+  }
+  private func previousSong() {
+    songPreviewPlayer.audioPlayer = nil
+    if index > 0 {
+      index -= 1
+      playSong()
+      noPreviousSong = (index <= 0)
     }
   }
 }
