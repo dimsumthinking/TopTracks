@@ -10,7 +10,7 @@ extension MusicTestOverview: View {
   var body: some View {
     VStack {
       if count > 0 {
-      Text("Quickly rank the \(numberOfSongs) songs in \n this Apple Music Playlist.")
+      Text("Quickly rank the songs in \n this Apple Music Playlist.")
         .multilineTextAlignment(.center)
         .padding()
         .padding(.horizontal)
@@ -26,15 +26,16 @@ extension MusicTestOverview: View {
       .disabled(count <= 0)
       .padding()
       .buttonStyle(.borderedProminent)
-      if count > 50 {
-        Text("Once you've chosen 40 songs \n we'll create a station.")
-          .multilineTextAlignment(.center)
-          .padding()
-          .padding(.horizontal)
-      }
+//      if count > 50 {
+//        Text("Once you've chosen 40 songs \n we'll create a station.")
+//          .multilineTextAlignment(.center)
+//          .padding()
+//          .padding(.horizontal)
+//      }
     }
   }
 }
+// \(numberOfSongs) 
 
 extension MusicTestOverview {
   private var numberOfSongs: String {

@@ -14,6 +14,10 @@ struct MusicTestView {
   @State private var playlistIDs: [String] = []
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
   @State private var noPreviousSong:  Bool = true
+  @State private var hasShown10: Bool = false
+  @State private var show10Alert: Bool = false
+  @State private var hasShown25: Bool = false
+  @State private var show25Alert: Bool = false
 }
 
 extension MusicTestView {
@@ -39,17 +43,21 @@ extension MusicTestView: View {
             EmptyView()
           }
           .padding(.bottom)
-          HStack {
             Button(action: previousSong){
+              HStack {
+                Spacer()
               Image(systemName: "arrow.left")
+                if !noPreviousSong {
+                  Text(" \(songs[index - 1].song.title)")
+                }
+                Spacer() 
+              }
                 .padding(.horizontal)
             }
             .disabled(noPreviousSong)
             .buttonStyle(.bordered)
             .padding(.horizontal)
             .padding(.leading)
-            Spacer()
-          }
           ProgressView("", value: songs.numberOfRatedSongs, total: songs.numberOfSongsToBeRated)
             .padding()
         }
@@ -74,6 +82,14 @@ extension MusicTestView: View {
         station.stationType == .playlist
       }.compactMap(\.playlistInfo).map(\.playlistID)
     }
+    .sheet(isPresented: $show10Alert){
+      Popup10(next: nextSong, show10Alert: $show10Alert)
+    }
+    .sheet(isPresented: $show25Alert){
+      Popup25(next: nextSong,
+              show25Alert: $show25Alert,
+              moveOn: $moveOn)
+    }
   }
 }
 
@@ -83,6 +99,18 @@ extension MusicTestView {
   }
   
   private func nextSong() {
+    guard songs.numberOfRatedSongs != 10 || hasShown10 == true else {
+      hasShown10 = true
+      show10Alert = true
+      return
+    }
+    guard songs.numberOfRatedSongs != 25 || hasShown25 == true else {
+      hasShown25 = true
+      if songs.numberOfSongsToBeRated > 5  {
+        show25Alert = true
+      }
+      return
+    }
     songPreviewPlayer.audioPlayer = nil
     if songs.testResults.indices.contains(index + 1)
         && songs.numberOfRatedSongs < songs.numberOfSongsToBeRated {
