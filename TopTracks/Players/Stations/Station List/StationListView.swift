@@ -8,11 +8,17 @@ struct StationListView {
   @StateObject private var stationList = StationList()
 //  @AppStorage("currentStationIDasString") var currentStationIDasString: String = ""
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
+  @AppStorage("showDataWarning") private var showDataWarning = true
 }
 
 extension StationListView: View {
   var body: some View {
     List {
+      if topTracksStatus.isNotConnected {
+       OfflineWarningView()
+      } else if topTracksStatus.isExpensive && showDataWarning {
+        DataWarningView()
+      }
       ForEach(stationList.stations) {station in
         StationBillboardView(station: station)//,
        // currentStationIDasString: $currentStationIDasString)

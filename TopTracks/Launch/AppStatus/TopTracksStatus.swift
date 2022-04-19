@@ -7,21 +7,24 @@ class TopTracksStatus: ObservableObject {
   @Published var isCreatingNew = false
   @Published var musicSubscription: MusicSubscription?
   @Published var needsAppSubscription = false
-  @AppStorage("requiresWiFi") private var requiresWiFi = false
-  private var pathMonitor = NWPathMonitor()
-//  init() {
-//    configurePathMonitor()
-//  }
+  private let pathMonitor = NWPathMonitor()
+  @Published var isNotConnected = true
+  @Published var isExpensive = false
+  init() {
+    configurePathMonitor()
+  }
 }
-//
-//extension TopTracksStatus {
-//  private func configurePathMonitor() {
-//    pathMonitor.pathUpdateHandler = {path in
-//      switch path.status {
-//      case:
-//      }
-//    }
-//  }
-//}
+extension TopTracksStatus {
+  private func configurePathMonitor() {
+    pathMonitor.pathUpdateHandler = {path in
+      DispatchQueue.main.async {
+        self.isNotConnected = (path.status == .satisfied) ? false : true
+        self.isExpensive = path.isExpensive
+      }
+    }
+    let queue = DispatchQueue(label: "Monitor")
+    pathMonitor.start(queue: queue)
+  }
+}
 
 

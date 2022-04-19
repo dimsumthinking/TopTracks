@@ -1,0 +1,5 @@
+extension TopTracksChartStation {
+  func update() {
+    
+  }
+}

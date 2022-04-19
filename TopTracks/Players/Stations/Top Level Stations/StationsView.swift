@@ -9,6 +9,7 @@ extension StationsView: View {
   var body: some View {
     NavigationView {
       VStack {
+        
         StationListView()
           .sheet(isPresented: $isShowingSettings){
             SettingsView(isShowingSettings: $isShowingSettings)

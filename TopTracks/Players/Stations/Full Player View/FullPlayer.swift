@@ -5,12 +5,16 @@ struct FullPlayer {
   let currentSong: Song?
   @ObservedObject private(set) var playerState = ApplicationMusicPlayer.shared.state
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
+  @EnvironmentObject private var topTracksStatus: TopTracksStatus
   let retrievedArtwork: Artwork?
 }
 
 extension FullPlayer: View {
   var body: some View {
     VStack {
+      if topTracksStatus.isNotConnected {
+       OfflineWarningView()
+      }
       if let stationName = currentlyPlaying.station?.stationName {
         Text(stationName)
           .padding()
