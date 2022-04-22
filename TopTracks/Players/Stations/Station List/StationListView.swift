@@ -2,13 +2,11 @@ import SwiftUI
 import MusicKit
 
 struct StationListView {
-  //  @Environment(\.managedObjectContext) private var viewContext
-  //  @Environment(\.editMode) private var editMode
   @EnvironmentObject var topTracksStatus: TopTracksStatus
   @StateObject private var stationList = StationList()
-//  @AppStorage("currentStationIDasString") var currentStationIDasString: String = ""
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
   @AppStorage("showDataWarning") private var showDataWarning = true
+  @AppStorage("hasAppSubscription") private var hasAppSubscription = false
 }
 
 extension StationListView: View {
@@ -20,8 +18,8 @@ extension StationListView: View {
         DataWarningView()
       }
       ForEach(stationList.stations) {station in
-        StationBillboardView(station: station)//,
-       // currentStationIDasString: $currentStationIDasString)
+        StationBillboardView(station: station,
+                             isLocked: !hasAppSubscription && station.buttonNumber > 3)
       }
       .onDelete { indexSet in
         if let index = indexSet.first {
@@ -34,7 +32,14 @@ extension StationListView: View {
           stationList.moveStation(at: index, offset: offset)
         }
       }
+      .onChange(of: currentlyPlaying.station) {currentStation in
+        if let currentStation = currentStation {
+          print("button number", currentStation.buttonNumber)
+          stationList.moveStation(at: currentStation.buttonNumber - 1, offset: 0)
+        }
+      }
     }
+    .animation(.default, value: stationList.stations)
     .navigationTitle("Stations")
     .navigationBarTitleDisplayMode(.inline)
   }

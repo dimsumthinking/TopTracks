@@ -5,11 +5,9 @@ extension TopTracksStation {
     let context = PersistenceController.newBackgroundContext
     guard songID != (currentSongID ?? ""),
           let changedSong = fetchedSong(songID, using: sharedViewContext) else {return}
-//    let oldPosition = changedSong.currentStackPosition
     changedSong.currentStackPosition = 100
     renumberStack(changedSong.stack, using: context)
-//    print("changedSong: ", changedSong.title, "by", changedSong.artistName, " from ", oldPosition, " to ", changedSong.currentStackPosition )
-
+    updateTime(using: context)
   }
   
 }
@@ -51,6 +49,17 @@ extension TopTracksStation {
       try context.save()
     } catch {
       fatalError("Couldn't renumber song positions")
+    }
+  }
+}
+
+extension TopTracksStation {
+  fileprivate func updateTime(using context: NSManagedObjectContext)  {
+    self.lastPlayed = Date()
+    do {
+      try context.save()
+    } catch {
+      fatalError("Couldn't update last played")
     }
   }
 }

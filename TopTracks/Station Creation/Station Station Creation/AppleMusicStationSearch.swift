@@ -4,6 +4,7 @@ import Foundation
 class AppleMusicStationSearch: ObservableObject {
   @Published private(set) var stations: [Station] = []
   @Published private(set) var stationCategories: [AppleMusicStationCategory] = []
+  private var count = 0
 }
 
 @MainActor
@@ -14,50 +15,42 @@ extension AppleMusicStationSearch {
     request.limit = 25
     
     let response = try? await request.response()
-    guard let stations = response?.stations else {return}
-    let appleMusicStations = stations
-      .filter{
-      guard let tagline = $0.editorialNotes?.tagline else  {return false}
-      return tagline.starts(with: "Apple Music")
-    }
+    guard let retrievedStations = response?.stations else {return}
+    add(retrievedStations.map{$0})
     Task {
-      await add(appleMusicStations)
+//      add(appleMusicStations)
       await continueDownloading()
     }
   }
   
-  private func add(_ stations: [Station]) async {
-    self.stations.append(contentsOf: stations)
-    self.stations = Set(self.stations)
+  private func add(_ stations: [Station]) {
+    count += stations.count
+    let addedStations
+    = stations
+      .filter{
+      guard let tagline = $0.editorialNotes?.tagline else  {return false}
+      return tagline.starts(with: "Apple Music")
+    }
       .filter{$0.isLive == false}
-
-//      .sorted {
-//        guard let tagline1 = $0.editorialNotes?.tagline,
-//              let tagline2 = $1.editorialNotes?.tagline else {return true}
-//        return tagline1 < tagline2
-//      }
+    
+    self.stations.append(contentsOf: addedStations)
     self.stationCategories
     = Set(self.stations.compactMap(\.editorialNotes?.tagline))
       .sorted().map(AppleMusicStationCategory.init(name: ))
   }
   
   private func continueDownloading() async {
-    var count = self.stations.count
-    while count > 0 && stations.count < 200 {
-      let currentCont = self.stations.count
-      var request = MusicCatalogSearchRequest(term: "Station",
+    var tries = 1
+    while tries < 8 && count < 200 {
+      var request = MusicCatalogSearchRequest(term: " Station",
                                             types: [Station.self])
-      request.offset = self.stations.count
+      request.offset = count
       request.limit = 25
       let response = try? await request.response()
       guard let additionalStations = response?.stations else {return}
-      let additionalAppleMusicStations = additionalStations
-        .filter{
-        guard let tagline = $0.editorialNotes?.tagline else  {return false}
-        return tagline.starts(with: "Apple Music")
-      }
-      await add(additionalAppleMusicStations)
-      count = self.stations.count - currentCont
+      add(additionalStations.map{$0})
+      tries += 1
+      print("count", count, Set(stations).count)
     }
   }
 }

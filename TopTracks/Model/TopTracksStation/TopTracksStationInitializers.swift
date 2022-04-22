@@ -4,7 +4,7 @@ import MusicKit
 extension TopTracksStation { // init for City Chart, daily top 100, and top playlist
   convenience init(chartType: TopTracksChartType,
                    playlist: Playlist,
-                   buttonPosition: Int,
+                   numberOfStations: Int,
                    songsInCategories: [SongInCategory],
                    context: NSManagedObjectContext) {
     self.init(context: context)
@@ -12,12 +12,13 @@ extension TopTracksStation { // init for City Chart, daily top 100, and top play
                                             playlist: playlist,
                                             station: self,
                                             context: context)
-    self.buttonPosition = Int16(buttonPosition)
+    self.buttonPosition = Int16(numberOfStations + 1)
     self.favorite = false
     self.stationName = playlist.name + (chartType == .playlists ? " (Chart)" : "")
     self.stationID = UUID()
     self.clockID = RotationClock.hourWithSpice.rawValue
     self.lastUpdated = Date()
+    self.lastPlayed = nil
     self.stacks = topTracksStacks(songsInCategories: songsInCategories,
                                   context: context)
   }
@@ -26,7 +27,7 @@ extension TopTracksStation { // init for City Chart, daily top 100, and top play
 extension TopTracksStation { // init for Genre Chart
   convenience init(chartType: TopTracksChartType,
                    genre: Genre,
-                   buttonPosition: Int,
+                   numberOfStations: Int,
                    songsInCategories: [SongInCategory],
                    context: NSManagedObjectContext) {
     self.init(context: context)
@@ -34,12 +35,13 @@ extension TopTracksStation { // init for Genre Chart
                                             genre: genre,
                                             station: self,
                                             context: context)
-    self.buttonPosition = Int16(buttonPosition)
+    self.buttonPosition = Int16(numberOfStations + 1)
     self.favorite = false
     self.stationName = "Top Songs: " + genre.name
     self.stationID = UUID()
     self.clockID = RotationClock.hourWithSpice.rawValue
     self.lastUpdated = Date()
+    self.lastPlayed = nil
     self.stacks = topTracksStacks(songsInCategories: songsInCategories,
                                   context: context)
   }
@@ -50,12 +52,12 @@ extension TopTracksStation { // init for Genre Chart
 extension TopTracksStation { // init for hand-selected from playlist
   convenience init(stationName: String,
                    playlist: Playlist,
-                   buttonPosition: Int,
+                   numberOfStations: Int,
                    songsInCategories: [SongInCategory],
                    clock: RotationClock,
                    context: NSManagedObjectContext) {
     self.init(context: context)
-    self.buttonPosition = Int16(buttonPosition)
+    self.buttonPosition = Int16(numberOfStations + 1)
     self.stationName = stationName
     self.stationID = UUID()
     self.favorite = false
@@ -65,16 +67,17 @@ extension TopTracksStation { // init for hand-selected from playlist
                                                  station: self,
                                                  context: context)
     self.lastUpdated = Date()
+    self.lastPlayed = nil
     self.clockID = clock.rawValue
   }
 }
 
 extension TopTracksStation { // init for 
   convenience init(station: Station,
-                   buttonPosition: Int,
+                   numberOfStations: Int,
                    context: NSManagedObjectContext) {
     self.init(context: context)
-    self.buttonPosition = Int16(buttonPosition)
+    self.buttonPosition = Int16(numberOfStations + 1)
     self.stationName = station.name
     self.stationID = UUID()
     self.favorite = false
@@ -85,6 +88,7 @@ extension TopTracksStation { // init for
     
     self.stacks = Set<TopTracksStack>()
     self.lastUpdated = Date()
+    self.lastPlayed = nil
     self.clockID = RotationClock.hourWithSpice.rawValue
   }
 }

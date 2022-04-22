@@ -6,10 +6,10 @@ import SwiftUI
 class TopTracksStatus: ObservableObject {
   @Published var isCreatingNew = false
   @Published var musicSubscription: MusicSubscription?
-  @Published var needsAppSubscription = false
   private let pathMonitor = NWPathMonitor()
   @Published var isNotConnected = true
   @Published var isExpensive = false
+  @Published var numberOfStations = 0
   init() {
     configurePathMonitor()
   }

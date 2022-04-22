@@ -20,3 +20,5 @@ let stationListCellWidth = min(UIScreen.main.bounds.width * 1 / 8, 80)
 
 let miniArtworkImageSize = min(UIScreen.main.bounds.width * 1 / 8, 80)
 let fullArtworkImageSize = min(UIScreen.main.bounds.width * 2 / 3, 250)
+
+let backButtonArtworkImageSize = min(UIScreen.main.bounds.width * 1 / 10, 40)

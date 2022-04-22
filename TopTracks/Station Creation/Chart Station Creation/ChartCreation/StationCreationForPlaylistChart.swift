@@ -12,63 +12,50 @@ struct StationCreationForPlaylistChart {
                                                    ascending: true)])
   private var stations: FetchedResults<TopTracksStation>
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
+  @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
 }
 
 extension StationCreationForPlaylistChart: View {
   var body: some View {
     if isSubscribed {
-      Button("Already subscribed to \n \(playlist.name)",
-             action: {topTracksStatus.isCreatingNew = false})
+      Button("Already subscribed to \n \(playlist.name) \n Tap to listen now",
+             action: playStation)
       .buttonStyle(.borderedProminent)
       .padding(.vertical)
     } else {
-    Button("Subscribe to \n \(playlist.name)",
-           action: createStation)
-    .buttonStyle(.borderedProminent)
-    .padding(.vertical)
+      Button("Add station \n \(playlist.name)",
+             action: createStation)
+      .buttonStyle(.borderedProminent)
+      .padding(.vertical)
     }
   }
 }
 
 extension StationCreationForPlaylistChart {
   private var isSubscribed: Bool {
-    stations
-      .filter {station in
-        guard let stationType = station.chartType else {return false}
-        return stationType == chartType
-      }
-      .map{$0.chartInfo?.sourceID ?? ""}
-      .contains(playlist.id.rawValue)
+    StationCreationCheckIfExists.isSubscribed(to: playlist.id,
+                                              in: stations,
+                                              chartType: chartType)
   }
 }
 
 extension StationCreationForPlaylistChart {
   func createStation() {
-    let context = PersistenceController.newBackgroundContext
-    let _ = TopTracksStation(chartType: chartType,
-                             playlist: playlist,
-                             buttonPosition: stations.count,
-                             songsInCategories: songsInCategories,
-                             context: context)
-    do {
-      topTracksStatus.isCreatingNew = false
-      try context.save()
-      print("tried to save \(playlist.name)")
-    } catch {
-      print("Not able to create a new station\n", error)
-    }
+    topTracksStatus.isCreatingNew = false
+    StationCreation.createStation(chartType: chartType,
+                                  stations: stations,
+                                  playlist: playlist,
+                                  songsInCategories: songsInCategories)
+    
   }
-  
-  //  private var decorationForStationName: String {
-  //    let numberWithSameStart = stations.map(\.stationName)
-  //      .filter{name in name.starts(with: playlist.name)}.count
-  //
-  //    return numberWithSameStart == 0 ? "" : (" " + (numberWithSameStart + 1).description)
-  //  }
 }
 
-//struct StationCreationForCityChart_Previews: PreviewProvider {
-//  static var previews: some View {
-//    StationCreationForCityChart()
-//  }
-//}
+extension StationCreationForPlaylistChart {
+  private func playStation() {
+    topTracksStatus.isCreatingNew = false
+    StationCreationCheckIfExists.playStation(with: playlist.id,
+                                             in: stations,
+                                             chartType: chartType,
+                                             currentlyPlaying: currentlyPlaying)
+  }
+}

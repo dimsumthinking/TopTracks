@@ -36,8 +36,9 @@ extension AppleMusicStationChooserView: View {
 
 extension AppleMusicStationChooserView {
   private var filteredCategories: [AppleMusicStationCategory] {
-    guard !filterText.isEmpty else {return appleMusicStationSearch.stationCategories}
-    return appleMusicStationSearch.stationCategories
+    let categories = appleMusicStationSearch.stationCategories
+    guard !filterText.isEmpty else {return categories}
+    return categories
       .filter {category in
         (category.name.lowercased()
           .contains(filterText.lowercased()))
@@ -50,12 +51,11 @@ extension AppleMusicStationChooserView {
   }
   
   private func filteredStations(in category: AppleMusicStationCategory) -> [Station] {
+    let stations = Set(appleMusicStationSearch.stations(in: category))
     guard !filterText.isEmpty else {
-      return appleMusicStationSearch
-      .stations(in: category)
-      .sorted {$0.name < $1.name}
+      return stations.sorted {$0.name < $1.name}
     }
-    return appleMusicStationSearch.stations(in: category)
+    return stations
       .filter {station in
         (category.name.lowercased().contains(filterText.lowercased()))
         || station.name.lowercased().contains(filterText.lowercased())

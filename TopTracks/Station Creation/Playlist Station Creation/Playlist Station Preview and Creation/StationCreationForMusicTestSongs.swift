@@ -15,7 +15,7 @@ struct StationCreationForMusicTestSongs {
 
 extension StationCreationForMusicTestSongs: View {
   var body: some View {
-    Button("Subscribe to \n  \(playlist.name) + \(decorationForStationName)",
+    Button("Add station \n  \(playlist.name) + \(decorationForStationName)",
            action: createStation)
     .buttonStyle(.borderedProminent)
     .padding(.vertical)
@@ -27,7 +27,7 @@ extension StationCreationForMusicTestSongs {
     let context = PersistenceController.newBackgroundContext
     let _ = TopTracksStation(stationName: playlist.name + decorationForStationName,
                              playlist: playlist,
-                             buttonPosition: stations.count,
+                             numberOfStations: stations.count,
                              songsInCategories: songsInCategories,
                              clock: RotationClock.hourWithSpice,
                              context: context)

@@ -10,6 +10,7 @@ struct StationCreationForAppleMusicStation {
                                                    ascending: true)])
   private var stations: FetchedResults<TopTracksStation>
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
+  @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
 }
 
 extension StationCreationForAppleMusicStation: View {
@@ -25,8 +26,8 @@ extension StationCreationForAppleMusicStation: View {
         .font(.title)
         .padding()
       if isSubscribed {
-        Button("Already subscribed to \n \(station.name)",
-               action: {topTracksStatus.isCreatingNew = false})
+        Button("Already subscribed to \n \(station.name)\n Tap to listen now",
+               action: playStation)
         .buttonStyle(.borderedProminent)
         .padding(.vertical)
       } else {
@@ -41,12 +42,8 @@ extension StationCreationForAppleMusicStation: View {
 
 extension StationCreationForAppleMusicStation {
   private var isSubscribed: Bool {
-    stations
-      .filter {station in
-        station.stationType == .station
-      }
-      .map(\.stationName)
-      .contains(station.name)
+    StationCreationCheckIfExists.isSubscribed(name: station.name,
+                                              in: stations)
   }
 }
 
@@ -54,7 +51,7 @@ extension StationCreationForAppleMusicStation {
   func createStation() {
     let context = PersistenceController.newBackgroundContext
     let _ = TopTracksStation(station: station,
-                             buttonPosition: stations.count,
+                             numberOfStations: stations.count,
                              context: context)
     do {
       topTracksStatus.isCreatingNew = false
@@ -78,3 +75,12 @@ extension StationCreationForAppleMusicStation {
 //    StationCreationForCityChart()
 //  }
 //}
+extension StationCreationForAppleMusicStation {
+  private func playStation() {
+    topTracksStatus.isCreatingNew = false
+    StationCreationCheckIfExists.playStation(with: station.id,
+                                             in: stations,
+                                             stationType: .station ,
+                                             currentlyPlaying: currentlyPlaying)
+  }
+}

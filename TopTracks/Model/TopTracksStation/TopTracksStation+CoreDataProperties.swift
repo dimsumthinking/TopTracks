@@ -15,6 +15,7 @@ extension TopTracksStation {
   @NSManaged public var stacks: Set<TopTracksStack>
   @NSManaged public var clockID: String
   @NSManaged public var lastUpdated: Date
+  @NSManaged public var lastPlayed: Date?
   @NSManaged public var chartInfo: TopTracksChartStation?
   @NSManaged public var playlistInfo: TopTracksPlaylistStation?
   @NSManaged public var appleStationInfo: TopTracksStationStation?

@@ -18,6 +18,8 @@ struct MusicTestView {
   @State private var show10Alert: Bool = false
   @State private var hasShown25: Bool = false
   @State private var show25Alert: Bool = false
+  @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
+  
 }
 
 extension MusicTestView {
@@ -37,37 +39,45 @@ extension MusicTestView: View {
           MusicTestSongRatingView(category: $songs[index].rotationCategory,
                                   next: nextSong)
           NavigationLink(isActive: $moveOn) {
-           StationPreviewForMusicTestSongs(playlist: playlist,
-                                           musicTestSongs: songs)
+            StationPreviewForMusicTestSongs(playlist: playlist,
+                                            musicTestSongs: songs)
           } label: {
             EmptyView()
           }
           .padding(.bottom)
-            Button(action: previousSong){
+          Button(action: previousSong){
+            if !noPreviousSong {
               HStack {
-                Spacer()
-              Image(systemName: "arrow.left")
-                if !noPreviousSong {
-                  Text(" \(songs[index - 1].song.title)")
+                if let artwork = songs[index - 1].song.artwork {
+                  ArtworkImage(artwork, width: backButtonArtworkImageSize).padding(.horizontal)
+                } else {
+                  Image(systemName: "arrow.left").padding()
                 }
-                Spacer() 
+                Text(" \(songs[index - 1].song.title)")
+                Spacer()
               }
-                .padding(.horizontal)
+            } else {
+              HStack {
+                Text(" ")
+                Spacer().padding(.trailing)
+              }
             }
-            .disabled(noPreviousSong)
-            .buttonStyle(.bordered)
-            .padding(.horizontal)
-            .padding(.leading)
+          }
+          .disabled(noPreviousSong)
+          .buttonStyle(.bordered)
+          .padding(.horizontal)
+          .padding(.horizontal)
           ProgressView("", value: songs.numberOfRatedSongs, total: songs.numberOfSongsToBeRated)
             .padding()
         }
       } else {
-        if playlistIDs.contains(playlist.id.rawValue) {
-          Button("You've already hand-crafted\n\(playlist.name)"){topTracksStatus.isCreatingNew = false}
+        if  isSubscribed {
+          Button("You've already hand-crafted\n\(playlist.name) \n Tap to listen now",
+                 action: playStation)
         } else {
-        MusicTestOverview(testIsRunning: $testIsRunning,
-                          action: playSong,
-                          count: songs.testResults.count)
+          MusicTestOverview(testIsRunning: $testIsRunning,
+                            action: playSong,
+                            count: songs.testResults.count)
         }
       }
     }
@@ -90,6 +100,20 @@ extension MusicTestView: View {
               show25Alert: $show25Alert,
               moveOn: $moveOn)
     }
+  }
+}
+
+extension MusicTestView {
+  private var isSubscribed: Bool {
+    playlistIDs.contains(playlist.id.rawValue)
+  }
+  private func playStation() {
+    topTracksStatus.isCreatingNew = false
+    
+    StationCreationCheckIfExists.playStation(with: playlist.id,
+                                             in: stations,
+                                             stationType: .playlist,
+                                             currentlyPlaying: currentlyPlaying)
   }
 }
 
