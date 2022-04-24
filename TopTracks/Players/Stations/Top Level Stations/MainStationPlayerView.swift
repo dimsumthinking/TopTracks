@@ -11,18 +11,33 @@ struct MainStationPlayerView {
 extension MainStationPlayerView: View {
   var body: some View {
     VStack {
-      StationsView()
-      MiniPlayer(currentSong: currentSong,
-      retrievedArtwork: retrievedArtwork)
+      if isShowingFullPlayer {
+        FullPlayer(currentSong: currentSong,
+                   retrievedArtwork: retrievedArtwork)
+        .transition(.scale(scale: 0.05,
+                           anchor: UnitPoint(x: 0.04,
+                                             y: 0.98)))
+        .contentShape(Rectangle())
+        .onTapGesture {
+          isShowingFullPlayer = false
+        }
+        .gesture(DragGesture().onChanged { _ in
+          isShowingFullPlayer = false
+        }
+        )
+      } else {
+        StationsView()
+        MiniPlayer(currentSong: currentSong,
+                   retrievedArtwork: retrievedArtwork)
         .contentShape(Rectangle())
         .onTapGesture {
           isShowingFullPlayer = true
         }
+      }
+        
     }
-    .sheet(isPresented: $isShowingFullPlayer) {
-    FullPlayer(currentSong: currentSong,
-    retrievedArtwork: retrievedArtwork)
-    }
+    .animation( .easeInOut,
+                value: isShowingFullPlayer)
   }
 }
 
@@ -32,7 +47,7 @@ extension MainStationPlayerView {
     switch item {
     case .song(let innerSong):
       if let station = currentlyPlaying.station {
-      station.markAsPlayed(songID: innerSong.id.rawValue)
+        station.markAsPlayed(songID: innerSong.id.rawValue)
         if station.stationType == .station && currentlyPlaying.song != innerSong {
           Task {
             retrievedArtwork = nil

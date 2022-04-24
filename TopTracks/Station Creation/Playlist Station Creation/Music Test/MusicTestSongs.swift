@@ -105,13 +105,13 @@ extension MusicTestSongs {
 }
 
 extension MusicTestSongs {
-  var numberOfRatedSongs: Double {
-    Double(testResults
+  var numberOfRatedSongs: Int {
+    testResults
       .filter{testResult in testResult.rotationCategory != .notRated}
-      .count)
+      .count
   }
-  var numberOfSongsToBeRated: Double {
-   Double( min(testResults.count, 40))
+  var numberOfSongsToBeRated:  Int {
+    min(testResults.count, 40)
   }
 }
 

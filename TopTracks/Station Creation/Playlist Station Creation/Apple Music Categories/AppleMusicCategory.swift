@@ -3,18 +3,18 @@ import Foundation
 let appleMusicCategories = AppleMusicCategory.allCases
 let defaultMusicCategory = AppleMusicCategory.spatialAudio
 let appleMusicDecades: [AppleMusicCategory]
-= [.fifties, .sixties, .seventies, .eighties, .nineties, .twoThousands, .twentyTens, .twentyTwenties]
+= [.fifties, .sixties, .seventies, .eighties, .nineties, .twoThousands, .twentyTens]//, .twentyTwenties]
 
 enum AppleMusicCategory: String, CaseIterable {
   case spatialAudio = "Spatial Audio"
-  case fifties = "'50s"
-  case sixties = "`60s"
-  case seventies = "`70s"
-  case eighties = "`80s"
-  case nineties = "`90s"
-  case twoThousands = "'2000s"
-  case twentyTens = "`2010s"
-  case twentyTwenties = "`2020s"
+  case fifties = "50s"
+  case sixties = "60s"
+  case seventies = "70s"
+  case eighties = "80s"
+  case nineties = "90s"
+  case twoThousands = "2000s"
+  case twentyTens = "2010s"
+//  case twentyTwenties = "2020s"
   case acoustic
   case african = "African Music"
   case afrikaans

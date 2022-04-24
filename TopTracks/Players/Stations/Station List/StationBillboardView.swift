@@ -28,6 +28,9 @@ extension StationBillboardView: View {
         currentlyPlaying.station = station
         stationIsCurrentlyPlaying = true
         Task {
+          if station.stationType == .chart {
+            await station.update()
+          }
           try await stationSongPlayer.play(station)
         }
       }

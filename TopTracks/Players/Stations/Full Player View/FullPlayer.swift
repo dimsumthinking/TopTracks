@@ -24,7 +24,6 @@ extension FullPlayer: View {
         PlayerArtwork(song: currentSong,
                       size: fullArtworkImageSize,
                       retrievedArtwork: retrievedArtwork)
-        
         Text(currentSong.title)
           .multilineTextAlignment(.center)
           .foregroundColor(.secondary)

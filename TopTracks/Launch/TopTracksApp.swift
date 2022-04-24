@@ -18,12 +18,16 @@ extension TopTracksApp: App {
       switch appleMusicAuthorization {
       case .notDetermined:
         AppleMusicAuthorizationView(authorization: $appleMusicAuthorization)
+          .preferredColorScheme(.dark)
       case .denied:
         ReconsiderAppleMusicAuthorizationView(authorization: $appleMusicAuthorization)
+          .preferredColorScheme(.dark)
       case .restricted:
         RestrictedAppleMusicAuthorizationView()
+          .preferredColorScheme(.dark)
       case .authorized:
         mainView
+          .preferredColorScheme(.dark)
       @unknown default:
         Text("The status: \(appleMusicAuthorization.rawValue) is not yet handled by this app")
       }

@@ -27,7 +27,6 @@ extension StationCreationOverview: View {
     }
     .navigationTitle("The Rotation Clock")
     .navigationBarTitleDisplayMode(.inline)
-    .modifier(MusicTestCancellation())
   }
   }
 }

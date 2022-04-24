@@ -67,7 +67,9 @@ extension MusicTestView: View {
           .buttonStyle(.bordered)
           .padding(.horizontal)
           .padding(.horizontal)
-          ProgressView("", value: songs.numberOfRatedSongs, total: songs.numberOfSongsToBeRated)
+          ProgressView("",
+                       value: Double(songs.numberOfRatedSongs),
+                       total: Double(songs.numberOfSongsToBeRated))
             .padding()
         }
       } else {
@@ -83,7 +85,7 @@ extension MusicTestView: View {
     }
     .navigationTitle(playlist.name)
     .navigationBarTitleDisplayMode(.inline)
-    .modifier(MusicTestCancellation())
+    .modifier(MusicTestCancellation(finish: finishPlaylist))
     .onDisappear {
       songPreviewPlayer.audioPlayer = nil
     }
@@ -93,7 +95,9 @@ extension MusicTestView: View {
       }.compactMap(\.playlistInfo).map(\.playlistID)
     }
     .sheet(isPresented: $show10Alert){
-      Popup10(next: nextSong, show10Alert: $show10Alert)
+      Popup10(next: nextSong,
+              finish: finishPlaylist,
+              show10Alert: $show10Alert)
     }
     .sheet(isPresented: $show25Alert){
       Popup25(next: nextSong,
@@ -152,6 +156,16 @@ extension MusicTestView {
       playSong()
       noPreviousSong = (index <= 0)
     }
+  }
+  
+  private func finishPlaylist() {
+    let limit = index < 25 ? 25 : 40
+    while songs.numberOfRatedSongs < limit
+            && songs.testResults.indices.contains(index + 1) {
+      index += 1
+      songs[index].rotationCategory = standardRotationCategories.randomElement() ?? .spice
+    }
+    moveOn = true
   }
 }
 
