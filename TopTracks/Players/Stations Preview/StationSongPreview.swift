@@ -10,17 +10,17 @@ struct StationSongPreview {
 
 extension StationSongPreview: View {
   var body: some View {
-    HStack (alignment: .top) {
+    HStack {
       if let artwork = song.artwork {
 //        ArtworkImage(artwork, width: songPreviewArtworkImageSize)
         ZStack {
           Rectangle()
             .foregroundColor(.secondary.opacity(0.2))
             .frame(width: songPreviewArtworkImageSize, height: songPreviewArtworkImageSize, alignment: .center)
-            .padding()
+            .padding(.horizontal)
         ArtworkImage(artwork,
                      width: songPreviewArtworkImageSize)
-        .padding()
+        .padding(.horizontal)
         }
       }
       VStack (alignment: .leading) {
