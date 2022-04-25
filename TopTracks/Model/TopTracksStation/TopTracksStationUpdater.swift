@@ -11,11 +11,12 @@ extension TopTracksStation {
     self.stacks = topTracksStacks(songsInCategories: songsInCategories,
                                   context: context)
     lastUpdated = Date()
-    do {
-      try context.save()
-    } catch {
-      fatalError("Couldn't save after updating station")
-    }
+    try? context.save()
+//    do {
+//      try context.save()
+//    } catch {
+//      fatalError("Couldn't save after updating station")
+//    }
   }
   
   private func songsForChart(_ chartType: TopTracksChartType,
