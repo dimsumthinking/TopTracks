@@ -13,18 +13,10 @@ extension MainStationPlayerView: View {
     VStack {
       if isShowingFullPlayer {
         FullPlayer(currentSong: currentSong,
-                   retrievedArtwork: retrievedArtwork)
+                   retrievedArtwork: retrievedArtwork,
+        isShowingFullPlayer: $isShowingFullPlayer)
         .transition(.scale(scale: 0.05,
-                           anchor: UnitPoint(x: 0.04,
-                                             y: 0.98)))
-        .contentShape(Rectangle())
-        .onTapGesture {
-          isShowingFullPlayer = false
-        }
-        .gesture(DragGesture().onChanged { _ in
-          isShowingFullPlayer = false
-        }
-        )
+                           anchor: anchorPointForPlayerTransition))
       } else {
         StationsView()
         MiniPlayer(currentSong: currentSong,
@@ -34,7 +26,7 @@ extension MainStationPlayerView: View {
           isShowingFullPlayer = true
         }
       }
-        
+      
     }
     .animation( .easeInOut,
                 value: isShowingFullPlayer)

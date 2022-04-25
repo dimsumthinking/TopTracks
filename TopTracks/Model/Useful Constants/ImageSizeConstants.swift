@@ -22,3 +22,6 @@ let miniArtworkImageSize = min(UIScreen.main.bounds.width * 1 / 8, 80)
 let fullArtworkImageSize = min(UIScreen.main.bounds.width * 2 / 3, 250)
 
 let backButtonArtworkImageSize = min(UIScreen.main.bounds.width * 1 / 10, 40)
+
+import SwiftUI
+let anchorPointForPlayerTransition = UnitPoint(x: 0.04, y: 0.98)

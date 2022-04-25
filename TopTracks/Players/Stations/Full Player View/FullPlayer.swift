@@ -7,30 +7,45 @@ struct FullPlayer {
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
   let retrievedArtwork: Artwork?
+  @Binding var isShowingFullPlayer: Bool
 }
 
 extension FullPlayer: View {
   var body: some View {
     VStack {
       if topTracksStatus.isNotConnected {
-       OfflineWarningView()
+        OfflineWarningView()
       }
-      if let stationName = currentlyPlaying.station?.stationName {
-        Text(stationName)
-          .padding()
+      VStack {
+        if let stationName = currentlyPlaying.station?.stationName {
+          Text(stationName)
+            .padding()
+        }
+        
+        if let currentSong = currentSong {
+          PlayerArtwork(song: currentSong,
+                        size: fullArtworkImageSize,
+                        retrievedArtwork: retrievedArtwork)
+          Text(currentSong.title)
+            .multilineTextAlignment(.center)
+            .foregroundColor(.secondary)
+            .font(.title2)
+          Text(currentSong.artistName)
+            .multilineTextAlignment(.center)
+            .foregroundColor(.secondary)
+        }
       }
-      
+      .contentShape(Rectangle())
+      .onTapGesture {
+        isShowingFullPlayer = false
+      }
+      .gesture(DragGesture().onChanged { drag in
+        if drag.location.y - drag.startLocation.y > 60 {
+          isShowingFullPlayer = false
+        }
+      }
+      )
       if let currentSong = currentSong {
-        PlayerArtwork(song: currentSong,
-                      size: fullArtworkImageSize,
-                      retrievedArtwork: retrievedArtwork)
-        Text(currentSong.title)
-          .multilineTextAlignment(.center)
-          .foregroundColor(.secondary)
-          .font(.title2)
-        Text(currentSong.artistName)
-          .multilineTextAlignment(.center)
-          .foregroundColor(.secondary)
         Spacer()
         SongScrubberView(currentSong: currentSong)
       }
@@ -79,8 +94,6 @@ extension FullPlayer: View {
         .padding()
         .accentColor(.secondary)
         .padding(.horizontal)
-      //      }
-      
     }
   }
 }

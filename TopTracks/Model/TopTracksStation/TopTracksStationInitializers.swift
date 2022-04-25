@@ -96,7 +96,7 @@ extension TopTracksStation { // init for
 
 
 extension TopTracksStation {
-  private func topTracksStacks(songsInCategories: [SongInCategory],
+  func topTracksStacks(songsInCategories: [SongInCategory],
                                context: NSManagedObjectContext) -> Set<TopTracksStack> {
     var topTracksStacks = Set<TopTracksStack>()
     for category in RotationCategory.allCases {

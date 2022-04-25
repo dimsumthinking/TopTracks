@@ -98,4 +98,10 @@ extension TopTracksStation {
     }
     return stationType == .playlists
   }
+  var chartNeedsUpdating: Bool {
+    guard stationType == .chart else {return false}
+    return (Date().timeIntervalSince(lastUpdated)) > 12 * 60 * 60 // check for update twice a day
+  }
 }
+
+

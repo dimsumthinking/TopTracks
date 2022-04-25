@@ -7,6 +7,7 @@ struct StationBillboardView {
   @State private var stationIsCurrentlyPlaying = false
   let isLocked: Bool
   @State var displayLockedAlert = false
+  @State var isLoading = false
 }
 
 extension StationBillboardView: View {
@@ -28,8 +29,10 @@ extension StationBillboardView: View {
         currentlyPlaying.station = station
         stationIsCurrentlyPlaying = true
         Task {
-          if station.stationType == .chart {
-            await station.update()
+          if station.stationType == .chart && station.chartNeedsUpdating  {
+            isLoading = true
+            await station.updateChart()
+            isLoading = false
           }
           try await stationSongPlayer.play(station)
         }
@@ -43,6 +46,14 @@ extension StationBillboardView: View {
       Image(systemName: "lock.fill")
         .font(.largeTitle)
         .foregroundColor(.primary.opacity(0.9))
+      }
+      if isLoading {
+        Rectangle()
+           .foregroundColor(Color(UIColor.systemBackground).opacity(0.7))
+        ProgressView()
+          .progressViewStyle(.circular)
+          .font(.largeTitle)
+          .foregroundColor(.yellow)
       }
     }
     .alert("You need to re-subscribe \nto unlock more than\n three stations. \n\nTesters - toggle the subscribe switch in settings",
