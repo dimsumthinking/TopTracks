@@ -41,7 +41,7 @@ extension MusicTestCancellation {
 extension MusicTestCancellation {
   private func stopBuilding() {
     songPreviewPlayer.audioPlayer = nil
-    topTracksStatus.isCreatingNew = false
+    topTracksStatus.endCreating()
   }
   private func finishAutomatically() {
     hideCancelAlert()

@@ -6,13 +6,25 @@ struct MainView {
 
 extension MainView : View {
   var body: some View {
-    if topTracksStatus.isCreatingNew {
-      MainStationCreationView()
-    } else {
+    switch topTracksStatus.appActivity {
+    case .playing:
       MainStationPlayerView()
+    case .creating:
+      MainStationCreationView()
+    case .updating:
+      Text("Updating view")
     }
   }
 }
+//extension MainView : View {
+//  var body: some View {
+//    if topTracksStatus.isCreatingNew {
+//      MainStationCreationView()
+//    } else {
+//      MainStationPlayerView()
+//    }
+//  }
+//}
 
 
 

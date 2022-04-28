@@ -1,6 +1,7 @@
 let basicCategories: [RotationCategory] = [.power, .current, .added]
 let standardRotationCategories: [RotationCategory] = [.power, .current, .added, .spice]
 let selectableCategories: [RotationCategory] = [.power, .current, .added, .spice, .notIncluded]
+let updateCategories: [RotationCategory] = [.power, .current, .added, .spice, .notIncluded, .notRated, .archived]
 
 enum RotationCategory: String, CaseIterable, Equatable, Hashable, Codable {
   case power
@@ -10,6 +11,7 @@ enum RotationCategory: String, CaseIterable, Equatable, Hashable, Codable {
   case recommended
   case notIncluded
   case notRated
+  case archived
 }
 
 extension RotationCategory: CustomStringConvertible {
@@ -22,6 +24,7 @@ extension RotationCategory: CustomStringConvertible {
     case .recommended: return "Recommended"
     case .notIncluded: return "Not Included"
     case .notRated: return "Not Rated"
+    case .archived: return "Archived"
     }
   }
 }
@@ -40,8 +43,10 @@ extension RotationCategory {
 extension RotationCategory {
   var capacity: Int {
     switch self {
-    case .recommended: return 500
-    default: return 10
+    case .power, .current, .added:
+      return 10
+    default:
+      return 200
     }
   }
 }
@@ -66,6 +71,7 @@ extension RotationCategory {
     case .recommended: return  Color(red: 1, green: 0.85, blue: 0)
     case .notIncluded: return .primary
     case .notRated: return .secondary
+    case .archived: return .primary
     }
   }
 }
@@ -80,7 +86,7 @@ extension RotationCategory {
     case .recommended: return  Image(systemName: "text.bubble")
     case .notIncluded: return Image(systemName: "circle.slash")
     case .notRated: return Image(systemName: "questionmark")
-
+    case .archived: return Image(systemName: "archivebox")
     }
   }
   
@@ -108,9 +114,10 @@ extension RotationCategory: Comparable {
     case .current: return 1
     case .added: return 2
     case .spice: return 3
-    case .recommended: return 4
-    case .notIncluded: return 5
-    case .notRated: return 6
+    case .archived: return 4
+    case .recommended: return 5
+    case .notIncluded: return 6
+    case .notRated: return 7
     }
   }
   

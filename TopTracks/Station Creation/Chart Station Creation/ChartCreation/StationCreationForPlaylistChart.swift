@@ -41,7 +41,7 @@ extension StationCreationForPlaylistChart {
 
 extension StationCreationForPlaylistChart {
   func createStation() {
-    topTracksStatus.isCreatingNew = false
+    topTracksStatus.endCreating()
     StationCreation.createStation(chartType: chartType,
                                   stations: stations,
                                   playlist: playlist,
@@ -52,7 +52,7 @@ extension StationCreationForPlaylistChart {
 
 extension StationCreationForPlaylistChart {
   private func playStation() {
-    topTracksStatus.isCreatingNew = false
+    topTracksStatus.endCreating()
     StationCreationCheckIfExists.playStation(with: playlist.id,
                                              in: stations,
                                              chartType: chartType,

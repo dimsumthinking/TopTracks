@@ -15,4 +15,17 @@ extension TopTracksSong {
     }
     self.songAsData = try? PropertyListEncoder().encode(song)
   }
+  
+//  convenience init(songs: [Song],
+//                   stack: TopTracksStack,
+//                   startingStackPosition: Int,
+//                   context: NSManagedObjectContext = sharedViewContext) {
+//    self.init(context: context)
+//    for index in startingStackPosition..<songs.count {
+//      stack.songs.insert(TopTracksSong(song: songs[index],
+//                                       stack: stack,
+//                                       stackPosition: index,
+//                                       context: context))
+//    }
+//  }
 }

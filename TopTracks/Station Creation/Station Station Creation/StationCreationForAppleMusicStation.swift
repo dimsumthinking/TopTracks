@@ -54,7 +54,7 @@ extension StationCreationForAppleMusicStation {
                              numberOfStations: stations.count,
                              context: context)
     do {
-      topTracksStatus.isCreatingNew = false
+      topTracksStatus.endCreating()
       try context.save()
       print("tried to save \(station.name)")
     } catch {
@@ -77,7 +77,7 @@ extension StationCreationForAppleMusicStation {
 //}
 extension StationCreationForAppleMusicStation {
   private func playStation() {
-    topTracksStatus.isCreatingNew = false
+    topTracksStatus.endCreating()
     StationCreationCheckIfExists.playStation(with: station.id,
                                              in: stations,
                                              stationType: .station ,

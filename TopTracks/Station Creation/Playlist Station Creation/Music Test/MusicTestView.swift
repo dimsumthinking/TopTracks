@@ -112,7 +112,7 @@ extension MusicTestView {
     playlistIDs.contains(playlist.id.rawValue)
   }
   private func playStation() {
-    topTracksStatus.isCreatingNew = false
+    topTracksStatus.endCreating()
     
     StationCreationCheckIfExists.playStation(with: playlist.id,
                                              in: stations,

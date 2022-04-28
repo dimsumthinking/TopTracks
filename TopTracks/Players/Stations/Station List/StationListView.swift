@@ -47,7 +47,7 @@ extension StationListView: View {
 
 extension StationListView {
   private func startBuilding() {
-    topTracksStatus.isCreatingNew = true
+    topTracksStatus.startCreating()
   }
 }
 

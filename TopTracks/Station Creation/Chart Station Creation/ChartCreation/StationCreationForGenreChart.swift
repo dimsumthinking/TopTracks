@@ -40,7 +40,7 @@ extension StationCreationForGenreChart {
 
 extension StationCreationForGenreChart {
   func createStation() {
-    topTracksStatus.isCreatingNew = false
+    topTracksStatus.endCreating()
     StationCreation.createStation(stations: stations,
                                   genre: genre,
                                   songsInCategories: songsInCategories)
@@ -49,7 +49,7 @@ extension StationCreationForGenreChart {
 
 extension StationCreationForGenreChart {
   private func playStation() {
-    topTracksStatus.isCreatingNew = false
+    topTracksStatus.endCreating()
     StationCreationCheckIfExists.playStation(with: genre.id,
                                              in: stations,
                                              chartType: .topSongs,

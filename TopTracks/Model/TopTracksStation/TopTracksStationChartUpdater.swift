@@ -2,12 +2,17 @@ import MusicKit
 import CoreData
 
 extension TopTracksStation {
+  var chartNeedsUpdating: Bool {
+    guard stationType == .chart else {return false}
+    return (Date().timeIntervalSince(lastUpdated)) > 12 * 60 * 60 // check for update twice a day
+  }
+  
   func updateChart() async {
     guard let chartType = chartType,
           let sourceIDString = chartInfo?.sourceID,
           let songsInCategories = await songsForChart(chartType,
                                                     sourceID: MusicItemID(sourceIDString)),
-    let context = managedObjectContext else {return}
+          let context = managedObjectContext else {return}
     self.stacks = topTracksStacks(songsInCategories: songsInCategories,
                                   context: context)
     lastUpdated = Date()

@@ -11,6 +11,7 @@ struct StationBillboardView {
   @Environment(\.editMode) private var editMode
   @AppStorage("hasAppSubscription") private var hasAppSubscription = false
   @State var isShowingPreview = false
+  @EnvironmentObject private var topTracksStatus: TopTracksStatus
 }
 
 extension StationBillboardView: View {
@@ -36,18 +37,21 @@ extension StationBillboardView: View {
                    action: {isShowingPreview = true})
             .padding()
             Spacer()
-            Button("Update",
-                   action: updateChartStation)
-            .disabled(!station.chartNeedsUpdating && station.stationType != .chart)
-            .padding()
+            if station.stationType == .chart {
+              Button("Update",
+                     action: updateChartStation)
+              .disabled(!station.chartNeedsUpdating || topTracksStatus.isNotConnected)
+              .padding()
+            } else if station.stationType == .playlist {
+              Button("Update",
+                     action: updatePlaylistStation)
+              .disabled(!station.playlistCanBeUpdated ||  topTracksStatus.isNotConnected)
+              .padding()
+            }
           }
           .buttonStyle(.bordered)
-//            .padding()
         }
-        
       }
-//      .contentShape(Rectangle())
-//      .onTapGesture {playStation()}
       .border(isCurrentStation ? Color.cyan : Color.secondary.opacity(0.4),
               width: isCurrentStation ? 3 : 1)
       if isLocked {
@@ -88,10 +92,13 @@ extension StationBillboardView {
     currentlyPlaying.station = station
     stationIsCurrentlyPlaying = true
     Task {
-      if station.stationType == .chart && station.chartNeedsUpdating && hasAppSubscription {
+      if station.stationType == .chart && station.chartNeedsUpdating  {
         updateChartStation()
       }
       try await stationSongPlayer.play(station)
+      if station.stationType == .playlist && station.playlistNeedsRefreshing {
+        await station.refreshPlaylist()
+      }
     }
   }
 
@@ -102,6 +109,9 @@ extension StationBillboardView {
       await station.updateChart()
       isLoading = false
     }
+  }
+  private func updatePlaylistStation() {
+  
   }
 }
 

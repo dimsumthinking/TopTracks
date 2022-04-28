@@ -46,7 +46,7 @@ extension StationsView {
     if stations.count > 2 && hasAppSubscription == false {
       isShowingReachedLimitAlert = true
     } else {
-    topTracksStatus.isCreatingNew = true
+      topTracksStatus.startCreating()
     }
   }
 }

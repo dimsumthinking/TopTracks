@@ -4,12 +4,14 @@ import Network
 import SwiftUI
 
 class TopTracksStatus: ObservableObject {
-  @Published var isCreatingNew = false
+  @Published private(set) var appActivity: TopTracksAppActivity = .playing
+//  @Published var isCreatingNew = false
   @Published var musicSubscription: MusicSubscription?
   private let pathMonitor = NWPathMonitor()
-  @Published var isNotConnected = true
-  @Published var isExpensive = false
-  @Published var numberOfStations = 0
+  @Published private(set) var isNotConnected = true
+  @Published private(set) var isExpensive = false
+//  @Published var numberOfStations = 0
+  @Published private(set) var stationBeingUpdated: TopTracksStation? = nil
   init() {
     configurePathMonitor()
   }
@@ -24,6 +26,23 @@ extension TopTracksStatus {
     }
     let queue = DispatchQueue(label: "Monitor")
     pathMonitor.start(queue: queue)
+  }
+}
+
+extension TopTracksStatus {
+  func startCreating() {
+    appActivity = .creating
+  }
+  func endCreating() {
+    appActivity = .playing
+  }
+  func startUpdating(_ station: TopTracksStation) {
+    appActivity = .updating
+    stationBeingUpdated = station
+  }
+  func stopUpdating() {
+    appActivity = .playing
+    stationBeingUpdated = nil
   }
 }
 

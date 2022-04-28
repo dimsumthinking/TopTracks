@@ -32,7 +32,7 @@ extension StationCreationForMusicTestSongs {
                              clock: RotationClock.hourWithSpice,
                              context: context)
     do {
-      topTracksStatus.isCreatingNew = false
+      topTracksStatus.endCreating()
       try context.save()
       print("tried to save \(playlist.name)")
     } catch {
