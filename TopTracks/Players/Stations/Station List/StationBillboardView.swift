@@ -92,13 +92,13 @@ extension StationBillboardView {
     currentlyPlaying.station = station
     stationIsCurrentlyPlaying = true
     Task {
-      if station.stationType == .chart && station.chartNeedsUpdating  {
-        updateChartStation()
-      }
+//      if station.stationType == .chart && station.chartNeedsUpdating  {
+//        updateChartStation()
+//      }
       try await stationSongPlayer.play(station)
-      if station.stationType == .playlist && station.playlistNeedsRefreshing {
-        await station.refreshPlaylist()
-      }
+//      if station.stationType == .playlist && station.playlistNeedsRefreshing {
+//        await station.refreshPlaylist()
+//      }
     }
   }
 
