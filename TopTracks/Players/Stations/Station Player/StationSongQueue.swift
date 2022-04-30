@@ -56,10 +56,10 @@ extension StationSongQueue {
   private func stacks(for station: TopTracksStation) -> [RotationCategory: [Song]] {
     var stacks = [RotationCategory: [Song]]()
     standardRotationCategories.forEach{ category in
-//      print(category)
+      print(category)
       stacks[category] = initializeStack(in: station,
                                          category: category)
-//      print(stacks[category]!.map(\.title))
+      print(stacks[category]!.map(\.title))
     }
     return stacks
   }

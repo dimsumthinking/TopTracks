@@ -111,7 +111,7 @@ extension StationBillboardView {
     }
   }
   private func updatePlaylistStation() {
-  
+    topTracksStatus.startUpdating(station)
   }
 }
 

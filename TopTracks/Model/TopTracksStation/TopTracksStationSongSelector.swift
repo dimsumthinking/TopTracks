@@ -1,11 +1,13 @@
 import CoreData
 
 extension TopTracksStation {
-  func markAsPlayed(songID: String) {
+  func markAsPlayed(songID: String,
+                    increment: Int = 0) {
     let context = PersistenceController.newBackgroundContext
     guard songID != (currentSongID ?? ""),
           let changedSong = fetchedSong(songID, using: sharedViewContext) else {return}
     changedSong.currentStackPosition = 100
+    changedSong.moveUpOrDown += increment
     renumberStack(changedSong.stack, using: context)
     updateTime(using: context)
   }

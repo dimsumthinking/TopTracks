@@ -10,7 +10,8 @@ struct StationPreviewForMusicTestSongs {
 extension StationPreviewForMusicTestSongs: View {
   var body: some View {
     VStack {
-      StationCreationForMusicTestSongs(playlist: playlist, songsInCategories: songsInCategories)
+      StationCreationForMusicTestSongs(playlist: playlist,
+                                       songsInCategories: songsInCategories)
       StationSongsPreview(songsInCategories: songsInCategories)
     }
     .onAppear {

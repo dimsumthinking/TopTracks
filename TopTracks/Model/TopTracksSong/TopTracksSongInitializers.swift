@@ -9,6 +9,7 @@ extension TopTracksSong {
     self.init(context: context)
     self.currentStackPosition = stackPosition
     self.stack = stack
+    self.upOrDown = 0
     self.songID = song.id.rawValue
     if let artwork = song.artwork {
       self.artworkAsData = try? PropertyListEncoder().encode(artwork)

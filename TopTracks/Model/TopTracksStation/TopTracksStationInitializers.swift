@@ -107,6 +107,7 @@ extension TopTracksStation {
           .map(\.song),
                                station: self,
                                context: context))
+      print("Stack", category, "\n \t", songsInCategories.count.description)
     }
     return topTracksStacks
   }

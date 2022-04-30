@@ -5,6 +5,7 @@ struct MainStationPlayerView {
   @State private var isShowingFullPlayer = false
   @ObservedObject private var queue = ApplicationMusicPlayer.shared.queue
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
+  @EnvironmentObject private var topTracksStatus: TopTracksStatus
   @State private var retrievedArtwork: Artwork?
 }
 
@@ -39,7 +40,9 @@ extension MainStationPlayerView {
     switch item {
     case .song(let innerSong):
       if let station = currentlyPlaying.station {
-        station.markAsPlayed(songID: innerSong.id.rawValue)
+        station.markAsPlayed(songID: innerSong.id.rawValue,
+                             increment: topTracksStatus.howSongSelected.increment)
+        topTracksStatus.advancedNaturally()
         if station.stationType == .station && currentlyPlaying.song != innerSong {
           Task {
             retrievedArtwork = nil

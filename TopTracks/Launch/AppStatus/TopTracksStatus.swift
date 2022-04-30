@@ -11,6 +11,7 @@ class TopTracksStatus: ObservableObject {
   @Published private(set) var isNotConnected = true
   @Published private(set) var isExpensive = false
 //  @Published var numberOfStations = 0
+  @Published private(set) var howSongSelected: HowSongSelected = .normal
   @Published private(set) var stationBeingUpdated: TopTracksStation? = nil
   init() {
     configurePathMonitor()
@@ -43,6 +44,18 @@ extension TopTracksStatus {
   func stopUpdating() {
     appActivity = .playing
     stationBeingUpdated = nil
+  }
+}
+
+extension TopTracksStatus {
+  func movedBack() {
+    howSongSelected = .back
+  }
+  func movedForward() {
+    howSongSelected = .forward
+  }
+  func advancedNaturally() {
+    howSongSelected = .normal
   }
 }
 

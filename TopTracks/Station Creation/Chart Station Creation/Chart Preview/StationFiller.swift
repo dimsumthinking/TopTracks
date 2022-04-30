@@ -39,8 +39,9 @@ extension StationFiller {
     let current = musicTestSongs.testResults.filter{$0.rotationCategory == .current}.map(\.song)
     let added = musicTestSongs.testResults.filter{$0.rotationCategory == .added}.map(\.song)
     let spice = musicTestSongs.testResults.filter{$0.rotationCategory == .spice}.map(\.song)
+    let notRatedSongs = musicTestSongs.testResults.filter{$0.rotationCategory == .notRated}.map{SongInCategory(for: $0.song, rotationCategory: .notRated)}
     let songs = power + current + added + spice
-    return songs.splitSongs
+    return songs.splitSongs + notRatedSongs
   }
 }
 

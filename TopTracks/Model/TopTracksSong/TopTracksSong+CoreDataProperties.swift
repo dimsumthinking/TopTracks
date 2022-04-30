@@ -78,4 +78,5 @@ extension TopTracksSong {
   var categoryColor: Color? {
     stack.rotationCategory.color
   }
+
 }

@@ -99,6 +99,17 @@ extension TopTracksStation {
     return stationType == .playlists
   }
   
+  var topTracksStationSize: TopTracksStationSize {
+    let size = stacks
+      .filter {stack in
+      standardRotationCategories.map(\.rawValue).contains(stack.stackName)
+    }
+    .map(\.songs.count)
+    .reduce(0, +)
+    print("Size is: ", size.description)
+    return size >= 40 ? .full : .mini
+  }
+  
   func stack(_ rotationCategory: RotationCategory) -> TopTracksStack? {
     stacks.filter{stack in stack.stackName == rotationCategory.rawValue}.first
   }

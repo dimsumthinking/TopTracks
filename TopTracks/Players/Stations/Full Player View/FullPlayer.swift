@@ -6,6 +6,7 @@ struct FullPlayer {
   @ObservedObject private(set) var playerState = ApplicationMusicPlayer.shared.state
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
+  @Environment(\.openURL) private var openURL
   let retrievedArtwork: Artwork?
   @Binding var isShowingFullPlayer: Bool
 }
@@ -54,7 +55,10 @@ extension FullPlayer: View {
       HStack {
         Spacer()
         Button(action: {
-          Task{try await stationSongPlayer.skipToPreviousEntry()}}){
+          Task{
+            topTracksStatus.movedBack()
+            try await stationSongPlayer.skipToPreviousEntry()
+          }}){
             Image(systemName: "backward.fill")
           }
         Spacer()
@@ -81,7 +85,10 @@ extension FullPlayer: View {
           }
         }
         Spacer()
-        Button(action: {Task{try await stationSongPlayer.skipToNextEntry()}}){
+        Button(action: {Task{
+          topTracksStatus.movedForward()
+          try await stationSongPlayer.skipToNextEntry()
+        }}){
           Image(systemName: "forward.fill")
         }
         Spacer()
@@ -94,12 +101,32 @@ extension FullPlayer: View {
         .padding()
         .accentColor(.secondary)
         .padding(.horizontal)
+      Spacer()
+      Button("Open in Apple Music") {
+        Task {
+          await openInAppleMusic()
+        }
+      }
+//      .buttonStyle(.borderedProminent)
     }
   }
 }
 
-//struct FullPlayer_Previews: PreviewProvider {
-//  static var previews: some View {
-//    FullPlayer()
-//  }
-//}
+extension FullPlayer {
+  private func appleMusicURL() async -> URL? {
+    var components = URLComponents()
+    guard let store = (try? await MusicDataRequest.currentCountryCode),
+          let songID = currentSong?.id.rawValue else {return nil}
+    components.scheme = "music"
+    components.host = "music.apple.com"
+    components.path = "/\(store)/song/\(songID)"
+    components.queryItems = [URLQueryItem(name: "app", value: "itunes")]
+    return components.url
+  }
+  
+  private func openInAppleMusic() async {
+    if let url = await appleMusicURL() {
+      openURL(url)
+    }
+  }
+}

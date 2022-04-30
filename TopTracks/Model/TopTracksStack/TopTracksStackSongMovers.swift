@@ -2,21 +2,29 @@ import MusicKit
 import CoreData
 
 extension TopTracksStack {
-  func add(_ addedSongs: [Song],
+  func add(_ songsToBeAdded: [Song],
            context: NSManagedObjectContext) {
-    var index = addedSongs.count
-    for song in addedSongs {
+    var index = songsToBeAdded.count
+    for song in songsToBeAdded {
       songs.insert(TopTracksSong(song: song,
                                  stack: self,
                                  stackPosition: index,
                                  context: context))
       index += 1
     }
+    try? context.save()
   }
   
-  func remove(_ songs: [Song],
+  func remove(_ songsToBeRemoved: [Song],
               context: NSManagedObjectContext) {
-fatalError()
+    for song in songsToBeRemoved {
+      if let topTracksSong = songs.filter({ttSong in
+        ttSong.songID == song.id.rawValue
+      }).first {
+        songs.remove(topTracksSong)
+      }
+    }
+    try? context.save()
   }
   
   func move(_ songs: [Song],
