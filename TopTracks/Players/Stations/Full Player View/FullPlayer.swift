@@ -56,7 +56,6 @@ extension FullPlayer: View {
         Spacer()
         Button(action: {
           Task{
-            topTracksStatus.movedBack()
             try await stationSongPlayer.skipToPreviousEntry()
           }}){
             Image(systemName: "backward.fill")
@@ -85,8 +84,8 @@ extension FullPlayer: View {
           }
         }
         Spacer()
-        Button(action: {Task{
-          topTracksStatus.movedForward()
+        Button(action: {
+          Task {
           try await stationSongPlayer.skipToNextEntry()
         }}){
           Image(systemName: "forward.fill")

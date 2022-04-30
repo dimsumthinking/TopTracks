@@ -30,7 +30,7 @@ extension StationsView: View {
               }
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-              EditButton()
+//              EditButton()
               Button(action: startBuilding){
                 Image(systemName: "plus")
               }

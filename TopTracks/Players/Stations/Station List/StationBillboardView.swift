@@ -3,12 +3,12 @@ import MusicKit
 
 struct StationBillboardView {
   let station: TopTracksStation
+  let deleteAction: (TopTracksStation, CurrentlyPlaying) -> Void
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
   @State private var stationIsCurrentlyPlaying = false
   let isLocked: Bool
   @State var displayLockedAlert = false
   @State var isLoading = false
-  @Environment(\.editMode) private var editMode
   @AppStorage("hasAppSubscription") private var hasAppSubscription = false
   @State var isShowingPreview = false
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
@@ -30,27 +30,50 @@ extension StationBillboardView: View {
         }
         .contentShape(Rectangle())
         .onTapGesture {playStation()}
-        if let mode = editMode,
-           mode.wrappedValue.isEditing && !isLocked && station.stationType != .station {
-          HStack {
+        .swipeActions(edge: .leading,
+                      allowsFullSwipe: false) {
+          if !isLocked && station.stationType != .station {
             Button("Preview",
                    action: {isShowingPreview = true})
-            .padding()
-            Spacer()
+            .tint(.blue)
             if station.stationType == .chart {
               Button("Update",
                      action: updateChartStation)
               .disabled(!station.chartNeedsUpdating || topTracksStatus.isNotConnected)
-              .padding()
+              .tint(.indigo)
             } else if station.stationType == .playlist {
               Button("Update",
                      action: updatePlaylistStation)
               .disabled(!station.playlistCanBeUpdated ||  topTracksStatus.isNotConnected)
-              .padding()
+              .tint(.indigo)
             }
           }
-          .buttonStyle(.bordered)
         }
+                      .swipeActions {
+                        Button(role: .destructive,
+                               action: {deleteAction(station, currentlyPlaying)}){ Text("Delete")}
+                      }
+//        if let mode = editMode,
+//           mode.wrappedValue.isEditing && !isLocked && station.stationType != .station {
+//          HStack {
+//            Button("Preview",
+//                   action: {isShowingPreview = true})
+//            .padding()
+//            Spacer()
+//            if station.stationType == .chart {
+//              Button("Update",
+//                     action: updateChartStation)
+//              .disabled(!station.chartNeedsUpdating || topTracksStatus.isNotConnected)
+//              .padding()
+//            } else if station.stationType == .playlist {
+//              Button("Update",
+//                     action: updatePlaylistStation)
+//              .disabled(!station.playlistCanBeUpdated ||  topTracksStatus.isNotConnected)
+//              .padding()
+//            }
+//          }
+//          .buttonStyle(.bordered)
+//        }
       }
       .border(isCurrentStation ? Color.cyan : Color.secondary.opacity(0.4),
               width: isCurrentStation ? 3 : 1)

@@ -63,6 +63,13 @@ extension StationList {
     }
     renumberButtons(using: context)
   }
+  
+  func delete(station: TopTracksStation,
+              currentlyPlaying: CurrentlyPlaying) {
+    if let index = stations.filter({station.stationID == $0.stationID}).map({$0.buttonNumber - 1}).first {
+      deleteStation(at: index, currentlyPlaying: currentlyPlaying)
+    }
+  }
 }
 
 extension StationList {

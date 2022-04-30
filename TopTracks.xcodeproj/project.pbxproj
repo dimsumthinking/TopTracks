@@ -130,7 +130,6 @@
 		62EB0B792818D0E900C4B89D /* TopTracksStationPlaylistUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EB0B782818D0E900C4B89D /* TopTracksStationPlaylistUpdater.swift */; };
 		62EB0B7B28197AEC00C4B89D /* TopTracksStationPlaylistRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EB0B7A28197AEC00C4B89D /* TopTracksStationPlaylistRefresher.swift */; };
 		62EB0B7D281B076B00C4B89D /* TopTracksStackSongMovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EB0B7C281B076B00C4B89D /* TopTracksStackSongMovers.swift */; };
-		62EB0B7F281C10AF00C4B89D /* HowSongSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EB0B7E281C10AF00C4B89D /* HowSongSelected.swift */; };
 		62EB0B81281C37BE00C4B89D /* TopTracksStackPlaylistUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EB0B80281C37BE00C4B89D /* TopTracksStackPlaylistUpdater.swift */; };
 		62F13BE4276E26B60096FDAF /* AppleMusicCategoryChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F13BE3276E26B60096FDAF /* AppleMusicCategoryChooserView.swift */; };
 /* End PBXBuildFile section */
@@ -262,7 +261,6 @@
 		62EB0B782818D0E900C4B89D /* TopTracksStationPlaylistUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksStationPlaylistUpdater.swift; sourceTree = "<group>"; };
 		62EB0B7A28197AEC00C4B89D /* TopTracksStationPlaylistRefresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksStationPlaylistRefresher.swift; sourceTree = "<group>"; };
 		62EB0B7C281B076B00C4B89D /* TopTracksStackSongMovers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksStackSongMovers.swift; sourceTree = "<group>"; };
-		62EB0B7E281C10AF00C4B89D /* HowSongSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowSongSelected.swift; sourceTree = "<group>"; };
 		62EB0B80281C37BE00C4B89D /* TopTracksStackPlaylistUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksStackPlaylistUpdater.swift; sourceTree = "<group>"; };
 		62F13BE3276E26B60096FDAF /* AppleMusicCategoryChooserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicCategoryChooserView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -308,7 +306,6 @@
 				6222D987280E112A009DEA8A /* OfflineWarningView.swift */,
 				6222D989280E1383009DEA8A /* DataWarningView.swift */,
 				62EB0B7628181C2A00C4B89D /* TopTracksAppActivity.swift */,
-				62EB0B7E281C10AF00C4B89D /* HowSongSelected.swift */,
 			);
 			path = AppStatus;
 			sourceTree = "<group>";
@@ -875,7 +872,6 @@
 				6269EBF52789EB43003E4468 /* TopTracksStation+CoreDataClass.swift in Sources */,
 				62141FD227F260980055783D /* ChartTypeSelectionView.swift in Sources */,
 				62EB0B7B28197AEC00C4B89D /* TopTracksStationPlaylistRefresher.swift in Sources */,
-				62EB0B7F281C10AF00C4B89D /* HowSongSelected.swift in Sources */,
 				62141FD627F263930055783D /* ChartCreationOptionView.swift in Sources */,
 				62C16B7027AC3DE900DC600A /* RestrictedAppleMusicAuthorizationView.swift in Sources */,
 				629603B527FC763D0024CD79 /* TopTracksChartStationInitializers.swift in Sources */,

@@ -40,9 +40,7 @@ extension MainStationPlayerView {
     switch item {
     case .song(let innerSong):
       if let station = currentlyPlaying.station {
-        station.markAsPlayed(songID: innerSong.id.rawValue,
-                             increment: topTracksStatus.howSongSelected.increment)
-        topTracksStatus.advancedNaturally()
+        station.markAsPlayed(songID: innerSong.id.rawValue)
         if station.stationType == .station && currentlyPlaying.song != innerSong {
           Task {
             retrievedArtwork = nil

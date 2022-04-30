@@ -19,14 +19,16 @@ extension StationListView: View {
       }
       ForEach(stationList.stations) {station in
         StationBillboardView(station: station,
+                             deleteAction: stationList.delete(station: currentlyPlaying:),
                              isLocked: !hasAppSubscription && station.buttonNumber > 3)
       }
-      .onDelete { indexSet in
-        if let index = indexSet.first {
-          stationList.deleteStation(at: index,
-                                    currentlyPlaying: currentlyPlaying)
-        }
-      }
+//      .onDelete { indexSet in
+//        if let index = indexSet.first {
+////          deleteStation(at: index)
+//          stationList.deleteStation(at: index,
+//                                    currentlyPlaying: currentlyPlaying)
+//        }
+//      }
       .onMove{ indexSet, offset in
         if let index = indexSet.first {
           stationList.moveStation(at: index, offset: offset)
@@ -49,6 +51,13 @@ extension StationListView {
   private func startBuilding() {
     topTracksStatus.startCreating()
   }
+//  private func deleteStation(at index: Int) {
+//    stationList.deleteStation(at: index, currentlyPlaying: currentlyPlaying)
+//  }
+//  private func delete(station: TopTracksStation) {
+//    if let stationToBeDeleted
+//    stationList.deleteStation(at: index, currentlyPlaying: currentlyPlaying)
+//  }
 }
 
 struct StationListView_Previews: PreviewProvider {
