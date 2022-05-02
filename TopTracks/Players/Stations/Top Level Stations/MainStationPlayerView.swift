@@ -7,6 +7,7 @@ struct MainStationPlayerView {
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
   @State private var retrievedArtwork: Artwork?
+  @State private var frequencyChangeImageName: String?
 }
 
 extension MainStationPlayerView: View {
@@ -15,7 +16,8 @@ extension MainStationPlayerView: View {
       if isShowingFullPlayer {
         FullPlayer(currentSong: currentSong,
                    retrievedArtwork: retrievedArtwork,
-        isShowingFullPlayer: $isShowingFullPlayer)
+                   imageName: $frequencyChangeImageName,
+                   isShowingFullPlayer: $isShowingFullPlayer)
         .transition(.scale(scale: 0.05,
                            anchor: anchorPointForPlayerTransition))
       } else {
@@ -49,6 +51,16 @@ extension MainStationPlayerView {
         }
       }
       currentlyPlaying.song = innerSong
+      if let station = currentlyPlaying.station {
+        Task {
+          if station.stationType == .playlist {
+            frequencyChangeImageName = "heart"
+            if let upOrDown = currentlyPlaying.topTracksSong?.upOrDown {
+              frequencyChangeImageName = UpdateFrequencyChange(rawValue: Int(upOrDown))?.imageName
+            }
+          }
+        }
+      }
       return innerSong
     default:
       return nil

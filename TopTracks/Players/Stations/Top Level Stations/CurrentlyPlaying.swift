@@ -14,3 +14,11 @@ extension CurrentlyPlaying: Equatable {
   
   
 }
+
+extension CurrentlyPlaying {
+  var topTracksSong: TopTracksSong? {
+    guard let station = station,
+          let song = song else {return nil}
+    return station.song(with: song.id)
+  }
+}

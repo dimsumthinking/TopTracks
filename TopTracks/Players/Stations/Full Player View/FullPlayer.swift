@@ -8,6 +8,7 @@ struct FullPlayer {
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
   @Environment(\.openURL) private var openURL
   let retrievedArtwork: Artwork?
+  @Binding var imageName: String?
   @Binding var isShowingFullPlayer: Bool
 }
 
@@ -24,9 +25,29 @@ extension FullPlayer: View {
         }
         
         if let currentSong = currentSong {
+          ZStack {
           PlayerArtwork(song: currentSong,
                         size: fullArtworkImageSize,
                         retrievedArtwork: retrievedArtwork)
+            if let stationType = currentlyPlaying.station?.stationType,
+               let imageName = imageName,
+               stationType == .playlist {
+              ZStack {
+                Circle()
+                  .frame(width: backButtonArtworkImageSize , height: backButtonArtworkImageSize)
+                  .foregroundColor(.blue.opacity(0.8))
+                Image(systemName: imageName)
+              }
+              .contentShape(Rectangle())
+              .onTapGesture {
+                adjustFrequencyChange(.theSame)
+              }
+                     .padding()
+              .offset(x: fullArtworkImageSize/2, y: -fullArtworkImageSize/2)
+              .padding()
+            }
+          }
+        
           Text(currentSong.title)
             .multilineTextAlignment(.center)
             .foregroundColor(.secondary)
@@ -41,8 +62,12 @@ extension FullPlayer: View {
         isShowingFullPlayer = false
       }
       .gesture(DragGesture().onChanged { drag in
-        if drag.location.y - drag.startLocation.y > 60 {
+        if drag.location.y - drag.startLocation.y > fullPlayerSwipe {
           isShowingFullPlayer = false
+        } else if drag.location.x - drag.startLocation.x > fullPlayerSwipe {
+          adjustFrequencyChange(.moreOften)
+        } else if drag.location.x - drag.startLocation.x < -fullPlayerSwipe {
+          adjustFrequencyChange(.lessOften)
         }
       }
       )
@@ -106,7 +131,6 @@ extension FullPlayer: View {
           await openInAppleMusic()
         }
       }
-//      .buttonStyle(.borderedProminent)
     }
   }
 }
@@ -128,4 +152,28 @@ extension FullPlayer {
       openURL(url)
     }
   }
+  private func adjustFrequencyChange(increase: Bool) {
+    guard let song = currentlyPlaying.topTracksSong,
+          let delta = UpdateFrequencyChange(rawValue: Int(song.upOrDown)) else {return}
+    if increase {
+      song.adjustFrequencyChange(delta.increase)
+    } else {
+      song.adjustFrequencyChange(delta.decrease)
+    }
+    frequencyChangeImageName()
+  }
+  
+  private func adjustFrequencyChange(_ delta: UpdateFrequencyChange) {
+    guard let song = currentlyPlaying.topTracksSong else {return}
+    song.adjustFrequencyChange(delta)
+    frequencyChangeImageName()
+  }
+  
+  private func frequencyChangeImageName() {
+    guard let upOrDown = currentlyPlaying.topTracksSong?.upOrDown else {return}
+    imageName = UpdateFrequencyChange(rawValue: Int(upOrDown))?.imageName ?? "heart"
+         
+  }
 }
+
+

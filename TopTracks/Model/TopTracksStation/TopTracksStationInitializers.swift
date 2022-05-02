@@ -55,6 +55,7 @@ extension TopTracksStation { // init for hand-selected from playlist
                    numberOfStations: Int,
                    songsInCategories: [SongInCategory],
                    clock: RotationClock,
+                   curator: String? = nil,
                    context: NSManagedObjectContext) {
     self.init(context: context)
     self.buttonPosition = Int16(numberOfStations + 1)
@@ -65,6 +66,7 @@ extension TopTracksStation { // init for hand-selected from playlist
                                   context: context)
     self.playlistInfo = TopTracksPlaylistStation(playlist: playlist,
                                                  station: self,
+                                                 curator: curator,
                                                  context: context)
     self.lastUpdated = Date()
     self.lastPlayed = nil

@@ -4,6 +4,7 @@ import MusicKit
 extension TopTracksPlaylistStation {
   convenience init(playlist: Playlist,
                    station: TopTracksStation,
+                   curator: String? = nil,
                    context: NSManagedObjectContext = sharedViewContext) {
     self.init(context: context)
     self.updateAvailable = false

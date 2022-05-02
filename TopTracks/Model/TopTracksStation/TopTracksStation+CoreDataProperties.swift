@@ -1,6 +1,6 @@
 import Foundation
 import CoreData
-
+import MusicKit
 
 extension TopTracksStation {
   
@@ -112,6 +112,10 @@ extension TopTracksStation {
   
   func stack(_ rotationCategory: RotationCategory) -> TopTracksStack? {
     stacks.filter{stack in stack.stackName == rotationCategory.rawValue}.first
+  }
+  
+  func song(with musicItemID: MusicItemID) -> TopTracksSong? {
+    stacks.flatMap(\.songs).filter{song in song.songID == musicItemID.rawValue}.first
   }
 
 }

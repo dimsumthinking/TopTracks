@@ -33,47 +33,31 @@ extension StationBillboardView: View {
         .swipeActions(edge: .leading,
                       allowsFullSwipe: false) {
           if !isLocked && station.stationType != .station {
-            Button("Preview",
-                   action: {isShowingPreview = true})
-            .tint(.blue)
+            Button(action: {isShowingPreview = true}){
+              Image(systemName: "magnifyingglass")
+            }
+            .tint(.indigo)
             if station.stationType == .chart {
-              Button("Update",
-                     action: updateChartStation)
+              Button(action: updateChartStation) {
+                Image(systemName: "arrow.triangle.2.circlepath")
+              }
               .disabled(!station.chartNeedsUpdating || topTracksStatus.isNotConnected)
-              .tint(.indigo)
+              .tint(.orange)
             } else if station.stationType == .playlist {
-              Button("Update",
-                     action: updatePlaylistStation)
+              Button(action: updatePlaylistStation) {
+                Image(systemName: "arrow.triangle.2.circlepath")
+              }
               .disabled(!station.playlistCanBeUpdated ||  topTracksStatus.isNotConnected)
-              .tint(.indigo)
+              .tint(.orange)
             }
           }
         }
-                      .swipeActions {
-                        Button(role: .destructive,
-                               action: {deleteAction(station, currentlyPlaying)}){ Text("Delete")}
-                      }
-//        if let mode = editMode,
-//           mode.wrappedValue.isEditing && !isLocked && station.stationType != .station {
-//          HStack {
-//            Button("Preview",
-//                   action: {isShowingPreview = true})
-//            .padding()
-//            Spacer()
-//            if station.stationType == .chart {
-//              Button("Update",
-//                     action: updateChartStation)
-//              .disabled(!station.chartNeedsUpdating || topTracksStatus.isNotConnected)
-//              .padding()
-//            } else if station.stationType == .playlist {
-//              Button("Update",
-//                     action: updatePlaylistStation)
-//              .disabled(!station.playlistCanBeUpdated ||  topTracksStatus.isNotConnected)
-//              .padding()
-//            }
-//          }
-//          .buttonStyle(.bordered)
-//        }
+        .swipeActions {
+          Button(role: .destructive,
+                 action: {deleteAction(station, currentlyPlaying)}){
+            Image(systemName: "trash.fill")
+          }
+        }
       }
       .border(isCurrentStation ? Color.cyan : Color.secondary.opacity(0.4),
               width: isCurrentStation ? 3 : 1)
@@ -115,13 +99,13 @@ extension StationBillboardView {
     currentlyPlaying.station = station
     stationIsCurrentlyPlaying = true
     Task {
-//      if station.stationType == .chart && station.chartNeedsUpdating  {
-//        updateChartStation()
-//      }
+      if station.stationType == .chart && station.chartNeedsUpdating  {
+        updateChartStation()
+      }
       try await stationSongPlayer.play(station)
-//      if station.stationType == .playlist && station.playlistNeedsRefreshing {
-//        await station.refreshPlaylist()
-//      }
+      if station.stationType == .playlist && station.playlistNeedsRefreshing {
+        await station.refreshPlaylist()
+      }
     }
   }
 
