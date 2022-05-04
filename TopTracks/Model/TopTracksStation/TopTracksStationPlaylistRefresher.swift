@@ -4,7 +4,7 @@ import CoreData
 extension TopTracksStation {
   var playlistNeedsRefreshing: Bool {
     guard stationType == .playlist else {return false}
-    return (Date().timeIntervalSince(lastUpdated)) > 24 * 60 * 60 // check for update daily
+    return (Date().timeIntervalSince(lastRefreshed)) > 24 * 60 * 60 // check for update daily
   }
 }
 
@@ -13,14 +13,14 @@ extension TopTracksStation {
     guard let playlistIDString = playlistInfo?.playlistID,
           let playlist = await playlist(with: MusicItemID(playlistIDString)),
           let context = managedObjectContext else {return}
-    guard lastUpdated < (playlist.lastModifiedDate ?? Date().addingTimeInterval(-7 * 24 * 60 * 60)) else {return}
+    guard lastRefreshed < (playlist.lastModifiedDate ?? Date().addingTimeInterval(-7 * 24 * 60 * 60)) else {return}
     let notRatedStack = stack(.notRated) ?? TopTracksStack(rotationCategory: .notRated,
                                                            songs: [Song](),
                                                            station: self,
                                                            context: context)
     await notRatedStack.add(songsForRefresher(for: playlist),
                             context: context)
-    lastUpdated = Date()
+    lastRefreshed = Date()
     try? context.save()
     
   }

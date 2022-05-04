@@ -17,7 +17,7 @@ extension TopTracksStation { // init for City Chart, daily top 100, and top play
     self.stationName = playlist.name + (chartType == .playlists ? " (Chart)" : "")
     self.stationID = UUID()
     self.clockID = RotationClock.hourWithSpice.rawValue
-    self.lastUpdated = Date()
+    self.lastRefreshed = Date()
     self.lastPlayed = nil
     self.stacks = topTracksStacks(songsInCategories: songsInCategories,
                                   context: context)
@@ -40,7 +40,7 @@ extension TopTracksStation { // init for Genre Chart
     self.stationName = "Top Songs: " + genre.name
     self.stationID = UUID()
     self.clockID = RotationClock.hourWithSpice.rawValue
-    self.lastUpdated = Date()
+    self.lastRefreshed = Date()
     self.lastPlayed = nil
     self.stacks = topTracksStacks(songsInCategories: songsInCategories,
                                   context: context)
@@ -68,7 +68,7 @@ extension TopTracksStation { // init for hand-selected from playlist
                                                  station: self,
                                                  curator: curator,
                                                  context: context)
-    self.lastUpdated = Date()
+    self.lastRefreshed = Date()
     self.lastPlayed = nil
     self.clockID = clock.rawValue
   }
@@ -89,7 +89,7 @@ extension TopTracksStation { // init for
                                                     context: context)
     
     self.stacks = Set<TopTracksStack>()
-    self.lastUpdated = Date()
+    self.lastRefreshed = Date()
     self.lastPlayed = nil
     self.clockID = RotationClock.hourWithSpice.rawValue
   }

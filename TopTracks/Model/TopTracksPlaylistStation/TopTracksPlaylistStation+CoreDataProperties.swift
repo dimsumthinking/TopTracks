@@ -9,7 +9,7 @@ extension TopTracksPlaylistStation {
     return NSFetchRequest<TopTracksPlaylistStation>(entityName: "TopTracksPlaylistStation")
   }
   
-  @NSManaged public var updateAvailable: Bool
+  @NSManaged public var lastUpdated: Date
   @NSManaged public var playlistName: String
   @NSManaged public var playlistID: String
   @NSManaged public var artworkAsData: Data?

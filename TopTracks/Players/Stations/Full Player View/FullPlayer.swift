@@ -40,7 +40,9 @@ extension FullPlayer: View {
               }
               .contentShape(Rectangle())
               .onTapGesture {
-                adjustFrequencyChange(.theSame)
+                incrementImageName()
+                
+//                adjustFrequencyChange(.theSame)
               }
                      .padding()
               .offset(x: fullArtworkImageSize/2, y: -fullArtworkImageSize/2)
@@ -64,11 +66,11 @@ extension FullPlayer: View {
       .gesture(DragGesture().onChanged { drag in
         if drag.location.y - drag.startLocation.y > fullPlayerSwipe {
           isShowingFullPlayer = false
-        } else if drag.location.x - drag.startLocation.x > fullPlayerSwipe {
-          adjustFrequencyChange(.moreOften)
-        } else if drag.location.x - drag.startLocation.x < -fullPlayerSwipe {
-          adjustFrequencyChange(.lessOften)
-        }
+        } //else if drag.location.x - drag.startLocation.x > fullPlayerSwipe {
+//          adjustFrequencyChange(.moreOften)
+//        } else if drag.location.x - drag.startLocation.x < -fullPlayerSwipe {
+//          adjustFrequencyChange(.lessOften)
+//        }
       }
       )
       if let currentSong = currentSong {
@@ -172,7 +174,15 @@ extension FullPlayer {
   private func frequencyChangeImageName() {
     guard let upOrDown = currentlyPlaying.topTracksSong?.upOrDown else {return}
     imageName = UpdateFrequencyChange(rawValue: Int(upOrDown))?.imageName ?? "heart"
-         
+  }
+  private func incrementImageName() {
+    if imageName == UpdateFrequencyChange.theSame.imageName {
+      adjustFrequencyChange(.moreOften)
+    } else if imageName == UpdateFrequencyChange.moreOften.imageName {
+      adjustFrequencyChange(.lessOften)
+    } else {
+      adjustFrequencyChange(.theSame)
+    }
   }
 }
 

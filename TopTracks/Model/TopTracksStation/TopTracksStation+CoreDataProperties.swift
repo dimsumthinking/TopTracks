@@ -14,7 +14,7 @@ extension TopTracksStation {
   @NSManaged public var stationID: UUID
   @NSManaged public var stacks: Set<TopTracksStack>
   @NSManaged public var clockID: String
-  @NSManaged public var lastUpdated: Date
+  @NSManaged public var lastRefreshed: Date
   @NSManaged public var lastPlayed: Date?
   @NSManaged public var chartInfo: TopTracksChartStation?
   @NSManaged public var playlistInfo: TopTracksPlaylistStation?
@@ -116,6 +116,10 @@ extension TopTracksStation {
   
   func song(with musicItemID: MusicItemID) -> TopTracksSong? {
     stacks.flatMap(\.songs).filter{song in song.songID == musicItemID.rawValue}.first
+  }
+  
+  var lastUpdatedOrNow: Date {
+    playlistInfo?.lastUpdated ?? Date()
   }
 
 }

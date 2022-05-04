@@ -2,9 +2,9 @@ import MusicKit
 import CoreData
 
 extension TopTracksStation {
-  var chartNeedsUpdating: Bool {
+  var chartNeedsRefreshing: Bool {
     guard stationType == .chart else {return false}
-    return (Date().timeIntervalSince(lastUpdated)) > 12 * 60 * 60 // check for update twice a day
+    return (Date().timeIntervalSince(lastRefreshed)) > 12 * 60 * 60 // check for update twice a day
   }
   
   func updateChart() async {
@@ -15,7 +15,7 @@ extension TopTracksStation {
           let context = managedObjectContext else {return}
     self.stacks = topTracksStacks(songsInCategories: songsInCategories,
                                   context: context)
-    lastUpdated = Date()
+    lastRefreshed = Date()
     try? context.save()
 //    do {
 //      try context.save()

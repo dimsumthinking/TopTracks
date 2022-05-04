@@ -22,10 +22,18 @@ extension StationBillboardView: View {
           StationIconView(station: station)
             .frame(width: stationListCellWidth, height: stationListCellWidth, alignment: .center)
             .padding()
-          Text(station.stationName)
-            .multilineTextAlignment(.leading)
-            .font(.title3)
-            .padding(.vertical, 20)
+          VStack (alignment: .leading){
+            Text(station.stationName)
+              .multilineTextAlignment(.leading)
+              .font(.title3)
+            if let lastUpdated = station.playlistInfo?.lastUpdated { //.station && (station.chartNeedsRefreshing || (station.playlistCanBeUpdated)) {
+              Group {
+                Text("Updated ") + Text(lastUpdated, style: .date)
+              }
+              .font(.caption)
+              .foregroundColor(.secondary)
+            }
+          }
           Spacer()
         }
         .contentShape(Rectangle())
@@ -41,7 +49,7 @@ extension StationBillboardView: View {
               Button(action: updateChartStation) {
                 Image(systemName: "arrow.triangle.2.circlepath")
               }
-              .disabled(!station.chartNeedsUpdating || topTracksStatus.isNotConnected)
+              .disabled(!station.chartNeedsRefreshing || topTracksStatus.isNotConnected)
               .tint(.orange)
             } else if station.stationType == .playlist {
               Button(action: updatePlaylistStation) {
@@ -99,7 +107,7 @@ extension StationBillboardView {
     currentlyPlaying.station = station
     stationIsCurrentlyPlaying = true
     Task {
-      if station.stationType == .chart && station.chartNeedsUpdating  {
+      if station.stationType == .chart && station.chartNeedsRefreshing  {
         updateChartStation()
       }
       try await stationSongPlayer.play(station)
@@ -118,7 +126,9 @@ extension StationBillboardView {
     }
   }
   private func updatePlaylistStation() {
-    topTracksStatus.startUpdating(station)
+    //TODO: Update update flow
+//    topTracksStatus.startUpdating(station)
+    station.updatePlaylistStation()
   }
 }
 

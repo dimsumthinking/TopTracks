@@ -1,7 +1,7 @@
 let basicCategories: [RotationCategory] = [.power, .current, .added]
 let standardRotationCategories: [RotationCategory] = [.power, .current, .added, .spice]
 let selectableCategories: [RotationCategory] = [.power, .current, .added, .spice, .notIncluded]
-let updateCategories: [RotationCategory] = [.power, .current, .added, .spice, .notIncluded, .notRated, .archived]
+let updateCategories: [RotationCategory] = [.power, .current, .added, .spice, .notRated, .archived]
 
 enum RotationCategory: String, CaseIterable, Equatable, Hashable, Codable {
   case power

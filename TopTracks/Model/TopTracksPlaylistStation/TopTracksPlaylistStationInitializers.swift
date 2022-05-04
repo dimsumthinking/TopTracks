@@ -7,7 +7,7 @@ extension TopTracksPlaylistStation {
                    curator: String? = nil,
                    context: NSManagedObjectContext = sharedViewContext) {
     self.init(context: context)
-    self.updateAvailable = false
+    self.lastUpdated = Date()
     self.playlistID = playlist.id.rawValue
     self.playlistName = playlist.name
     if let artwork = playlist.artwork {
