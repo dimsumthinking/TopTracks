@@ -6,7 +6,6 @@ struct StationListView {
   @StateObject private var stationList = StationList()
   @EnvironmentObject private var currentlyPlaying: CurrentlyPlaying
   @AppStorage("showDataWarning") private var showDataWarning = true
-  @AppStorage("hasAppSubscription") private var hasAppSubscription = false
 }
 
 extension StationListView: View {
@@ -20,7 +19,7 @@ extension StationListView: View {
       ForEach(stationList.stations) {station in
         StationBillboardView(station: station,
                              deleteAction: stationList.delete(station: currentlyPlaying:),
-                             isLocked: !hasAppSubscription && station.buttonNumber > 3)
+                             isLocked: !topTracksStatus.hasAppSubscription && station.buttonNumber > 3)
       }
 //      .onDelete { indexSet in
 //        if let index = indexSet.first {

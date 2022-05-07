@@ -14,7 +14,7 @@ extension TopTracksStation { // init for City Chart, daily top 100, and top play
                                             context: context)
     self.buttonPosition = Int16(numberOfStations + 1)
     self.favorite = false
-    self.stationName = playlist.name + (chartType == .playlists ? " (Chart)" : "")
+    self.stationName = playlist.name //+ (chartType == .playlists ? " (Chart)" : "")
     self.stationID = UUID()
     self.clockID = RotationClock.hourWithSpice.rawValue
     self.lastRefreshed = Date()

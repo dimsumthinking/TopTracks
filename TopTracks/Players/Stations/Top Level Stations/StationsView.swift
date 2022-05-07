@@ -3,7 +3,6 @@ import SwiftUI
 struct StationsView {
   @State private var isShowingSettings = false
   @EnvironmentObject var topTracksStatus: TopTracksStatus
-  @AppStorage("hasAppSubscription") private var hasAppSubscription = false
   @FetchRequest(entity: TopTracksStation.entity(),
                 sortDescriptors: [NSSortDescriptor(key: "buttonPosition",
                                                    ascending: true)])
@@ -43,7 +42,7 @@ extension StationsView: View {
 
 extension StationsView {
   private func startBuilding() {
-    if stations.count > 2 && hasAppSubscription == false {
+    if stations.count > 2 && topTracksStatus.hasAppSubscription == false {
       isShowingReachedLimitAlert = true
     } else {
       topTracksStatus.startCreating()

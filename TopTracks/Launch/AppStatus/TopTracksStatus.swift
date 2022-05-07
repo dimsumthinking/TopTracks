@@ -2,20 +2,34 @@ import Combine
 import MusicKit
 import Network
 import SwiftUI
+import RevenueCat
+
 
 class TopTracksStatus: ObservableObject {
   @Published private(set) var appActivity: TopTracksAppActivity = .playing
-//  @Published var isCreatingNew = false
   @Published var musicSubscription: MusicSubscription?
   private let pathMonitor = NWPathMonitor()
   @Published private(set) var isNotConnected = true
   @Published private(set) var isExpensive = false
-//  @Published var numberOfStations = 0
   @Published private(set) var stationBeingUpdated: TopTracksStation? = nil
+  private var revenueCatSubscription = RevenueCatSubscription()
+  
   init() {
     configurePathMonitor()
   }
 }
+
+@MainActor
+extension TopTracksStatus {
+  var activeAppSubscription: AppSubscriptionType {
+    revenueCatSubscription.activeAppSubscription
+  }
+  var hasAppSubscription: Bool {
+    revenueCatSubscription.hasAppSubscription
+  }
+
+}
+
 extension TopTracksStatus {
   private func configurePathMonitor() {
     pathMonitor.pathUpdateHandler = {path in

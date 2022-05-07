@@ -8,6 +8,8 @@ struct TopTracksApp {
   private var topTracksStatus = TopTracksStatus()
   private var currentlyPlaying = CurrentlyPlaying()
   @Environment(\.scenePhase) var scenePhase
+
+  
   
 //    let persistenceController = PersistenceController.shared
 }
@@ -35,7 +37,6 @@ extension TopTracksApp: App {
     .onChange(of: scenePhase) {phase in
       if phase == .background {
         songPreviewPlayer.stop()
-//        topTracksStatus.isCreatingNew = false
       }
       currentlyPlaying.hack.toggle()
     }

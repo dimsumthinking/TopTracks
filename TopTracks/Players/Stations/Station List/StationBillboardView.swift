@@ -9,7 +9,6 @@ struct StationBillboardView {
   let isLocked: Bool
   @State var displayLockedAlert = false
   @State var isLoading = false
-  @AppStorage("hasAppSubscription") private var hasAppSubscription = false
   @State var isShowingPreview = false
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
 }

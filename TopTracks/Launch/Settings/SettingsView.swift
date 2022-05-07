@@ -3,7 +3,6 @@ import SwiftUI
 struct SettingsView {
   @Binding var isShowingSettings: Bool
   @AppStorage("showDataWarning") private var showDataWarning = true
-  @AppStorage("hasAppSubscription") private var hasAppSubscription = false
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
 }
 
@@ -16,11 +15,6 @@ extension SettingsView: View {
                  action: goToSettings)
           Toggle("Show Data Usage Warning",
                  isOn: $showDataWarning)
-        }
-        Section("Top Tracks Subscription") {
-          Text("During testing toggle subscription below")
-          Toggle("Subscribe",
-                 isOn: $hasAppSubscription)
         }
       }
       .navigationBarTitleDisplayMode(.inline)
