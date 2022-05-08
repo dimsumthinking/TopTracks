@@ -90,6 +90,9 @@ extension StationBillboardView: View {
       ExistingStationPreview(station: station,
                              isShowingPreview: $isShowingPreview)
     }
+    .sheet(isPresented: $isShowingAppSubscriptions){
+      AppSubscriptionView(isShowingAppSubscriptions: $isShowingAppSubscriptions)
+    }
     .alert("You need an active subscription to unlock more than three stations.",
            isPresented: $displayLockedAlert){
       Button("Subscriptions"){

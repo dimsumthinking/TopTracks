@@ -60,7 +60,7 @@ extension AppSubscriptionType {
     case .monthly:
       return "Upgrade to the yearly subscription to get two months each year for free."
     case .yearly:
-      return ""
+      return "No upgrades available."
     }
   }
   

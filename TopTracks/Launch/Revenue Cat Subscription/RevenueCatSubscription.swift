@@ -9,7 +9,7 @@ class RevenueCatSubscription: ObservableObject {
     Purchases.logLevel = .debug
     Purchases.configure(withAPIKey: revenueCatAPIKey)
     Task {
-      await customerInfo()
+      await refreshCustomerInfo()
       currentOffering = try? await Purchases.shared
         .offerings()
         .current
@@ -63,16 +63,24 @@ extension RevenueCatSubscription {
   func purchaseSubscription(for appSubscriptionType: AppSubscriptionType) {
     if let package = package(for: appSubscriptionType) {
       Purchases.shared.purchase(package: package) { (transaction, customerInfo, error, userCancelled) in
-//        if customerInfo.entitlements["your_entitlement_id"]?.isActive == true {
-//          // Unlock that great "pro" content
-//        }
+        Task {
+          await self.refreshCustomerInfo()
+        }
+      }
+    }
+  }
+  
+  func restoreSubscriptions() {
+    Purchases.shared.restorePurchases { customerInfo, error in
+      Task {
+        await self.refreshCustomerInfo()
       }
     }
   }
 }
 
 extension RevenueCatSubscription {
-  private func customerInfo() async {
+  func refreshCustomerInfo() async {
     self.customerInfo = try? await Purchases.shared.customerInfo()
   }
   

@@ -36,6 +36,12 @@ extension TopTracksStatus {
   func purchase(subscription appSubscriptionType: AppSubscriptionType) {
     revenueCatSubscription.purchaseSubscription(for: appSubscriptionType)
   }
+  func refreshSubscriptions() async {
+    await revenueCatSubscription.refreshCustomerInfo()
+  }
+  func restorePurchases() {
+    revenueCatSubscription.restoreSubscriptions()
+  }
 }
 
 extension TopTracksStatus {

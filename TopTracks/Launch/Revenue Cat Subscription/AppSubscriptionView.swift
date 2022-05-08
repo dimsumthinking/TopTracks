@@ -52,19 +52,42 @@ extension AppSubscriptionView: View {
           .buttonStyle(.borderedProminent)
           .padding()
         }
+      }
+
+      if topTracksStatus.activeAppSubscriptionType == .none {
         Text("Free one week trial for first time subscribers")
           .font(.caption)
           .padding()
+        
+        Button("Restore Purchases",
+               action: {
+          topTracksStatus.restorePurchases()
+          isShowingAppSubscriptions = false
+        })
+        .padding()
+      }
+      if let expirationDate = topTracksStatus.activeAppExpirationDate, topTracksStatus.activeAppSubscriptionType == .monthly {
+        Group {
+        Text("Your yearly subscription will take effect when the monthly subscription expires on ")
+        + Text(expirationDate, style: .date)
+        }
+        .font(.caption)
+        .padding()
+        
+      }
         Button("Dismiss",
                action: {isShowingAppSubscriptions = false})
       }
-    }
+    .padding()
+    
   }
 }
 
 extension AppSubscriptionView {
   private func purchase(_ applicationSubscriptionType: AppSubscriptionType) {
     topTracksStatus.purchase(subscription: applicationSubscriptionType)
+    Task {await topTracksStatus.refreshSubscriptions()}
+    isShowingAppSubscriptions = false
   }
 }
 

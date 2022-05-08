@@ -18,7 +18,7 @@ extension SettingsView: View {
                  isOn: $showDataWarning)
         }
         Section("Subscription Info") {
-          Text("\(topTracksStatus.activeAppSubscriptionType.description) subscription")
+          Text("\(topTracksStatus.activeAppSubscriptionType.description) subscription active")
           if let expirationDate = topTracksStatus.activeAppExpirationDate,
               let expirationDateAsString = dateFormatter.string(from: expirationDate),
             topTracksStatus.activeAppSubscriptionType != .none {
