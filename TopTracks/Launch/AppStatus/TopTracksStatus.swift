@@ -21,13 +21,21 @@ class TopTracksStatus: ObservableObject {
 
 @MainActor
 extension TopTracksStatus {
-  var activeAppSubscription: AppSubscriptionType {
-    revenueCatSubscription.activeAppSubscription
+  var activeAppSubscriptionType: AppSubscriptionType {
+    revenueCatSubscription.activeAppSubscriptionType
   }
   var hasAppSubscription: Bool {
     revenueCatSubscription.hasAppSubscription
   }
-
+  var activeAppExpirationDate: Date? {
+    revenueCatSubscription.activeAppExpirationDate
+  }
+  func appPrice(for type: AppSubscriptionType) -> String {
+    revenueCatSubscription.appPrice(for: type)
+  }
+  func purchase(subscription appSubscriptionType: AppSubscriptionType) {
+    revenueCatSubscription.purchaseSubscription(for: appSubscriptionType)
+  }
 }
 
 extension TopTracksStatus {

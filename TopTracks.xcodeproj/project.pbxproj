@@ -115,9 +115,7 @@
 		62B850A9282546360042053B /* RevenueCatSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B850A8282546360042053B /* RevenueCatSubscription.swift */; };
 		62B850AB2825C4850042053B /* AppSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B850AA2825C4850042053B /* AppSubscriptionView.swift */; };
 		62B850AD2825C5260042053B /* AppSubscriptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B850AC2825C5260042053B /* AppSubscriptionButton.swift */; };
-		62B850AF2825DADC0042053B /* ActiveAppSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B850AE2825DADC0042053B /* ActiveAppSubscription.swift */; };
 		62B850B12826A8370042053B /* AppSubscriptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B850B02826A8370042053B /* AppSubscriptionType.swift */; };
-		62B850B32826BC490042053B /* AppSubscriptionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B850B22826BC490042053B /* AppSubscriptionInfoView.swift */; };
 		62BC8213280AD62F00685370 /* Popup10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BC8212280AD62F00685370 /* Popup10.swift */; };
 		62BC8215280ADC1900685370 /* Popup25.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BC8214280ADC1900685370 /* Popup25.swift */; };
 		62BFC76B27F5EB700046A47B /* GenresListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BFC76A27F5EB700046A47B /* GenresListingView.swift */; };
@@ -257,9 +255,7 @@
 		62B850A8282546360042053B /* RevenueCatSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueCatSubscription.swift; sourceTree = "<group>"; };
 		62B850AA2825C4850042053B /* AppSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSubscriptionView.swift; sourceTree = "<group>"; };
 		62B850AC2825C5260042053B /* AppSubscriptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSubscriptionButton.swift; sourceTree = "<group>"; };
-		62B850AE2825DADC0042053B /* ActiveAppSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveAppSubscription.swift; sourceTree = "<group>"; };
 		62B850B02826A8370042053B /* AppSubscriptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSubscriptionType.swift; sourceTree = "<group>"; };
-		62B850B22826BC490042053B /* AppSubscriptionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSubscriptionInfoView.swift; sourceTree = "<group>"; };
 		62BC8212280AD62F00685370 /* Popup10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup10.swift; sourceTree = "<group>"; };
 		62BC8214280ADC1900685370 /* Popup25.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup25.swift; sourceTree = "<group>"; };
 		62BFC76A27F5EB700046A47B /* GenresListingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresListingView.swift; sourceTree = "<group>"; };
@@ -778,9 +774,7 @@
 				62B850A8282546360042053B /* RevenueCatSubscription.swift */,
 				62B850AA2825C4850042053B /* AppSubscriptionView.swift */,
 				62B850AC2825C5260042053B /* AppSubscriptionButton.swift */,
-				62B850AE2825DADC0042053B /* ActiveAppSubscription.swift */,
 				62B850B02826A8370042053B /* AppSubscriptionType.swift */,
-				62B850B22826BC490042053B /* AppSubscriptionInfoView.swift */,
 			);
 			path = "Revenue Cat Subscription";
 			sourceTree = "<group>";
@@ -974,7 +968,6 @@
 				6245CC5A281CBDF70073A32E /* TopTracksStationSize.swift in Sources */,
 				62A5B69327AEB32D0024D2ED /* AppleMusicSubscriptionView.swift in Sources */,
 				6279B8A92804CD560044907C /* AppleMusicStationCategory.swift in Sources */,
-				62B850B32826BC490042053B /* AppSubscriptionInfoView.swift in Sources */,
 				629603B327FC70560024CD79 /* StationCreationForPlaylistChart.swift in Sources */,
 				625A6C24276D3DFD003A05E7 /* Hour.swift in Sources */,
 				629603A227FBCD600024CD79 /* TopTracksPlaylistStation+CoreDataProperties.swift in Sources */,
@@ -1019,7 +1012,6 @@
 				629603BB27FD20490024CD79 /* StationCreationForMusicTestSongs.swift in Sources */,
 				62BC8215280ADC1900685370 /* Popup25.swift in Sources */,
 				625A6C20276D352E003A05E7 /* ClockSegmentView.swift in Sources */,
-				62B850AF2825DADC0042053B /* ActiveAppSubscription.swift in Sources */,
 				6269EBD127866E68003E4468 /* TopTracksStationInitializers.swift in Sources */,
 				6269EBF82789EB43003E4468 /* TopTracksSong+CoreDataProperties.swift in Sources */,
 				62D64D102824B4F90012A36D /* RevenueCatConstants.swift in Sources */,

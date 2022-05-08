@@ -10,6 +10,7 @@ struct StationBillboardView {
   @State var displayLockedAlert = false
   @State var isLoading = false
   @State var isShowingPreview = false
+  @State var isShowingAppSubscriptions = false
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
 }
 
@@ -89,9 +90,13 @@ extension StationBillboardView: View {
       ExistingStationPreview(station: station,
                              isShowingPreview: $isShowingPreview)
     }
-    .alert("You need to re-subscribe \nto unlock more than\n three stations. \n\nTesters - toggle the subscribe switch in settings",
+    .alert("You need an active subscription to unlock more than three stations.",
            isPresented: $displayLockedAlert){
-      Button("OK", action: {displayLockedAlert = false})
+      Button("Subscriptions"){
+        displayLockedAlert = false
+        isShowingAppSubscriptions = true
+      }
+      Button("Dismiss", action: {displayLockedAlert = false})
     }
   }
 }

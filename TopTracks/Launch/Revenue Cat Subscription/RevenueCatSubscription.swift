@@ -3,12 +3,16 @@ import Foundation
 
 class RevenueCatSubscription: ObservableObject {
   @Published private(set) var customerInfo: CustomerInfo?
+  private var currentOffering: Offering?
   
   init() {
     Purchases.logLevel = .debug
     Purchases.configure(withAPIKey: revenueCatAPIKey)
     Task {
       await customerInfo()
+      currentOffering = try? await Purchases.shared
+        .offerings()
+        .current
       await listenForCustomerInfo()
     }
   }
@@ -43,14 +47,27 @@ extension RevenueCatSubscription {
     activeEntitlement?.periodType == .trial
   }
   
-  func appPrice(for productIdentifier: String?) async  -> String? {
-    guard let productIdentifier = productIdentifier,
-          let package
-            = try? await Purchases.shared
-      .offerings()
-      .current?
-      .package(identifier: productIdentifier) else {return nil}
+  func package(for appSubscriptionType: AppSubscriptionType) -> Package? {
+    appSubscriptionType.package(for: currentOffering)
+  }
+  
+  
+  
+  func appPrice(for appSubscriptionType: AppSubscriptionType)  -> String {
+    guard let package = package(for: appSubscriptionType)
+    else {return appSubscriptionType.description}
     return package.localizedPriceString
+    + " / " + appSubscriptionType.subscriptionLength
+  }
+  
+  func purchaseSubscription(for appSubscriptionType: AppSubscriptionType) {
+    if let package = package(for: appSubscriptionType) {
+      Purchases.shared.purchase(package: package) { (transaction, customerInfo, error, userCancelled) in
+//        if customerInfo.entitlements["your_entitlement_id"]?.isActive == true {
+//          // Unlock that great "pro" content
+//        }
+      }
+    }
   }
 }
 

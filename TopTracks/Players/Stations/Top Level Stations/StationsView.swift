@@ -2,6 +2,7 @@ import SwiftUI
 
 struct StationsView {
   @State private var isShowingSettings = false
+  @State private var isShowingAppSubscriptions = false
   @EnvironmentObject var topTracksStatus: TopTracksStatus
   @FetchRequest(entity: TopTracksStation.entity(),
                 sortDescriptors: [NSSortDescriptor(key: "buttonPosition",
@@ -16,11 +17,22 @@ extension StationsView: View {
       VStack {
         StationListView()
           .sheet(isPresented: $isShowingSettings){
-            SettingsView(isShowingSettings: $isShowingSettings)
+            SettingsView(isShowingSettings: $isShowingSettings,
+            isShowingAppSubscriptions: $isShowingAppSubscriptions)
           }
-          .alert("You need to subscribe\nto create more than\nthree stations\n\nTesters - you can toggle\nthis in Settings",
+          .sheet(isPresented: $isShowingAppSubscriptions){
+            AppSubscriptionView(isShowingAppSubscriptions: $isShowingAppSubscriptions)
+          }
+          .alert("You need an active subscription to create more than three stations",
                  isPresented: $isShowingReachedLimitAlert){
-            Button("OK"){isShowingReachedLimitAlert = false}
+            VStack {
+              Button("Subscriptions"){
+                isShowingReachedLimitAlert = false
+                isShowingAppSubscriptions = true
+              }
+              Button("Dismiss") 
+              {isShowingReachedLimitAlert = false}
+            }
           }
           .toolbar{
             ToolbarItem(placement: .navigationBarLeading){
