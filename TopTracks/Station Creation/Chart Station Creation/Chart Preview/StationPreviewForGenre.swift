@@ -19,6 +19,7 @@ extension StationPreviewForGenre: View {
       }
     }
     .navigationTitle("Top " + genre.name)
+    .navigationBarBackButtonHidden(true)
     .modifier(NewStationCancellation())
   }
 }

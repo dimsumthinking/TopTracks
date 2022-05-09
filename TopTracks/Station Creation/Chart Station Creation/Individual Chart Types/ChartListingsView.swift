@@ -12,8 +12,12 @@ extension ChartListingsView: View {
     List {
       ForEach(filteredPlaylists){playlist in
         NavigationLink {
+          if chartType == .playlists {
+            MusicTestView(for: playlist)
+          } else {
           StationPreviewForPlaylist(chartType: chartType,
                                     playlist: playlist)
+          }
         } label: {
           HStack {
 //            if let artwork = playlist.artwork {

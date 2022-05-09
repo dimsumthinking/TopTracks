@@ -21,6 +21,8 @@ let stationListCellWidth = min(UIScreen.main.bounds.width * 1 / 8, 80)
 let miniArtworkImageSize = min(UIScreen.main.bounds.width * 1 / 8, 80)
 let fullArtworkImageSize = min(UIScreen.main.bounds.width * 1 / 2, 200)
 
+let musicTestArtworkImageSize = min(UIScreen.main.bounds.width * 1/3, 120)
+
 let backButtonArtworkImageSize = min(UIScreen.main.bounds.width * 1 / 10, 40)
 
 let fullPlayerSwipe = min(UIScreen.main.bounds.width * 1 / 4, 80)

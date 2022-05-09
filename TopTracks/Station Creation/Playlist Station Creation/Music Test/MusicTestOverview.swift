@@ -1,41 +1,64 @@
 import SwiftUI
+import MusicKit
 
 struct MusicTestOverview {
-  @Binding var testIsRunning: Bool
-  let action: () -> Void
+  @Binding var isSelectingSongs: Bool
+  let fillAutomatically: () -> Void
+  let runTest: () -> Void
   let count: Int
+  let artwork: Artwork?
 }
 
 extension MusicTestOverview: View {
   var body: some View {
     VStack {
+      if let artwork = artwork {
+        Spacer()
+        ArtworkImage(artwork, width: fullArtworkImageSize, height: fullArtworkImageSize)
+      }
+      Spacer()
       if count > 0 {
-      Text("Quickly rank the songs in \n this Apple Music Playlist.")
-        .multilineTextAlignment(.center)
+        HStack {
+          Image(systemName: "wand.and.stars")
+            .font(.largeTitle)
+            .padding(.trailing)
+          Text("Automatically create a station from this Apple Music Playlist")
+          Spacer()
+        }
         .padding()
-        .padding(.horizontal)
+        .foregroundColor(.accentColor)
+        .border(Color.accentColor)
+        .padding()
+        .contentShape(Rectangle())
+        .onTapGesture {
+          isSelectingSongs = true
+          fillAutomatically()
+        }
+        HStack {
+          Image(systemName: "tuningfork")
+            .font(.largeTitle)
+            .padding(.trailing)
+          Text("Begin a Music Test where you can quickly rank the songs in this Apple Music Playlist.")
+          Spacer()
+        }
+        .padding()
+        .foregroundColor(.accentColor)
+        .border(Color.accentColor)
+        .padding()
+        .contentShape(Rectangle())
+        .onTapGesture {
+          isSelectingSongs = true
+          runTest()
+        }
       } else {
         Text("Loading...")
           .foregroundColor(.secondary)
           .font(.largeTitle)
       }
-      Button("Start the Music Test"){
-        testIsRunning = true
-        action()
-      }
-      .disabled(count <= 0)
-      .padding()
-      .buttonStyle(.borderedProminent)
-//      if count > 50 {
-//        Text("Once you've chosen 40 songs \n we'll create a station.")
-//          .multilineTextAlignment(.center)
-//          .padding()
-//          .padding(.horizontal)
-//      }
+          Spacer()
     }
   }
 }
-// \(numberOfSongs) 
 
 extension MusicTestOverview {
   private var numberOfSongs: String {
@@ -43,10 +66,10 @@ extension MusicTestOverview {
   }
 }
 
-struct MusicTestOverview_Previews: PreviewProvider {
-  static var previews: some View {
-    MusicTestOverview(testIsRunning: .constant(false),
-                      action: {},
-                      count: 5)
-  }
-}
+//struct MusicTestOverview_Previews: PreviewProvider {
+//  static var previews: some View {
+//    MusicTestOverview(testIsRunning: .constant(false),
+//                      action: {},
+//                      count: 5)
+//  }
+//}

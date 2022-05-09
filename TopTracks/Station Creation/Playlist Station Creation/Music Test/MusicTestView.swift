@@ -4,7 +4,7 @@ import MusicKit
 struct MusicTestView {
   private let playlist: Playlist
   @StateObject private var songs: MusicTestSongs
-  @State private var testIsRunning = false
+  @State private var isSelectingSongs = false
   @State private var index = 0
   @State private var moveOn = false
   @FetchRequest(entity: TopTracksStation.entity(),
@@ -33,11 +33,21 @@ extension MusicTestView: View {
   var body: some View {
     //    ScrollView {
     VStack {
-      if testIsRunning {
+      if isSelectingSongs {
         VStack {
           SongArtAndInfoView(song: songs[index].song)
+          HStack {
+            Spacer()
+          Button(action: finishPlaylist) {
+            Image(systemName: "wand.and.stars")
+              .font(.title)
+              .foregroundColor(.accentColor)
+          }
+          .padding(.trailing)
+          }
           MusicTestSongRatingView(category: $songs[index].rotationCategory,
                                   next: nextSong)
+            
           NavigationLink(isActive: $moveOn) {
             StationPreviewForMusicTestSongs(playlist: playlist,
                                             musicTestSongs: songs)
@@ -77,9 +87,11 @@ extension MusicTestView: View {
           Button("You've already hand-crafted\n\(playlist.name) \n Tap to listen now",
                  action: playStation)
         } else {
-          MusicTestOverview(testIsRunning: $testIsRunning,
-                            action: playSong,
-                            count: songs.testResults.count)
+          MusicTestOverview(isSelectingSongs: $isSelectingSongs,
+                            fillAutomatically: finishPlaylist,
+                            runTest: playSong,
+                            count: songs.testResults.count,
+                            artwork: playlist.artwork)
         }
       }
     }
@@ -159,8 +171,7 @@ extension MusicTestView {
   }
   
   private func finishPlaylist() {
-    let limit = index < 25 ? 25 : 40
-    while songs.numberOfRatedSongs < limit
+    while songs.numberOfRatedSongs < min(songs.numberOfPotentialSongs, 40)
             && songs.testResults.indices.contains(index + 1) {
       index += 1
       songs[index].rotationCategory = standardRotationCategories.randomElement() ?? .spice

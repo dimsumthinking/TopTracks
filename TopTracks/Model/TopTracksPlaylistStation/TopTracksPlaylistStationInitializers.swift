@@ -14,7 +14,5 @@ extension TopTracksPlaylistStation {
       self.artworkAsData = try? PropertyListEncoder().encode(artwork)
     }
     self.station = station
-    self.archive = Set<TopTracksPlaylistStationArchive>()
-
   }
 }

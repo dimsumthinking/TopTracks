@@ -58,8 +58,11 @@ extension MusicTestSongs {
 
 extension MusicTestSongs {
   var numberOfPotentialSongs: Int {
-    testResults.filter{standardRotationCategories.contains($0.rotationCategory)}.count
+    testResults.filter{updateCategories.contains($0.rotationCategory)}.count
   }
+  //  var numberOfPotentialSongs: Int {
+//    testResults.filter{standardRotationCategories.contains($0.rotationCategory)}.count
+//  }
   var numberOfCategories: Int {
     numberOfPotentialSongs < 36 ? 3 : 4
   }
