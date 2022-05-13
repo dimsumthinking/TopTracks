@@ -22,7 +22,7 @@ extension StationPreviewForPlaylist: View {
     }
     .navigationTitle(playlistName)
     .navigationBarBackButtonHidden(true)
-    .modifier(NewStationCancellation())
+//    .modifier(NewStationCancellation())
   }
 }
 

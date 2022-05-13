@@ -10,6 +10,7 @@ struct FullPlayer {
   let retrievedArtwork: Artwork?
   @Binding var imageName: String?
   @Binding var isShowingFullPlayer: Bool
+  @State private var isShowingShareSheet = false
 }
 
 extension FullPlayer: View {
@@ -75,7 +76,18 @@ extension FullPlayer: View {
       )
       if let currentSong = currentSong {
         Spacer()
+        HStack(alignment: .top) {
         SongScrubberView(currentSong: currentSong)
+          if let currentStation = currentlyPlaying.station,
+             currentStation.canBeShared {
+            Button(action: {
+              isShowingShareSheet = true
+            }) {
+              Image(systemName: "square.and.arrow.up")
+                .font(.title)
+            }
+          }
+        }
       }
       Spacer()
       
@@ -128,14 +140,21 @@ extension FullPlayer: View {
         .accentColor(.secondary)
         .padding(.horizontal)
       Spacer()
-      Button("Open in Apple Music") {
-        Task {
-          await openInAppleMusic()
-        }
-      }
+//      Button("Open in Apple Music") {
+//        Task {
+//          await openInAppleMusic()
+//        }
+//      }
+    }
+    .sheet(isPresented: $isShowingShareSheet) {
+      if let song = currentSong,
+         let station = currentlyPlaying.station {
+        TopTracksShareSheet(song: song, station: station)
+      } 
     }
   }
 }
+
 
 extension FullPlayer {
   private func appleMusicURL() async -> URL? {

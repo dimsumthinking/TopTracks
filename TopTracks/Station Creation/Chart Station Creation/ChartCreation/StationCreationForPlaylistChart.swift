@@ -20,13 +20,19 @@ extension StationCreationForPlaylistChart: View {
     if isSubscribed {
       Button("Already subscribed to \n \(playlist.name) \n Tap to listen now",
              action: playStation)
-      .buttonStyle(.borderedProminent)
       .padding(.vertical)
+      Button("Dismiss",// \n \(playlist.name)",
+             action: topTracksStatus.stopCreating)
+      .padding()
     } else {
-      Button("Add station \n \(playlist.name)",
-             action: createStation)
-      .buttonStyle(.borderedProminent)
-      .padding(.vertical)
+      HStack {
+        Button("Add station",// \n \(playlist.name)",
+               action: createStation)
+        .padding()
+        Button("Dismiss",// \n \(playlist.name)",
+               action: topTracksStatus.stopCreating)
+        .padding()
+      }
     }
   }
 }
@@ -41,7 +47,7 @@ extension StationCreationForPlaylistChart {
 
 extension StationCreationForPlaylistChart {
   func createStation() {
-    topTracksStatus.endCreating()
+    topTracksStatus.stopCreating()
     StationCreation.createStation(chartType: chartType,
                                   stations: stations,
                                   playlist: playlist,
@@ -52,7 +58,7 @@ extension StationCreationForPlaylistChart {
 
 extension StationCreationForPlaylistChart {
   private func playStation() {
-    topTracksStatus.endCreating()
+    topTracksStatus.stopCreating()
     StationCreationCheckIfExists.playStation(with: playlist.id,
                                              in: stations,
                                              chartType: chartType,

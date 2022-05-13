@@ -28,13 +28,20 @@ extension StationCreationForAppleMusicStation: View {
       if isSubscribed {
         Button("Already subscribed to \n \(station.name)\n Tap to listen now",
                action: playStation)
-        .buttonStyle(.borderedProminent)
+        .padding(.vertical)
+        Button("Dismiss",//"Subscribe to \n \(station.name)",
+               action: topTracksStatus.stopCreating)
         .padding(.vertical)
       } else {
-        Button("Subscribe to \n \(station.name)",
-               action: createStation)
-        .buttonStyle(.borderedProminent)
-        .padding(.vertical)
+        HStack {
+          Button("Add Station",//"Subscribe to \n \(station.name)",
+                 action: createStation)
+          .padding(.vertical)
+          
+          Button("Dismiss",//"Subscribe to \n \(station.name)",
+                 action: topTracksStatus.stopCreating)
+          .padding(.vertical)
+        }
       }
     }
   }
@@ -54,7 +61,7 @@ extension StationCreationForAppleMusicStation {
                              numberOfStations: stations.count,
                              context: context)
     do {
-      topTracksStatus.endCreating()
+      topTracksStatus.stopCreating()
       try context.save()
       print("tried to save \(station.name)")
     } catch {
@@ -77,7 +84,7 @@ extension StationCreationForAppleMusicStation {
 //}
 extension StationCreationForAppleMusicStation {
   private func playStation() {
-    topTracksStatus.endCreating()
+    topTracksStatus.stopCreating()
     StationCreationCheckIfExists.playStation(with: station.id,
                                              in: stations,
                                              stationType: .station ,

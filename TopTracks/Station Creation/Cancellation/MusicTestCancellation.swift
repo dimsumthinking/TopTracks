@@ -11,18 +11,14 @@ extension MusicTestCancellation: ViewModifier {
     content
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button("Cancel",
+          Button("Dismiss",
                  role:.destructive,
                  action: showCancelAlert)
         }
       }
       .alert("Stop creating a new station?",
              isPresented: $showCancel){
-        Button("No, keep going",
-               action: hideCancelAlert)
-        Button("Finish automatically",
-               action: finishAutomatically )
-        Button("Yes",
+        Button("Stop and discard work",
                role: .destructive,
                action: stopBuilding)
       }
@@ -41,7 +37,7 @@ extension MusicTestCancellation {
 extension MusicTestCancellation {
   private func stopBuilding() {
     songPreviewPlayer.audioPlayer = nil
-    topTracksStatus.endCreating()
+    topTracksStatus.stopCreating()
   }
   private func finishAutomatically() {
     hideCancelAlert()

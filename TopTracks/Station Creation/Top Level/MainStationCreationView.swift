@@ -11,17 +11,21 @@ extension MainStationCreationView: View {
         NavigationLink {
          ChartTypeSelectionView()
         } label: {
-          StationCreationOptionView(stationType: .chart)
+          StationCreationOptionView(stationTypeImageName: appleMusicChartIcon,
+                                    stationTypeBlurb: appleMusicChartBlurb)
         }
         NavigationLink {
          AppleMusicCategoryChooserView()
         } label : {
-          StationCreationOptionView(stationType: .playlist)
+          StationCreationOptionView(stationTypeImageName: appleMusicPlaylistIcon,
+                                    stationTypeBlurb: appleMusicPlaylistBlurb)
+
         }
         NavigationLink {
          AppleMusicStationChooserView()
         } label : {
-          StationCreationOptionView(stationType: .station)
+          StationCreationOptionView(stationTypeImageName: appleMusicStationIcon,
+                                    stationTypeBlurb: appleMusicStationBlurb)
         }
       }
       .navigationTitle("Station Type")

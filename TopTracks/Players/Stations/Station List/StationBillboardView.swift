@@ -45,7 +45,7 @@ extension StationBillboardView: View {
               Image(systemName: "magnifyingglass")
             }
             .tint(.indigo)
-            if station.stationType == .chart {
+            if station.stationType.updatesDaily {
               Button(action: updateChartStation) {
                 Image(systemName: "arrow.triangle.2.circlepath")
               }
@@ -114,7 +114,7 @@ extension StationBillboardView {
     currentlyPlaying.station = station
     stationIsCurrentlyPlaying = true
     Task {
-      if station.stationType == .chart && station.chartNeedsRefreshing  {
+      if station.stationType.updatesDaily && station.chartNeedsRefreshing  {
         updateChartStation()
       }
       try await stationSongPlayer.play(station)

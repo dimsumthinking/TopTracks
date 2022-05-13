@@ -19,6 +19,7 @@ extension TopTracksStation {
   @NSManaged public var chartInfo: TopTracksChartStation?
   @NSManaged public var playlistInfo: TopTracksPlaylistStation?
   @NSManaged public var appleStationInfo: TopTracksStationStation?
+  @NSManaged public var url: URL?
 }
 
 
@@ -60,11 +61,11 @@ extension TopTracksStation {
     stationID.description
   }
 }
-
+//TODO: Not wild about the force unwrap
 extension TopTracksStation {
   var stationType: TopTracksStationType {
     if chartType != nil {
-      return .chart
+      return .chart(chartType: chartType!)
     } else if playlistInfo != nil {
       return .playlist
     } else {
@@ -121,7 +122,9 @@ extension TopTracksStation {
   var lastUpdatedOrNow: Date {
     playlistInfo?.lastUpdated ?? Date()
   }
-
+  var canBeShared: Bool {
+    url != nil
+  }
 }
 
 

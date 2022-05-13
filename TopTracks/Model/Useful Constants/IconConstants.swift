@@ -1,7 +1,9 @@
 let appleMusicChartIcon = "list.bullet.rectangle"
+let appleMusicChartBlurb = "Updated daily from selected\nApple Music Chart"
 let appleMusicPlaylistIcon = "rectangle.and.hand.point.up.left.filled"
-
+let appleMusicPlaylistBlurb = "Personal choices from curated\nApple Music Playlist" //"Hand-crafted from curated\nApple Music Playlist"
 let appleMusicStationIcon = "antenna.radiowaves.left.and.right"
+let appleMusicStationBlurb = "Delivered on demand from an\nApple Music Station"
 
 let genreIcon = "music.note.list"
 let top100Icon = "map"

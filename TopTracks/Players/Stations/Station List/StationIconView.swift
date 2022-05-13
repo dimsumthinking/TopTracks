@@ -27,7 +27,7 @@ extension StationIconView {
       if let artwork = station.playlistInfo?.artwork {
         ArtworkImage(artwork, width: stationListCellWidth)
       } else {
-        Image(systemName: TopTracksStationType.playlist.imageName)
+        Image(systemName: appleMusicPlaylistIcon)
           .resizable()
           .scaledToFit()
           .scaleEffect(0.5)
@@ -44,7 +44,7 @@ extension StationIconView {
         .scaleEffect(0.5)
         .foregroundColor(chartType.imageColor)
     } else {
-      return Image(systemName: TopTracksStationType.chart.imageName)
+      return Image(systemName: appleMusicChartIcon)
         .resizable()
         .scaledToFit()
         .scaleEffect(0.5)
@@ -53,7 +53,7 @@ extension StationIconView {
   }
   
   private var stationIcon: some View {
-    return Image(systemName: TopTracksStationType.station.imageName)
+    return Image(systemName: appleMusicStationIcon)
       .resizable()
       .scaledToFit()
       .scaleEffect(0.5)

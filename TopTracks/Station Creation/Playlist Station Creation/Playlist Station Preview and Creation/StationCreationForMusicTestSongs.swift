@@ -15,10 +15,14 @@ struct StationCreationForMusicTestSongs {
 
 extension StationCreationForMusicTestSongs: View {
   var body: some View {
-    Button("Add station \n  \(playlist.name) + \(decorationForStationName)",
+    HStack {
+    Button("Add station",// \n  \(playlist.name) + \(decorationForStationName)",
            action: createStation)
-    .buttonStyle(.borderedProminent)
-    .padding(.vertical)
+    .padding()
+      Button("Dismiss",
+             action: topTracksStatus.stopCreating)
+      .padding()
+    }
   }
 }
 
@@ -32,7 +36,7 @@ extension StationCreationForMusicTestSongs {
                              clock: RotationClock.hourWithSpice,
                              context: context)
     do {
-      topTracksStatus.endCreating()
+      topTracksStatus.stopCreating()
       try context.save()
       print("tried to save \(playlist.name)")
     } catch {

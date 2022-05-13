@@ -11,7 +11,6 @@ class TopTracksStatus: ObservableObject {
   private let pathMonitor = NWPathMonitor()
   @Published private(set) var isNotConnected = true
   @Published private(set) var isExpensive = false
-  @Published private(set) var stationBeingUpdated: TopTracksStation? = nil
   private var revenueCatSubscription = RevenueCatSubscription()
   
   init() {
@@ -61,15 +60,16 @@ extension TopTracksStatus {
   func startCreating() {
     appActivity = .creating
   }
-  func endCreating() {
+  func stopCreating() {
     appActivity = .playing
   }
-  func startUpdating(_ station: TopTracksStation) {
-    appActivity = .updating
-    stationBeingUpdated = station
+  func startImporting(url: URL?) {
+    appActivity = .importing(url: url)
   }
-  func stopUpdating() {
+  func stopImporting() {
     appActivity = .playing
-    stationBeingUpdated = nil
+  }
+  var isImporting: Bool {
+    appActivity != .importing(url: URL(string: ""))
   }
 }

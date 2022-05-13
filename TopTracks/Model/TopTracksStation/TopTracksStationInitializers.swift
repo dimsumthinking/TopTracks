@@ -14,13 +14,15 @@ extension TopTracksStation { // init for City Chart, daily top 100, and top play
                                             context: context)
     self.buttonPosition = Int16(numberOfStations + 1)
     self.favorite = false
-    self.stationName = playlist.name //+ (chartType == .playlists ? " (Chart)" : "")
+    self.stationName = playlist.name
     self.stationID = UUID()
     self.clockID = RotationClock.hourWithSpice.rawValue
     self.lastRefreshed = Date()
     self.lastPlayed = nil
     self.stacks = topTracksStacks(songsInCategories: songsInCategories,
                                   context: context)
+    self.url = createURL(from: .chart(chartType: chartType),
+                         with: playlist.id)
   }
 }
 
@@ -44,6 +46,8 @@ extension TopTracksStation { // init for Genre Chart
     self.lastPlayed = nil
     self.stacks = topTracksStacks(songsInCategories: songsInCategories,
                                   context: context)
+    self.url = createURL(from: .chart(chartType: .topSongs),
+                         with: genre.id)
   }
 }
 
@@ -71,10 +75,12 @@ extension TopTracksStation { // init for hand-selected from playlist
     self.lastRefreshed = Date()
     self.lastPlayed = nil
     self.clockID = clock.rawValue
+    self.url = createURL(from: .playlist,
+                         with: playlist.id)
   }
 }
 
-extension TopTracksStation { // init for 
+extension TopTracksStation { // init for station station
   convenience init(station: Station,
                    numberOfStations: Int,
                    context: NSManagedObjectContext) {
@@ -92,6 +98,8 @@ extension TopTracksStation { // init for
     self.lastRefreshed = Date()
     self.lastPlayed = nil
     self.clockID = RotationClock.hourWithSpice.rawValue
+    self.url = createURL(from: .station,
+                         with: station.id)
   }
 }
 
@@ -112,5 +120,16 @@ extension TopTracksStation {
       print("Stack", category, "\n \t", songsInCategories.count.description)
     }
     return topTracksStacks
+  }
+}
+
+extension TopTracksStation {
+  func createURL(from stationType: TopTracksStationType,
+                 with musicItemID: MusicItemID) -> URL? {
+    var components = URLComponents()
+    components.scheme = "toptracks"
+    components.host = stationType.host
+    components.query = "id=\(musicItemID.rawValue)"
+    return components.url
   }
 }

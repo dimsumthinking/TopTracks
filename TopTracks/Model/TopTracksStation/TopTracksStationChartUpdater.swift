@@ -3,7 +3,7 @@ import CoreData
 
 extension TopTracksStation {
   var chartNeedsRefreshing: Bool {
-    guard stationType == .chart else {return false}
+    guard stationType.updatesDaily else {return false}
     return (Date().timeIntervalSince(lastRefreshed)) > 12 * 60 * 60 // check for update twice a day
   }
   

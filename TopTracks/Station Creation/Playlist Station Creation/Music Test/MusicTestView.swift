@@ -107,14 +107,16 @@ extension MusicTestView: View {
       }.compactMap(\.playlistInfo).map(\.playlistID)
     }
     .sheet(isPresented: $show10Alert){
-      Popup10(next: nextSong,
-              finish: finishPlaylist,
-              show10Alert: $show10Alert)
+      KeepGoingSheet(number: 10,
+                     next: nextSong,
+                     finish: finishPlaylist,
+                     showAlert: $show10Alert)
     }
     .sheet(isPresented: $show25Alert){
-      Popup25(next: nextSong,
-              show25Alert: $show25Alert,
-              moveOn: $moveOn)
+      KeepGoingSheet(number: 25,
+                     next: nextSong,
+                     finish: finishPlaylist,
+                     showAlert: $show25Alert)
     }
   }
 }
@@ -124,7 +126,7 @@ extension MusicTestView {
     playlistIDs.contains(playlist.id.rawValue)
   }
   private func playStation() {
-    topTracksStatus.endCreating()
+    topTracksStatus.stopCreating()
     
     StationCreationCheckIfExists.playStation(with: playlist.id,
                                              in: stations,
@@ -173,6 +175,7 @@ extension MusicTestView {
   private func finishPlaylist() {
     while songs.numberOfRatedSongs < min(songs.numberOfPotentialSongs, 40)
             && songs.testResults.indices.contains(index + 1) {
+      print("POTENTIAL", songs.numberOfPotentialSongs.description, "RATED", songs.numberOfRatedSongs)
       index += 1
       songs[index].rotationCategory = standardRotationCategories.randomElement() ?? .spice
     }

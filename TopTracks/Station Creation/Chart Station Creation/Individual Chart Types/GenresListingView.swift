@@ -15,17 +15,6 @@ extension GenresListingView: View {
           StationPreviewForGenre(genre: genre)
         } label: {
           HStack {
-//            ZStack {
-//              Rectangle()
-//                .foregroundColor(.secondary.opacity(0.2))
-//                .frame(width: playlistArtworkImageSize, height: playlistArtworkImageSize, alignment: .center)
-//                .padding()
-//              if let artwork = artworkForGenre[genre] {
-//                ArtworkImage(artwork,
-//                             width: playlistArtworkImageSize)
-//                .padding()
-//              }
-//            }
             AppleMusicPlaylistArtworkView(artwork: artworkForGenre[genre])
             VStack(alignment: .leading) {
               Text("Top Songs in:")
@@ -38,16 +27,6 @@ extension GenresListingView: View {
             }
             .padding()
           }
-          //          VStack(alignment: .leading, spacing: 5) {
-          //            Text("Top Songs in")
-          //              .foregroundColor(.secondary)
-          //            HStack {
-          //              Spacer()
-          //              Text(genre.name)
-          //                .font(.title)
-          //                .padding(.trailing)
-          //            }
-          //          }
         }
       }
     }

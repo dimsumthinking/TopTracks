@@ -11,6 +11,7 @@ extension TopTracksChartStation {
     print(chartType.rawValue)
     self.sourceName = playlist.name
     self.chartType = chartType.rawValue
+    print(sourceName, sourceID)
   }
   convenience init(chartType: TopTracksChartType,
                    genre: Genre,

@@ -19,13 +19,19 @@ extension StationCreationForGenreChart: View {
     if isSubscribed {
       Button("Already subscribed to \n Top Songs: \(genre.name)\n Tap to listen now",
              action: playStation)
-      .buttonStyle(.borderedProminent)
       .padding(.vertical)
+      Button("Dismiss",// \n Top Songs: \(genre.name)",
+             action: topTracksStatus.stopCreating)
+      .padding()
     } else {
-      Button("Add station \n Top Songs: \(genre.name)",
+      HStack {
+      Button("Add station",// \n Top Songs: \(genre.name)",
              action: createStation)
-      .buttonStyle(.borderedProminent)
-      .padding(.vertical)
+      .padding()
+      Button("Dismiss",// \n Top Songs: \(genre.name)",
+             action: topTracksStatus.stopCreating)
+      .padding()
+      }
     }
   }
 }
@@ -40,7 +46,7 @@ extension StationCreationForGenreChart {
 
 extension StationCreationForGenreChart {
   func createStation() {
-    topTracksStatus.endCreating()
+    topTracksStatus.stopCreating()
     StationCreation.createStation(stations: stations,
                                   genre: genre,
                                   songsInCategories: songsInCategories)
@@ -49,7 +55,7 @@ extension StationCreationForGenreChart {
 
 extension StationCreationForGenreChart {
   private func playStation() {
-    topTracksStatus.endCreating()
+    topTracksStatus.stopCreating()
     StationCreationCheckIfExists.playStation(with: genre.id,
                                              in: stations,
                                              chartType: .topSongs,
