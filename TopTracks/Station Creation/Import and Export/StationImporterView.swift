@@ -4,7 +4,7 @@ import MusicKit
 struct StationImporterView {
   let url: URL
   @StateObject var importer = StationImporter()
-//  @StateObject var importer: StationImporter
+  //  @StateObject var importer: StationImporter
   
   @EnvironmentObject private var topTracksStatus: TopTracksStatus
 }
@@ -20,7 +20,7 @@ extension StationImporterView: View {
           StationPreviewForPlaylist(chartType: .cityCharts,
                                     playlist: playlist)
         } else {
-//          MusicTestView(for: playlist)
+          //          MusicTestView(for: playlist)
           StationPreviewForPlaylist(chartType: .playlists,
                                     playlist: playlist)
         }
@@ -29,17 +29,17 @@ extension StationImporterView: View {
       } else if let station = importer.musicItem as? Station {
         StationCreationForAppleMusicStation(station: station)
       } else {
-      VStack {
-        Text(importer.stationType == stationTypeForDeepLinkNotFound ? "Could not locate station from the provided link" : "Importing Playlist...")
-          .multilineTextAlignment(.center)
-        .font(.largeTitle)
-        .foregroundColor(.secondary)
-        .padding()
-        Button("Dismiss",
-               action: {topTracksStatus.stopImporting()})
-        .padding()
+        VStack {
+          Text(importer.stationType == stationTypeForDeepLinkNotFound ? "Could not locate station from the provided link" : "Importing Playlist...")
+            .multilineTextAlignment(.center)
+            .font(.largeTitle)
+            .foregroundColor(.secondary)
+            .padding()
+          Button("Dismiss",
+                 action: {topTracksStatus.stopImporting()})
+          .padding()
+        }
       }
-    }
     }
     .task {
       await importer.process(url: url)
