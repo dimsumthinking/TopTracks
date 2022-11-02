@@ -1,43 +1,20 @@
+//
+//  MainView.swift
+//  TopTracks
+//
+//  Created by Daniel Steinberg on 11/2/22.
+//
+
 import SwiftUI
 
-struct MainView {
-  @EnvironmentObject var topTracksStatus: TopTracksStatus
-}
-
-extension MainView : View {
-  var body: some View {
-    Group {
-      switch topTracksStatus.appActivity {
-      case .playing:
-        MainStationPlayerView()
-      case .creating:
-        MainStationCreationView()
-      case .importing(let url):
-        url.map{url in
-          StationImporterView(url: url)
-        }
-      }
+struct MainView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
-    .onOpenURL { url in
-      topTracksStatus.stopCreating()
-      topTracksStatus.startImporting(url: url)
-    }
-  }
 }
-//extension MainView : View {
-//  var body: some View {
-//    if topTracksStatus.isCreatingNew {
-//      MainStationCreationView()
-//    } else {
-//      MainStationPlayerView()
-//    }
-//  }
-//}
-
-
 
 struct MainView_Previews: PreviewProvider {
-  static var previews: some View {
-    MainView()
-  }
+    static var previews: some View {
+        MainView()
+    }
 }
