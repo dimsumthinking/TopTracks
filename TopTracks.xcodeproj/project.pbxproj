@@ -14,8 +14,11 @@
 		623B99EF276AC4F0004C17AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99EE276AC4F0004C17AE /* Assets.xcassets */; };
 		623B99F2276AC4F0004C17AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99F1276AC4F0004C17AE /* Preview Assets.xcassets */; };
 		623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623CAFA4278CFA6500B8FC48 /* CloudKit.framework */; };
+		62C8DDFE297A31CD005D9739 /* AppleMusicAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C8DDFD297A31CD005D9739 /* AppleMusicAuthorizationView.swift */; };
+		62C8DE03297A33E4005D9739 /* AppleMusicSubscription in Frameworks */ = {isa = PBXBuildFile; productRef = 62C8DE02297A33E4005D9739 /* AppleMusicSubscription */; };
+		62C8DE05297B3459005D9739 /* AppleMusicSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C8DE04297B3459005D9739 /* AppleMusicSubscriptionView.swift */; };
+		62CAD2FF297A2781002AB06E /* AppleMusicAuthorization in Frameworks */ = {isa = PBXBuildFile; productRef = 62CAD2FE297A2781002AB06E /* AppleMusicAuthorization */; };
 		62D64D0E2824B14B0012A36D /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 62D64D0D2824B14B0012A36D /* RevenueCat */; };
-		62F796232927E02E00BADF43 /* AppleMusicSubscription in Frameworks */ = {isa = PBXBuildFile; productRef = 62F796222927E02E00BADF43 /* AppleMusicSubscription */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +32,10 @@
 		623CAF9F278C764000B8FC48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623CAFA2278CF98000B8FC48 /* TopTracks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TopTracks.entitlements; sourceTree = "<group>"; };
 		623CAFA4278CFA6500B8FC48 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		62F796212927DDEE00BADF43 /* AppleMusicSubscription */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppleMusicSubscription; path = TopTracks/AppleMusicSubscription; sourceTree = "<group>"; };
+		62C8DDFD297A31CD005D9739 /* AppleMusicAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAuthorizationView.swift; sourceTree = "<group>"; };
+		62C8DE01297A33D6005D9739 /* AppleMusicSubscription */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppleMusicSubscription; path = TopTracks/AppleMusicSubscription; sourceTree = "<group>"; };
+		62C8DE04297B3459005D9739 /* AppleMusicSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicSubscriptionView.swift; sourceTree = "<group>"; };
+		62CAD2FD297A25E7002AB06E /* AppleMusicAuthorization */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppleMusicAuthorization; path = TopTracks/AppleMusicAuthorization; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,10 +44,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				62D64D0E2824B14B0012A36D /* RevenueCat in Frameworks */,
-				62F796232927E02E00BADF43 /* AppleMusicSubscription in Frameworks */,
 				620233812824003A00D7C63F /* StoreKit.framework in Frameworks */,
 				623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */,
 				6222D986280DFFAF009DEA8A /* NetworkExtension.framework in Frameworks */,
+				62C8DE03297A33E4005D9739 /* AppleMusicSubscription in Frameworks */,
+				62CAD2FF297A2781002AB06E /* AppleMusicAuthorization in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,7 +58,8 @@
 		6207E2B32926AB7F00DD5A81 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				62F796212927DDEE00BADF43 /* AppleMusicSubscription */,
+				62CAD2FD297A25E7002AB06E /* AppleMusicAuthorization */,
+				62C8DE01297A33D6005D9739 /* AppleMusicSubscription */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -72,6 +80,8 @@
 			children = (
 				6221ABBA2912A8CA0088F0F2 /* TopTracksApp.swift */,
 				6221ABBC2912A8F20088F0F2 /* MainView.swift */,
+				62C8DDFD297A31CD005D9739 /* AppleMusicAuthorizationView.swift */,
+				62C8DE04297B3459005D9739 /* AppleMusicSubscriptionView.swift */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -139,7 +149,8 @@
 			name = TopTracks;
 			packageProductDependencies = (
 				62D64D0D2824B14B0012A36D /* RevenueCat */,
-				62F796222927E02E00BADF43 /* AppleMusicSubscription */,
+				62CAD2FE297A2781002AB06E /* AppleMusicAuthorization */,
+				62C8DE02297A33E4005D9739 /* AppleMusicSubscription */,
 			);
 			productName = TopTracks;
 			productReference = 623B99E7276AC4F0004C17AE /* TopTracks.app */;
@@ -199,7 +210,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62C8DDFE297A31CD005D9739 /* AppleMusicAuthorizationView.swift in Sources */,
 				6221ABBB2912A8CA0088F0F2 /* TopTracksApp.swift in Sources */,
+				62C8DE05297B3459005D9739 /* AppleMusicSubscriptionView.swift in Sources */,
 				6221ABBD2912A8F20088F0F2 /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,14 +448,18 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		62C8DE02297A33E4005D9739 /* AppleMusicSubscription */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppleMusicSubscription;
+		};
+		62CAD2FE297A2781002AB06E /* AppleMusicAuthorization */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppleMusicAuthorization;
+		};
 		62D64D0D2824B14B0012A36D /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 62D64D0C2824B14B0012A36D /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
-		};
-		62F796222927E02E00BADF43 /* AppleMusicSubscription */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AppleMusicSubscription;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

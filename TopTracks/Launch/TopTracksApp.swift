@@ -1,27 +1,20 @@
 import SwiftUI
 import MusicKit
-import AppleMusicSubscription
 
 @main
 struct TopTracksApp {
-  @StateObject private var musicAuthorization = AppleMusicAuthorization()
-  @StateObject var musicSubscription = AppleMusicSubscription()
+  @State private var musicAuthorizationStatus = MusicAuthorization.Status.notDetermined
 }
 
 extension TopTracksApp: App {
   var body: some Scene {
     WindowGroup {
-      switch musicAuthorization.status {
+      switch musicAuthorizationStatus {
       case .authorized:
-        if musicSubscription.canPlayCatalogContent {
-          MainView()
-        } else {
-          musicSubscription.view
-        }
+        AppleMusicSubscriptionView()
       default:
-        musicAuthorization.view
+        AppleMusicAuthorizationView(musicAuthorizationStatus: $musicAuthorizationStatus)
       }
     }
   }
 }
-
