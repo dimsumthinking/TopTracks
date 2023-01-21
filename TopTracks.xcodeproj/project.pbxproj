@@ -14,6 +14,7 @@
 		623B99EF276AC4F0004C17AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99EE276AC4F0004C17AE /* Assets.xcassets */; };
 		623B99F2276AC4F0004C17AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99F1276AC4F0004C17AE /* Preview Assets.xcassets */; };
 		623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623CAFA4278CFA6500B8FC48 /* CloudKit.framework */; };
+		62ABB976297B72670002D7AB /* NetworkMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 62ABB975297B72670002D7AB /* NetworkMonitor */; };
 		62C8DDFE297A31CD005D9739 /* AppleMusicAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C8DDFD297A31CD005D9739 /* AppleMusicAuthorizationView.swift */; };
 		62C8DE03297A33E4005D9739 /* AppleMusicSubscription in Frameworks */ = {isa = PBXBuildFile; productRef = 62C8DE02297A33E4005D9739 /* AppleMusicSubscription */; };
 		62C8DE05297B3459005D9739 /* AppleMusicSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C8DE04297B3459005D9739 /* AppleMusicSubscriptionView.swift */; };
@@ -32,6 +33,7 @@
 		623CAF9F278C764000B8FC48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623CAFA2278CF98000B8FC48 /* TopTracks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TopTracks.entitlements; sourceTree = "<group>"; };
 		623CAFA4278CFA6500B8FC48 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		62ABB974297B6E300002D7AB /* NetworkMonitor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NetworkMonitor; path = TopTracks/NetworkMonitor; sourceTree = "<group>"; };
 		62C8DDFD297A31CD005D9739 /* AppleMusicAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAuthorizationView.swift; sourceTree = "<group>"; };
 		62C8DE01297A33D6005D9739 /* AppleMusicSubscription */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppleMusicSubscription; path = TopTracks/AppleMusicSubscription; sourceTree = "<group>"; };
 		62C8DE04297B3459005D9739 /* AppleMusicSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicSubscriptionView.swift; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62ABB976297B72670002D7AB /* NetworkMonitor in Frameworks */,
 				62D64D0E2824B14B0012A36D /* RevenueCat in Frameworks */,
 				620233812824003A00D7C63F /* StoreKit.framework in Frameworks */,
 				623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */,
@@ -60,6 +63,7 @@
 			children = (
 				62CAD2FD297A25E7002AB06E /* AppleMusicAuthorization */,
 				62C8DE01297A33D6005D9739 /* AppleMusicSubscription */,
+				62ABB974297B6E300002D7AB /* NetworkMonitor */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -151,6 +155,7 @@
 				62D64D0D2824B14B0012A36D /* RevenueCat */,
 				62CAD2FE297A2781002AB06E /* AppleMusicAuthorization */,
 				62C8DE02297A33E4005D9739 /* AppleMusicSubscription */,
+				62ABB975297B72670002D7AB /* NetworkMonitor */,
 			);
 			productName = TopTracks;
 			productReference = 623B99E7276AC4F0004C17AE /* TopTracks.app */;
@@ -448,6 +453,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		62ABB975297B72670002D7AB /* NetworkMonitor */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkMonitor;
+		};
 		62C8DE02297A33E4005D9739 /* AppleMusicSubscription */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppleMusicSubscription;
