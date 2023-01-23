@@ -1,16 +1,18 @@
-//
-//  MainView.swift
-//  TopTracks
-//
-//  Created by Daniel Steinberg on 11/2/22.
-//
 
 import SwiftUI
-//import AppleMusicSubscription
+import MusicKit
+import MusicPlayer
 
 struct MainView: View {
+  @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
+  
     var body: some View {
-      Text("Start")
+      FullScreenPlayerView()
+        .onAppear {
+          Task {
+            try  await Player.shared.fetch()
+          }
+        }
     }
 }
 
@@ -19,3 +21,4 @@ struct MainView_Previews: PreviewProvider {
         MainView()
     }
 }
+

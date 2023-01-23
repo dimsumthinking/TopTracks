@@ -6,7 +6,7 @@ public class AppleMusicSubscription: ObservableObject {
   public static var shared = AppleMusicSubscription()
 //  private var isNotYetMonitoring = true
   
-  @Published private(set) var subscription: MusicSubscription?
+  @Published public private(set) var subscription: MusicSubscription?
   
   private init() {
     Task {

@@ -5,7 +5,7 @@ public class NetworkConnectionMonitor: ObservableObject {
   public static var shared = NetworkConnectionMonitor()
   
   private let pathMonitor = NWPathMonitor()
-  @Published public private(set) var isNotConnected = true
+  @Published public private(set) var isNotConnected = false
   @Published private(set) var isExpensive = false
   
   private init() {

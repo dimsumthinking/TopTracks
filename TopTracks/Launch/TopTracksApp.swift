@@ -13,12 +13,15 @@ extension TopTracksApp: App {
     WindowGroup {
       if networkMonitor.isNotConnected {
         OfflineWarningView()
+          .preferredColorScheme(.dark)
       } else {
         switch musicAuthorizationStatus {
-        case .authorized:
+        case .authorized, .notDetermined:
           AppleMusicSubscriptionView()
+            .preferredColorScheme(.dark)
         default:
           AppleMusicAuthorizationView(musicAuthorizationStatus: $musicAuthorizationStatus)
+            .preferredColorScheme(.dark)
         }
       }
     }

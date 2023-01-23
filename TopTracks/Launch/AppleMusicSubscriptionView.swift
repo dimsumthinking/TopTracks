@@ -8,7 +8,8 @@ struct AppleMusicSubscriptionView {
 
 extension AppleMusicSubscriptionView: View {
     var body: some View {
-      if musicSubscription.canPlayCatalogContent {
+      if musicSubscription.canPlayCatalogContent ||
+          musicSubscription.subscription == nil {
         MainView()
       } else {
         AppleMusicSubscriberView(canBecomeSubscriber: musicSubscription.canBecomeSubscriber)
