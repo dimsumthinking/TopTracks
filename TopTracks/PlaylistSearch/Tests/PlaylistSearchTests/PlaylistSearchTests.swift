@@ -1,7 +1,7 @@
 import XCTest
-@testable import MusicPlayer
+@testable import PlaylistSearch
 
-final class MusicPlayerTests: XCTestCase {
+final class PlaylistSearchTests: XCTestCase {
     func testExample() throws {
         XCTAssertTrue(true)
     }

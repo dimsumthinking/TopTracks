@@ -1,18 +1,14 @@
 
 import SwiftUI
 import MusicKit
-import MusicPlayer
+import PlaylistSearch
 
 struct MainView: View {
   @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
   
     var body: some View {
-      FullScreenPlayerView()
-        .onAppear {
-          Task {
-            try  await Player.shared.fetch()
-          }
-        }
+//      ChartTypeSelectionView()
+      PlaylistSearchDirectoryView()
     }
 }
 

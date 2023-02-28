@@ -1,5 +1,6 @@
 import MusicKit
-import SwiftUI
+//import SwiftUI
+import Combine
 
 @MainActor
 public class AppleMusicSubscription: ObservableObject {

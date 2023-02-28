@@ -16,7 +16,7 @@ extension TopTracksApp: App {
           .preferredColorScheme(.dark)
       } else {
         switch musicAuthorizationStatus {
-        case .authorized, .notDetermined:
+        case .authorized://, .notDetermined:
           AppleMusicSubscriptionView()
             .preferredColorScheme(.dark)
         default:
