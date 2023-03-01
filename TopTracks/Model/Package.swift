@@ -3,23 +3,23 @@
 import PackageDescription
 
 let package = Package(
-    name: "PlaylistSearch",
+    name: "Model",
     platforms: [
       .macOS("13.0"),
       .iOS("16.0")],
     products: [
         .library(
-            name: "PlaylistSearch",
-            targets: ["PlaylistSearch"]),
+            name: "Model",
+            targets: ["Model"]),
     ],
     dependencies: [
     ],
     targets: [
         .target(
-            name: "PlaylistSearch",
+            name: "Model",
             dependencies: []),
         .testTarget(
-            name: "PlaylistSearchTests",
-            dependencies: ["PlaylistSearch"]),
+            name: "ModelTests",
+            dependencies: ["Model"]),
     ]
 )
