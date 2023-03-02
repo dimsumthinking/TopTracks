@@ -38,6 +38,7 @@
 		6282BCD529A79E5400021EBB /* NetworkMonitor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NetworkMonitor; path = TopTracks/NetworkMonitor; sourceTree = "<group>"; };
 		628E69A829AD4A6500B7B9EF /* PlaylistSearch */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PlaylistSearch; path = TopTracks/PlaylistSearch; sourceTree = "<group>"; };
 		62ABB974297B6E300002D7AB /* NetworkMonitor */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NetworkMonitor; path = TopTracks/NetworkMonitor; sourceTree = "<group>"; };
+		62B337A829B12E31000BD413 /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Model; path = TopTracks/Model; sourceTree = "<group>"; };
 		62C8DDFD297A31CD005D9739 /* AppleMusicAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAuthorizationView.swift; sourceTree = "<group>"; };
 		62C8DE01297A33D6005D9739 /* AppleMusicSubscription */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppleMusicSubscription; path = TopTracks/AppleMusicSubscription; sourceTree = "<group>"; };
 		62C8DE04297B3459005D9739 /* AppleMusicSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicSubscriptionView.swift; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 				6282BCD429A79DD500021EBB /* AppleMusicAuthorization */,
 				6282BCD529A79E5400021EBB /* NetworkMonitor */,
 				628E69A829AD4A6500B7B9EF /* PlaylistSearch */,
+				62B337A829B12E31000BD413 /* Model */,
 			);
 			name = Packages;
 			sourceTree = "<group>";

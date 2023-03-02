@@ -1,6 +1,5 @@
 import SwiftUI
 import MusicKit
-import Constants
 
 struct PlaylistGridView {
   let filteredPlaylists: [Playlist]

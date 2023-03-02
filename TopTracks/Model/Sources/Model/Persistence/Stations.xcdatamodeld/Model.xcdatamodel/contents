@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="TopTracksSong" representedClassName=".TopTracksSong" syncable="YES">
+        <attribute name="favorite" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastPlayed" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="songAsData" attributeType="Binary"/>
+        <attribute name="songID" attributeType="String"/>
+        <relationship name="stack" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="songs" inverseEntity="TopTracksStack"/>
+    </entity>
+    <entity name="TopTracksStack" representedClassName=".TopTracksStack" syncable="YES">
+        <attribute name="name" attributeType="String"/>
+        <relationship name="songs" toMany="YES" deletionRule="Nullify" destinationEntity="TopTracksSong" inverseName="stack" inverseEntity="TopTracksSong"/>
+        <relationship name="station" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStation" inverseName="stacks" inverseEntity="TopTracksStation"/>
+    </entity>
+    <entity name="TopTracksStation" representedClassName=".TopTracksStation" syncable="YES">
+        <attribute name="allowRecommendations" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="artworkAsData" attributeType="Binary"/>
+        <attribute name="buttonPosition" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="favorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="lastPlayed" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastUpdated" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="playlistAsData" optional="YES" attributeType="Binary"/>
+        <attribute name="playlistID" attributeType="String"/>
+        <attribute name="stationID" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="stationName" attributeType="String"/>
+        <attribute name="updateAvailable" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <relationship name="stacks" toMany="YES" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="station" inverseEntity="TopTracksStack"/>
+    </entity>
+</model>

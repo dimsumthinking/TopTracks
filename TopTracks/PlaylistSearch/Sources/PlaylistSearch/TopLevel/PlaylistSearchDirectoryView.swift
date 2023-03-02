@@ -16,7 +16,7 @@ extension PlaylistSearchDirectoryView: View {
               Image(systemName: playlistKind.sfSymbolName)
               Text(playlistKind.description)
             }
-            .font(.headline)
+            .font(.title2)
             .padding(.bottom)
           }
         }
