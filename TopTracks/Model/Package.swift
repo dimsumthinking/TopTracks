@@ -17,7 +17,8 @@ let package = Package(
     targets: [
         .target(
             name: "Model",
-            dependencies: []),
+            dependencies: [],
+            resources: [.copy("Persistence/Stations.xcdatamodeld")]),
         .testTarget(
             name: "ModelTests",
             dependencies: ["Model"]),

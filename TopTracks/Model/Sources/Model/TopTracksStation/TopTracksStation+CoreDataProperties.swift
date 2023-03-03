@@ -1,11 +1,3 @@
-//
-//  TopTracksStation+CoreDataProperties.swift
-//  TopTracks
-//
-//  Created by Daniel Steinberg on 3/2/23.
-//
-//
-
 import Foundation
 import CoreData
 
@@ -18,16 +10,18 @@ extension TopTracksStation {
 
     @NSManaged public var buttonPosition: Int16
     @NSManaged public var favorite: Bool
-    @NSManaged public var lastUpdated: Date?
-    @NSManaged public var playlistID: String?
-    @NSManaged public var stationID: UUID?
-    @NSManaged public var stationName: String?
+    @NSManaged public var lastUpdated: Date
+    @NSManaged public var playlistID: String
+    @NSManaged public var stationID: UUID
+    @NSManaged public var stationName: String
     @NSManaged public var updateAvailable: Bool
-    @NSManaged public var lastPlayed: Date?
+    @NSManaged public var lastPlayed: Date
     @NSManaged public var artworkAsData: Data?
     @NSManaged public var allowRecommendations: Bool
     @NSManaged public var playlistAsData: Data?
-    @NSManaged public var stacks: NSSet?
+    @NSManaged public var stacks: Set<TopTracksStack>
+    @NSManaged public var isChart: Bool
+
 
 }
 

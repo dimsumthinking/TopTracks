@@ -1,11 +1,14 @@
 import SwiftUI
 import MusicKit
 import NetworkMonitor
+import Model
+
 
 @main
 struct TopTracksApp {
   @State private var musicAuthorizationStatus = MusicAuthorization.Status.notDetermined
   @StateObject private var networkMonitor = NetworkConnectionMonitor.shared
+  let persistence = sharedViewContext
 }
 
 extension TopTracksApp: App {

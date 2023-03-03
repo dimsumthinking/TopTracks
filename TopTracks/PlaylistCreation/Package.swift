@@ -1,26 +1,25 @@
 // swift-tools-version: 5.7
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "Constants",
+    name: "PlaylistCreation",
     platforms: [
       .macOS("13.0"),
       .iOS("16.0")],
     products: [
         .library(
-            name: "Constants",
-            targets: ["Constants"]),
+            name: "PlaylistCreation",
+            targets: ["PlaylistCreation"]),
     ],
     dependencies: [
     ],
     targets: [
         .target(
-            name: "Constants",
+            name: "PlaylistCreation",
             dependencies: []),
         .testTarget(
-            name: "ConstantsTests",
-            dependencies: ["Constants"]),
+            name: "PlaylistCreationTests",
+            dependencies: ["PlaylistCreation"]),
     ]
 )

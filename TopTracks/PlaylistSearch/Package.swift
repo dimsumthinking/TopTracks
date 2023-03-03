@@ -13,11 +13,12 @@ let package = Package(
             targets: ["PlaylistSearch"]),
     ],
     dependencies: [
+      .package(path: "../PlaylistCreation")
     ],
     targets: [
         .target(
             name: "PlaylistSearch",
-            dependencies: []),
+            dependencies: ["PlaylistCreation"]),
         .testTarget(
             name: "PlaylistSearchTests",
             dependencies: ["PlaylistSearch"]),

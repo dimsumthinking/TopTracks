@@ -6,7 +6,7 @@ public struct ChartChooserView {
   @State private var filterString = ""
   
   init(kind: MusicCatalogChartKind) {
-    _lister = StateObject(wrappedValue: ChartLister(kind: kind))
+    _lister = StateObject(wrappedValue: {ChartLister(kind: kind)}())
   }
 }
 

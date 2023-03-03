@@ -17,7 +17,7 @@ extension PlaylistSearchDirectoryView: View {
               Text(playlistKind.description)
             }
             .font(.title2)
-            .padding(.bottom)
+            .padding()
           }
         }
       }

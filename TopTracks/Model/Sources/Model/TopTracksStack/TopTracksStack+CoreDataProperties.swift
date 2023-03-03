@@ -1,11 +1,3 @@
-//
-//  TopTracksStack+CoreDataProperties.swift
-//  TopTracks
-//
-//  Created by Daniel Steinberg on 3/2/23.
-//
-//
-
 import Foundation
 import CoreData
 
@@ -16,9 +8,9 @@ extension TopTracksStack {
         return NSFetchRequest<TopTracksStack>(entityName: "TopTracksStack")
     }
 
-    @NSManaged public var name: String?
-    @NSManaged public var songs: NSSet?
-    @NSManaged public var station: TopTracksStation?
+    @NSManaged public var name: String
+    @NSManaged public var songs: Set<TopTracksSong>
+    @NSManaged public var station: TopTracksStation
 
 }
 
@@ -42,3 +34,17 @@ extension TopTracksStack {
 extension TopTracksStack : Identifiable {
 
 }
+
+extension TopTracksStack {
+  var rotationCategory: RotationCategory {
+    guard let category = RotationCategory(rawValue: name) else {
+      fatalError("No Rotation Category corresponds to this stack - which shouldn't be possible")
+    }
+    return category
+  }
+  
+  var orderedSongs: [TopTracksSong] {
+    songs.sorted {$0.lastPlayed < $1.lastPlayed}
+  }
+}
+
