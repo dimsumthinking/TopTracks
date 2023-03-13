@@ -12,6 +12,7 @@ extension ArtworkFiller: View {
       .frame(width: size,
              height: size)
       .foregroundColor(.clear)
+      .background(Color.clear)
       .padding()
   }
 }

@@ -10,6 +10,15 @@ extension PlaylistKind {
     }
   }
   
+  var hasHardCodedCategories: Bool {
+    switch self {
+    case .byGenre, .decade, .international, .moodAndActivity, .classical:
+      return true
+    default:
+      return false
+    }
+  }
+  
   var musicCatalogChartKind: MusicCatalogChartKind {
     switch self {
     case .top: return .mostPlayed

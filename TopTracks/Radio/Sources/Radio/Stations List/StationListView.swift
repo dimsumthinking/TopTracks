@@ -22,6 +22,9 @@ extension StationListView: View {
             }
           }
       }
+      Text("Spacer")
+        .padding(.vertical,20)
+        .foregroundColor(.clear)
       
       if stationLister.stations.isEmpty {
         HStack {

@@ -13,10 +13,13 @@ extension PlaylistKindView: View {
           if playlistKind.isChart {
             ChartChooserView(kind: playlistKind.musicCatalogChartKind)
               .navigationTitle(playlistKind.description)
-          } else {
+          } else if playlistKind.hasHardCodedCategories {
             AppleMusicCategoryChooserView(categories: playlistKind.playlistCategories)
               .navigationTitle(playlistKind.description)
+          } else {
+           PlaylistSearchRequestView()
           }
+          
         } label: {
           GridRow {
             Image(systemName: playlistKind.sfSymbolName)

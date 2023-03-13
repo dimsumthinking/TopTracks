@@ -42,7 +42,6 @@ extension MainStationsView: View {
               .onTapGesture {
                 isShowingFullPlayer = true
               }
-              .background(Color.black.opacity(0.85))
           }
         }
       }

@@ -33,9 +33,10 @@ extension MiniPlayerView: View {
           .padding()
       }
       .tint(.secondary)
-      .background(Color.secondary.opacity(0.2))
+      .background(Color.black.opacity(0.8))
     } else {
       ArtworkFiller(size: Constants.miniPlayerArtworkImageSize)
+      
     }
   }
 }
