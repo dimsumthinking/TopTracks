@@ -2,6 +2,7 @@ import SwiftUI
 import MusicKit
 import NetworkMonitor
 import Model
+import PlaylistSongPreview
 
 
 @main
@@ -9,6 +10,7 @@ struct TopTracksApp {
   @State private var musicAuthorizationStatus = MusicAuthorization.Status.notDetermined
   @StateObject private var networkMonitor = NetworkConnectionMonitor.shared
   let persistence = sharedViewContext
+  @Environment(\.scenePhase) private var scenePhase
 }
 
 extension TopTracksApp: App {
@@ -27,6 +29,13 @@ extension TopTracksApp: App {
             .preferredColorScheme(.dark)
         }
       }
+    }
+    .onChange(of: scenePhase) {phase in
+      if phase == .background {
+        songPreviewPlayer.stop()
+//        topTracksStatus.stopImporting()
+      }
+//      currentlyPlaying.hack.toggle()
     }
   }
 }

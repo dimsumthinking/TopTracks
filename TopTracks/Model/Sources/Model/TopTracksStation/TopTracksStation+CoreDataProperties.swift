@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import MusicKit
 
 
 extension TopTracksStation {
@@ -7,20 +8,17 @@ extension TopTracksStation {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<TopTracksStation> {
         return NSFetchRequest<TopTracksStation>(entityName: "TopTracksStation")
     }
-
-    @NSManaged public var buttonPosition: Int16
-    @NSManaged public var favorite: Bool
-    @NSManaged public var lastUpdated: Date
-    @NSManaged public var playlistID: String
-    @NSManaged public var stationID: UUID
-    @NSManaged public var stationName: String
-    @NSManaged public var updateAvailable: Bool
-    @NSManaged public var lastPlayed: Date
-    @NSManaged public var artworkAsData: Data?
-    @NSManaged public var allowRecommendations: Bool
-    @NSManaged public var playlistAsData: Data?
-    @NSManaged public var stacks: Set<TopTracksStack>
-    @NSManaged public var isChart: Bool
+  @NSManaged public var favorite: Bool
+  @NSManaged public var lastUpdated: Date
+  @NSManaged public var playlistID: String
+  @NSManaged public var stationID: UUID
+  @NSManaged public var stationName: String
+  @NSManaged public var updateAvailable: Bool
+  @NSManaged public var lastTouched: Date
+  @NSManaged public var allowRecommendations: Bool
+  @NSManaged public var playlistAsData: Data?
+  @NSManaged public var stacks: Set<TopTracksStack>
+  @NSManaged public var isChart: Bool
 
 
 }
@@ -44,4 +42,29 @@ extension TopTracksStation {
 
 extension TopTracksStation : Identifiable {
 
+}
+
+extension TopTracksStation {
+  public var name: String {
+    stationName
+  }
+  
+  public var artwork: Artwork? {
+    guard let playlistAsData,
+          let playlist = try? PropertyListDecoder().decode(Playlist.self, from: playlistAsData) else {return nil}
+    return playlist.artwork
+  }
+  
+  public var topArtists: String {
+    String(stacks.filter{ stack in stack.name == "power"}.flatMap(\.songs).map(\.title)
+      .reduce("") {$1 + ", " + $0}.dropLast(2))
+  }
+  
+  public func stack(for rotationCategory: RotationCategory) -> TopTracksStack? {
+    stacks.first(where: { $0.name == rotationCategory.name})
+  }
+  
+  public var hasEnoughGold: Bool {
+    (stack(for: .gold)?.songs.count ?? 0) > 10
+  }
 }

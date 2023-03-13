@@ -1,6 +1,8 @@
 import Foundation
 
-enum PlaylistKind: String, CaseIterable {
+let mainPlaylistKinds = [PlaylistKind.top, .cityCharts, .countryTop100, .byGenre, .moodAndActivity, .decade, .international]
+
+enum PlaylistKind: String, CaseIterable, Hashable, Equatable {
   case top
   case cityCharts
   case countryTop100
@@ -8,6 +10,7 @@ enum PlaylistKind: String, CaseIterable {
   case moodAndActivity
   case decade
   case international
+  case classical
 }
 
 extension PlaylistKind {
@@ -27,6 +30,8 @@ extension PlaylistKind {
       return "calendar"
     case .international:
       return "globe"
+    case .classical:
+      return "headphones"
     }
   }
 }
@@ -48,6 +53,8 @@ extension PlaylistKind: CustomStringConvertible {
       return "The Decades"
     case .international:
       return "International Music"
+    case .classical:
+      return "Classical"
     }
   }
 }
@@ -55,38 +62,5 @@ extension PlaylistKind: CustomStringConvertible {
 extension PlaylistKind: Identifiable {
   var id: Self {
     self
-  }
-}
-
-
-import MusicKit
-
-extension PlaylistKind {
-  var isChart: Bool {
-    switch self {
-    case .cityCharts, .countryTop100, .top:
-      return true
-    default:
-      return false
-    }
-  }
-  
-  var musicCatalogChartKind: MusicCatalogChartKind {
-    switch self {
-    case .top: return .mostPlayed
-    case .cityCharts: return .cityTop
-    case .countryTop100: return .dailyGlobalTop
-    default: fatalError("Type must be a chart type")
-    }
-  }
-  
-  var playlistCategories: [AppleMusicCategory] {
-    switch self {
-    case .byGenre: return AppleMusicCategory.appleMusicGenres
-    case .decade: return AppleMusicCategory.appleMusicDecades
-    case .international: return AppleMusicCategory.appleMusicWorldwide
-    case .moodAndActivity: return AppleMusicCategory.appleMusicMoodsAndActivities
-    default: fatalError("Type must not be a chart type")
-    }
   }
 }

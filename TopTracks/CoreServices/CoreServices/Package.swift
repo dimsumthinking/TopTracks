@@ -15,14 +15,20 @@ let package = Package(
     dependencies: [
       .package(path: "../AppleMusicAuthorization"),
       .package(path: "../AppleMusicSubscription"),
-      .package(path: "../NetworkMonitor")
+      .package(path: "../NetworkMonitor"),
+      .package(path: "../Constants"),
+      .package(path: "../PlaylistSongPreview"),
+      .package(path: "../ApplicationState")
     ],
     targets: [
         .target(
             name: "CoreServices",
             dependencies: ["AppleMusicAuthorization",
                           "AppleMusicSubscription",
-                          "NetworkMonitor"]),
+                          "NetworkMonitor",
+                          "Constants",
+                          "PlaylistSongPreview",
+                          "ApplicationState"]),
         .testTarget(
             name: "CoreServicesTests",
             dependencies: ["CoreServices"]),
