@@ -9,10 +9,12 @@ extension ControlPanel: View {
     HStack {
 //      Spacer()
       PreviousSongButton()
+        .font(.title)
       Spacer()
       PlayPauseButton()
       Spacer()
       NextSongButton()
+        .font(.title)
 //      Spacer()
     }
     .font(.largeTitle)

@@ -18,18 +18,19 @@ extension Constants {
   
   public static let stationListHorizontalEdgeInset = 6.0
   public static let stationLlistVerticalEdgeInset = 20.0
-  
+  public static let fullPlayerSwipe = 80.0
+
   
   #if os(iOS)
   public static let miniPlayerArtworkImageSize = min(UIScreen.main.bounds.width * 1 / 6, 80)
   public static let fullPlayerArtworkImageSize = min(UIScreen.main.bounds.width * 2 / 3, 300)
-  public static let fullPlayerSwipe = min(UIScreen.main.bounds.width * 1 / 4, 40)
+//  public static let fullPlayerSwipe = min(UIScreen.main.bounds.width * 1 / 4, 80)
 
 
   #else
   public static let miniPlayerArtworkImageSize = 80
   public static let fullPlayerArtworkImageSize = 300
-  public static let fullPlayerSwipe = 40
+//  public static let fullPlayerSwipe = 80
   #endif
   
   public static let anchorPointForPlayerTransition = UnitPoint(x: 0.04, y: 0.98)

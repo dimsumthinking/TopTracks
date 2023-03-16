@@ -32,17 +32,16 @@ fileprivate func splitSongsIntoCategories(songs: [Song]) -> [RotationCategory: [
 }
 
 extension TopTracksStation {
-  public static func stationExistsForPlaylist(id: String) -> Bool {
+  public static func stationForPlaylist(id: String) -> TopTracksStation? {
     let request = TopTracksStation.fetchRequest()
     request.predicate = NSPredicate(format: "playlistID == %@", id)
     
     do {
-      let matchingStations = try PersistenceController.newBackgroundContext.fetch(request)
-      print(matchingStations.count == 0 ? "No matches" : "Matching \(matchingStations.count)")
-      return matchingStations.count > 0
+      let matchingStations = try  sharedViewContext.fetch(request) //PersistenceController.newBackgroundContext.fetch(request)
+      return matchingStations.first
     } catch {
         print("Failed to return from search")
-      return false
+      return nil
     }
   }
 }

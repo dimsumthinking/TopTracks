@@ -19,31 +19,43 @@ extension FullPlayerView: View {
             .font(.headline)
             .padding()
         }
-        
+
         AlbumArt(currentSong: currentSong)
-
+          .onTapGesture {
+            isShowingFullPlayer = false
+          }
+        
         SongTextInfo(currentSong: currentSong)
-
+        
+        
         Spacer()
+        
         SongScrubberView(currentSong: currentSong)
+          .padding()
+          .font(.headline)
+          .tint(.primary)
         Spacer()
         ControlPanel()
         Spacer()
-        SystemVolumeSlider()
-          .padding()
-          .padding(.horizontal)
+        HStack {
+          Spacer()
+          SleepTimer()
+          Spacer()
+          RoutePicker()
+            .frame(width: 20, height: 20)
+          Spacer()
+        }
+        .padding(.bottom)
       }
-      .onTapGesture {
-        isShowingFullPlayer = false
-      }
+      
       .gesture(DragGesture().onChanged { drag in
         if drag.location.y - drag.startLocation.y > Constants.fullPlayerSwipe {
           isShowingFullPlayer = false
-        } 
+        }
       }
       )
     }
-
+    
     else {
       ArtworkFiller(size: Constants.miniPlayerArtworkImageSize)
     }

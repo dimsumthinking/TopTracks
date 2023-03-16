@@ -51,7 +51,7 @@ extension StationBillboard: View {
         applicationState.setStation(to: station)
         Task {
           do {
-            try await stationSongPlayer.play(station)
+            try await applicationState.playStation(station)
           } catch {
             print("Couldn't play station")
             applicationState.noStationSelected()

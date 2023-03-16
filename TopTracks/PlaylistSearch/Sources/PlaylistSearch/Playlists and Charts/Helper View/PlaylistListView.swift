@@ -32,6 +32,7 @@ extension PlaylistListView: View {
               }
               if let shortDescription = playlist.shortDescription {
                 Text(shortDescription)
+                  .lineLimit(3)
                   .font(.caption)
                   .foregroundColor(.secondary)
               }

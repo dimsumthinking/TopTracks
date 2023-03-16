@@ -10,11 +10,16 @@ func shortenedNameFor(playlist: Playlist) -> String {
 
 func filter(_ playlists: MusicItemCollection<Playlist>,
             using filterString: String,
+            playlistKind: PlaylistKind = .openSearch,
             appleOnly: Bool = true) -> [Playlist] {
-  let applePlaylists = playlists.filter {playlist in
+  var playlists = playlists.filter {playlist in
     appleOnly ? playlist.kind == .editorial : true
   }
-  guard !filterString.isEmpty else {return applePlaylists}
-  return applePlaylists.filter{$0.description.lowercased().contains(filterString.lowercased())}
+  playlists = playlists.filter {playlist in
+    guard let shortDescription = playlist.shortDescription else {return true}
+    return playlistKind == .moodAndActivity ? shortDescription.starts(with: "Hey Siri") : true
+  }
+  guard !filterString.isEmpty else {return playlists}
+  return playlists.filter{$0.description.lowercased().contains(filterString.lowercased())}
 }
 

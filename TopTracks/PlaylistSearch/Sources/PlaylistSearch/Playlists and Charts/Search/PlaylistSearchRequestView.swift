@@ -26,6 +26,7 @@ extension PlaylistSearchRequestView: View {
           
           Button {
             searchTerm = ""
+            searchSuggester.resetSuggestions()
           } label: {
             Image(systemName: "x.circle.fill")
           }

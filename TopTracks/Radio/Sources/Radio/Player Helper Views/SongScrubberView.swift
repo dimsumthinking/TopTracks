@@ -12,6 +12,17 @@ struct SongScrubberView {
 extension SongScrubberView: View {
   var body: some View {
     VStack {
+
+      if let duration = currentSong.duration {
+      HStack {
+        Text(timeInterval(for: currentTime))
+        Spacer()
+        Text(timeInterval(for: duration - currentTime))
+      }
+      .padding(.horizontal)
+      .font(.caption)
+      .padding(.horizontal)
+    }
     Slider(value: $currentTime, in: 0...(currentSong.duration ?? 5 * 60)){editing in
       if !editing {
       ApplicationMusicPlayer.shared.playbackTime = currentTime
@@ -28,15 +39,24 @@ extension SongScrubberView: View {
         }
       }
       if let duration = currentSong.duration {
-      HStack {
-        Text(timeInterval(for: currentTime))
-        Spacer()
-        Text(timeInterval(for: duration - currentTime))
+        
+        HStack {
+          Button {
+            ApplicationMusicPlayer.shared.playbackTime = max(0, ApplicationMusicPlayer.shared.playbackTime - 15)
+          } label: {
+            Image(systemName: "gobackward.15")
+          }
+          Spacer()
+          Button {
+            ApplicationMusicPlayer.shared.playbackTime = min(duration, ApplicationMusicPlayer.shared.playbackTime + 30)
+          } label: {
+            Image(systemName: "goforward.30")
+          }
+        }
+        .padding(.horizontal)
+        .font(.title)
+        .padding()
       }
-      .padding(.horizontal)
-      .font(.caption)
-      .padding(.horizontal)
-    }
     }
     .padding(.vertical)
   }
@@ -56,7 +76,7 @@ extension SongScrubberView {
     return formattedTime
   }
 }
-
+import AVFAudio
 extension SongScrubberView {
 
   func startUpdatingCurrentTime() async throws {

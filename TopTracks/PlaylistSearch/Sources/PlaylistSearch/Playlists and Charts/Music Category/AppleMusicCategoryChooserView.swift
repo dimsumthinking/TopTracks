@@ -5,9 +5,12 @@ struct AppleMusicCategoryChooserView {
   let categories: [AppleMusicCategory]
   @State private var filterString = ""
   @EnvironmentObject private var applicationState: ApplicationState
+  private let playlistKind: PlaylistKind
   
-  init(categories: [AppleMusicCategory]) {
+  init(categories: [AppleMusicCategory],
+       playlistKind: PlaylistKind) {
     self.categories = categories
+    self.playlistKind = playlistKind
   }
 }
 
@@ -42,7 +45,8 @@ extension AppleMusicCategoryChooserView {
 
 struct AppleMusicCategoryChooserView_Previews: PreviewProvider {
   static var previews: some View {
-    AppleMusicCategoryChooserView(categories: AppleMusicCategory.appleMusicDecades)
+    AppleMusicCategoryChooserView(categories: AppleMusicCategory.appleMusicDecades,
+                                  playlistKind: .moodAndActivity)
   }
 }
 

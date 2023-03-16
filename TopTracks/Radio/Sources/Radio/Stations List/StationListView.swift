@@ -4,6 +4,7 @@ import Constants
 import Model
 
 public struct StationListView {
+  @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
   @StateObject private var stationLister = StationLister()
   public init() {}
 }
@@ -22,9 +23,6 @@ extension StationListView: View {
             }
           }
       }
-      Text("Spacer")
-        .padding(.vertical,20)
-        .foregroundColor(.clear)
       
       if stationLister.stations.isEmpty {
         HStack {
@@ -37,6 +35,7 @@ extension StationListView: View {
         .foregroundColor(.yellow)
       }
     }
+    .padding(.bottom, Constants.miniPlayerArtworkImageSize/2)
     .onAppear {
       stationLister.updateStationList()
     }

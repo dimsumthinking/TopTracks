@@ -9,6 +9,8 @@ public class ApplicationState: ObservableObject {
   @Published public private(set) var currentActivity: TopTracksAppActivity = .playing
   @Published public private(set) var currentStation: TopTracksStation?
   @Published public private(set) var currentSong: Song?
+  public var endTime: Date?
+  private var sleepTimer: Task<Void, Error>?
 }
 
 extension ApplicationState {
@@ -24,8 +26,17 @@ extension ApplicationState {
     currentStation = station
   }
   
+  public func playStation(_ station: TopTracksStation) async throws {
+    ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: station.nextHour())
+    try await ApplicationMusicPlayer.shared.prepareToPlay()
+    try await ApplicationMusicPlayer.shared.play()
+  }
+  
   public func noStationSelected() {
     currentStation = nil
+    ApplicationMusicPlayer.shared.stop()
+    ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: [Song]())
+    ApplicationMusicPlayer.shared.queue.currentEntry = nil
   }
 }
 
@@ -77,3 +88,34 @@ extension ApplicationState {
     }
   }
 }
+
+extension ApplicationState {
+  public func sleepAfter(timeInterval: TimeInterval,
+                         andSongPlayingThen: Bool = false) {
+    endTime = Date().addingTimeInterval(timeInterval)
+    sleepTimer?.cancel()
+    sleepTimer = Task {
+      try? await Task.sleep(for: .seconds(10)) // timeInterval
+      try Task.checkCancellation()
+      if andSongPlayingThen {
+        await pauseAfterCurrentSong()
+      } else {
+        ApplicationMusicPlayer.shared.pause()
+      }
+      endTime = nil
+    }
+  }
+  
+  private func pauseAfterCurrentSong() async {
+    if let duration = currentSong?.duration {
+      try? await Task.sleep(for: .seconds(duration - ApplicationMusicPlayer.shared.playbackTime - 1))
+    }
+    ApplicationMusicPlayer.shared.pause()
+  }
+  
+  public func cancelTimer() {
+    endTime = nil
+    sleepTimer?.cancel()
+  }
+}
+

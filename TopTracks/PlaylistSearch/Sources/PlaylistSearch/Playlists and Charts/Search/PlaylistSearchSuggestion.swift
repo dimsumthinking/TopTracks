@@ -12,11 +12,16 @@ class PlaylistSearchSuggestion: ObservableObject {
 
 extension PlaylistSearchSuggestion {
   func searchSuggestions(for term: String) {
-    searchSuggestions.removeAll()
+    resetSuggestions()
     haveNotSearchedSubTerms = true
     Task {
       try await playlistSearchSuggestions(term: term)
     }
+  }
+  
+  func resetSuggestions() {
+    searchSuggestions.removeAll()
+    suggestions.removeAll()
   }
   
   private func playlistSearchSuggestions(term: String) async throws {

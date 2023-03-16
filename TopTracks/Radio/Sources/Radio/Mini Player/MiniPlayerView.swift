@@ -5,6 +5,7 @@ import MusicKit
 
 struct MiniPlayerView {
   @EnvironmentObject private var applicationState: ApplicationState
+  @Binding var isShowingFullPlayer: Bool
 }
 
 
@@ -22,7 +23,9 @@ extension MiniPlayerView: View {
         }
         VStack (alignment: .leading) {
           Text(currentSong.title)
+            .lineLimit(2)
           Text(currentSong.artistName)
+            .lineLimit(2)
             .foregroundColor(.secondary)
         }
         Spacer()
@@ -34,6 +37,15 @@ extension MiniPlayerView: View {
       }
       .tint(.secondary)
       .background(Color.black.opacity(0.8))
+      .onTapGesture {
+        isShowingFullPlayer = true
+      }
+      .gesture(DragGesture().onChanged { drag in
+        if  drag.startLocation.y - drag.location.y > Constants.fullPlayerSwipe {
+          isShowingFullPlayer = true
+        }
+      }
+      )
     } else {
       ArtworkFiller(size: Constants.miniPlayerArtworkImageSize)
       

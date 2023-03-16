@@ -9,6 +9,7 @@ public struct PlaylistSongsView {
   @State private var songs = [Song]()
   @State private var checkIsComplete = false
   @State private var playlistAlreadyExists = false
+  @State private var existingStation: TopTracksStation?
   @State private var currentSong: Song?
   
   public init(playlist: Playlist) {
@@ -39,7 +40,24 @@ extension PlaylistSongsView: View {
     }
     .alert("Station already Exists",
            isPresented: $playlistAlreadyExists) {
-      Button("Play the station", action: {})
+      Button("Play the station", action: {
+        // TODO: play station
+        if let station = existingStation {
+          ApplicationState.shared.setStation(to: station)
+          Task {
+            do {
+              try await ApplicationState.shared.playStation(station)
+            } catch {
+              print("Couldn't play station")
+              ApplicationState.shared.noStationSelected()
+              
+            }
+          }
+          
+          
+        }
+        ApplicationState.shared.endCreating()
+      })
       Button("Cancel") {
         ApplicationState.shared.endCreating()
       }
@@ -53,8 +71,9 @@ extension PlaylistSongsView: View {
       }
     }
     .onAppear {
-      playlistAlreadyExists =
-        TopTracksStation.stationExistsForPlaylist(id: playlist.id.rawValue)
+      existingStation =
+        TopTracksStation.stationForPlaylist(id: playlist.id.rawValue)
+      playlistAlreadyExists = (existingStation != nil)
       checkIsComplete = true
       fetchSongs()
     }

@@ -38,10 +38,10 @@ extension MainStationsView: View {
           }
           VStack {
             Spacer()
-            MiniPlayerView()
-              .onTapGesture {
-                isShowingFullPlayer = true
-              }
+            MiniPlayerView(isShowingFullPlayer: $isShowingFullPlayer)
+//              .onTapGesture {
+//                isShowingFullPlayer = true
+//              }
           }
         }
       }
