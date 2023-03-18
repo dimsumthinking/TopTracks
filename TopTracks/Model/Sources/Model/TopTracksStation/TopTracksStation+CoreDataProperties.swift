@@ -67,4 +67,35 @@ extension TopTracksStation {
   public var hasEnoughGold: Bool {
     (stack(for: .gold)?.songs.count ?? 0) > 10
   }
+  
+  public var allSongs: [TopTracksSong] {
+    self.stacks.flatMap(\.songs)
+  }
+  
+  public var activeSongs: [TopTracksSong] {
+    allSongs.filter{song in stationCreationCategories.contains(song.stack.rotationCategory)}
+  }
+}
+
+extension TopTracksStation {
+  func changeStack(for topTracksSong: TopTracksSong,
+            to category: RotationCategory) {
+    let startingStack = topTracksSong.stack
+    if let destinationStack = stacks.filter({ stack in stack.name == category.name}).first {
+      destinationStack.addToSongs(topTracksSong)
+      topTracksSong.stack = destinationStack
+      startingStack.removeFromSongs(topTracksSong)
+    }
+  }
+  
+  public func changeStationName(to stationName: String) {
+    self.stationName = stationName
+    guard let managedObjectContext else {return}
+    do {
+      try managedObjectContext.save()
+    } catch {
+      managedObjectContext.rollback()
+      print("Couldn't change station name")
+    }
+  }
 }

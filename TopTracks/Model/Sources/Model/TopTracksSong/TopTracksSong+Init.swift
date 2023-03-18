@@ -8,7 +8,8 @@ extension TopTracksSong {
     self.init(context: context)
     self.songID = song.id.rawValue
     self.lastPlayed = Date()
-    self.rating = 0
+    self.rating = SongRating.neutral.rawValue
+    self.motion = "added"
     self.stack = stack
     self.title = song.title
     self.artistName = song.artistName

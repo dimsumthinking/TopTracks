@@ -12,7 +12,8 @@ extension TopTracksSong {
   @NSManaged public var songAsData: Data?
   @NSManaged public var songID: String
   @NSManaged public var lastPlayed: Date
-  @NSManaged public var rating: Int16
+  @NSManaged public var rating: String
+  @NSManaged public var motion: String
   @NSManaged public var stack: TopTracksStack
   @NSManaged public var title: String
   @NSManaged public var artistName: String
@@ -42,5 +43,13 @@ extension TopTracksSong {
       context.rollback()
       print("Couldn't mark TopTracksSong as played")
     }
+  }
+  
+  public var songRating: SongRating? {
+    SongRating(rawValue: rating)
+  }
+  
+  public var station: TopTracksStation {
+    stack.station
   }
 }

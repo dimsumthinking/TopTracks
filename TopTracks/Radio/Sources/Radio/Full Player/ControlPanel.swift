@@ -7,7 +7,6 @@ struct ControlPanel {
 extension ControlPanel: View {
   var body: some View {
     HStack {
-//      Spacer()
       PreviousSongButton()
         .font(.title)
       Spacer()
@@ -15,7 +14,6 @@ extension ControlPanel: View {
       Spacer()
       NextSongButton()
         .font(.title)
-//      Spacer()
     }
     .font(.largeTitle)
     .tint(.primary)

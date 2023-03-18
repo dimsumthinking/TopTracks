@@ -119,3 +119,21 @@ extension ApplicationState {
   }
 }
 
+extension ApplicationState {
+  public var currentRatingIconName: String {
+    currentSong?.anyMatchingTopTracksSong?.songRating?.icon ?? "heart"
+  }
+  
+  public var currentRatingName: String {
+    currentSong?.anyMatchingTopTracksSong?.songRating?.name ?? "It's ok"
+  }
+  
+  public func changeRating(to rating: SongRating) {
+    currentSong?.changeRatingForEveryMatchingTopTracksSong(to: rating)
+  }
+  
+  public func removeCurrentSong() {
+    currentSong?.moveEveryMatchingTopTracksSong(to: .removed)
+  }
+}
+

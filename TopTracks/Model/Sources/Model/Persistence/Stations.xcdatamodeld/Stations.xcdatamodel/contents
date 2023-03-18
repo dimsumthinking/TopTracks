@@ -4,7 +4,8 @@
         <attribute name="artistName" attributeType="String"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="lastPlayed" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="rating" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="motion" optional="YES" attributeType="String"/>
+        <attribute name="rating" attributeType="String"/>
         <attribute name="songAsData" attributeType="Binary"/>
         <attribute name="songID" attributeType="String"/>
         <attribute name="title" attributeType="String"/>

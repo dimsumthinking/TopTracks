@@ -12,48 +12,58 @@ struct FullPlayerView {
 extension FullPlayerView: View {
   var body: some View {
     if let currentSong = applicationState.currentSong {
-      
-      VStack {
-        if let station = applicationState.currentStation {
-          Text(station.name)
-            .font(.headline)
+      NavigationStack {
+        VStack {
+          AlbumArt(currentSong: currentSong)
+            .onTapGesture {
+              isShowingFullPlayer = false
+            }
+          
+          SongTextInfo(currentSong: currentSong)
+          
+          Spacer()
+          
+          SongScrubberView(currentSong: currentSong)
             .padding()
+            .font(.headline)
+            .tint(.primary)
+          Spacer()
+          ControlPanel()
+          Spacer()
+          HStack {
+            Spacer()
+            SleepTimer()
+            Spacer()
+            RoutePicker()
+              .frame(width: 20, height: 20)
+            Spacer()
+          }
+          .padding(.bottom)
         }
+        .navigationTitle(applicationState.currentStation?.stationName ?? "Now Playing")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            SongRatingView()
 
-        AlbumArt(currentSong: currentSong)
-          .onTapGesture {
-            isShowingFullPlayer = false
           }
         
-        SongTextInfo(currentSong: currentSong)
-        
-        
-        Spacer()
-        
-        SongScrubberView(currentSong: currentSong)
-          .padding()
-          .font(.headline)
-          .tint(.primary)
-        Spacer()
-        ControlPanel()
-        Spacer()
-        HStack {
-          Spacer()
-          SleepTimer()
-          Spacer()
-          RoutePicker()
-            .frame(width: 20, height: 20)
-          Spacer()
+//            Button {
+//
+//            } label: {
+//              Image(systemName: applicationState.currentSong?.anyMatchingTopTracksSong?.songRating.icon ?? "heart")
+//            }
+//          }
         }
-        .padding(.bottom)
+        
+        .gesture(DragGesture().onChanged { drag in
+          if drag.location.y - drag.startLocation.y > Constants.fullPlayerSwipe {
+            isShowingFullPlayer = false
+          }
+        }
+        )
       }
       
-      .gesture(DragGesture().onChanged { drag in
-        if drag.location.y - drag.startLocation.y > Constants.fullPlayerSwipe {
-          isShowingFullPlayer = false
-        }
-      }
-      )
     }
     
     else {

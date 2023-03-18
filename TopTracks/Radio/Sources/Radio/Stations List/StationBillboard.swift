@@ -7,6 +7,8 @@ import ApplicationState
 public struct StationBillboard {
   let station: TopTracksStation
   @EnvironmentObject private var applicationState: ApplicationState
+  @State private var isChangingName = false
+  @State private var stationName = ""
 }
 
 extension StationBillboard: View {
@@ -28,10 +30,10 @@ extension StationBillboard: View {
           ArtworkImage(artwork,
                        width: Constants.stationListImageSize,
                        height: Constants.stationListImageSize)
+          .padding(.trailing)
           VStack(alignment: .leading) {
-            Text(station.name)
-              .font(.headline)
-              .padding(.bottom, 8)
+            StationNameView(station: station,
+                            isChangingName: $isChangingName)
             Text(station.topArtists)
               .font(.caption)
               .multilineTextAlignment(.leading)
@@ -48,6 +50,7 @@ extension StationBillboard: View {
                          )
       .contentShape(Rectangle())
       .onTapGesture {
+        guard !isChangingName else { return }
         applicationState.setStation(to: station)
         Task {
           do {
@@ -58,6 +61,9 @@ extension StationBillboard: View {
             
           }
         }
+      }
+      .onLongPressGesture {
+        isChangingName = true
       }
       .animation(.default, value: applicationState.currentStation)
     }

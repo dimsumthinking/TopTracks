@@ -6,6 +6,7 @@ public struct PlaylistSearchRequestView {
   @State private var searchTerm = ""
   @State private var startSearch = false
   @StateObject private var searchSuggester = PlaylistSearchSuggestion()
+  @FocusState private var enteringSearch: Bool
 }
 
 extension PlaylistSearchRequestView: View {
@@ -21,6 +22,7 @@ extension PlaylistSearchRequestView: View {
           .padding()
           .multilineTextAlignment(.center)
           .background(Color.secondary.opacity(0.2))
+          .focused($enteringSearch)
         HStack {
           Spacer()
           
@@ -73,6 +75,9 @@ extension PlaylistSearchRequestView: View {
     .navigationDestination(isPresented: $startSearch) {
       PlaylistSearchResultsView(term: escapedSearchTerm)
         .navigationTitle(searchTerm)
+    }
+    .onAppear {
+      enteringSearch = true
     }
   }
 }

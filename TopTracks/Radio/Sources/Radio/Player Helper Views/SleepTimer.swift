@@ -11,6 +11,7 @@ extension SleepTimer: View {
   var body: some View {
     HStack {
       Button {
+        atEndOfSong = false
         showingTimerOptions = true
       } label: {
         Image(systemName: "bed.double")
@@ -59,3 +60,5 @@ extension SleepTimer {
     showingTimerOptions = false
   }
 }
+
+

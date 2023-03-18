@@ -1,5 +1,6 @@
 let stationEssentialCategories: [RotationCategory] = [.power, .heavy, .medium, .light]
 let stationCreationCategories: [RotationCategory] = [.power, .heavy, .medium, .light, .gold]
+//let fullStationCreationCategories: [RotationCategory] = [.power, .heavy, .medium, .light, .gold, .recommended]
 
 public enum RotationCategory: String, CaseIterable, Hashable, Equatable {
   case power
@@ -8,10 +9,10 @@ public enum RotationCategory: String, CaseIterable, Hashable, Equatable {
   case light
   case gold
   case archived
-  case notIncluded
+  case added
   case removed
-  case recommended
-  case recommendedPlayed
+//  case recommended
+//  case recommendedPlayed
 }
 
 extension RotationCategory: Comparable {
