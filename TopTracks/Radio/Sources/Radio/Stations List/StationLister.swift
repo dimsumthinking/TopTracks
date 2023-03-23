@@ -52,7 +52,6 @@ extension StationLister {
   func deleteStation(_ station: TopTracksStation) {
     TopTracksStation.delete(topTracksStation: station,
                             context: context)
-    // TODO - stop playing
     ApplicationState.shared.noStationSelected()
   }
 }

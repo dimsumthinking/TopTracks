@@ -4,6 +4,7 @@ import MusicKit
 import PlaylistSearch
 import ApplicationState
 import Radio
+import StationUpdaters
 
 struct MainView: View {
   //  @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
@@ -17,6 +18,7 @@ struct MainView: View {
       switch applicationState.currentActivity {
       case .playing: MainStationsView()
       case .creating:  MainCreationView()
+      case .viewingOrEditing(let station): MainStationSongListView(station)
       case .importing(let url):  Text("Not implemented yet for" + (url?.description ?? "no url"))
       }
     }

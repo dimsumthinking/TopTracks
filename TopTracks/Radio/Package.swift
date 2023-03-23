@@ -15,12 +15,13 @@ let package = Package(
     dependencies: [
       .package(path: "../Model"),
       .package(path: "../CoreServices/ApplicationState"),
-      .package(path: "../CoreServices/Constants")
+      .package(path: "../CoreServices/Constants"),
+      .package(path: "../StationUpdaters")
     ],
     targets: [
         .target(
             name: "Radio",
-            dependencies: ["Model", "ApplicationState", "Constants"]),
+            dependencies: ["Model", "ApplicationState", "Constants", "StationUpdaters"]),
         .testTarget(
             name: "RadioTests",
             dependencies: ["Radio"]),

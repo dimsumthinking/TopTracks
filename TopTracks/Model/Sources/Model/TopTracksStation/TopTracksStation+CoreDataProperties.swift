@@ -9,7 +9,8 @@ extension TopTracksStation {
         return NSFetchRequest<TopTracksStation>(entityName: "TopTracksStation")
     }
   @NSManaged public var favorite: Bool
-  @NSManaged public var lastUpdated: Date
+  @NSManaged public var stationLastUpdated: Date
+  @NSManaged public var playlistLastUpdated: Date?
   @NSManaged public var playlistID: String
   @NSManaged public var stationID: UUID
   @NSManaged public var stationName: String
@@ -49,10 +50,16 @@ extension TopTracksStation {
     stationName
   }
   
-  public var artwork: Artwork? {
+  public var playlist: Playlist? {
     guard let playlistAsData,
           let playlist = try? PropertyListDecoder().decode(Playlist.self, from: playlistAsData) else {return nil}
-    return playlist.artwork
+    return playlist
+  }
+  
+  public var artwork: Artwork? {
+//    guard let playlistAsData,
+//          let playlist = try? PropertyListDecoder().decode(Playlist.self, from: playlistAsData) else {return nil}
+    return playlist?.artwork
   }
   
   public var topArtists: String {
@@ -68,19 +75,28 @@ extension TopTracksStation {
     (stack(for: .gold)?.songs.count ?? 0) > 10
   }
   
+  public var hasEnoughGoldForTwoAnHour: Bool {
+    (stack(for: .gold)?.songs.count ?? 0) > 24
+  }
+  
   public var allSongs: [TopTracksSong] {
     self.stacks.flatMap(\.songs)
   }
   
   public var activeSongs: [TopTracksSong] {
-    allSongs.filter{song in stationCreationCategories.contains(song.stack.rotationCategory)}
+    allSongs.filter{song in stationStandardCategories.contains(song.stack.rotationCategory)}
+  }
+  
+  public var availableSongs: [TopTracksSong] {
+    allSongs.filter{song in stationExtendedCategories.contains(song.stack.rotationCategory)}
   }
 }
 
 extension TopTracksStation {
-  func changeStack(for topTracksSong: TopTracksSong,
+  public func changeStack(for topTracksSong: TopTracksSong,
             to category: RotationCategory) {
     let startingStack = topTracksSong.stack
+    guard startingStack.name != category.rawValue else { return }
     if let destinationStack = stacks.filter({ stack in stack.name == category.name}).first {
       destinationStack.addToSongs(topTracksSong)
       topTracksSong.stack = destinationStack
@@ -88,14 +104,39 @@ extension TopTracksStation {
     }
   }
   
+  public func changeStack(for topTrackSongs: [TopTracksSong],
+                   to category: RotationCategory) {
+    for song in topTrackSongs {
+      changeStack(for: song,
+                  to: category)
+    }
+  }
+  
+  
   public func changeStationName(to stationName: String) {
     self.stationName = stationName
-    guard let managedObjectContext else {return}
-    do {
-      try managedObjectContext.save()
-    } catch {
-      managedObjectContext.rollback()
-      print("Couldn't change station name")
+//    guard let managedObjectContext else {return}
+    saveIfPossible()
+//    do {
+//      try managedObjectContext.save()
+//    } catch {
+//      managedObjectContext.rollback()
+//      print("Couldn't change station name")
+//    }
+  }
+}
+
+extension TopTracksStation {
+  public func remove(song: Song) {
+    guard let topTracksSong = allSongs.first(where:{ topTracksSong in topTracksSong.songID == song.id.rawValue}) else { return }
+    changeStack(for: topTracksSong, to: .removed)
+    if let added =  stack(for: .added)?.songs.first {
+      changeStack(for: added, to: topTracksSong.stack.rotationCategory)
+    } else if let gold = stack(for: .gold)?.songs.first {
+      changeStack(for: gold, to: topTracksSong.stack.rotationCategory)
+    } else if let archived = stack(for: .archived)?.songs.first {
+      changeStack(for: archived, to: topTracksSong.stack.rotationCategory)
     }
+    saveIfPossible()
   }
 }

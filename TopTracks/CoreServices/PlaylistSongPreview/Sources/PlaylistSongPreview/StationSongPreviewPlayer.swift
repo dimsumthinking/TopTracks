@@ -29,6 +29,7 @@ extension StationSongPreviewPlayer {
 #if !os(macOS)
     
     if let url = song.previewAssets?.first?.url {
+      NotificationCenter.default.post(name: Notification.Name("PreviewPlayerBegan"), object: nil)
       Task {
         do {
           let (data, _) = try await URLSession.shared.data(from: url)

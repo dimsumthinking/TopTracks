@@ -6,7 +6,7 @@ extension TopTracksStation {
     stationCategories.forEach { category in
       stacks[category] = songs(for: category)
     }
-    return musicClock
+    return stationMusicClock
       .compactMap { category in
       guard var songs = stacks[category],
             songs.count >= 2 else {return Optional<Song>.none}
@@ -26,7 +26,13 @@ extension TopTracksStation {
   }
   
   private var stationCategories: [RotationCategory] {
-    hasEnoughGold ? stationCreationCategories : stationEssentialCategories
+    hasEnoughGold ? stationStandardCategories : stationEssentialCategories
+  }
+}
+
+extension TopTracksStation {
+  private var stationMusicClock: [RotationCategory] {
+    hasEnoughGoldForTwoAnHour ? musicClockPlus : musicClock
   }
 }
 

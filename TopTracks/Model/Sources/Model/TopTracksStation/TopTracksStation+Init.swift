@@ -8,7 +8,8 @@ extension TopTracksStation {
                    context: NSManagedObjectContext) {
     self.init(context: context)
     self.favorite = false
-    self.lastUpdated = Date()
+    self.stationLastUpdated = Date()
+    self.playlistLastUpdated = playlist.lastModifiedDate
     self.playlistID = playlist.id.rawValue
     self.stationID = UUID()
     self.stationName = playlist.name

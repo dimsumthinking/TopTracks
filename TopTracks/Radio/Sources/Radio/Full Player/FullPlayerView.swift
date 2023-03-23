@@ -43,17 +43,12 @@ extension FullPlayerView: View {
         .navigationTitle(applicationState.currentStation?.stationName ?? "Now Playing")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            SongRatingView()
-
+          if applicationState.canShowRating {
+            ToolbarItem(placement: .navigationBarTrailing) {
+              SongRatingView()
+              
+            }
           }
-        
-//            Button {
-//
-//            } label: {
-//              Image(systemName: applicationState.currentSong?.anyMatchingTopTracksSong?.songRating.icon ?? "heart")
-//            }
-//          }
         }
         
         .gesture(DragGesture().onChanged { drag in

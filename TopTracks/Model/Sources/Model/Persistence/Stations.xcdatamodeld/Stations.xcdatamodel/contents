@@ -21,10 +21,11 @@
         <attribute name="favorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="isChart" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lastTouched" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="lastUpdated" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="playlistAsData" optional="YES" attributeType="Binary"/>
         <attribute name="playlistID" attributeType="String"/>
+        <attribute name="playlistLastUpdated" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="stationID" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="stationLastUpdated" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="stationName" attributeType="String"/>
         <attribute name="updateAvailable" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="stacks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="station" inverseEntity="TopTracksStack"/>

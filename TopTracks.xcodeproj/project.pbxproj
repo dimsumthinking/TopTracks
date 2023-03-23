@@ -20,6 +20,7 @@
 		62BF864A29B921A2003B94EB /* CoreServices in Frameworks */ = {isa = PBXBuildFile; productRef = 62BF864929B921A2003B94EB /* CoreServices */; };
 		62C8DDFE297A31CD005D9739 /* AppleMusicAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C8DDFD297A31CD005D9739 /* AppleMusicAuthorizationView.swift */; };
 		62C8DE05297B3459005D9739 /* AppleMusicSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C8DE04297B3459005D9739 /* AppleMusicSubscriptionView.swift */; };
+		62E32B7A29C8C35400E43121 /* StationUpdaters in Frameworks */ = {isa = PBXBuildFile; productRef = 62E32B7929C8C35400E43121 /* StationUpdaters */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		623CAFA4278CFA6500B8FC48 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		628E69A829AD4A6500B7B9EF /* PlaylistSearch */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PlaylistSearch; path = TopTracks/PlaylistSearch; sourceTree = "<group>"; };
 		62B337A829B12E31000BD413 /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Model; path = TopTracks/Model; sourceTree = "<group>"; };
+		62B9FC8229C8BB3C00543F90 /* StationUpdaters */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StationUpdaters; path = TopTracks/StationUpdaters; sourceTree = "<group>"; };
 		62C8DDFD297A31CD005D9739 /* AppleMusicAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAuthorizationView.swift; sourceTree = "<group>"; };
 		62C8DE04297B3459005D9739 /* AppleMusicSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicSubscriptionView.swift; sourceTree = "<group>"; };
 		62E8CD7829B23CCE00591D07 /* CoreServices */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreServices; path = TopTracks/CoreServices/CoreServices; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				620233812824003A00D7C63F /* StoreKit.framework in Frameworks */,
+				62E32B7A29C8C35400E43121 /* StationUpdaters in Frameworks */,
 				6227AB2D29B92F1C00BDF230 /* Radio in Frameworks */,
 				62BF864A29B921A2003B94EB /* CoreServices in Frameworks */,
 				623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */,
@@ -66,6 +69,7 @@
 				62B337A829B12E31000BD413 /* Model */,
 				62E8CD7829B23CCE00591D07 /* CoreServices */,
 				6227AB2B29B92EC500BDF230 /* Radio */,
+				62B9FC8229C8BB3C00543F90 /* StationUpdaters */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -158,6 +162,7 @@
 				6258454B29B15926008F70CB /* Model */,
 				62BF864929B921A2003B94EB /* CoreServices */,
 				6227AB2C29B92F1C00BDF230 /* Radio */,
+				62E32B7929C8C35400E43121 /* StationUpdaters */,
 			);
 			productName = TopTracks;
 			productReference = 623B99E7276AC4F0004C17AE /* TopTracks.app */;
@@ -458,6 +463,10 @@
 		62BF864929B921A2003B94EB /* CoreServices */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CoreServices;
+		};
+		62E32B7929C8C35400E43121 /* StationUpdaters */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StationUpdaters;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

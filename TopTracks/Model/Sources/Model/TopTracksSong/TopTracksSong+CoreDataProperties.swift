@@ -45,8 +45,17 @@ extension TopTracksSong {
     }
   }
   
-  public var songRating: SongRating? {
-    SongRating(rawValue: rating)
+  public var songRating: SongRating {
+    get {
+      SongRating(rawValue: rating) ?? .neutral
+    }
+    set {
+      rating = newValue.rawValue
+    }
+  }
+  
+  public var songMotion: SongMotion {
+    SongMotion(rawValue: rating) ?? .same
   }
   
   public var station: TopTracksStation {

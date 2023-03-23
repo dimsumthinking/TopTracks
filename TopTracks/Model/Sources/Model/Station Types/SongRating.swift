@@ -7,7 +7,12 @@ public enum SongRating: String, CaseIterable, Hashable, Equatable {
   case remove
 }
 
-extension SongRating {
+extension SongRating: Comparable {
+  public static func < (lhs: SongRating,
+                        rhs: SongRating) -> Bool {
+    lhs.index > rhs.index
+  }
+  
   private var index: Int {
     SongRating.allCases.firstIndex(of: self) ?? 0
   }
@@ -16,18 +21,12 @@ extension SongRating {
 extension SongRating: CustomStringConvertible {
   public var name: String {
     switch self {
-    case .topTrack:
-      "I love it"
-    case .love:
-      "Play it more"
-    case .like:
-      "I like it"
-    case .neutral:
-      "It's ok"
-    case .dontLike:
-      "Play it less"
-    case .remove:
-      "Don't play it again"
+    case .topTrack: return  "I love it"
+    case .love: return "Play it more"
+    case .like: return "I like it"
+    case .neutral: return "It's ok"
+    case .dontLike: return "Play it less"
+    case .remove: return "Don't play it again"
     }
   }
   public var description: String {

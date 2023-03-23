@@ -2,10 +2,13 @@ import SwiftUI
 import MusicKit
 import Constants
 import Model
+import ApplicationState
+import StationUpdaters
 
 public struct StationListView {
   @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
   @StateObject private var stationLister = StationLister()
+  @EnvironmentObject private var applicationState: ApplicationState
   public init() {}
 }
 
@@ -22,8 +25,34 @@ extension StationListView: View {
               Image(systemName: "trash.fill")
             }
           }
+          .swipeActions(edge: .leading) {
+            Button {
+              ApplicationState.shared.beginStationgSongList(for: station)
+            } label: {
+              Image(systemName: "music.note.list")
+            }
+            .tint(.orange)
+            if !station.isChart && station.availableSongs.count > 24 {
+              Button {
+                let rotator = RotateExistingMusic(in: station)
+                rotator.rotate()
+              } label: {
+                Image(systemName: "arrow.triangle.2.circlepath.circle")
+              }
+              .tint(.cyan)
+            }
+            if let added = station.stack(for: .added),
+               (!station.isChart && added.songs.count > 4) {
+              Button {
+                let adder = AddAndRotateMusic(in: station)
+                adder.add()
+              } label: {
+                Image(systemName: "goforward.plus")
+              }
+              .tint(.mint)
+            }
+          }
       }
-      
       if stationLister.stations.isEmpty {
         HStack {
           Text("Tap")
@@ -43,10 +72,6 @@ extension StationListView: View {
     .listStyle(.plain)
   }
 }
-  
-  
-  struct StationListView_Previews: PreviewProvider {
-    static var previews: some View {
-      StationListView()
-    }
-  }
+
+
+

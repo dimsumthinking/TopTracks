@@ -36,7 +36,7 @@ extension SongRatingView: View {
       Button(role: .destructive) {
         removeCurrentSong()
       } label: {
-        Text("Permanently remove this song")
+        Text("Permanently remove from this station")
       }
       
       Button(role: .cancel) {

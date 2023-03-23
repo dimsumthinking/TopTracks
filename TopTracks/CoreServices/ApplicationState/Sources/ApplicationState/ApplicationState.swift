@@ -11,6 +11,18 @@ public class ApplicationState: ObservableObject {
   @Published public private(set) var currentSong: Song?
   public var endTime: Date?
   private var sleepTimer: Task<Void, Error>?
+  private var queueCache: ApplicationMusicPlayer.Queue?
+  private var cachedSong: Song?
+  private var songTime: TimeInterval?
+  
+  init() {
+    Task {
+      for await _ in NotificationCenter.default.notifications(named: Notification.Name("PreviewPlayerBegan")) {
+        cachedSong = currentSong
+        songTime = ApplicationMusicPlayer.shared.playbackTime
+      }
+    }
+  }
 }
 
 extension ApplicationState {
@@ -27,7 +39,12 @@ extension ApplicationState {
   }
   
   public func playStation(_ station: TopTracksStation) async throws {
+      
     ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: station.nextHour())
+    try await setUpPlayer()
+  }
+  
+  private func setUpPlayer() async throws {
     try await ApplicationMusicPlayer.shared.prepareToPlay()
     try await ApplicationMusicPlayer.shared.play()
   }
@@ -70,7 +87,37 @@ extension ApplicationState {
   
   public func endCreating() {
     currentActivity = .playing
+    restartPlayer()
   }
+  
+  public func beginStationgSongList(for topTracksStation: TopTracksStation) {
+    currentActivity = .viewingOrEditing(topTracksStation: topTracksStation)
+  }
+  
+  public func endStationSongList() {
+    currentActivity = .playing
+    restartPlayer()
+  }
+  
+  private func restartPlayer() {
+    if let cachedSong  {
+      currentSong = cachedSong
+      ApplicationMusicPlayer.shared.queue =  ApplicationMusicPlayer.Queue(for: [cachedSong])
+      refillQueue()
+      if let songTime {
+        ApplicationMusicPlayer.shared.playbackTime = songTime
+      }
+      Task {
+        try await setUpPlayer()
+      }
+    } else {
+      currentSong = nil
+      currentStation = nil
+    }
+    cachedSong = nil
+    songTime = nil
+  }
+  
 }
 
 extension ApplicationState {
@@ -121,11 +168,11 @@ extension ApplicationState {
 
 extension ApplicationState {
   public var currentRatingIconName: String {
-    currentSong?.anyMatchingTopTracksSong?.songRating?.icon ?? "heart"
+    currentSong?.anyMatchingTopTracksSong?.songRating.icon ?? "heart"
   }
   
   public var currentRatingName: String {
-    currentSong?.anyMatchingTopTracksSong?.songRating?.name ?? "It's ok"
+    currentSong?.anyMatchingTopTracksSong?.songRating.name ?? "It's ok"
   }
   
   public func changeRating(to rating: SongRating) {
@@ -133,7 +180,16 @@ extension ApplicationState {
   }
   
   public func removeCurrentSong() {
-    currentSong?.moveEveryMatchingTopTracksSong(to: .removed)
+//    currentSong?.moveEveryMatchingTopTracksSong(to: .removed)
+    guard let currentStation,
+          let currentSong else { return }
+    currentStation.remove(song: currentSong)
   }
+  public var canShowRating: Bool {
+    guard let currentStation else { return false }
+    return !currentStation.isChart
+  }
+  
 }
+
 

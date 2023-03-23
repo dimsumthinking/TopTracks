@@ -3,6 +3,7 @@ import Model
 import MusicKit
 import Constants
 import ApplicationState
+import StationUpdaters
 
 public struct StationBillboard {
   let station: TopTracksStation
@@ -42,7 +43,11 @@ extension StationBillboard: View {
           }
         }
         if station == applicationState.currentStation {
-          Text("")
+          let message = (!station.isChart && station.updateAvailable) ? "New Songs Available (Swipe Right)" : ""
+          HStack {
+            Text(message)
+              .foregroundColor(.yellow)
+          }
             .padding(.bottom)
         }
       }
@@ -54,6 +59,7 @@ extension StationBillboard: View {
         applicationState.setStation(to: station)
         Task {
           do {
+            try await UpdateRetriever.fetchUpdates(for: station)
             try await applicationState.playStation(station)
           } catch {
             print("Couldn't play station")
@@ -69,3 +75,4 @@ extension StationBillboard: View {
     }
   }
 }
+
