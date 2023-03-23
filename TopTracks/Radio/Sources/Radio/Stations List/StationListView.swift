@@ -64,11 +64,11 @@ extension StationListView: View {
         .foregroundColor(.yellow)
       }
     }
+    .animation(.default, value: stationLister.stations)
     .padding(.bottom, Constants.miniPlayerArtworkImageSize/2)
     .onAppear {
       stationLister.updateStationList()
     }
-    .animation(.default, value: stationLister.stations)
     .listStyle(.plain)
   }
 }

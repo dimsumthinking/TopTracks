@@ -26,7 +26,7 @@ public class ApplicationState: ObservableObject {
 }
 
 extension ApplicationState {
-  public func setStation(to station: TopTracksStation) {
+   func setStation(to station: TopTracksStation) {
     station.lastTouched = Date()
     do {
       try sharedViewContext.save()
@@ -39,9 +39,11 @@ extension ApplicationState {
   }
   
   public func playStation(_ station: TopTracksStation) async throws {
-      
     ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: station.nextHour())
     try await setUpPlayer()
+    await MainActor.run {
+      setStation(to: station)
+    }
   }
   
   private func setUpPlayer() async throws {
@@ -118,6 +120,7 @@ extension ApplicationState {
     songTime = nil
   }
   
+
 }
 
 extension ApplicationState {

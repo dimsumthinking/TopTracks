@@ -43,7 +43,7 @@ extension PlaylistSongsView: View {
       Button("Play the station", action: {
         // TODO: play station
         if let station = existingStation {
-          ApplicationState.shared.setStation(to: station)
+//          ApplicationState.shared.setStation(to: station)
           Task {
             do {
               try await ApplicationState.shared.playStation(station)

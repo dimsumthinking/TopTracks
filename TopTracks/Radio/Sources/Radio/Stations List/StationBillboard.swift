@@ -56,7 +56,7 @@ extension StationBillboard: View {
       .contentShape(Rectangle())
       .onTapGesture {
         guard !isChangingName else { return }
-        applicationState.setStation(to: station)
+//        applicationState.setStation(to: station)
         Task {
           do {
             try await UpdateRetriever.fetchUpdates(for: station)

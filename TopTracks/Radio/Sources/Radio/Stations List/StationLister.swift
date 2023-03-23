@@ -9,7 +9,7 @@ class StationLister: NSObject, ObservableObject {
   @Published private(set) var stations: [TopTracksStation] = []
   private let fetchedResultsController: NSFetchedResultsController<TopTracksStation>
   private let context = sharedViewContext
-  
+
   override init() {
     let request = TopTracksStation.fetchRequest()
     request.sortDescriptors = [NSSortDescriptor(key: "lastTouched",
