@@ -43,7 +43,7 @@ extension StationBillboard: View {
           }
         }
         if station == applicationState.currentStation {
-          let message = (!station.isChart && station.updateAvailable) ? "New Songs Available (Swipe Right)" : ""
+//          let message = (!station.isChart && station.updateAvailable) ? "New Songs Available (Swipe Right)" : ""
           HStack {
             Text(message)
               .foregroundColor(.yellow)
@@ -76,3 +76,13 @@ extension StationBillboard: View {
   }
 }
 
+extension StationBillboard {
+  private var message: String {
+    if let added = station.stack(for: .added),
+       (!station.isChart && added.songs.count > 4) {
+      return "New Songs Available (Swipe Right)"
+    } else {
+      return ""
+    }
+  }
+}

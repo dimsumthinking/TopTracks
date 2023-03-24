@@ -14,7 +14,6 @@ extension TopTracksSong {
     self.title = song.title
     self.artistName = song.artistName
     self.songAsData = try? PropertyListEncoder().encode(song)
-    print(song.title, song.genres?.map(\.name) ?? "No genres use names \(song.genreNames)")
     self.id = UUID()
   }
 }

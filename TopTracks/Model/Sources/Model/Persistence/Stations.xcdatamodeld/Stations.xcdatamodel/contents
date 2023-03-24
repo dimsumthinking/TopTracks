@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="TopTracksSong" representedClassName="Model.TopTracksSong" syncable="YES">
-        <attribute name="artistName" attributeType="String"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="lastPlayed" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="artistName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="lastPlayed" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="motion" optional="YES" attributeType="String"/>
-        <attribute name="rating" attributeType="String"/>
-        <attribute name="songAsData" attributeType="Binary"/>
-        <attribute name="songID" attributeType="String"/>
-        <attribute name="title" attributeType="String"/>
+        <attribute name="rating" optional="YES" attributeType="String"/>
+        <attribute name="songAsData" optional="YES" attributeType="Binary"/>
+        <attribute name="songID" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="stack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="songs" inverseEntity="TopTracksStack"/>
     </entity>
     <entity name="TopTracksStack" representedClassName="Model.TopTracksStack" syncable="YES">
-        <attribute name="name" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TopTracksSong" inverseName="stack" inverseEntity="TopTracksSong"/>
         <relationship name="station" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TopTracksStation" inverseName="stacks" inverseEntity="TopTracksStation"/>
     </entity>
     <entity name="TopTracksStation" representedClassName="Model.TopTracksStation" syncable="YES">
-        <attribute name="allowRecommendations" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="favorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="isChart" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="lastTouched" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="allowRecommendations" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isChart" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastTouched" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="playlistAsData" optional="YES" attributeType="Binary"/>
-        <attribute name="playlistID" attributeType="String"/>
-        <attribute name="playlistLastUpdated" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="stationID" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="stationLastUpdated" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="stationName" attributeType="String"/>
-        <attribute name="updateAvailable" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="playlistID" optional="YES" attributeType="String"/>
+        <attribute name="playlistLastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="stationID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="stationLastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="stationName" optional="YES" attributeType="String"/>
+        <attribute name="updateAvailable" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="stacks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TopTracksStack" inverseName="station" inverseEntity="TopTracksStack"/>
     </entity>
 </model>

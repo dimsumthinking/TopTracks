@@ -54,5 +54,6 @@ extension StationLister {
                             context: context)
     ApplicationState.shared.noStationSelected()
   }
+
 }
 

@@ -102,6 +102,8 @@ extension ApplicationState {
   }
   
   private func restartPlayer() {
+    guard (ApplicationMusicPlayer.shared.state.playbackStatus != .paused &&
+           ApplicationMusicPlayer.shared.state.playbackStatus != .playing) else {return}
     if let cachedSong  {
       currentSong = cachedSong
       ApplicationMusicPlayer.shared.queue =  ApplicationMusicPlayer.Queue(for: [cachedSong])

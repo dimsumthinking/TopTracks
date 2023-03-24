@@ -72,6 +72,3 @@ extension StationListView: View {
     .listStyle(.plain)
   }
 }
-
-
-
