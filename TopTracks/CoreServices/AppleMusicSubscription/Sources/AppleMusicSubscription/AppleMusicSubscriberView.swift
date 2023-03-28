@@ -3,25 +3,32 @@ import MusicKit
 
 
 public struct AppleMusicSubscriberView {
-  let canBecomeSubscriber: Bool
   @State private var isShowingSubscriptionOffer = false
+  @ObservedObject private var appleMusicSubscription: AppleMusicSubscription
   
-  public init(canBecomeSubscriber: Bool) {
-    self.canBecomeSubscriber = canBecomeSubscriber
+  public init(appleMusicSubscription: AppleMusicSubscription) {
+    self.appleMusicSubscription = appleMusicSubscription
   }
 }
 
 extension AppleMusicSubscriberView: View {
   public var body: some View {
     VStack(spacing: 40) {
-      Text("""
+      if let subscription = AppleMusicSubscription.shared.subscription {
+        Text("""
            This app requires an
            Apple Music Subscription
            Individual, Student, or Family Plan
            to create playlists and play music.
            """)
-      .multilineTextAlignment(.center)
-      if canBecomeSubscriber {
+        .multilineTextAlignment(.center)
+      } else {
+        VStack {
+          Text("Checking Apple Music Subscription")
+          ProgressView()
+        }
+      }
+      if appleMusicSubscription.canBecomeSubscriber {
         Button("Subscribe") {
           isShowingSubscriptionOffer = true
         }
@@ -31,5 +38,4 @@ extension AppleMusicSubscriberView: View {
                             options: MusicSubscriptionOffer.Options.default)
   }
 }
-
 

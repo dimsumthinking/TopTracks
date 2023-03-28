@@ -1,12 +1,9 @@
 import MusicKit
-//import SwiftUI
 import Combine
 
 @MainActor
 public class AppleMusicSubscription: ObservableObject {
   public static var shared = AppleMusicSubscription()
-//  private var isNotYetMonitoring = true
-  
   @Published public private(set) var subscription: MusicSubscription?
   
   private init() {
@@ -16,15 +13,6 @@ public class AppleMusicSubscription: ObservableObject {
       }
     }
   }
-  
-//  public func startMonitoring() {
-//    guard isNotYetMonitoring else { return }
-//    Task {
-//      for await subscription in MusicSubscription.subscriptionUpdates {
-//        self.subscription = subscription
-//      }
-//    }
-//  }
 }
 
 extension AppleMusicSubscription {

@@ -56,6 +56,8 @@ extension StationBillboard: View {
       .contentShape(Rectangle())
       .onTapGesture {
         guard !isChangingName else { return }
+//        guard let currentStation = applicationState.currentStation,
+//              currentStation.stationID != station.stationID else {return}
 //        applicationState.setStation(to: station)
         Task {
           do {

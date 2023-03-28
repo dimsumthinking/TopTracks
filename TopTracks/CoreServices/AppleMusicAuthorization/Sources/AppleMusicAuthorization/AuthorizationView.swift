@@ -44,3 +44,9 @@ extension AuthorizationView {
     }
   }
 }
+
+//struct AuthorizationView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    AuthorizationView(status: .constant(.denied))
+//  }
+//}
