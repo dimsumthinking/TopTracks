@@ -2,7 +2,7 @@ import Foundation
 import Model
 
 public enum TopTracksAppActivity {
-  case playing
+  case enjoying
   case creating
   case viewingOrEditing(topTracksStation: TopTracksStation)
   case importing(url: URL?)
@@ -11,7 +11,7 @@ public enum TopTracksAppActivity {
 extension TopTracksAppActivity: Equatable {
   public static func ==(lhs: TopTracksAppActivity, rhs: TopTracksAppActivity) -> Bool {
     switch (lhs, rhs) {
-    case (.playing, .playing), (.creating, .creating):
+    case (.enjoying, .enjoying), (.creating, .creating):
       return true
     case (.importing( _), .importing( _)):
       return true

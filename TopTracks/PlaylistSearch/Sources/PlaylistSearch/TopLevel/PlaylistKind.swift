@@ -1,6 +1,6 @@
 import Foundation
 
-let mainPlaylistKinds = [PlaylistKind.top, .cityCharts, .countryTop100, .byGenre, .moodAndActivity, .decade, .international, .openSearch]
+let mainPlaylistKinds = [PlaylistKind.top, .cityCharts, .countryTop100, .byGenre, .moodAndActivity, .decade, .international, .classical, .openSearch]
 
 enum PlaylistKind: String, CaseIterable, Hashable, Equatable {
   case top
@@ -49,7 +49,7 @@ extension PlaylistKind: CustomStringConvertible {
     case .countryTop100:
       return "Daily Global Top 100"
     case .byGenre:
-      return "Playlists by Genre"
+      return "Playlists for Top Genres"
     case .moodAndActivity:
       return "Mood and Activity"
     case .decade:

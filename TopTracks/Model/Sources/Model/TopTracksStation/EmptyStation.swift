@@ -2,7 +2,7 @@ import MusicKit
 import Foundation
 
 
-let emptyStation = TopTracksStation(favorite: false,
+public let emptyStation = TopTracksStation(favorite: false,
                                     stationLastUpdated: Date(),
                                     playlistLastUpdated: Date(),
                                     playlistID: "-1",

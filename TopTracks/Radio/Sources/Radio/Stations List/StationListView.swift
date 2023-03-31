@@ -53,6 +53,17 @@ extension StationListView: View {
             }
           }
       }
+      .onDelete { indexSet in
+        if let index = indexSet.first {
+          stationLister.deleteStation( stationLister.stations[index])
+        }
+      }
+      .onMove { indexSet, offset in
+        if let fromLocation = indexSet.first {
+          stationLister.moveStation(from: fromLocation,
+                                    offset: offset)
+        }
+      }
       if stationLister.stations.isEmpty {
         HStack {
           Text("Tap")
@@ -63,9 +74,11 @@ extension StationListView: View {
         .font(.headline)
         .foregroundColor(.yellow)
       }
+      Rectangle()
+        .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
+        .foregroundColor(.clear)
     }
     .animation(.default, value: stationLister.stations)
-    .padding(.bottom, Constants.miniPlayerArtworkImageSize/2)
     .onAppear {
       stationLister.updateStationList()
     }

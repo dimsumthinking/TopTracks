@@ -16,7 +16,7 @@ struct MainView: View {
   var body: some View {
     Group {
       switch applicationState.currentActivity {
-      case .playing: MainStationsView()
+      case .enjoying: MainStationsView()
       case .creating:  MainCreationView()
       case .viewingOrEditing(let station): MainStationSongListView(station)
       case .importing(let url):  Text("Not implemented yet for" + (url?.description ?? "no url"))

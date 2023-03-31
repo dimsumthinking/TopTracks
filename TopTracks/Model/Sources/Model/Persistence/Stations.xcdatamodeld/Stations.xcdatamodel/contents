@@ -18,12 +18,14 @@
     </entity>
     <entity name="TopTracksStation" representedClassName="Model.TopTracksStation" syncable="YES">
         <attribute name="allowRecommendations" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="buttonPosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="favorite" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="isChart" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lastTouched" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="playlistAsData" optional="YES" attributeType="Binary"/>
         <attribute name="playlistID" optional="YES" attributeType="String"/>
         <attribute name="playlistLastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="stacksLastRotated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="stationID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="stationLastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="stationName" optional="YES" attributeType="String"/>

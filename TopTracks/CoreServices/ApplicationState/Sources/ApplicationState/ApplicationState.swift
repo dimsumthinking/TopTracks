@@ -6,7 +6,7 @@ import MusicKit
 
 public class ApplicationState: ObservableObject {
   public static var shared = ApplicationState()
-  @Published public private(set) var currentActivity: TopTracksAppActivity = .playing
+  @Published public private(set) var currentActivity: TopTracksAppActivity = .enjoying
   @Published public private(set) var currentStation: TopTracksStation?
   @Published public private(set) var currentSong: Song?
   public var endTime: Date?
@@ -51,12 +51,20 @@ extension ApplicationState {
     try await ApplicationMusicPlayer.shared.play()
   }
   
-  public func noStationSelected() {
+  public func stopPlayingDeletedStation(_ station: TopTracksStation) {
+    guard currentStation == station else { return }
     currentStation = nil
     ApplicationMusicPlayer.shared.stop()
     ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: [Song]())
     ApplicationMusicPlayer.shared.queue.currentEntry = nil
   }
+  
+    public func noStationSelected() {
+      currentStation = nil
+      ApplicationMusicPlayer.shared.stop()
+      ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: [Song]())
+      ApplicationMusicPlayer.shared.queue.currentEntry = nil
+    }
 }
 
 extension ApplicationState {
@@ -88,7 +96,7 @@ extension ApplicationState {
   }
   
   public func endCreating() {
-    currentActivity = .playing
+    currentActivity = .enjoying
     restartPlayer()
   }
   
@@ -97,7 +105,7 @@ extension ApplicationState {
   }
   
   public func endStationSongList() {
-    currentActivity = .playing
+    currentActivity = .enjoying
     restartPlayer()
   }
   

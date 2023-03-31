@@ -12,7 +12,7 @@ extension PlaylistKind {
   
   var hasHardCodedCategories: Bool {
     switch self {
-    case .byGenre, .decade, .international, .moodAndActivity, .classical:
+    case .byGenre, .decade, .international, .moodAndActivity:
       return true
     default:
       return false

@@ -9,7 +9,9 @@ extension TopTracksStation {
         return NSFetchRequest<TopTracksStation>(entityName: "TopTracksStation")
     }
   @NSManaged public var favorite: Bool
+  @NSManaged public var buttonPosition: Int16
   @NSManaged public var stationLastUpdated: Date
+  @NSManaged public var stacksLastRotated: Date
   @NSManaged public var playlistLastUpdated: Date?
   @NSManaged public var playlistID: String
   @NSManaged public var stationID: UUID
@@ -66,6 +68,15 @@ extension TopTracksStation {
   public var topArtists: String {
     String(stacks.filter{ stack in stack.name == "power"}.flatMap(\.songs).map(\.title)
       .reduce("") {$1 + ", " + $0}.dropLast(2))
+  }
+  
+  public var buttonNumber: Int {
+    get {
+      Int(buttonPosition)
+    }
+    set {
+      buttonPosition = Int16(newValue)
+    }
   }
   
   public func stack(for rotationCategory: RotationCategory) -> TopTracksStack? {

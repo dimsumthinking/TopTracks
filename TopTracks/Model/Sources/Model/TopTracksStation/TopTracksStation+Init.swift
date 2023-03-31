@@ -20,6 +20,14 @@ extension TopTracksStation {
     self.stacks = topTracksStacks(songsInStacks: songsInStacks,
                                   context: context)
     self.isChart = playlist.isChart ?? false
+    let numberOfStations: Int
+    do {
+      numberOfStations = try context.count(for: TopTracksStation.fetchRequest())
+    } catch {
+      numberOfStations = 0
+    }
+    self.buttonPosition = Int16(numberOfStations)
+    self.stacksLastRotated = Date()
   }
 }
 
