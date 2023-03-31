@@ -14,7 +14,7 @@ struct MainView: View {
       switch applicationState.currentActivity {
       case .enjoying:
         ZStack {
-          StationListView()
+          MainStationsView()
           MainPlayerView()
         }
       case .creating:  MainCreationView()

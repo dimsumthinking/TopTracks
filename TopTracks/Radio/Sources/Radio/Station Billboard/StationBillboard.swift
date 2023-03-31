@@ -32,6 +32,16 @@ extension StationBillboard: View {
       }
       .listRowBackground(BillboardBackground(backgroundColor: backgroundColor,
                                              isCurrentStation: isCurrentStation))
+      .swipeActions(edge: .leading) {
+        ShowStacksButton(station: station)
+        if !station.isChart && station.availableSongs.count > 24 {
+          RotateMusicButton(station: station)
+        }
+        if let added = station.stack(for: .added),
+           (!station.isChart && added.songs.count > 4) {
+          AddAndRotateMusicButton(station: station)
+        }
+      }
       .contentShape(Rectangle())
       .onTapGesture {
         guard isNotEditing  else {
@@ -46,7 +56,6 @@ extension StationBillboard: View {
           } catch {
             print("Couldn't play station")
             applicationState.noStationSelected()
-            
           }
         }
       }
