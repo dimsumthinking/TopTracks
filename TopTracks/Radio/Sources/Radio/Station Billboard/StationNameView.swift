@@ -34,6 +34,7 @@ extension StationNameView: View {
       Text(station.name)
         .padding(.bottom, 8)
         .multilineTextAlignment(.leading)
+        .lineLimit(3)
 
     }
 

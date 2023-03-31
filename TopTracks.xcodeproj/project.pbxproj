@@ -15,6 +15,7 @@
 		623B99EF276AC4F0004C17AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99EE276AC4F0004C17AE /* Assets.xcassets */; };
 		623B99F2276AC4F0004C17AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99F1276AC4F0004C17AE /* Preview Assets.xcassets */; };
 		623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623CAFA4278CFA6500B8FC48 /* CloudKit.framework */; };
+		624C171029D73623003BAE44 /* Players in Frameworks */ = {isa = PBXBuildFile; productRef = 624C170F29D73623003BAE44 /* Players */; };
 		6258454C29B15926008F70CB /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = 6258454B29B15926008F70CB /* Model */; };
 		628E69AA29AD4AA200B7B9EF /* PlaylistSearch in Frameworks */ = {isa = PBXBuildFile; productRef = 628E69A929AD4AA200B7B9EF /* PlaylistSearch */; };
 		62BF864A29B921A2003B94EB /* CoreServices in Frameworks */ = {isa = PBXBuildFile; productRef = 62BF864929B921A2003B94EB /* CoreServices */; };
@@ -27,6 +28,7 @@
 		6221ABBC2912A8F20088F0F2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6222D985280DFFAF009DEA8A /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		6227AB2B29B92EC500BDF230 /* Radio */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Radio; path = TopTracks/Radio; sourceTree = "<group>"; };
+		622F549D29D7358B00C89939 /* Players */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Players; path = TopTracks/Players; sourceTree = "<group>"; };
 		623B99E7276AC4F0004C17AE /* TopTracks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopTracks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		623B99EE276AC4F0004C17AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		623B99F1276AC4F0004C17AE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 				62BF864A29B921A2003B94EB /* CoreServices in Frameworks */,
 				623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */,
 				6222D986280DFFAF009DEA8A /* NetworkExtension.framework in Frameworks */,
+				624C171029D73623003BAE44 /* Players in Frameworks */,
 				6258454C29B15926008F70CB /* Model in Frameworks */,
 				628E69AA29AD4AA200B7B9EF /* PlaylistSearch in Frameworks */,
 			);
@@ -66,6 +69,7 @@
 				62E8CD7829B23CCE00591D07 /* CoreServices */,
 				6227AB2B29B92EC500BDF230 /* Radio */,
 				62B9FC8229C8BB3C00543F90 /* StationUpdaters */,
+				622F549D29D7358B00C89939 /* Players */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -157,6 +161,7 @@
 				62BF864929B921A2003B94EB /* CoreServices */,
 				6227AB2C29B92F1C00BDF230 /* Radio */,
 				62E32B7929C8C35400E43121 /* StationUpdaters */,
+				624C170F29D73623003BAE44 /* Players */,
 			);
 			productName = TopTracks;
 			productReference = 623B99E7276AC4F0004C17AE /* TopTracks.app */;
@@ -443,6 +448,10 @@
 		6227AB2C29B92F1C00BDF230 /* Radio */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Radio;
+		};
+		624C170F29D73623003BAE44 /* Players */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Players;
 		};
 		6258454B29B15926008F70CB /* Model */ = {
 			isa = XCSwiftPackageProductDependency;
