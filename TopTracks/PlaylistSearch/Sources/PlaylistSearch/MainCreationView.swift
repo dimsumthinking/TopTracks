@@ -15,7 +15,8 @@ extension MainCreationView: View {
         .toolbar {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button("Cancel") {
-              ApplicationState.shared.endCreating()
+              CurrentActivity.shared.endCreating()
+//              ApplicationState.shared.endCreating()
             }
           }
         }

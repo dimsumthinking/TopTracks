@@ -35,7 +35,8 @@ extension MainStationsView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
-            ApplicationState.shared.beginCreating()
+            CurrentActivity.shared.beginCreating()
+//            ApplicationState.shared.beginCreating()
           } label: {
             Image(systemName: "plus")
           }

@@ -31,7 +31,8 @@ extension PlaylistSongsView: View {
       if checkIsComplete {
         Button("Add \(playlist.name)") {
           createStation()
-          ApplicationState.shared.endCreating()
+          CurrentActivity.shared.endCreating()
+//          ApplicationState.shared.endCreating()
         }
         .buttonStyle(.borderedProminent)
         .disabled(songs.isEmpty || playlistAlreadyExists)
@@ -46,27 +47,30 @@ extension PlaylistSongsView: View {
 //          ApplicationState.shared.setStation(to: station)
           Task {
             do {
-              try await ApplicationState.shared.playStation(station)
+              try await CurrentQueue.shared.playStation(station)
             } catch {
               print("Couldn't play station")
-              ApplicationState.shared.noStationSelected()
+              CurrentQueue.shared.stopPlayingStation()
               
             }
           }
           
           
         }
-        ApplicationState.shared.endCreating()
+        CurrentActivity.shared.endCreating()
+//        ApplicationState.shared.endCreating()
       })
       Button("Cancel") {
-        ApplicationState.shared.endCreating()
+        CurrentActivity.shared.endCreating()
+//        ApplicationState.shared.endCreating()
       }
     }
 
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button("Cancel") {
-          ApplicationState.shared.endCreating()
+          CurrentActivity.shared.endCreating()
+//          ApplicationState.shared.endCreating()
         }
       }
     }

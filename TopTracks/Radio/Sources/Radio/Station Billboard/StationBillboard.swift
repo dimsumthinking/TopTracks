@@ -7,7 +7,8 @@ import StationUpdaters
 
 public struct StationBillboard {
   let station: TopTracksStation
-  @EnvironmentObject private var applicationState: ApplicationState
+  let currentStation: TopTracksStation?
+//  @State private var currentStation: TopTracksStation? = nil
   @State private var isChangingName = false
   @State private var stationName = ""
   @Environment(\.editMode) private var editMode
@@ -52,14 +53,14 @@ extension StationBillboard: View {
         Task {
           do {
             try await UpdateRetriever.fetchUpdates(for: station)
-            try await applicationState.playStation(station)
+            try await CurrentQueue.shared.playStation(station)
           } catch {
             print("Couldn't play station")
-            applicationState.noStationSelected()
+            CurrentQueue.shared.stopPlayingStation()
           }
         }
       }
-      .animation(.default, value: applicationState.currentStation)
+      .animation(.default, value: currentStation)
     }
   }
 }
@@ -70,11 +71,14 @@ extension StationBillboard {
   }
   
   private var isCurrentStation: Bool {
-    station == applicationState.currentStation
+    print(station.stationName, "compared to", currentStation?.stationName ?? "no name")
+    return station == currentStation
   }
   
   private var isNotCurrentStation: Bool {
     !isCurrentStation
   }
 }
+
+
 

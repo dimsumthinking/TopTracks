@@ -11,9 +11,12 @@ extension SongTextInfo: View {
   var body: some View {
       VStack {
         Text(currentSong.title)
-          .font(.headline)
+          .multilineTextAlignment(.center)
+          .lineLimit(2)
         Text(currentSong.artistName)
           .foregroundColor(.secondary)
+          .multilineTextAlignment(.center)
+          .lineLimit(2)
       }
     .padding()
     .padding(.horizontal)

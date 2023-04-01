@@ -5,13 +5,16 @@ import Radio
 import Players
 import StationUpdaters
 
-struct MainView: View {
-  @State private var isCreating = false
-  @EnvironmentObject private var applicationState: ApplicationState
+struct MainView {
+  @State private var currentActivity = TopTracksAppActivity.enjoying
+}
+
+extension MainView: View {
+  
   
   var body: some View {
     Group {
-      switch applicationState.currentActivity {
+      switch currentActivity {
       case .enjoying:
         ZStack {
           MainStationsView()
@@ -22,7 +25,18 @@ struct MainView: View {
       case .importing(let url):  Text("Not implemented yet for" + (url?.description ?? "no url"))
       }
     }
+    .task {
+      await registerForCurrentActivity()
+    }
     
+  }
+}
+
+extension MainView {
+  private func registerForCurrentActivity() async {
+    for await activity in CurrentActivity.shared.activities {
+      currentActivity = activity
+    }
   }
 }
 

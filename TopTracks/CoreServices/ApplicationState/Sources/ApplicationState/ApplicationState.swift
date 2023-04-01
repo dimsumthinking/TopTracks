@@ -6,66 +6,13 @@ import MusicKit
 
 public class ApplicationState: ObservableObject {
   public static var shared = ApplicationState()
-  @Published public private(set) var currentActivity: TopTracksAppActivity = .enjoying
-  @Published public private(set) var currentStation: TopTracksStation?
   @Published public private(set) var currentSong: Song?
   public var endTime: Date?
   private var sleepTimer: Task<Void, Error>?
-  private var queueCache: ApplicationMusicPlayer.Queue?
-  private var cachedSong: Song?
-  private var songTime: TimeInterval?
-  
-  init() {
-    Task {
-      for await _ in NotificationCenter.default.notifications(named: Notification.Name("PreviewPlayerBegan")) {
-        cachedSong = currentSong
-        songTime = ApplicationMusicPlayer.shared.playbackTime
-      }
-    }
-  }
+
 }
 
-extension ApplicationState {
-   func setStation(to station: TopTracksStation) {
-    station.lastTouched = Date()
-    do {
-      try sharedViewContext.save()
-    }
-    catch {
-      sharedViewContext.rollback()
-      print("Couldn't save station starting to play")
-    }
-    currentStation = station
-  }
-  
-  public func playStation(_ station: TopTracksStation) async throws {
-    ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: station.nextHour())
-    try await setUpPlayer()
-    await MainActor.run {
-      setStation(to: station)
-    }
-  }
-  
-  private func setUpPlayer() async throws {
-    try await ApplicationMusicPlayer.shared.prepareToPlay()
-    try await ApplicationMusicPlayer.shared.play()
-  }
-  
-  public func stopPlayingDeletedStation(_ station: TopTracksStation) {
-    guard currentStation == station else { return }
-    currentStation = nil
-    ApplicationMusicPlayer.shared.stop()
-    ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: [Song]())
-    ApplicationMusicPlayer.shared.queue.currentEntry = nil
-  }
-  
-    public func noStationSelected() {
-      currentStation = nil
-      ApplicationMusicPlayer.shared.stop()
-      ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: [Song]())
-      ApplicationMusicPlayer.shared.queue.currentEntry = nil
-    }
-}
+
 
 extension ApplicationState {
   public func setSong(to song: TopTracksSong) {
@@ -82,72 +29,24 @@ extension ApplicationState {
     default:
       print("Entry is not a song")
     }
-    refillQueue()
+    CurrentQueue.shared.refillQueueIfNeeded()
   }
   
   public func noSongSelected() {
     currentSong = nil
   }
+  
+  
+  public func removeCurrentSong() {
+  //    currentSong?.moveEveryMatchingTopTracksSong(to: .removed)
+    guard let topTracksStation = CurrentStation.shared.topTracksStation,
+          let currentSong else { return }
+    topTracksStation.remove(song: currentSong)
+  }
 }
 
-extension ApplicationState {
-  public func beginCreating() {
-    currentActivity = .creating
-  }
-  
-  public func endCreating() {
-    currentActivity = .enjoying
-    restartPlayer()
-  }
-  
-  public func beginStationgSongList(for topTracksStation: TopTracksStation) {
-    currentActivity = .viewingOrEditing(topTracksStation: topTracksStation)
-  }
-  
-  public func endStationSongList() {
-    currentActivity = .enjoying
-    restartPlayer()
-  }
-  
-  private func restartPlayer() {
-    guard (ApplicationMusicPlayer.shared.state.playbackStatus != .paused &&
-           ApplicationMusicPlayer.shared.state.playbackStatus != .playing) else {return}
-    if let cachedSong  {
-      currentSong = cachedSong
-      ApplicationMusicPlayer.shared.queue =  ApplicationMusicPlayer.Queue(for: [cachedSong])
-      refillQueue()
-      if let songTime {
-        ApplicationMusicPlayer.shared.playbackTime = songTime
-      }
-      Task {
-        try await setUpPlayer()
-      }
-    } else {
-      currentSong = nil
-      currentStation = nil
-    }
-    cachedSong = nil
-    songTime = nil
-  }
-  
 
-}
 
-extension ApplicationState {
-  private func refillQueue() {
-    guard let currentStation else { return }
-    let player = ApplicationMusicPlayer.shared
-    let entries = player.queue.entries
-    if let currentEntry = player.queue.currentEntry,
-       let index = entries.firstIndex(of: currentEntry),
-        entries.distance(from: index, to: entries.endIndex) < 3 {
-      Task {
-        try await player.queue.insert(currentStation.nextHour(),
-                                      position: .tail)
-      }
-    }
-  }
-}
 
 extension ApplicationState {
   public func sleepAfter(timeInterval: TimeInterval,
@@ -191,17 +90,7 @@ extension ApplicationState {
   public func changeRating(to rating: SongRating) {
     currentSong?.changeRatingForEveryMatchingTopTracksSong(to: rating)
   }
-  
-  public func removeCurrentSong() {
-//    currentSong?.moveEveryMatchingTopTracksSong(to: .removed)
-    guard let currentStation,
-          let currentSong else { return }
-    currentStation.remove(song: currentSong)
-  }
-  public var canShowRating: Bool {
-    guard let currentStation else { return false }
-    return !currentStation.isChart
-  }
+
   
 }
 

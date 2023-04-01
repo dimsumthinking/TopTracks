@@ -36,7 +36,7 @@ extension MiniPlayerView: View {
           .padding()
       }
       .tint(.secondary)
-      .background(Color.black.opacity(0.8))
+      .background(Color.black.opacity(0.85))
       .onTapGesture {
         isShowingFullPlayer = true
       }

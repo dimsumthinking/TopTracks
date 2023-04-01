@@ -28,7 +28,7 @@ extension AppleMusicCategoryChooserView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button("Cancel") {
-            applicationState.endCreating()
+            CurrentActivity.shared.endCreating()
           }
         }
       }

@@ -35,7 +35,8 @@ extension MainStationSongListView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           Button(role: .cancel) {
-            ApplicationState.shared.endStationSongList()
+            CurrentActivity.shared.endStationSongList()
+//            ApplicationState.shared.endStationSongList()
           } label: {
             Text("Stations")
           }

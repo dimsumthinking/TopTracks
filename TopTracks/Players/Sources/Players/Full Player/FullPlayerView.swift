@@ -40,10 +40,10 @@ extension FullPlayerView: View {
           }
           .padding(.bottom)
         }
-        .navigationTitle(applicationState.currentStation?.stationName ?? "Now Playing")
+        .navigationTitle(CurrentStation.shared.topTracksStation?.stationName ?? "Now Playing")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-          if applicationState.canShowRating {
+          if CurrentStation.shared.canShowRating {
             ToolbarItem(placement: .navigationBarTrailing) {
               SongRatingView()
               

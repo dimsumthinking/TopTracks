@@ -9,13 +9,15 @@ struct StationListView {
   @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
   @ObservedObject  var stationLister: StationLister
   @EnvironmentObject private var applicationState: ApplicationState
+  @State private var currentStation: TopTracksStation?
 }
 
 extension StationListView: View {
   var body: some View {
     
     ForEach(stationLister.stations) {station in
-      StationBillboard(station: station)
+      StationBillboard(station: station,
+      currentStation: currentStation)
         .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
         .swipeActions {
           Button(role: .destructive) {
@@ -42,7 +44,23 @@ extension StationListView: View {
     .onAppear {
       stationLister.updateStationList()
     }
+    .task {
+      await subscribeToCurrentStation()
+    }
     
+  }
+}
+
+extension StationListView {
+  private func subscribeToCurrentStation() async {
+    do {
+      let stations = try CurrentStation.shared.currentStationStream()
+      for await station in stations {
+        self.currentStation = station
+      }
+    } catch {
+      print(error)
+    }
   }
 }
 

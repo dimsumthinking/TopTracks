@@ -1,6 +1,6 @@
 import Foundation
 
-let mainPlaylistKinds = [PlaylistKind.top, .cityCharts, .countryTop100, .byGenre, .moodAndActivity, .decade, .international, .classical, .openSearch]
+let mainPlaylistKinds = [PlaylistKind.top, .cityCharts, .countryTop100, .byGenre, .moodAndActivity, .decade, .international, .openSearch]
 
 enum PlaylistKind: String, CaseIterable, Hashable, Equatable {
   case top

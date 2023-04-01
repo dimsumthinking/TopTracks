@@ -11,3 +11,17 @@ extension TopTracksStation {
     }
   }
 }
+
+
+extension TopTracksStation {
+  public func saveInContext() throws {
+    guard let managedObjectContext else {
+      throw MissingManagedObjectContext()
+    }
+    try managedObjectContext.save()
+  }
+}
+
+
+public struct MissingManagedObjectContext: Error {}
+

@@ -17,9 +17,9 @@ extension PlaylistKindView: View {
             AppleMusicCategoryChooserView(categories: playlistKind.playlistCategories,
                                           playlistKind: playlistKind)
               .navigationTitle(playlistKind.description)
-          }  else if playlistKind == .classical {
-            Text("Searching for classical")
-              .navigationTitle(playlistKind.description)
+//          }  else if playlistKind == .classical {
+//            Text("Searching for classical")
+//              .navigationTitle(playlistKind.description)
           } else {
            PlaylistSearchRequestView()
           }

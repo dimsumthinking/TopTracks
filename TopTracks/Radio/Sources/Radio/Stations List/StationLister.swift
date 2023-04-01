@@ -51,7 +51,7 @@ extension StationLister {
 
 extension StationLister {
   func deleteStation(_ station: TopTracksStation) {
-    ApplicationState.shared.stopPlayingDeletedStation(station)
+    CurrentQueue.shared.stopPlayingDeletedStation(station)
     TopTracksStation.delete(topTracksStation: station,
                             context: context)
   }
