@@ -3,12 +3,12 @@ import MusicKit
 import Constants
 
 struct AlbumArt {
-  let currentSong: Song
+  let artwork: Artwork?
 }
 
 extension AlbumArt: View {
   var body: some View {
-    if let artwork = currentSong.storedArtwork {
+    if let artwork {
       ArtworkImage(artwork,
                    width: Constants.fullPlayerArtworkImageSize,
                    height: Constants.fullPlayerArtworkImageSize)

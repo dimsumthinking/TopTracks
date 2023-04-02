@@ -1,6 +1,7 @@
 import AVFAudio
 import MusicKit
 import Combine
+import Constants
 
 public let songPreviewPlayer = StationSongPreviewPlayer()
 
@@ -29,7 +30,9 @@ extension StationSongPreviewPlayer {
 #if !os(macOS)
     
     if let url = song.previewAssets?.first?.url {
-      NotificationCenter.default.post(name: Notification.Name("PreviewPlayerBegan"), object: nil)
+      NotificationCenter.default.post(name: Constants.previewPlayerBeginsNotification,
+                                      object: nil)
+      
       Task {
         do {
           let (data, _) = try await URLSession.shared.data(from: url)

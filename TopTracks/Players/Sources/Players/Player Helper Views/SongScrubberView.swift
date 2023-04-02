@@ -47,6 +47,9 @@ extension SongScrubberView: View {
             Image(systemName: "gobackward.15")
           }
           Spacer()
+          RoutePicker()
+            .frame(width: 20, height: 20)
+          Spacer()
           Button {
             ApplicationMusicPlayer.shared.playbackTime = min(duration, ApplicationMusicPlayer.shared.playbackTime + 30)
           } label: {
@@ -54,7 +57,7 @@ extension SongScrubberView: View {
           }
         }
         .padding(.horizontal)
-        .font(.title)
+//        .font(.title)
         .padding()
       }
     }

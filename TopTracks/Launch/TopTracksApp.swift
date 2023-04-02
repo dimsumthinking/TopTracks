@@ -28,7 +28,6 @@ extension TopTracksApp: App {
           if musicSubscription.canPlayCatalogContent {
             // MARK: - Everything is great  Main App Entry point
             MainView()
-              .environmentObject(ApplicationState.shared)
               .preferredColorScheme(.dark)
           } else {
             // MARK: - Checking on Apple Music Subscription

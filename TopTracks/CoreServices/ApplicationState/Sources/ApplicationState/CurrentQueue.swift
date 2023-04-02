@@ -1,8 +1,10 @@
 import Model
 import MusicKit
+import Foundation
 
 public class CurrentQueue {
   public static let shared = CurrentQueue()
+  private var sleepTimer: SleepTimer?
 }
 
 extension CurrentQueue {
@@ -16,7 +18,7 @@ extension CurrentQueue {
     }
   }
   
-  private func refillQueue() {
+  func refillQueue() {
     guard let currentStation = CurrentStation.shared.topTracksStation else { return }
     let player = ApplicationMusicPlayer.shared
     Task {
@@ -29,15 +31,19 @@ extension CurrentQueue {
 
 extension CurrentQueue {
   public func playStation(_ station: TopTracksStation) async throws {
-    ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: station.nextHour())
-    try await setUpPlayer()
     await MainActor.run {
       CurrentStation.shared.setStation(to: station)
     }
+    ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: station.nextHour())
+    try await setUpPlayer()
+
   }
   
-  private func setUpPlayer() async throws {
+  func setUpPlayer(toPlayAt playbackTime: TimeInterval? = nil) async throws {
     try await ApplicationMusicPlayer.shared.prepareToPlay()
+    if let playbackTime {
+      ApplicationMusicPlayer.shared.playbackTime = playbackTime
+    }
     try await ApplicationMusicPlayer.shared.play()
   }
 }
@@ -54,5 +60,33 @@ extension CurrentQueue {
     ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: [Song]())
     ApplicationMusicPlayer.shared.queue.currentEntry = nil
     
+  }
+}
+
+extension CurrentQueue {
+  public var sleepTimerIsSet: Bool {
+    sleepTimer != nil
+  }
+  
+  public var sleepsAfterSong: Bool {
+    sleepTimer?.afterSong ?? false
+  }
+  
+  public var endTime: Date? {
+    sleepTimer?.endTime
+  }
+  
+  public func sleepAfter(timeInterval: TimeInterval,
+                         finishSong: Bool = false) {
+    sleepTimer = SleepTimer(for: timeInterval,
+                            finishSong: finishSong)
+    Task {
+      await sleepTimer?.sleep()
+      sleepTimer = nil
+    }
+  }
+  
+  public func cancelTimer() {
+    sleepTimer = nil
   }
 }

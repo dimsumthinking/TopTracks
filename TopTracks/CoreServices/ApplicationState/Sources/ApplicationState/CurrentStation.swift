@@ -3,7 +3,7 @@ import Foundation
 
 public class CurrentStation {
   public static let shared = CurrentStation()
-  public private(set) var topTracksStation: TopTracksStation? {
+  public internal(set) var topTracksStation: TopTracksStation? {
     didSet {
       if let topTracksStation {
         continuation?.yield(topTracksStation)

@@ -4,7 +4,6 @@ import ApplicationState
 struct AppleMusicCategoryChooserView {
   let categories: [AppleMusicCategory]
   @State private var filterString = ""
-  @EnvironmentObject private var applicationState: ApplicationState
   private let playlistKind: PlaylistKind
   
   init(categories: [AppleMusicCategory],

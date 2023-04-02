@@ -65,6 +65,12 @@ extension TopTracksStation {
     return playlist?.artwork
   }
   
+  public func topTracksSongMatching(_ song: Song) -> TopTracksSong? {
+    allSongs.first { topTracksSong in
+      topTracksSong.songID == song.id.rawValue
+    }
+  }
+  
   public var topArtists: String {
     String(stacks.filter{ stack in stack.name == "power"}.flatMap(\.songs).map(\.title)
       .reduce("") {$1 + ", " + $0}.dropLast(2))
@@ -141,8 +147,7 @@ extension TopTracksStation {
 }
 
 extension TopTracksStation {
-  public func remove(song: Song) {
-    guard let topTracksSong = allSongs.first(where:{ topTracksSong in topTracksSong.songID == song.id.rawValue}) else { return }
+  public func remove(topTracksSong: TopTracksSong) {
     changeStack(for: topTracksSong, to: .removed)
     if let added =  stack(for: .added)?.songs.first {
       changeStack(for: added, to: topTracksSong.stack.rotationCategory)
@@ -154,3 +159,18 @@ extension TopTracksStation {
     saveIfPossible()
   }
 }
+
+//extension TopTracksStation {
+//  public func remove(song: Song) {
+//    guard let topTracksSong = allSongs.first(where:{ topTracksSong in topTracksSong.songID == song.id.rawValue}) else { return }
+//    changeStack(for: topTracksSong, to: .removed)
+//    if let added =  stack(for: .added)?.songs.first {
+//      changeStack(for: added, to: topTracksSong.stack.rotationCategory)
+//    } else if let gold = stack(for: .gold)?.songs.first {
+//      changeStack(for: gold, to: topTracksSong.stack.rotationCategory)
+//    } else if let archived = stack(for: .archived)?.songs.first {
+//      changeStack(for: archived, to: topTracksSong.stack.rotationCategory)
+//    }
+//    saveIfPossible()
+//  }
+//}

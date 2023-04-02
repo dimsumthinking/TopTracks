@@ -8,7 +8,6 @@ import StationUpdaters
 public struct StationBillboard {
   let station: TopTracksStation
   let currentStation: TopTracksStation?
-//  @State private var currentStation: TopTracksStation? = nil
   @State private var isChangingName = false
   @State private var stationName = ""
   @Environment(\.editMode) private var editMode
@@ -50,6 +49,7 @@ extension StationBillboard: View {
           return
         }
         guard isNotCurrentStation else { return }
+        print("Getting set to play", station.name)
         Task {
           do {
             try await UpdateRetriever.fetchUpdates(for: station)

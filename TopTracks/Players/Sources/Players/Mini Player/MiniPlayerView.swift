@@ -4,16 +4,17 @@ import ApplicationState
 import MusicKit
 
 struct MiniPlayerView {
-  @EnvironmentObject private var applicationState: ApplicationState
+//  @EnvironmentObject private var applicationState: ApplicationState
   @Binding var isShowingFullPlayer: Bool
+  let currentSong: Song?
 }
 
 
 extension MiniPlayerView: View {
   var body: some View {
-    if let currentSong = applicationState.currentSong {
+    if let currentSong { //= CurrentSong.shared.song {
       HStack(spacing: 4) {
-        if let artwork = currentSong.storedArtwork {
+        if let artwork = CurrentSong.shared.artwork {
           ArtworkImage(artwork,
                        width: Constants.miniPlayerArtworkImageSize,
                        height: Constants.miniPlayerArtworkImageSize)
@@ -48,7 +49,6 @@ extension MiniPlayerView: View {
       )
     } else {
       ArtworkFiller(size: Constants.miniPlayerArtworkImageSize)
-      
     }
   }
 }

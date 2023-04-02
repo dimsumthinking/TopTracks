@@ -8,7 +8,7 @@ struct BillboardBackground {
 extension BillboardBackground: View {
   var body: some View {
     LinearGradient(colors: [Color(backgroundColor).opacity(0.9), Color(backgroundColor).opacity(0.2)], startPoint: .topLeading, endPoint: .bottomTrailing)
-      .border(isCurrentStation ? .yellow : .clear)
+      .border(isCurrentStation ? .yellow : .clear, width: 2)
   }
 }
 

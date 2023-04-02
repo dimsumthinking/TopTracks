@@ -5,16 +5,17 @@ import MusicKit
 
 struct FullPlayerView {
   @Binding var isShowingFullPlayer: Bool
-  @EnvironmentObject private var applicationState: ApplicationState
+//  @EnvironmentObject private var applicationState: ApplicationState
+  let currentSong: Song?
 }
 
 
 extension FullPlayerView: View {
   var body: some View {
-    if let currentSong = applicationState.currentSong {
+    if let currentSong { //} = CurrentSong.shared.song {
       NavigationStack {
         VStack {
-          AlbumArt(currentSong: currentSong)
+          AlbumArt(artwork: CurrentSong.shared.artwork )
             .onTapGesture {
               isShowingFullPlayer = false
             }
@@ -30,15 +31,6 @@ extension FullPlayerView: View {
           Spacer()
           ControlPanel()
           Spacer()
-          HStack {
-            Spacer()
-            SleepTimer()
-            Spacer()
-            RoutePicker()
-              .frame(width: 20, height: 20)
-            Spacer()
-          }
-          .padding(.bottom)
         }
         .navigationTitle(CurrentStation.shared.topTracksStation?.stationName ?? "Now Playing")
         .navigationBarTitleDisplayMode(.inline)
@@ -48,6 +40,9 @@ extension FullPlayerView: View {
               SongRatingView()
               
             }
+          }
+          ToolbarItem(placement: .navigationBarLeading) {
+            SleepTimerView()
           }
         }
         

@@ -8,7 +8,8 @@ import StationUpdaters
 public struct MainStationsView {
   @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
   @StateObject private var stationLister = StationLister()
-  @EnvironmentObject private var applicationState: ApplicationState
+  
+//  @EnvironmentObject private var applicationState: ApplicationState
   public init() {}
 }
 

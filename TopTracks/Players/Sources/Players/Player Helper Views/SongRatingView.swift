@@ -4,7 +4,7 @@ import Model
 
 
 struct SongRatingView {
-  @EnvironmentObject private var applicationState: ApplicationState
+//  @EnvironmentObject private var applicationState: ApplicationState
   @State private var isShowingAlert = false
  @State private var updatedAt = Date()
 }
@@ -26,12 +26,12 @@ extension SongRatingView: View {
       }
     } label: {
       VStack {
-        Image(systemName: applicationState.currentRatingIconName)
+        Image(systemName: CurrentSong.shared.ratingIconName)
         Text(updatedAt, style: .relative).foregroundColor(.clear)
           .font(.caption2)
       }
     }
-    .alert("Remove " + (applicationState.currentSong?.title ?? "this song") + "?",
+    .alert("Remove " + (CurrentSong.shared.song?.title ?? "this song") + "?",
            isPresented: $isShowingAlert) {
       Button(role: .destructive) {
         removeCurrentSong()
@@ -55,10 +55,10 @@ extension SongRatingView: View {
 
 extension SongRatingView {
   private func updateSong(rating: SongRating) {
-    applicationState.changeRating(to: rating)
+    CurrentSong.shared.changeRating(to: rating)
     updatedAt = Date()
   }
   private func removeCurrentSong() {
-    applicationState.removeCurrentSong()
+    CurrentSong.shared.removeCurrentSong()
   }
 }

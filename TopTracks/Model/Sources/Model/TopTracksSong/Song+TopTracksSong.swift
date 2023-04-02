@@ -44,19 +44,19 @@ extension Song {
     }
   }
   
-  public func changeRatingForEveryMatchingTopTracksSong(to rating: SongRating) {
-    let matchingSongs = everyMatchingTopTracksSong
-    guard let context = matchingSongs.first?.managedObjectContext else {return}
-    matchingSongs.forEach { topTracksSong in
-      topTracksSong.rating = rating.rawValue
-    }
-    do {
-      try context.save()
-    } catch {
-      context.rollback()
-      print("Couldn't change rating for song", self.title)
-    }
-  }
+//  public func changeRatingForEveryMatchingTopTracksSong(to rating: SongRating) {
+//    let matchingSongs = everyMatchingTopTracksSong
+//    guard let context = matchingSongs.first?.managedObjectContext else {return}
+//    matchingSongs.forEach { topTracksSong in
+//      topTracksSong.rating = rating.rawValue
+//    }
+//    do {
+//      try context.save()
+//    } catch {
+//      context.rollback()
+//      print("Couldn't change rating for song", self.title)
+//    }
+//  }
   
 //  public func matchingTopTracksSong(in station: TopTracksStation) {
 //
