@@ -22,7 +22,9 @@ extension MainStationSongListView: View {
         List(stationStandardCategories) {category in
           if let stack = station.stack(for: category),
              !stack.songs.isEmpty {
-            let songs = stack.songs.compactMap(\.song).sorted{ lhs, rhs in lhs.title < rhs.title }
+            let songs = stack.songs
+              .sorted{ lhs, rhs in lhs.lastPlayed < rhs.lastPlayed}
+              .compactMap(\.song)
             Section(category.description) {
               ForEach(songs) {song in
                 SongPreview(song: song,
@@ -36,7 +38,6 @@ extension MainStationSongListView: View {
         ToolbarItem(placement: .navigationBarLeading) {
           Button(role: .cancel) {
             CurrentActivity.shared.endStationSongList()
-//            ApplicationState.shared.endStationSongList()
           } label: {
             Text("Stations")
           }
