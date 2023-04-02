@@ -71,7 +71,6 @@ extension StationBillboard {
   }
   
   private var isCurrentStation: Bool {
-    print(station.stationName, "compared to", currentStation?.stationName ?? "no name")
     return station == currentStation
   }
   

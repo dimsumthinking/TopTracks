@@ -19,10 +19,19 @@ extension StationListView: View {
       currentStation: currentStation)
         .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
         .swipeActions {
+
           Button(role: .destructive) {
             stationLister.deleteStation(station)
           }  label: {
             Image(systemName: "trash.fill")
+          }
+          if stationLister.stations.count > 1 {
+            Button {
+              stationLister.moveToTop(station)
+            } label: {
+              Image(systemName: "text.line.first.and.arrowtriangle.forward")
+            }
+            .tint(.indigo)
           }
         }
       

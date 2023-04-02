@@ -77,6 +77,13 @@ extension StationLister {
     }
   }
   
+  func moveToTop(_ station: TopTracksStation) {
+    if let currentPosition = stations.firstIndex(of: station) {
+      moveStation(from: currentPosition,
+                  offset: 0)
+    } 
+  }
+  
 }
 
 
