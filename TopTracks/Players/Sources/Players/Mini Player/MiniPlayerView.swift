@@ -4,7 +4,6 @@ import ApplicationState
 import MusicKit
 
 struct MiniPlayerView {
-//  @EnvironmentObject private var applicationState: ApplicationState
   @Binding var isShowingFullPlayer: Bool
   let currentSong: Song?
 }
@@ -12,13 +11,16 @@ struct MiniPlayerView {
 
 extension MiniPlayerView: View {
   var body: some View {
-    if let currentSong { //= CurrentSong.shared.song {
+    if let currentSong {
       HStack(spacing: 4) {
         if let artwork = CurrentSong.shared.artwork {
           ArtworkImage(artwork,
                        width: Constants.miniPlayerArtworkImageSize,
                        height: Constants.miniPlayerArtworkImageSize)
           .padding()
+          .onTapGesture {
+            isShowingFullPlayer = true
+          }
         } else {
           ArtworkFiller(size: Constants.miniPlayerArtworkImageSize)
         }
@@ -29,18 +31,22 @@ extension MiniPlayerView: View {
             .lineLimit(2)
             .foregroundColor(.secondary)
         }
+        .onTapGesture {
+          isShowingFullPlayer = true
+        }
         Spacer()
         PlayPauseButton()
-          .font(.title2)
+          .font(.title)
         NextSongButton()
-          .font(.title2)
+          .font(.headline)
           .padding()
       }
       .tint(.secondary)
-      .background(Color.black.opacity(0.85))
-      .onTapGesture {
-        isShowingFullPlayer = true
-      }
+      .background(.thinMaterial)
+      .shadow( radius: 20, x: 0, y: -2)
+//      .onTapGesture {
+//        isShowingFullPlayer = true
+//      }
       .gesture(DragGesture().onChanged { drag in
         if  drag.startLocation.y - drag.location.y > Constants.fullPlayerSwipe {
           isShowingFullPlayer = true

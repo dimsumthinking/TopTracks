@@ -49,7 +49,7 @@ extension PlaylistKind: CustomStringConvertible {
     case .countryTop100:
       return "Daily Global Top 100"
     case .byGenre:
-      return "Playlists for Top Genres"
+      return "Top Genres"
     case .moodAndActivity:
       return "Mood and Activity"
     case .decade:

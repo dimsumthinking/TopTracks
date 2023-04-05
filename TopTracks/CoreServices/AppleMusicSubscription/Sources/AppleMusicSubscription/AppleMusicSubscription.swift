@@ -1,30 +1,25 @@
 import MusicKit
-import Combine
 
 @MainActor
-public class AppleMusicSubscription: ObservableObject {
+public class AppleMusicSubscription {
   public static var shared = AppleMusicSubscription()
-  @Published public private(set) var subscription: MusicSubscription?
+  private var isListeningForSubscriptions = false
   
-  private init() {
-    Task {
-      for await subscription in MusicSubscription.subscriptionUpdates {
-        self.subscription = subscription
-      }
-    }
-  }
+  public var contentPermissions = MusicSubscription.subscriptionUpdates.map(\.canPlayCatalogContent)
+  var subscriberPermissions = MusicSubscription.subscriptionUpdates.map(\.canBecomeSubscriber)
+  public var contentChecksForSubscription = MusicSubscription.subscriptionUpdates.map(\.canPlayCatalogContent)
 }
 
-extension AppleMusicSubscription {
-  public var canPlayCatalogContent: Bool {
-    guard let subscription else {return false}
-    print("can play content", subscription.canPlayCatalogContent.description)
-    return subscription.canPlayCatalogContent
-  }
-  
-  public var canBecomeSubscriber: Bool {
-    guard let subscription else {return false}
-    print("can subscribe", subscription.canBecomeSubscriber.description)
-    return subscription.canBecomeSubscriber
-  }
-}
+//extension AppleMusicSubscription {
+//  public var canPlayCatalogContent: Bool {
+//    guard let subscription else {return false}
+//    print("can play content", subscription.canPlayCatalogContent.description)
+//    return subscription.canPlayCatalogContent
+//  }
+//  
+//  public var canBecomeSubscriber: Bool {
+//    guard let subscription else {return false}
+//    print("can subscribe", subscription.canBecomeSubscriber.description)
+//    return subscription.canBecomeSubscriber
+//  }
+//}

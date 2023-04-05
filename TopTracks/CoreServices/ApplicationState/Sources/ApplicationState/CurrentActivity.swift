@@ -22,6 +22,17 @@ extension CurrentActivity {
     restartPlayer()
   }
   
+  public func beginImporting(url: URL) {
+    backgroundCache = BackgroundCache(currentSong: CurrentSong.shared.song,
+                                      currentStation: CurrentStation.shared.topTracksStation)
+    continuation?.yield(.importing(url: url))
+  }
+  
+  public func endImporting() {
+    continuation?.yield(.enjoying)
+    restartPlayer()
+  }
+  
   public func beginStationgSongList(for topTracksStation: TopTracksStation) {
     backgroundCache = BackgroundCache(currentSong: CurrentSong.shared.song,
                                       currentStation: CurrentStation.shared.topTracksStation)

@@ -1,6 +1,8 @@
 import SwiftUI
+import Constants
 
 struct CurrentStationIndicator {
+  @Environment(\.colorScheme) private var colorScheme
 }
 
 extension CurrentStationIndicator: View {
@@ -11,7 +13,7 @@ extension CurrentStationIndicator: View {
       Image(systemName: "antenna.radiowaves.left.and.right")
         .padding(.trailing)
         .font(.largeTitle)
-        .foregroundColor(.yellow)
+        .foregroundColor(ColorConstants.accentColor(for: colorScheme))
     }
   }
 }

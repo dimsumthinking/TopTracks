@@ -22,9 +22,7 @@ extension MainStationSongListView: View {
         List(stationStandardCategories) {category in
           if let stack = station.stack(for: category),
              !stack.songs.isEmpty {
-            let songs = stack.songs
-              .sorted{ lhs, rhs in lhs.lastPlayed < rhs.lastPlayed}
-              .compactMap(\.song)
+            let songs = stack.orderedSongs.compactMap(\.song)
             Section(category.description) {
               ForEach(songs) {song in
                 SongPreview(song: song,

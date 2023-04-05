@@ -4,6 +4,7 @@ import Constants
 
 struct PlaylistListView {
   let filteredPlaylists: [Playlist]
+  @Environment(\.colorScheme) private var colorScheme
   
   init(_ filteredPlaylists: [Playlist]) {
     self.filteredPlaylists = filteredPlaylists
@@ -39,9 +40,19 @@ extension PlaylistListView: View {
             }
           }
         }
-        .listRowBackground(LinearGradient(colors: [Color(backgroundColor).opacity(0.9), Color(backgroundColor).opacity(0.2)], startPoint: .topLeading, endPoint: .bottomTrailing))
+        .listRowBackground(LinearGradient(colors: [
+          ColorConstants.gradientStartColor(backgroundColor: backgroundColor,
+                                            colorScheme: colorScheme),
+          ColorConstants.gradientEndColor(backgroundColor: backgroundColor,
+                                          colorScheme: colorScheme)],
+                                          startPoint: .topLeading,
+                                          endPoint: .bottomTrailing))
+        .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
+
       }
     }
+    .listStyle(.plain)
+
   }
 }
 

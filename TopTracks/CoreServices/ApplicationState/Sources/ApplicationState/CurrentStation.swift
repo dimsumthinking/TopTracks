@@ -27,7 +27,7 @@ extension CurrentStation {
 }
 
 extension CurrentStation {
-  func setStation(to station: TopTracksStation) {
+  public func setStation(to station: TopTracksStation) {
     station.lastTouched = Date()
     do {
       try station.saveInContext()
@@ -43,6 +43,7 @@ extension CurrentStation {
 extension CurrentStation {
   public func noStationSelected() {
    topTracksStation = nil
+    CurrentSong.shared.noSongSelected()
   }
   public var canShowRating: Bool {
     guard let topTracksStation else { return false }

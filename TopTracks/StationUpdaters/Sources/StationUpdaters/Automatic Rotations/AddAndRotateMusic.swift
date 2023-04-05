@@ -89,9 +89,13 @@ extension AddAndRotateMusic {
   
   private func splitGold(topTracksSongs: [TopTracksSong]) {
     var songs = topTracksSongs
-    for _ in 1...min(1, songs.count - 60) {
-      station.changeStack(for: songs.removeFirst(), to: .archived)
+    if songs.count > 60 {
+      let excess = songs.count - 60
+      for _ in 1...excess {
+        station.changeStack(for: songs.removeFirst(), to: .archived)
+      }
     }
+    
   }
 }
 

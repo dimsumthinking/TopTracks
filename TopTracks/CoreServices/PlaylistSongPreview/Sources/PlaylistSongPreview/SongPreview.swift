@@ -5,6 +5,7 @@ import Constants
 public struct SongPreview {
   let song: Song
   @Binding private var currentSong: Song?
+  @Environment(\.colorScheme) private var colorScheme
   let isPlaying: Bool
   
   public init(song: Song,
@@ -22,13 +23,13 @@ extension SongPreview: View {
         ArtworkImage(artwork,
                      width: Constants.songListImageSize,
                      height: Constants.songListImageSize)
-        .border(isPlaying ? Color.cyan : Color.clear, width: 3)
+        .border(isPlaying ? ColorConstants.accentColor(for: colorScheme) : Color.clear, width: 3)
       } else {
         Image(systemName: "music.note")
           .background(Color.secondary)
           .frame(width: Constants.songListImageSize,
                  height: Constants.songListImageSize)
-          .border(isPlaying ? Color.cyan : Color.clear, width: 3)
+          .border(isPlaying ? ColorConstants.accentColor(for: colorScheme) : Color.clear, width: 3)
       }
       VStack(alignment: .leading) {
         Text(song.title)

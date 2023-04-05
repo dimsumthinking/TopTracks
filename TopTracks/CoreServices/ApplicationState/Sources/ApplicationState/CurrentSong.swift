@@ -7,22 +7,22 @@ public class CurrentSong {
   
   public internal(set) var song: Song? {
     didSet {
-      if let song {
+//      if let song {
         continuation?.yield(song)
-      }
+//      }
     }
   }
   private var hasNoStreamSubscriber = true
   
-  private var continuation: AsyncStream<Song>.Continuation?
+  private var continuation: AsyncStream<Song?>.Continuation?
 }
 
 extension CurrentSong {
-  public func currentSongStream() throws -> AsyncStream<Song> {
+  public func currentSongStream() throws -> AsyncStream<Song?> {
     guard hasNoStreamSubscriber else {
       throw HasCurrentSongStreamSubscriber()
     }
-    return AsyncStream(Song.self) { continuation in
+    return AsyncStream(Song?.self) { continuation in
       self.continuation = continuation
     }
   }

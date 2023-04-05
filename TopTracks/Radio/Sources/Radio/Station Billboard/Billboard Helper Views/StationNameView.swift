@@ -14,7 +14,6 @@ extension StationNameView: View {
     if editMode?.wrappedValue.isEditing == true {
       TextField(station.name, text: $stationName)
         .font(.headline)
-        .padding(.bottom, 8)
         .background(Color.black.opacity(0.4))
         .border(Color.secondary)
         .multilineTextAlignment(.center)

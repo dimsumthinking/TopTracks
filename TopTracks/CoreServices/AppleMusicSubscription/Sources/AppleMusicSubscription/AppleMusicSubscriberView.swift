@@ -4,17 +4,20 @@ import MusicKit
 
 public struct AppleMusicSubscriberView {
   @State private var isShowingSubscriptionOffer = false
-  @ObservedObject private var appleMusicSubscription: AppleMusicSubscription
+  @State private var canBecomeSubscriber = false
+  @State private var cannotShowContent = false
+  public init() {}
+//  @ObservedObject private var appleMusicSubscription: AppleMusicSubscription
   
-  public init(appleMusicSubscription: AppleMusicSubscription) {
-    self.appleMusicSubscription = appleMusicSubscription
-  }
+//  public init(appleMusicSubscription: AppleMusicSubscription) {
+//    self.appleMusicSubscription = appleMusicSubscription
+//  }
 }
 
 extension AppleMusicSubscriberView: View {
   public var body: some View {
     VStack(spacing: 40) {
-      if let subscription = AppleMusicSubscription.shared.subscription {
+      if cannotShowContent {
         Text("""
            This app requires an
            Apple Music Subscription
@@ -28,7 +31,7 @@ extension AppleMusicSubscriberView: View {
           ProgressView()
         }
       }
-      if appleMusicSubscription.canBecomeSubscriber {
+      if canBecomeSubscriber {
         Button("Subscribe") {
           isShowingSubscriptionOffer = true
         }
@@ -36,6 +39,16 @@ extension AppleMusicSubscriberView: View {
     }
     .musicSubscriptionOffer(isPresented: $isShowingSubscriptionOffer,
                             options: MusicSubscriptionOffer.Options.default)
+    .task {
+      for await canBecomeSubscriber in AppleMusicSubscription.shared.subscriberPermissions {
+        self.canBecomeSubscriber = canBecomeSubscriber
+      }
+    }
+    .task {
+      for await canShowContent in AppleMusicSubscription.shared.contentChecksForSubscription {
+        self.cannotShowContent = !canShowContent
+      }
+    }
   }
 }
 

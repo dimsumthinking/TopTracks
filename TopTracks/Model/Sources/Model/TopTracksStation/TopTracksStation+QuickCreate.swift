@@ -9,12 +9,6 @@ extension TopTracksStation {
                              songsInStacks: splitSongsIntoCategories(songs: songs),
                              context: context)
     station.saveIfPossible()
-//    do {
-//      try context.save()
-//      print("tried to save \(playlist.name)")
-//    } catch {
-//      print("Not able to create a new station\n", error)
-//    }
   }
 }
 

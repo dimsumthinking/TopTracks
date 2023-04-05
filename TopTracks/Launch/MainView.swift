@@ -22,11 +22,14 @@ extension MainView: View {
         }
       case .creating:  MainCreationView()
       case .viewingOrEditing(let station): MainStationSongListView(station)
-      case .importing(let url):  Text("Not implemented yet for" + (url?.description ?? "no url"))
+      case .importing(let url): PlaylistImporterView(url: url)
       }
     }
     .task {
       await registerForCurrentActivity()
+    }
+    .onOpenURL { url in
+      CurrentActivity.shared.beginImporting(url: url)
     }
     
   }

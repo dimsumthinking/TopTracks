@@ -43,7 +43,7 @@ extension TopTracksStack {
     return category
   }
   
-  var orderedSongs: [TopTracksSong] {
+ public var orderedSongs: [TopTracksSong] {
     songs.sorted {$0.lastPlayed < $1.lastPlayed}
   }
 }

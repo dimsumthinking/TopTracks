@@ -18,6 +18,34 @@ public enum RotationCategory: String, CaseIterable, Hashable, Equatable, Identif
 //  case recommendedPlayed
 }
 
+
+
+extension RotationCategory {
+  public var frequency: String {
+    switch self {
+    case .power: return "90 minutes"
+    case .heavy: return "2 1/2 hours"
+    case .medium: return "3 1/2 hours"
+    case .light:  return "5 hours"
+    case .gold:  return "rarely"
+    case .added: return "not added yet"
+    default: return "never"
+    }
+  }
+  
+  public var numberPerHour: Int {
+    switch self {
+    case .power: return 6
+    case .heavy: return 4
+    case .medium: return 3
+    case .light:  return 2
+    case .gold:  return 1
+    default: return 0
+    }
+  }
+}
+
+
 extension RotationCategory {
   public var id: Int {
     hashValue
@@ -42,6 +70,6 @@ extension RotationCategory: CustomStringConvertible {
     return rawValue
   }
   public var description: String {
-    return rawValue.uppercased()
+    return rawValue.capitalized
   }
 }

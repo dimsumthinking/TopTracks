@@ -11,6 +11,7 @@ public struct PlaylistSongsView {
   @State private var playlistAlreadyExists = false
   @State private var existingStation: TopTracksStation?
   @State private var currentSong: Song?
+  @State private var didCreateStation = false
   
   public init(playlist: Playlist) {
     self.playlist = playlist
@@ -29,16 +30,25 @@ extension PlaylistSongsView: View {
         }
       }
       if checkIsComplete {
-        Button("Add \(playlist.name)") {
+        Button("Create Station") {
+//        Button("Add \(playlist.name)") {
           createStation()
-          CurrentActivity.shared.endCreating()
-//          ApplicationState.shared.endCreating()
+//          CurrentActivity.shared.endCreating()
         }
         .buttonStyle(.borderedProminent)
         .disabled(songs.isEmpty || playlistAlreadyExists)
-        .padding(.top)
+        .padding()
       }
     }
+    .sheet(isPresented: $didCreateStation) {
+      Text("Added new station: \(playlist.name)")
+        .presentationDetents([.fraction(0.25)])
+        .presentationDragIndicator(.hidden)
+        .interactiveDismissDisabled(true)
+        .background(.thinMaterial)
+
+    }
+    
     .alert("Station already Exists",
            isPresented: $playlistAlreadyExists) {
       Button("Play the station", action: {
@@ -46,8 +56,10 @@ extension PlaylistSongsView: View {
         if let station = existingStation {
 //          ApplicationState.shared.setStation(to: station)
           Task {
+            
             do {
               try await CurrentQueue.shared.playStation(station)
+              CurrentStation.shared.setStation(to: station)
             } catch {
               print("Couldn't play station")
               CurrentQueue.shared.stopPlayingStation()
@@ -70,7 +82,6 @@ extension PlaylistSongsView: View {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button("Cancel") {
           CurrentActivity.shared.endCreating()
-//          ApplicationState.shared.endCreating()
         }
       }
     }
@@ -103,7 +114,15 @@ extension PlaylistSongsView {
 
 extension PlaylistSongsView {
   func createStation() {
-    TopTracksStation.quickCreate(from: playlist,
-                                 with: songs)
+    Task {
+      TopTracksStation.quickCreate(from: playlist,
+                                   with: songs)
+      didCreateStation = true
+      try? await Task.sleep(for: .seconds(2))
+      didCreateStation = false
+      
+      CurrentActivity.shared.endCreating()
+      
+    }
   }
 }

@@ -8,12 +8,12 @@ extension ControlPanel: View {
   var body: some View {
     HStack {
       PreviousSongButton()
-        .font(.title)
+        .font(.title2)
       Spacer()
       PlayPauseButton()
       Spacer()
       NextSongButton()
-        .font(.title)
+        .font(.title2)
     }
     .font(.largeTitle)
     .tint(.primary)

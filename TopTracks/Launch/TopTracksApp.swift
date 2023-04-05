@@ -11,34 +11,38 @@ import ApplicationState
 struct TopTracksApp {
   @State private var musicAuthorizationStatus = MusicAuthorization.Status.notDetermined
   @StateObject private var networkMonitor = NetworkConnectionMonitor.shared
-  @StateObject private var  musicSubscription = AppleMusicSubscription.shared
+//  @StateObject private var  musicSubscription = AppleMusicSubscription.shared
   @Environment(\.scenePhase) private var scenePhase
+  @AppStorage("colorScheme") private var colorSchemeString = "dark"
+  @State private var canPlayContent = false
 }
 
 extension TopTracksApp: App {
   var body: some Scene {
     WindowGroup {
       if networkMonitor.isNotConnected {
-        // MARK: - Display no Network
         OfflineWarningView()
-          .preferredColorScheme(.dark)
+          .preferredColorScheme(currentColorScheme(from: colorSchemeString))
       } else {
         switch musicAuthorizationStatus {
         case .authorized:
-          if musicSubscription.canPlayCatalogContent {
-            // MARK: - Everything is great  Main App Entry point
+          if canPlayContent {
             MainView()
-              .preferredColorScheme(.dark)
+              .preferredColorScheme(currentColorScheme(from: colorSchemeString))
           } else {
-            // MARK: - Checking on Apple Music Subscription
-//            AppleMusicSubscriberView(canBecomeSubscriber: musicSubscription.canBecomeSubscriber)
-            AppleMusicSubscriberView(appleMusicSubscription: musicSubscription)
-
+            AppleMusicSubscriberView()
+              .preferredColorScheme(currentColorScheme(from: colorSchemeString))
           }
         default:
-          // MARK: - Checking User Authorized Music
           AppleMusicAuthorizationView(musicAuthorizationStatus: $musicAuthorizationStatus)
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(currentColorScheme(from: colorSchemeString))
+        }
+      }
+    }
+    .onChange(of: musicAuthorizationStatus) { status in
+      if status == .authorized {
+        Task {
+          await checkSubscription()
         }
       }
     }
@@ -51,3 +55,63 @@ extension TopTracksApp: App {
     }
   }
 }
+
+extension TopTracksApp {
+  private func checkSubscription() async {
+    for await canPlayContent in AppleMusicSubscription.shared.contentPermissions {
+      self.canPlayContent = canPlayContent
+    }
+  }
+}
+
+
+//import SwiftUI
+//import MusicKit
+//import NetworkMonitor
+//import PlaylistSongPreview
+//import AppleMusicAuthorization
+//import AppleMusicSubscription
+//import ApplicationState
+//
+//
+//@main
+//struct TopTracksApp {
+//  @State private var musicAuthorizationStatus = MusicAuthorization.Status.notDetermined
+//  @StateObject private var networkMonitor = NetworkConnectionMonitor.shared
+//  @StateObject private var  musicSubscription = AppleMusicSubscription.shared
+//  @Environment(\.scenePhase) private var scenePhase
+//  @AppStorage("colorScheme") private var colorSchemeString = "dark"
+//}
+//
+//extension TopTracksApp: App {
+//  var body: some Scene {
+//    WindowGroup {
+//      if networkMonitor.isNotConnected {
+//        OfflineWarningView()
+//          .preferredColorScheme(currentColorScheme(from: colorSchemeString))
+//      } else {
+//        switch musicAuthorizationStatus {
+//        case .authorized:
+//          if musicSubscription.canPlayCatalogContent {
+//            MainView()
+//              .preferredColorScheme(currentColorScheme(from: colorSchemeString))
+//          } else {
+//            AppleMusicSubscriberView(appleMusicSubscription: musicSubscription)
+//              .preferredColorScheme(currentColorScheme(from: colorSchemeString))
+//          }
+//        default:
+//          AppleMusicAuthorizationView(musicAuthorizationStatus: $musicAuthorizationStatus)
+//            .preferredColorScheme(currentColorScheme(from: colorSchemeString))
+//        }
+//      }
+//    }
+//
+//    .onChange(of: scenePhase) {phase in
+//      if phase == .background {
+//        songPreviewPlayer.stop()
+////        topTracksStatus.stopImporting()
+//      }
+////      currentlyPlaying.hack.toggle()
+//    }
+//  }
+//}

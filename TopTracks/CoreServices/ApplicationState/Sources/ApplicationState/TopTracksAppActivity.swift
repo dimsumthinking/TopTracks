@@ -5,7 +5,7 @@ public enum TopTracksAppActivity {
   case enjoying
   case creating
   case viewingOrEditing(topTracksStation: TopTracksStation)
-  case importing(url: URL?)
+  case importing(url: URL)
 }
 
 extension TopTracksAppActivity: Equatable {
