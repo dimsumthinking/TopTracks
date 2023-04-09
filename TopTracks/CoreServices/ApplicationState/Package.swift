@@ -13,12 +13,13 @@ let package = Package(
             targets: ["ApplicationState"]),
     ],
     dependencies: [
-      .package(path: "../../Model")
+      .package(path: "../../Model"),
+      .package(path: "../Constants")
     ],
     targets: [
         .target(
             name: "ApplicationState",
-            dependencies: ["Model"]),
+            dependencies: ["Model", "Constants"]),
         .testTarget(
             name: "ApplicationStateTests",
             dependencies: ["ApplicationState"]),
