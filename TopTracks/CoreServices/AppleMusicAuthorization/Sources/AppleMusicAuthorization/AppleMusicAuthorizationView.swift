@@ -1,6 +1,5 @@
 import SwiftUI
 import MusicKit
-//import AppleMusicAuthorization
 
 public struct AppleMusicAuthorizationView {
   @Binding var musicAuthorizationStatus: MusicAuthorization.Status
@@ -23,8 +22,9 @@ extension AppleMusicAuthorizationView: View {
   }
 }
 
-//struct AppleMusicAuthorizationView_Previews: PreviewProvider {
+//struct AppleMusicAuthorizationView_Preview: PreviewProvider {
+//  
 //  static var previews: some View {
-//    AppleMusicAuthorizationView(musicAuthorizationStatus: .constant(.notDetermined))
+//    AppleMusicAuthorizationView(musicAuthorizationStatus: .constant(.denied))
 //  }
 //}

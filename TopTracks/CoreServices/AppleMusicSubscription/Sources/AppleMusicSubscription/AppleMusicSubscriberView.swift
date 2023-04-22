@@ -7,29 +7,16 @@ public struct AppleMusicSubscriberView {
   @State private var canBecomeSubscriber = false
   @State private var cannotShowContent = false
   public init() {}
-//  @ObservedObject private var appleMusicSubscription: AppleMusicSubscription
-  
-//  public init(appleMusicSubscription: AppleMusicSubscription) {
-//    self.appleMusicSubscription = appleMusicSubscription
-//  }
+
 }
 
 extension AppleMusicSubscriberView: View {
   public var body: some View {
     VStack(spacing: 40) {
       if cannotShowContent {
-        Text("""
-           This app requires an
-           Apple Music Subscription
-           Individual, Student, or Family Plan
-           to create playlists and play music.
-           """)
-        .multilineTextAlignment(.center)
+       AppleMusicSubscriptionCantShowContent()
       } else {
-        VStack {
-          Text("Checking Apple Music Subscription")
-          ProgressView()
-        }
+        AppleMusicSubscriptionIsChecking()
       }
       if canBecomeSubscriber {
         Button("Subscribe") {
@@ -37,18 +24,29 @@ extension AppleMusicSubscriberView: View {
         }
       }
     }
+    #if os(iOS) || os(macOS)
     .musicSubscriptionOffer(isPresented: $isShowingSubscriptionOffer,
                             options: MusicSubscriptionOffer.Options.default)
+    #endif
     .task {
-      for await canBecomeSubscriber in AppleMusicSubscription.shared.subscriberPermissions {
+      for await canBecomeSubscriber in
+            MusicSubscription.subscriptionUpdates.map(\.canBecomeSubscriber) {
         self.canBecomeSubscriber = canBecomeSubscriber
       }
     }
     .task {
-      for await canShowContent in AppleMusicSubscription.shared.contentChecksForSubscription {
-        self.cannotShowContent = !canShowContent
+      for await canPlayCatalogContent in
+            MusicSubscription.subscriptionUpdates.map(\.canPlayCatalogContent) {
+        self.cannotShowContent = !canPlayCatalogContent
       }
     }
+  }
+}
+
+struct AppleMusicSubscriberView_Preview: PreviewProvider {
+  
+  static var previews: some View {
+    AppleMusicSubscriberView()
   }
 }
 

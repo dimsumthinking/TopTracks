@@ -23,7 +23,8 @@ extension Constants {
   
   #if os(iOS)
   public static let miniPlayerArtworkImageSize = max(UIScreen.main.bounds.width * 1 / 6, 80)
-  public static let fullPlayerArtworkImageSize = max(UIScreen.main.bounds.width * 2 / 3, 300)
+  public static let fullPlayerArtworkImageSize =
+  max(min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 1 / 2, 260)
   public static let playlistListImageSize = max(UIScreen.main.bounds.width * 1 / 6, 80)
   public static let stationListImageSize = max(UIScreen.main.bounds.width * 1 / 6, 80)
 //  public static let fullPlayerSwipe = min(UIScreen.main.bounds.width * 1 / 4, 80)

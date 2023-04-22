@@ -44,9 +44,6 @@ extension MiniPlayerView: View {
       .tint(.secondary)
       .background(.thinMaterial)
       .shadow( radius: 20, x: 0, y: -2)
-//      .onTapGesture {
-//        isShowingFullPlayer = true
-//      }
       .gesture(DragGesture().onChanged { drag in
         if  drag.startLocation.y - drag.location.y > Constants.fullPlayerSwipe {
           isShowingFullPlayer = true

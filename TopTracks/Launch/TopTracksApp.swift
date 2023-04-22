@@ -14,7 +14,7 @@ struct TopTracksApp {
 //  @StateObject private var  musicSubscription = AppleMusicSubscription.shared
   @Environment(\.scenePhase) private var scenePhase
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
-  @State private var canPlayContent = false
+  @State private var canPlayCatalogContent = false
 }
 
 extension TopTracksApp: App {
@@ -26,7 +26,7 @@ extension TopTracksApp: App {
       } else {
         switch musicAuthorizationStatus {
         case .authorized:
-          if canPlayContent {
+          if canPlayCatalogContent {
             MainView()
               .preferredColorScheme(currentColorScheme(from: colorSchemeString))
           } else {
@@ -58,8 +58,10 @@ extension TopTracksApp: App {
 
 extension TopTracksApp {
   private func checkSubscription() async {
-    for await canPlayContent in AppleMusicSubscription.shared.contentPermissions {
-      self.canPlayContent = canPlayContent
+    for await canPlayCatalogContent in
+          MusicSubscription.subscriptionUpdates.map(\.canPlayCatalogContent) {
+          //AppleMusicSubscription.shared.contentPermissions {
+      self.canPlayCatalogContent = canPlayCatalogContent
     }
   }
 }

@@ -10,7 +10,7 @@ extension ClockInfo: View {
     VStack(alignment: .leading, spacing: 20) {
       HStack {
         Spacer()
-        Text("Tap a station to enjoy a fresh mix of music.")
+        Text("Tap a station to enjoy a fresh music mix.")
         Spacer()
       }
       
@@ -20,7 +20,7 @@ extension ClockInfo: View {
       
       ClockView(hour: musicClock)
       
-      Text("As we move around the clock, you'll hear one of the songs in the highlighted category that was played the longest ago.")
+      Text("As we move around the clock, you'll hear a song in the highlighted category that played longest ago.")
       
       .multilineTextAlignment(.center)
 
