@@ -16,15 +16,14 @@
 		623B99F2276AC4F0004C17AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99F1276AC4F0004C17AE /* Preview Assets.xcassets */; };
 		623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623CAFA4278CFA6500B8FC48 /* CloudKit.framework */; };
 		624C171029D73623003BAE44 /* Players in Frameworks */ = {isa = PBXBuildFile; productRef = 624C170F29D73623003BAE44 /* Players */; };
-		6258454C29B15926008F70CB /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = 6258454B29B15926008F70CB /* Model */; };
 		62615EF929F48B7F005FC1A1 /* TopTracksTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62615EF829F48B7F005FC1A1 /* TopTracksTVApp.swift */; };
 		62615EFB29F48B7F005FC1A1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62615EFA29F48B7F005FC1A1 /* MainView.swift */; };
 		62615EFD29F48B7F005FC1A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62615EFC29F48B7F005FC1A1 /* Assets.xcassets */; };
 		62615F0029F48B7F005FC1A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62615EFF29F48B7F005FC1A1 /* Preview Assets.xcassets */; };
-		62615F0629F48D49005FC1A1 /* CoreServices in Frameworks */ = {isa = PBXBuildFile; productRef = 62615F0529F48D49005FC1A1 /* CoreServices */; };
-		62615F0829F494CE005FC1A1 /* PlaylistSearch in Frameworks */ = {isa = PBXBuildFile; productRef = 62615F0729F494CE005FC1A1 /* PlaylistSearch */; };
 		628E69AA29AD4AA200B7B9EF /* PlaylistSearch in Frameworks */ = {isa = PBXBuildFile; productRef = 628E69A929AD4AA200B7B9EF /* PlaylistSearch */; };
-		62BF864A29B921A2003B94EB /* CoreServices in Frameworks */ = {isa = PBXBuildFile; productRef = 62BF864929B921A2003B94EB /* CoreServices */; };
+		62BD8B3529F5639A009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3429F5639A009A528E /* TopTracksCore */; };
+		62BD8B3729F563C1009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3629F563C1009A528E /* TopTracksCore */; };
+		62BD8B3D29F5645B009A528E /* PlaylistSearch in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3C29F5645B009A528E /* PlaylistSearch */; };
 		62E32B7A29C8C35400E43121 /* StationUpdaters in Frameworks */ = {isa = PBXBuildFile; productRef = 62E32B7929C8C35400E43121 /* StationUpdaters */; };
 /* End PBXBuildFile section */
 
@@ -33,8 +32,6 @@
 		6221ABBA2912A8CA0088F0F2 /* TopTracksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksApp.swift; sourceTree = "<group>"; };
 		6221ABBC2912A8F20088F0F2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6222D985280DFFAF009DEA8A /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-		6227AB2B29B92EC500BDF230 /* Radio */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Radio; path = TopTracks/Radio; sourceTree = "<group>"; };
-		622F549D29D7358B00C89939 /* Players */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Players; path = TopTracks/Players; sourceTree = "<group>"; };
 		623B99E7276AC4F0004C17AE /* TopTracks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopTracks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		623B99EE276AC4F0004C17AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		623B99F1276AC4F0004C17AE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -46,10 +43,11 @@
 		62615EFA29F48B7F005FC1A1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		62615EFC29F48B7F005FC1A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62615EFF29F48B7F005FC1A1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		628E69A829AD4A6500B7B9EF /* PlaylistSearch */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PlaylistSearch; path = TopTracks/PlaylistSearch; sourceTree = "<group>"; };
-		62B337A829B12E31000BD413 /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Model; path = TopTracks/Model; sourceTree = "<group>"; };
-		62B9FC8229C8BB3C00543F90 /* StationUpdaters */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StationUpdaters; path = TopTracks/StationUpdaters; sourceTree = "<group>"; };
-		62E8CD7829B23CCE00591D07 /* CoreServices */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreServices; path = TopTracks/CoreServices/CoreServices; sourceTree = "<group>"; };
+		62BD8B3229F56373009A528E /* TopTracksCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TopTracksCore; path = TopTracksCommonPackages/CoreServices/TopTracksCore; sourceTree = "<group>"; };
+		62BD8B3829F56406009A528E /* Players */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Players; path = TopTracks/Players; sourceTree = "<group>"; };
+		62BD8B3929F56421009A528E /* Radio */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Radio; path = TopTracks/Radio; sourceTree = "<group>"; };
+		62BD8B3A29F56432009A528E /* PlaylistSearch */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PlaylistSearch; path = TopTracks/PlaylistSearch; sourceTree = "<group>"; };
+		62BD8B3B29F56442009A528E /* StationUpdaters */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StationUpdaters; path = TopTracks/StationUpdaters; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +56,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				620233812824003A00D7C63F /* StoreKit.framework in Frameworks */,
+				62BD8B3529F5639A009A528E /* TopTracksCore in Frameworks */,
 				62E32B7A29C8C35400E43121 /* StationUpdaters in Frameworks */,
 				6227AB2D29B92F1C00BDF230 /* Radio in Frameworks */,
-				62BF864A29B921A2003B94EB /* CoreServices in Frameworks */,
 				623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */,
 				6222D986280DFFAF009DEA8A /* NetworkExtension.framework in Frameworks */,
 				624C171029D73623003BAE44 /* Players in Frameworks */,
-				6258454C29B15926008F70CB /* Model in Frameworks */,
 				628E69AA29AD4AA200B7B9EF /* PlaylistSearch in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,8 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62615F0829F494CE005FC1A1 /* PlaylistSearch in Frameworks */,
-				62615F0629F48D49005FC1A1 /* CoreServices in Frameworks */,
+				62BD8B3D29F5645B009A528E /* PlaylistSearch in Frameworks */,
+				62BD8B3729F563C1009A528E /* TopTracksCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,12 +81,11 @@
 		6207E2B32926AB7F00DD5A81 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				628E69A829AD4A6500B7B9EF /* PlaylistSearch */,
-				62B337A829B12E31000BD413 /* Model */,
-				62E8CD7829B23CCE00591D07 /* CoreServices */,
-				6227AB2B29B92EC500BDF230 /* Radio */,
-				62B9FC8229C8BB3C00543F90 /* StationUpdaters */,
-				622F549D29D7358B00C89939 /* Players */,
+				62BD8B3229F56373009A528E /* TopTracksCore */,
+				62BD8B3829F56406009A528E /* Players */,
+				62BD8B3929F56421009A528E /* Radio */,
+				62BD8B3A29F56432009A528E /* PlaylistSearch */,
+				62BD8B3B29F56442009A528E /* StationUpdaters */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -164,8 +160,7 @@
 		62615EF729F48B7F005FC1A1 /* TopTracksTV */ = {
 			isa = PBXGroup;
 			children = (
-				62615EF829F48B7F005FC1A1 /* TopTracksTVApp.swift */,
-				62615EFA29F48B7F005FC1A1 /* MainView.swift */,
+				62615F0929F55A53005FC1A1 /* Launch */,
 				62615F0429F48C36005FC1A1 /* Support */,
 			);
 			path = TopTracksTV;
@@ -188,6 +183,15 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
+		62615F0929F55A53005FC1A1 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				62615EF829F48B7F005FC1A1 /* TopTracksTVApp.swift */,
+				62615EFA29F48B7F005FC1A1 /* MainView.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -206,11 +210,10 @@
 			name = TopTracks;
 			packageProductDependencies = (
 				628E69A929AD4AA200B7B9EF /* PlaylistSearch */,
-				6258454B29B15926008F70CB /* Model */,
-				62BF864929B921A2003B94EB /* CoreServices */,
 				6227AB2C29B92F1C00BDF230 /* Radio */,
 				62E32B7929C8C35400E43121 /* StationUpdaters */,
 				624C170F29D73623003BAE44 /* Players */,
+				62BD8B3429F5639A009A528E /* TopTracksCore */,
 			);
 			productName = TopTracks;
 			productReference = 623B99E7276AC4F0004C17AE /* TopTracks.app */;
@@ -230,8 +233,8 @@
 			);
 			name = TopTracksTV;
 			packageProductDependencies = (
-				62615F0529F48D49005FC1A1 /* CoreServices */,
-				62615F0729F494CE005FC1A1 /* PlaylistSearch */,
+				62BD8B3629F563C1009A528E /* TopTracksCore */,
+				62BD8B3C29F5645B009A528E /* PlaylistSearch */,
 			);
 			productName = TopTracksTV;
 			productReference = 62615EF629F48B7F005FC1A1 /* TopTracksTV.app */;
@@ -614,25 +617,21 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Players;
 		};
-		6258454B29B15926008F70CB /* Model */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Model;
-		};
-		62615F0529F48D49005FC1A1 /* CoreServices */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CoreServices;
-		};
-		62615F0729F494CE005FC1A1 /* PlaylistSearch */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PlaylistSearch;
-		};
 		628E69A929AD4AA200B7B9EF /* PlaylistSearch */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PlaylistSearch;
 		};
-		62BF864929B921A2003B94EB /* CoreServices */ = {
+		62BD8B3429F5639A009A528E /* TopTracksCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = CoreServices;
+			productName = TopTracksCore;
+		};
+		62BD8B3629F563C1009A528E /* TopTracksCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TopTracksCore;
+		};
+		62BD8B3C29F5645B009A528E /* PlaylistSearch */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PlaylistSearch;
 		};
 		62E32B7929C8C35400E43121 /* StationUpdaters */ = {
 			isa = XCSwiftPackageProductDependency;

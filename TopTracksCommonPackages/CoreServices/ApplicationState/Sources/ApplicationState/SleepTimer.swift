@@ -18,6 +18,7 @@ class SleepTimer {
 
 extension SleepTimer {
   func sleep() async {
+    #if !os(macOS)
     await withCheckedContinuation { continuation in
       sleepTimerTask?.cancel()
       sleepTimerTask = Task {
@@ -31,6 +32,7 @@ extension SleepTimer {
         continuation.resume(returning: ())
       }
     }
+    #endif
   }
 }
 

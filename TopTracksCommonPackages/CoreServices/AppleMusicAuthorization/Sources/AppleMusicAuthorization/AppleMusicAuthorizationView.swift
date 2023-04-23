@@ -12,12 +12,15 @@ extension AppleMusicAuthorizationView: View {
   public var body: some View {
     VStack {
       AuthorizationView(status: $musicAuthorizationStatus)
+      #if !os(macOS)
       if musicAuthorizationStatus == .denied {
         Button("Go to Settings") {
           UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         }
         .padding(.top)
       }
+#endif
+
     }
   }
 }

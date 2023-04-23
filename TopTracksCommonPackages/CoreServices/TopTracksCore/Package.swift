@@ -3,14 +3,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "CoreServices",
+    name: "TopTracksCore",
     platforms: [
       .macOS("13.0"),
       .iOS("16.0")],
     products: [
         .library(
-            name: "CoreServices",
-            targets: ["CoreServices"]),
+            name: "TopTracksCore",
+            targets: ["TopTracksCore"]),
     ],
     dependencies: [
       .package(path: "../AppleMusicAuthorization"),
@@ -22,7 +22,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "CoreServices",
+            name: "TopTracksCore",
             dependencies: ["AppleMusicAuthorization",
                           "AppleMusicSubscription",
                           "NetworkMonitor",
@@ -30,7 +30,7 @@ let package = Package(
                           "PlaylistSongPreview",
                           "ApplicationState"]),
         .testTarget(
-            name: "CoreServicesTests",
-            dependencies: ["CoreServices"]),
+            name: "TopTracksCoreTests",
+            dependencies: ["TopTracksCore"]),
     ]
 )

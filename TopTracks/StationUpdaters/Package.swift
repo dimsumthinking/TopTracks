@@ -13,9 +13,9 @@ let package = Package(
             targets: ["StationUpdaters"]),
     ],
     dependencies: [
-      .package(path: "../Model"),
-      .package(path: "../CoreServices/ApplicationState"),
-      .package(path: "../CoreServices/PlaylistSongPreview")
+      .package(path: "../../TopTracksCommonPackages/Model"),
+      .package(path: "../../TopTracksCommonPackages/CoreServices/ApplicationState"),
+      .package(path: "../../TopTracksCommonPackages/CoreServices/PlaylistSongPreview")
     ],
     targets: [
         .target(

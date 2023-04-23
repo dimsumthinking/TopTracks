@@ -13,10 +13,10 @@ let package = Package(
             targets: ["PlaylistSearch"]),
     ],
     dependencies: [
-      .package(path: "../Model"),
-      .package(path: "../CoreServices/Constants"),
-      .package(path: "../CoreServices/ApplicationState"),
-      .package(path: "../CoreServices/PlaylistSongPreview")
+      .package(path: "../../TopTracksCommonPackages/Model"),
+      .package(path: "../../TopTracksCommonPackages/CoreServices/Constants"),
+      .package(path: "../../TopTracksCommonPackages/CoreServices/ApplicationState"),
+      .package(path: "../../TopTracksCommonPackages/CoreServices/PlaylistSongPreview")
     ],
     targets: [
         .target(

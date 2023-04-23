@@ -30,6 +30,7 @@ extension CurrentSong {
 
 
 extension CurrentSong {
+  #if !os(macOS)
   public func setCurrentSong(using entry: ApplicationMusicPlayer.Queue.Entry) {
     guard let item = entry.item else {return}
     switch item {
@@ -41,6 +42,7 @@ extension CurrentSong {
     }
     CurrentQueue.shared.refillQueueIfNeeded()
   }
+  #endif
   
   public func noSongSelected() {
     self.song = nil

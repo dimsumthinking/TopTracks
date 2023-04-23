@@ -13,9 +13,9 @@ let package = Package(
             targets: ["Radio"]),
     ],
     dependencies: [
-      .package(path: "../Model"),
-      .package(path: "../CoreServices/ApplicationState"),
-      .package(path: "../CoreServices/Constants"),
+      .package(path: "../../TopTracksCommonPackages/Model"),
+      .package(path: "../../TopTracksCommonPackages/CoreServices/ApplicationState"),
+      .package(path: "../../TopTracksCommonPackages/CoreServices/Constants"),
       .package(path: "../StationUpdaters")
     ],
     targets: [
