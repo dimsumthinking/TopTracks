@@ -1,6 +1,7 @@
 import SwiftUI
 import MusicKit
 import ApplicationState
+import PlaylistSearchShared
 
 public struct PlaylistChooserView {
   @StateObject  var lister: PlaylistLister

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		620233812824003A00D7C63F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 620233802824003A00D7C63F /* StoreKit.framework */; };
+		620FF5A829F573DA0036C059 /* PlaylistSearch in Frameworks */ = {isa = PBXBuildFile; productRef = 620FF5A729F573DA0036C059 /* PlaylistSearch */; };
 		6221ABBB2912A8CA0088F0F2 /* TopTracksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221ABBA2912A8CA0088F0F2 /* TopTracksApp.swift */; };
 		6221ABBD2912A8F20088F0F2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221ABBC2912A8F20088F0F2 /* MainView.swift */; };
 		6222D986280DFFAF009DEA8A /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6222D985280DFFAF009DEA8A /* NetworkExtension.framework */; };
@@ -20,15 +21,16 @@
 		62615EFB29F48B7F005FC1A1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62615EFA29F48B7F005FC1A1 /* MainView.swift */; };
 		62615EFD29F48B7F005FC1A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62615EFC29F48B7F005FC1A1 /* Assets.xcassets */; };
 		62615F0029F48B7F005FC1A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62615EFF29F48B7F005FC1A1 /* Preview Assets.xcassets */; };
-		628E69AA29AD4AA200B7B9EF /* PlaylistSearch in Frameworks */ = {isa = PBXBuildFile; productRef = 628E69A929AD4AA200B7B9EF /* PlaylistSearch */; };
 		62BD8B3529F5639A009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3429F5639A009A528E /* TopTracksCore */; };
 		62BD8B3729F563C1009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3629F563C1009A528E /* TopTracksCore */; };
-		62BD8B3D29F5645B009A528E /* PlaylistSearch in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3C29F5645B009A528E /* PlaylistSearch */; };
+		62C60FBA29F589F000092D6E /* PlaylistSearchTV in Frameworks */ = {isa = PBXBuildFile; productRef = 62C60FB929F589F000092D6E /* PlaylistSearchTV */; };
 		62E32B7A29C8C35400E43121 /* StationUpdaters in Frameworks */ = {isa = PBXBuildFile; productRef = 62E32B7929C8C35400E43121 /* StationUpdaters */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		620233802824003A00D7C63F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		620FF5A629F573CB0036C059 /* PlaylistSearch */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PlaylistSearch; path = TopTracks/PlaylistSearch; sourceTree = "<group>"; };
+		62113B3A29F56CCA00927FAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6221ABBA2912A8CA0088F0F2 /* TopTracksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksApp.swift; sourceTree = "<group>"; };
 		6221ABBC2912A8F20088F0F2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6222D985280DFFAF009DEA8A /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
@@ -46,8 +48,8 @@
 		62BD8B3229F56373009A528E /* TopTracksCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TopTracksCore; path = TopTracksCommonPackages/CoreServices/TopTracksCore; sourceTree = "<group>"; };
 		62BD8B3829F56406009A528E /* Players */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Players; path = TopTracks/Players; sourceTree = "<group>"; };
 		62BD8B3929F56421009A528E /* Radio */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Radio; path = TopTracks/Radio; sourceTree = "<group>"; };
-		62BD8B3A29F56432009A528E /* PlaylistSearch */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PlaylistSearch; path = TopTracks/PlaylistSearch; sourceTree = "<group>"; };
 		62BD8B3B29F56442009A528E /* StationUpdaters */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StationUpdaters; path = TopTracks/StationUpdaters; sourceTree = "<group>"; };
+		62C60FB829F589D400092D6E /* PlaylistSearchTV */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PlaylistSearchTV; path = TopTracksTV/PlaylistSearchTV; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +63,8 @@
 				6227AB2D29B92F1C00BDF230 /* Radio in Frameworks */,
 				623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */,
 				6222D986280DFFAF009DEA8A /* NetworkExtension.framework in Frameworks */,
+				620FF5A829F573DA0036C059 /* PlaylistSearch in Frameworks */,
 				624C171029D73623003BAE44 /* Players in Frameworks */,
-				628E69AA29AD4AA200B7B9EF /* PlaylistSearch in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62BD8B3D29F5645B009A528E /* PlaylistSearch in Frameworks */,
+				62C60FBA29F589F000092D6E /* PlaylistSearchTV in Frameworks */,
 				62BD8B3729F563C1009A528E /* TopTracksCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,8 +86,9 @@
 				62BD8B3229F56373009A528E /* TopTracksCore */,
 				62BD8B3829F56406009A528E /* Players */,
 				62BD8B3929F56421009A528E /* Radio */,
-				62BD8B3A29F56432009A528E /* PlaylistSearch */,
 				62BD8B3B29F56442009A528E /* StationUpdaters */,
+				620FF5A629F573CB0036C059 /* PlaylistSearch */,
+				62C60FB829F589D400092D6E /* PlaylistSearchTV */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 		62615EF729F48B7F005FC1A1 /* TopTracksTV */ = {
 			isa = PBXGroup;
 			children = (
+				62113B3A29F56CCA00927FAA /* Info.plist */,
 				62615F0929F55A53005FC1A1 /* Launch */,
 				62615F0429F48C36005FC1A1 /* Support */,
 			);
@@ -209,11 +213,11 @@
 			);
 			name = TopTracks;
 			packageProductDependencies = (
-				628E69A929AD4AA200B7B9EF /* PlaylistSearch */,
 				6227AB2C29B92F1C00BDF230 /* Radio */,
 				62E32B7929C8C35400E43121 /* StationUpdaters */,
 				624C170F29D73623003BAE44 /* Players */,
 				62BD8B3429F5639A009A528E /* TopTracksCore */,
+				620FF5A729F573DA0036C059 /* PlaylistSearch */,
 			);
 			productName = TopTracks;
 			productReference = 623B99E7276AC4F0004C17AE /* TopTracks.app */;
@@ -234,7 +238,7 @@
 			name = TopTracksTV;
 			packageProductDependencies = (
 				62BD8B3629F563C1009A528E /* TopTracksCore */,
-				62BD8B3C29F5645B009A528E /* PlaylistSearch */,
+				62C60FB929F589F000092D6E /* PlaylistSearchTV */,
 			);
 			productName = TopTracksTV;
 			productReference = 62615EF629F48B7F005FC1A1 /* TopTracksTV.app */;
@@ -374,13 +378,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 16.4;
 			};
 			name = Debug;
 		};
@@ -429,12 +434,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TVOS_DEPLOYMENT_TARGET = 16.4;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -462,7 +468,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -501,7 +507,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -528,6 +534,7 @@
 				DEVELOPMENT_TEAM = MG5SW9CY8D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TopTracksTV/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "TopTracks uses Music to search for and play the tunes in your custom stations.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
@@ -558,6 +565,7 @@
 				DEVELOPMENT_TEAM = MG5SW9CY8D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TopTracksTV/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "TopTracks uses Music to search for and play the tunes in your custom stations.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
@@ -609,6 +617,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		620FF5A729F573DA0036C059 /* PlaylistSearch */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PlaylistSearch;
+		};
 		6227AB2C29B92F1C00BDF230 /* Radio */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Radio;
@@ -616,10 +628,6 @@
 		624C170F29D73623003BAE44 /* Players */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Players;
-		};
-		628E69A929AD4AA200B7B9EF /* PlaylistSearch */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PlaylistSearch;
 		};
 		62BD8B3429F5639A009A528E /* TopTracksCore */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -629,9 +637,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = TopTracksCore;
 		};
-		62BD8B3C29F5645B009A528E /* PlaylistSearch */ = {
+		62C60FB929F589F000092D6E /* PlaylistSearchTV */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = PlaylistSearch;
+			productName = PlaylistSearchTV;
 		};
 		62E32B7929C8C35400E43121 /* StationUpdaters */ = {
 			isa = XCSwiftPackageProductDependency;

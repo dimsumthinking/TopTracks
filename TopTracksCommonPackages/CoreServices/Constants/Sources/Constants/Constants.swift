@@ -7,11 +7,11 @@ import SwiftUI
 
 
 extension Constants {
-  public static let songListImageSize = 80.0
-  
-  public static let playlistGridImageSize = 150.0
-  public static let playlistGridGridSize = 180.0
-  public static let playlistGridRowSpacing = 50.0
+  #if os(tvOS)
+  public static let playlistGridImageSize = 200.0
+  public static let playlistGridGridSize = 240.0
+  public static let playlistGridRowSpacing = 40.0
+  #endif
   
 //  public static let playlistListImageSize = 80.0 // was 60
 //  public static let stationListImageSize = 80.0
@@ -22,6 +22,7 @@ extension Constants {
 
   
   #if os(iOS)
+  public static let songListImageSize = max(UIScreen.main.bounds.width * 1 / 6, 80)
   public static let miniPlayerArtworkImageSize = max(UIScreen.main.bounds.width * 1 / 6, 80)
   public static let fullPlayerArtworkImageSize =
   max(min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 1 / 2, 260)
@@ -29,12 +30,18 @@ extension Constants {
   public static let stationListImageSize = max(UIScreen.main.bounds.width * 1 / 6, 80)
 //  public static let fullPlayerSwipe = min(UIScreen.main.bounds.width * 1 / 4, 80)
   
+  #elseif os(tvOS)
+  public static let playlistListImageSize = 200.0
+  public static let stationListImageSize = 180.0
+  public static let songListImageSize = 180.0
+
   
   #else
   public static let miniPlayerArtworkImageSize = 80
   public static let fullPlayerArtworkImageSize = 300
   public static let playlistListImageSize = 80.0 // was 60
   public static let stationListImageSize = 80.0
+  public static let songListImageSize = 80.0
 //  public static let fullPlayerSwipe = 80
   #endif
   

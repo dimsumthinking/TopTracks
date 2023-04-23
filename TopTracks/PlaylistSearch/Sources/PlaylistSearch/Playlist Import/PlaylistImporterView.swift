@@ -2,6 +2,7 @@ import MusicKit
 import SwiftUI
 import Foundation
 import ApplicationState
+import PlaylistSearchShared
 
 public struct PlaylistImporterView {
   let url: URL

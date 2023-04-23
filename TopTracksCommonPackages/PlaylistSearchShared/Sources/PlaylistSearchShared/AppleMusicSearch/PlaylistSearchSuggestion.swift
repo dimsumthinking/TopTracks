@@ -3,15 +3,16 @@ import MusicKit
 import Combine
 
 @MainActor
-class PlaylistSearchSuggestion: ObservableObject {
-  @Published var searchSuggestions: [String: String] = [:] // displayterm, searchterm
+public class PlaylistSearchSuggestion: ObservableObject {
+  @Published public private(set) var searchSuggestions: [String: String] = [:] // displayterm, searchterm
   private var haveNotSearchedSubTerms = true
   
-  @Published var suggestions: [MusicCatalogSearchSuggestionsResponse.Suggestion] = []
+  @Published public private(set) var suggestions: [MusicCatalogSearchSuggestionsResponse.Suggestion] = []
+  public init(){}
 }
 
 extension PlaylistSearchSuggestion {
-  func searchSuggestions(for term: String) {
+  public func searchSuggestions(for term: String) {
     resetSuggestions()
     haveNotSearchedSubTerms = true
     Task {
@@ -19,7 +20,7 @@ extension PlaylistSearchSuggestion {
     }
   }
   
-  func resetSuggestions() {
+  public func resetSuggestions() {
     searchSuggestions.removeAll()
     suggestions.removeAll()
   }

@@ -1,7 +1,7 @@
 import MusicKit
 
 extension PlaylistKind {
-  var isChart: Bool {
+  public var isChart: Bool {
     switch self {
     case .cityCharts, .countryTop100, .top:
       return true
@@ -10,7 +10,7 @@ extension PlaylistKind {
     }
   }
   
-  var hasHardCodedCategories: Bool {
+  public var hasHardCodedCategories: Bool {
     switch self {
     case .byGenre, .decade, .international, .moodAndActivity:
       return true
@@ -19,7 +19,7 @@ extension PlaylistKind {
     }
   }
   
-  var musicCatalogChartKind: MusicCatalogChartKind {
+  public var musicCatalogChartKind: MusicCatalogChartKind {
     switch self {
     case .top: return .mostPlayed
     case .cityCharts: return .cityTop
@@ -28,7 +28,7 @@ extension PlaylistKind {
     }
   }
   
-  var playlistCategories: [AppleMusicCategory] {
+  public var playlistCategories: [AppleMusicCategory] {
     switch self {
     case .byGenre: return AppleMusicCategory.appleMusicGenres
     case .decade: return AppleMusicCategory.appleMusicDecades

@@ -1,5 +1,6 @@
 import SwiftUI
 import ApplicationState
+import PlaylistSearchShared
 
 public struct PlaylistKindView {
   public init() {}

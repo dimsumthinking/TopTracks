@@ -2,9 +2,9 @@ import MusicKit
 import Combine
 
 @MainActor
-class PlaylistSearch: ObservableObject {
-  @Published var playlists =  MusicItemCollection<Playlist>()
-  init(term: String) {
+public class PlaylistSearch: ObservableObject {
+  @Published public private(set) var playlists =  MusicItemCollection<Playlist>()
+  public init(term: String) {
     Task {
       try await playlistSearch(term: term)
     }

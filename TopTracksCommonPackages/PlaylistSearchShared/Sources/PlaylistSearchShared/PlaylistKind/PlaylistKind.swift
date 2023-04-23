@@ -1,8 +1,8 @@
 import Foundation
 
-let mainPlaylistKinds = [PlaylistKind.top, .cityCharts, .countryTop100, .byGenre, .moodAndActivity, .decade, .international, .openSearch]
+public let mainPlaylistKinds = [PlaylistKind.top, .cityCharts, .countryTop100, .byGenre, .moodAndActivity, .decade, .international, .openSearch]
 
-enum PlaylistKind: String, CaseIterable, Hashable, Equatable {
+public enum PlaylistKind: String, CaseIterable, Hashable, Equatable {
   case top
   case cityCharts
   case countryTop100
@@ -15,7 +15,7 @@ enum PlaylistKind: String, CaseIterable, Hashable, Equatable {
 }
 
 extension PlaylistKind {
-  var sfSymbolName: String {
+  public var sfSymbolName: String {
     switch self {
     case .top:
       return "chart.line.uptrend.xyaxis"
@@ -40,7 +40,7 @@ extension PlaylistKind {
 }
 
 extension PlaylistKind: CustomStringConvertible {
-  var description: String {
+  public var description: String {
     switch self {
     case .top:
       return "Top Playlists"
@@ -65,7 +65,7 @@ extension PlaylistKind: CustomStringConvertible {
 }
 
 extension PlaylistKind: Identifiable {
-  var id: Self {
+  public var id: Self {
     self
   }
 }

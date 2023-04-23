@@ -2,7 +2,7 @@ import MusicKit
 import Foundation
 
 
-func fetchPlaylist(for url: URL) async throws -> Playlist {
+public func fetchPlaylist(for url: URL) async throws -> Playlist {
   let components = URLComponents(url: url,
                                  resolvingAgainstBaseURL: true)
   guard let host = components?.host,
@@ -19,19 +19,20 @@ func fetchPlaylist(for url: URL) async throws -> Playlist {
 }
 
 
-enum PlaylistImportError {
+public enum PlaylistImportError {
   case badlyFormedURL(url: URL)
   case unknownPlaylistType(type: String)
   case playlistNotFound(playlistID: String)
 }
 
-struct BadlyFormedURL: Error {
-  let url: URL
+public struct BadlyFormedURL: Error {
+  public let url: URL
 }
 
-struct UnKnownPlaylistType: Error {
-  let host: String
+public struct UnKnownPlaylistType: Error {
+  public let host: String
 }
-struct PlaylistNotFound: Error {
-  let playlistId: String
+
+public struct PlaylistNotFound: Error {
+  public let playlistId: String
 }

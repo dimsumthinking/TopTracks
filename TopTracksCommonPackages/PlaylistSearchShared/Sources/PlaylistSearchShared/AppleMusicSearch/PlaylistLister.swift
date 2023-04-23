@@ -1,10 +1,11 @@
 import MusicKit
 import Combine
+import PlaylistSearchShared
 
 @MainActor
-class PlaylistLister: ObservableObject {
-  @Published var playlists =  MusicItemCollection<Playlist>()
-  init(category: AppleMusicCategory) {
+public class PlaylistLister: ObservableObject {
+  @Published public private(set) var playlists =  MusicItemCollection<Playlist>()
+  public init(category: AppleMusicCategory) {
     Task {
       try await playlistSearch(category: category)
     }

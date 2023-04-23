@@ -2,9 +2,11 @@ import MusicKit
 import Combine
 
 @MainActor
-class ChartLister: ObservableObject {
-  @Published var playlists =  MusicItemCollection<Playlist>()
-  init(kind: MusicCatalogChartKind) {
+public class ChartLister: ObservableObject {
+  @Published public private(set) var playlists =  MusicItemCollection<Playlist>()
+  public let kind: MusicCatalogChartKind
+  public init(kind: MusicCatalogChartKind) {
+    self.kind = kind
     Task {
       try await chartSearch(kind: kind)
     }

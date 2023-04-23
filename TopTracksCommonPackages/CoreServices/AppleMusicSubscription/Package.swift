@@ -1,12 +1,12 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
 
 let package = Package(
     name: "AppleMusicSubscription",
     platforms: [
-      .iOS("16.0"),
-      .macOS("13.0")
+      .iOS("16.4"),
+      .macOS("13.3")
     ],
     products: [
         .library(

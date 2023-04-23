@@ -41,13 +41,26 @@ extension SongPreview: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
-      if !isPlaying {
-        songPreviewPlayer.play(song)
-        currentSong = song
-      } else {
-        songPreviewPlayer.stop()
-        currentSong = nil
-      }
+      playSong()
+//      if !isPlaying {
+//        songPreviewPlayer.play(song)
+//        currentSong = song
+//      } else {
+//        songPreviewPlayer.stop()
+//        currentSong = nil
+//      }
+    }
+  }
+}
+
+extension SongPreview {
+  public func playSong() {
+    if !isPlaying {
+      songPreviewPlayer.play(song)
+      currentSong = song
+    } else {
+      songPreviewPlayer.stop()
+      currentSong = nil
     }
   }
 }

@@ -29,7 +29,7 @@ import Foundation
 //    .morning, .motivation, .outdoors, .party, .romance, .sleep, .social, .sports, .summertimeSounds,
 //    .vacation, .weekend, .wellbeing, .work ]
 
-enum AppleMusicCategory: String, CaseIterable {
+public enum AppleMusicCategory: String, CaseIterable {
   // Spatial
   case spatialAudio = "Spatial Audio"
   
@@ -178,32 +178,32 @@ enum AppleMusicCategory: String, CaseIterable {
 }
 
 extension AppleMusicCategory: Identifiable {
-  var id: Self {
+  public var id: Self {
     self
   }
 }
 
 extension AppleMusicCategory: CustomStringConvertible {
-  var description: String {
+  public var description: String {
     rawValue.first!.isLetter ? rawValue.capitalized : rawValue
   }
 }
 
 extension AppleMusicCategory {
-  static let appleMusicCategories = AppleMusicCategory.allCases
-  static let defaultMusicCategory = AppleMusicCategory.spatialAudio
-  static let appleMusicSpatial = AppleMusicCategory.spatialAudio
-  static let appleMusicEssentials = AppleMusicCategory.essentials
-  static let appleMusicDecades: [AppleMusicCategory]
+  public static let appleMusicCategories = AppleMusicCategory.allCases
+  public static let defaultMusicCategory = AppleMusicCategory.spatialAudio
+  public static let appleMusicSpatial = AppleMusicCategory.spatialAudio
+  public static let appleMusicEssentials = AppleMusicCategory.essentials
+  public static let appleMusicDecades: [AppleMusicCategory]
   = [.oldies, .fifties, .sixties, .seventies, .eighties, .nineties, .twoThousands, .twentyTens]//, .twentyTwenties]
-  static let appleMusicGenres: [AppleMusicCategory]
+  public static let appleMusicGenres: [AppleMusicCategory]
   = [.spatialAudio, .essentials, .acoustic, .african, .alternative, .americana, .behindTheSongs, .blues, .christian,
      .classicRock, .classical, .country, .cPop, .dance, .devotional, .djMixes, .electronic, .family,
      .filmTVStage, .gospel, .hardRock, .hits, .hipHop, .holiday, .indie, .jazz,
      .kPop, .kids, .latin, .live, .metal, .musicaMexicana, .musicaTropical, .pop, .pride, .punk,
      .radio, .rAndB, .reggae, .rock, .rockYAlternativo, .samba, .soulFunk, .upNext, .urbanoLatino]
 
-  static let appleMusicWorldwide: [AppleMusicCategory]
+  public static let appleMusicWorldwide: [AppleMusicCategory]
   = [.african, .afrikaans, .anime, .arabic, .baileFunk, .bollywood, .brazilianPop, .cPop,
      .canadian, .cantopop,  .catalana, .deutschpop, .deutschrap, .devotional, .firstNationsAustralia,
      .flamenco, .frenchPop, .frenchRap, .halk, .horspiele, .indianIndependent, .indonesianMusic,
@@ -213,12 +213,12 @@ extension AppleMusicCategory {
      .russian, .russianHipHop, .russianPop, .russianRock, .sanat, .schlager, .sertanejo,
      .tamil, .telugu, .thaiMusic, .valienato, .worldwide]
 
-  static let appleMusicMoodsAndActivities: [AppleMusicCategory]
+  public static let appleMusicMoodsAndActivities: [AppleMusicCategory]
   = [ .afterHours, .aloneTime, .chill, .commuting, .eatingAndCooking, .evening,
       .feelGood, .feelingBlue, .fitness, .focus, .gaming, .heartbreak, .home,
       .morning, .motivation, .outdoors, .party, .romance, .sleep, .social, .sports, .summertimeSounds,
       .vacation, .weekend, .wellbeing, .work ]
   
-  static let appleMusicClassical: [AppleMusicCategory]
+  public static let appleMusicClassical: [AppleMusicCategory]
   = []
 }

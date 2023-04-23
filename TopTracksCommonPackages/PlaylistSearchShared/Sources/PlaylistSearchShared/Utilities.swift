@@ -1,6 +1,6 @@
 import MusicKit
 
-func shortenedNameFor(playlist: Playlist) -> String {
+public func shortenedNameFor(playlist: Playlist) -> String {
   playlist.name
     .replacingOccurrences(of: "Top 25: ", with: "")
     .replacingOccurrences(of: "Top 100:", with: "")
@@ -8,7 +8,7 @@ func shortenedNameFor(playlist: Playlist) -> String {
 }
 
 
-func filter(_ playlists: MusicItemCollection<Playlist>,
+public func filter(_ playlists: MusicItemCollection<Playlist>,
             using filterString: String,
             playlistKind: PlaylistKind = .openSearch,
             appleOnly: Bool = true) -> [Playlist] {
@@ -22,4 +22,5 @@ func filter(_ playlists: MusicItemCollection<Playlist>,
   guard !filterString.isEmpty else {return playlists}
   return playlists.filter{$0.description.lowercased().contains(filterString.lowercased())}
 }
+
 

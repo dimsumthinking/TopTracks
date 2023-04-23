@@ -1,5 +1,6 @@
 import SwiftUI
 import ApplicationState
+import PlaylistSearchShared
 
 struct AppleMusicCategoryChooserView {
   let categories: [AppleMusicCategory]
