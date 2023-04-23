@@ -66,10 +66,6 @@ extension MainStationsView: View {
         InfoView(isShowingInfo: $isShowingInfo)
           .environment(\.colorScheme, colorScheme)
       }
-//      .animation(.default, value: stationLister.stations)
-//      .onAppear {
-//        stationLister.updateStationList()
-//      }
       .listStyle(.plain)
     }
   }

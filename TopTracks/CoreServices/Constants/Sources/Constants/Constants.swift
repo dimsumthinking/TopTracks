@@ -41,6 +41,9 @@ extension Constants {
   public static let anchorPointForPlayerTransition = UnitPoint(x: 0.04, y: 0.98)
   
   public static let previewPlayerBeginsNotification = Notification.Name("PreviewPlayerBegan")
+  
+  public static let previewPlayerEndsNotification = Notification.Name("PreviewPlayerEnded")
+
 
 }
 

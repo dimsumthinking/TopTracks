@@ -3,6 +3,7 @@ import MusicKit
 import Model
 import PlaylistSongPreview
 import ApplicationState
+import Constants
 
 public struct PlaylistSongsView {
   private let playlist: Playlist
@@ -94,6 +95,11 @@ extension PlaylistSongsView: View {
     }
     .onDisappear {
       songPreviewPlayer.stop()
+    }
+    .task {
+      for await _ in NotificationCenter.default.notifications(named: Constants.previewPlayerEndsNotification).map({_ in true}) {
+        currentSong = nil
+      }
     }
   }
 }

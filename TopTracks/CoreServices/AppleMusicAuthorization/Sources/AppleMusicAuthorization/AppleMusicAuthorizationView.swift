@@ -23,7 +23,7 @@ extension AppleMusicAuthorizationView: View {
 }
 
 //struct AppleMusicAuthorizationView_Preview: PreviewProvider {
-//  
+//
 //  static var previews: some View {
 //    AppleMusicAuthorizationView(musicAuthorizationStatus: .constant(.denied))
 //  }

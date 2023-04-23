@@ -61,5 +61,7 @@ fileprivate class PreviewPlayerDelegate:  NSObject, AVAudioPlayerDelegate {
 #if !os(macOS)
     songPreviewPlayer.audioPlayer = nil
 #endif
+    NotificationCenter.default.post(name: Constants.previewPlayerEndsNotification,
+                                    object: nil)
   }
 }

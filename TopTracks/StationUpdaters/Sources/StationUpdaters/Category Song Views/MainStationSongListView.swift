@@ -3,6 +3,7 @@ import Model
 import MusicKit
 import ApplicationState
 import PlaylistSongPreview
+import Constants
 
 public struct MainStationSongListView {
   @State var currentSong: Song?
@@ -43,6 +44,11 @@ extension MainStationSongListView: View {
       }
       .onDisappear {
         songPreviewPlayer.stop()
+      }
+      .task {
+        for await _ in NotificationCenter.default.notifications(named: Constants.previewPlayerEndsNotification).map({_ in true}) {
+          currentSong = nil
+        }
       }
     }
   }

@@ -2,6 +2,7 @@ import SwiftUI
 import MusicKit
 import Constants
 
+
 public struct SongPreview {
   let song: Song
   @Binding private var currentSong: Song?

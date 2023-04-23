@@ -18,7 +18,7 @@ let package = Package(
     targets: [
         .target(
             name: "PlaylistSongPreview",
-            dependencies: ["Constants"] ),
+        dependencies: ["Constants"]),
         .testTarget(
             name: "PlaylistSongPreviewTests",
             dependencies: ["PlaylistSongPreview"]),
