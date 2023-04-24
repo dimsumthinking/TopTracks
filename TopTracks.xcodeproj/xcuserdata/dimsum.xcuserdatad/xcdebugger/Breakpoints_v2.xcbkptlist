@@ -61,5 +61,131 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A04B7CE6-75D7-4CD1-B49D-1B5A361A8A5A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TopTracksTV/PlayersTV/Sources/PlayersTV/MainPlayerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "A04B7CE6-75D7-4CD1-B49D-1B5A361A8A5A - 3c93d79dbedda980"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in PlayersTV.MainPlayerView.body.getter : some"
+                  moduleName = "TopTracksTV"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dimsum/Developer/Music/TopTracks/TopTracksTV/PlayersTV/Sources/PlayersTV/MainPlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "296">
+               </Location>
+               <Location
+                  uuid = "A04B7CE6-75D7-4CD1-B49D-1B5A361A8A5A - b8d2736da22d5759"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PlayersTV.MainPlayerView.body.getter : some"
+                  moduleName = "TopTracksTV"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dimsum/Developer/Music/TopTracks/TopTracksTV/PlayersTV/Sources/PlayersTV/MainPlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "416">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AA2083B5-81AC-4B35-9076-BB7B4A1ADC31"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TopTracksTV/PlayersTV/Sources/PlayersTV/MainPlayerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "AA2083B5-81AC-4B35-9076-BB7B4A1ADC31 - 79f6c048f9ee53a6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 @Sendable () async -&gt; () in PlayersTV.MainPlayerView.body.getter : some"
+                  moduleName = "TopTracksTV"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dimsum/Developer/Music/TopTracks/TopTracksTV/PlayersTV/Sources/PlayersTV/MainPlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "AA2083B5-81AC-4B35-9076-BB7B4A1ADC31 - 790a1223a2bdd8ad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) await resume partial function for closure #4 @Sendable () async -&gt; () in PlayersTV.MainPlayerView.body.getter : some"
+                  moduleName = "TopTracksTV"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dimsum/Developer/Music/TopTracks/TopTracksTV/PlayersTV/Sources/PlayersTV/MainPlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "AA2083B5-81AC-4B35-9076-BB7B4A1ADC31 - c4ccffc4d712c488"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) suspend resume partial function for closure #4 @Sendable () async -&gt; () in PlayersTV.MainPlayerView.body.getter : some"
+                  moduleName = "TopTracksTV"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dimsum/Developer/Music/TopTracks/TopTracksTV/PlayersTV/Sources/PlayersTV/MainPlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "AA2083B5-81AC-4B35-9076-BB7B4A1ADC31 - b8d2736da22d5759"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PlayersTV.MainPlayerView.body.getter : some"
+                  moduleName = "TopTracksTV"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dimsum/Developer/Music/TopTracks/TopTracksTV/PlayersTV/Sources/PlayersTV/MainPlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "416">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

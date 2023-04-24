@@ -37,8 +37,8 @@ extension ChartListView: View {
       }
     }
     .navigationDestination(for: Playlist.self) {playlist in
-      PlaylistSongsView(playlist: playlist)
-      //        .navigationTitle(playlist.name)
+
+        PlaylistSongsView(playlist: playlist)
     }
     
   }

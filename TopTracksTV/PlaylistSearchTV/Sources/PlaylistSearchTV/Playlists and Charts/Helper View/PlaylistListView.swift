@@ -55,8 +55,12 @@ extension PlaylistListView: View {
       }
     }
     .navigationDestination(for: Playlist.self) {playlist in
-      PlaylistSongsView(playlist: playlist)
-//        .navigationTitle(playlist.name)
+//      VStack {
+//        HeaderView(title: playlist.name)
+        
+        PlaylistSongsView(playlist: playlist)
+//      }
+      
     }
       
       //    List(filteredPlaylists) {playlist in

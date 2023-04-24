@@ -34,6 +34,9 @@ extension Constants {
   public static let playlistListImageSize = 200.0
   public static let stationListImageSize = 180.0
   public static let songListImageSize = 180.0
+  public static let miniPlayerArtworkImageSize = 180.0
+  public static let fullPlayerArtworkImageSize = 300.0
+
 
   
   #else

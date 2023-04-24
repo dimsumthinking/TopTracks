@@ -13,6 +13,7 @@ public struct PlaylistSearchRequestView {
 extension PlaylistSearchRequestView: View {
   public var body: some View {
     VStack {
+      HeaderView(title: "Open Search")
         TextField("Playlist Search Term", text: $searchTerm)
           .onSubmit {
             if searchTerm.count > 2 {
@@ -23,6 +24,7 @@ extension PlaylistSearchRequestView: View {
           .multilineTextAlignment(.center)
           .background(Color.secondary.opacity(0.2))
           .focused($enteringSearch)
+          .font(.headline)
       
 
       .padding()
@@ -62,8 +64,10 @@ extension PlaylistSearchRequestView: View {
           }
         }
         .navigationDestination(for: MusicCatalogSearchSuggestionsResponse.Suggestion.self) { suggestion in
-          PlaylistSearchResultsView(term: suggestion.searchTerm)
-            .navigationTitle(suggestion.displayTerm)
+          VStack {
+            HeaderView(title: suggestion.displayTerm)
+            PlaylistSearchResultsView(term: suggestion.searchTerm)
+          }
         }
 //        List(searchSuggester.suggestions) { suggestion in
 //          NavigationLink(suggestion.displayTerm) {
@@ -76,8 +80,10 @@ extension PlaylistSearchRequestView: View {
     }
 //    .navigationTitle("Playlist Search")
     .navigationDestination(isPresented: $startSearch) {
-      PlaylistSearchResultsView(term: escapedSearchTerm)
-        .navigationTitle(searchTerm)
+      VStack {
+        HeaderView(title: searchTerm)
+        PlaylistSearchResultsView(term: escapedSearchTerm)
+      }
     }
     .onAppear {
       enteringSearch = true

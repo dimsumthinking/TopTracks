@@ -21,10 +21,11 @@
 		62615EFB29F48B7F005FC1A1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62615EFA29F48B7F005FC1A1 /* MainView.swift */; };
 		62615EFD29F48B7F005FC1A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62615EFC29F48B7F005FC1A1 /* Assets.xcassets */; };
 		62615F0029F48B7F005FC1A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62615EFF29F48B7F005FC1A1 /* Preview Assets.xcassets */; };
+		62732F6D29F603C20092C35C /* RadioTV in Frameworks */ = {isa = PBXBuildFile; productRef = 62732F6C29F603C20092C35C /* RadioTV */; };
 		62BD8B3529F5639A009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3429F5639A009A528E /* TopTracksCore */; };
 		62BD8B3729F563C1009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3629F563C1009A528E /* TopTracksCore */; };
-		62C60FBA29F589F000092D6E /* PlaylistSearchTV in Frameworks */ = {isa = PBXBuildFile; productRef = 62C60FB929F589F000092D6E /* PlaylistSearchTV */; };
 		62E32B7A29C8C35400E43121 /* StationUpdaters in Frameworks */ = {isa = PBXBuildFile; productRef = 62E32B7929C8C35400E43121 /* StationUpdaters */; };
+		62EA329429F7119C00863F80 /* PlaylistSearchTV in Frameworks */ = {isa = PBXBuildFile; productRef = 62EA329329F7119C00863F80 /* PlaylistSearchTV */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,11 +46,12 @@
 		62615EFA29F48B7F005FC1A1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		62615EFC29F48B7F005FC1A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62615EFF29F48B7F005FC1A1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		62732F6B29F603A10092C35C /* RadioTV */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = RadioTV; path = TopTracksTV/RadioTV; sourceTree = "<group>"; };
 		62BD8B3229F56373009A528E /* TopTracksCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TopTracksCore; path = TopTracksCommonPackages/CoreServices/TopTracksCore; sourceTree = "<group>"; };
 		62BD8B3829F56406009A528E /* Players */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Players; path = TopTracks/Players; sourceTree = "<group>"; };
 		62BD8B3929F56421009A528E /* Radio */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Radio; path = TopTracks/Radio; sourceTree = "<group>"; };
 		62BD8B3B29F56442009A528E /* StationUpdaters */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StationUpdaters; path = TopTracks/StationUpdaters; sourceTree = "<group>"; };
-		62C60FB829F589D400092D6E /* PlaylistSearchTV */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PlaylistSearchTV; path = TopTracksTV/PlaylistSearchTV; sourceTree = "<group>"; };
+		62EA329229F7118F00863F80 /* PlaylistSearchTV */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PlaylistSearchTV; path = TopTracksTV/PlaylistSearchTV; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62C60FBA29F589F000092D6E /* PlaylistSearchTV in Frameworks */,
+				62732F6D29F603C20092C35C /* RadioTV in Frameworks */,
+				62EA329429F7119C00863F80 /* PlaylistSearchTV in Frameworks */,
 				62BD8B3729F563C1009A528E /* TopTracksCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,7 +91,8 @@
 				62BD8B3929F56421009A528E /* Radio */,
 				62BD8B3B29F56442009A528E /* StationUpdaters */,
 				620FF5A629F573CB0036C059 /* PlaylistSearch */,
-				62C60FB829F589D400092D6E /* PlaylistSearchTV */,
+				62732F6B29F603A10092C35C /* RadioTV */,
+				62EA329229F7118F00863F80 /* PlaylistSearchTV */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -238,7 +242,8 @@
 			name = TopTracksTV;
 			packageProductDependencies = (
 				62BD8B3629F563C1009A528E /* TopTracksCore */,
-				62C60FB929F589F000092D6E /* PlaylistSearchTV */,
+				62732F6C29F603C20092C35C /* RadioTV */,
+				62EA329329F7119C00863F80 /* PlaylistSearchTV */,
 			);
 			productName = TopTracksTV;
 			productReference = 62615EF629F48B7F005FC1A1 /* TopTracksTV.app */;
@@ -629,6 +634,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Players;
 		};
+		62732F6C29F603C20092C35C /* RadioTV */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RadioTV;
+		};
 		62BD8B3429F5639A009A528E /* TopTracksCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TopTracksCore;
@@ -637,13 +646,13 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = TopTracksCore;
 		};
-		62C60FB929F589F000092D6E /* PlaylistSearchTV */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PlaylistSearchTV;
-		};
 		62E32B7929C8C35400E43121 /* StationUpdaters */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = StationUpdaters;
+		};
+		62EA329329F7119C00863F80 /* PlaylistSearchTV */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PlaylistSearchTV;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

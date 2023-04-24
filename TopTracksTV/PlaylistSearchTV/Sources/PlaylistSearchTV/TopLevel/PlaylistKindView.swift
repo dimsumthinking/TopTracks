@@ -37,10 +37,13 @@ extension PlaylistKindView: View {
     }
     .navigationDestination(for: PlaylistKind.self) {playlistKind in
       if playlistKind.isChart {
-        ChartChooserView(kind: playlistKind.musicCatalogChartKind)
+
+          ChartChooserView(kind: playlistKind.musicCatalogChartKind)
       } else if playlistKind.hasHardCodedCategories {
-        AppleMusicCategoryChooserView(categories: playlistKind.playlistCategories,
-                                      playlistKind: playlistKind)
+      
+          AppleMusicCategoryChooserView(categories: playlistKind.playlistCategories,
+                                        playlistKind: playlistKind)
+        
       } else {
         PlaylistSearchRequestView()
       }

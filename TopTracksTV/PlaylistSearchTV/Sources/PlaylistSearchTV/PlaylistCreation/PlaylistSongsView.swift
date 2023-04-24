@@ -26,7 +26,7 @@ extension PlaylistSongsView: View {
         Button("Create Station for \(playlist.name)") {
 //        Button("Add \(playlist.name)") {
           createStation()
-//          CurrentActivity.shared.endCreating()
+          CurrentActivity.shared.endCreating()
         }
         .buttonStyle(.borderedProminent)
         .disabled(songs.isEmpty || playlistAlreadyExists)

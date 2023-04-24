@@ -13,7 +13,9 @@ extension SettingsView: View {
       VStack {
         List {
           ColorSchemeChooserView()
+          #if os(iOS)
           CellUsageSettingsView()
+          #endif
         }
       }
       .toolbar {

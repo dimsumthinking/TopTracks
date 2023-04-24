@@ -10,7 +10,10 @@ public struct MainCreationView {
 extension MainCreationView: View {
   public var body: some View {
     NavigationStack {
-      PlaylistKindView()
+      VStack {
+       HeaderView(title: "New Station Categories")
+        PlaylistKindView()
+      }
     }
   }
 }

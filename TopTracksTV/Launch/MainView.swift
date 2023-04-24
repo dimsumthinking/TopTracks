@@ -1,9 +1,9 @@
 import SwiftUI
 import PlaylistSearchTV
 import ApplicationState
-//import Radio
-//import Players
-//import StationUpdaters
+import RadioTV
+import PlayersTV
+import StationUpdaters
 
 struct MainView {
   @State private var currentActivity = TopTracksAppActivity.enjoying
@@ -13,18 +13,18 @@ extension MainView: View {
   var body: some View {
     Group {
       switch currentActivity {
-//              case .enjoying:
-        //        ZStack {
-        //          MainStationsView()
-        //          MainPlayerView()
+      case .enjoying:
+        //                ZStack {
+        MainStationsView()
+      case .importing:
+                  MainPlayerView()
         //        }
-              case .creating:  MainCreationView()
-        //      case .viewingOrEditing(let station): MainStationSongListView(station)
-        //      case .importing(let url): PlaylistImporterView(url: url)
-      default: MainCreationView()
+      case .creating:  MainCreationView()
+      case .viewingOrEditing(let station): MainStationSongListView(station)
       }
-      }
-//    }
+    }
+  
+
     .task {
       await registerForCurrentActivity()
     }
