@@ -9,28 +9,28 @@ struct SettingsView {
 
 extension SettingsView: View {
   var body: some View {
-    NavigationStack {
-      VStack {
-        List {
-          ColorSchemeChooserView()
+    VStack {
+      Text("Settings")
+        .font(.title)
+      List {
+        ColorSchemeChooserView()
 #if os(iOS)
-CellUsageSettingsView()
+        CellUsageSettingsView()
 #endif
-          
-        }
+        
       }
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            isShowingSettings = false
-          } label: {
-            Text("Done")
-          }
-        }
-      }
-      .navigationTitle("Settings")
-          .preferredColorScheme(currentColorScheme(from:  colorSchemeString) ?? colorScheme)
-
     }
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button {
+          isShowingSettings = false
+        } label: {
+          Text("Done")
+        }
+      }
+    }
+    .preferredColorScheme(currentColorScheme(from:  colorSchemeString) ?? colorScheme)
+    
   }
 }
+

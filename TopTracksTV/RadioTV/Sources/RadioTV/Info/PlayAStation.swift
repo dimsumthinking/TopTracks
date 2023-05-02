@@ -6,42 +6,28 @@ struct PlayAStation {
 
 extension PlayAStation: View {
   var body: some View {
-    VStack(alignment: .leading, spacing: 20) {
-      HStack {
-        Spacer()
-        Text("Choose your music player")
-        Spacer()
-      }
-      .padding(.vertical)
-      .padding(.vertical)
-      VStack(alignment: .leading, spacing: 20) {
+    VStack {
+      VStack (alignment: .leading, spacing: 20) {
         
-        Text("The ") + Text("mini player").underline() + Text(" displays the essential song information.")
+        Text("The player displays the essential song information.")
         Text("Use it to play, pause or skip to the next song.")
-        Text("Swipe up to use the full player.")
-      }
-      .padding(.bottom)
-      .padding(.bottom)
-
-      VStack(alignment: .leading, spacing: 20) {
-        Text("The ") + Text("full player").underline() + Text(" includes more options and information.")
-        HStack {
-          Image(systemName: "heart")
-            .foregroundColor(.blue)
-          Text("Rate the songs.")// to hear them more or less often.")
-        }.padding(.leading)
-        HStack {
-          Image(systemName: "powersleep")
-            .foregroundColor(.blue)
-          Text("Set the sleep timer.")
-        }.padding(.leading)
+        Text("Jump ahead or back within a song.")
+        Text("Rate the songs to influence how often a song is played \(Image(systemName: "star"))\(Image(systemName: "wand.and.stars"))")
         
-        Text("Swipe down to return to the station list and mini player")
       }
+      .font(.headline)
+      .padding()
+      VStack(alignment: .leading) {
+        Text("\(Image(systemName: "star")) Ratings are used next time you rotate the station's music.")
+          .padding([.top])
+        
+        Text("\(Image(systemName: "wand.and.stars"))  Not available in Top 25 & Top 100 Charts. \n \t \t They update automatically.")
+          .padding([.vertical])
+      }
+      .foregroundColor(.secondary)
+      .font(.caption)
     }
     .padding()
-    .font(.headline)
-    
-    .navigationTitle("Info - The Players")
+    .navigationTitle("Info - The Player")
   }
 }

@@ -5,102 +5,41 @@ import MusicKit
 import Constants
 
 public struct MainPlayerView {
+  @Binding private var isShowingFullPlayer: Bool
   @State private var currentSong: Song?
   @ObservedObject private var queue = ApplicationMusicPlayer.shared.queue
-  public init() {}
+  public init(isShowingFullPlayer: Binding<Bool>) {
+    self._isShowingFullPlayer = isShowingFullPlayer
+  }
 }
 
 extension MainPlayerView: View {
   public var body: some View {
     VStack {
-      HStack {
-        Button {
-          CurrentActivity.shared.endImporting()
-        } label: {
-          Text("\(Image(systemName: "arrow.left")) Stations")
-        }
-        Spacer()
-
-      }
-      Spacer()
-      if let currentSong {
-                    SongTextInfo(currentSong: currentSong)
-
+      if isShowingFullPlayer {
+        FullPlayerView(isShowingFullPlayer: $isShowingFullPlayer,
+                       currentSong: currentSong)
+          .transition(.scale(scale: 0.05,
+                             anchor: Constants.anchorPointForPlayerTransition))
       } else {
-        Text("Main Player")
+        EmptyView()
       }
-Spacer()
     }
-        .onChange(of: queue.currentEntry) { entry in
-          if let entry {
-            CurrentSong.shared.setCurrentSong(using: entry)
-          }
-        }
-        .onAppear {
-          currentSong = CurrentSong.shared.song
-        }
-        .task {
-          await subscribeToCurrentSong()
-        }
+    .animation(.easeInOut, value: isShowingFullPlayer)
+    .onChange(of: queue.currentEntry) { entry in
+      if let entry {
+        CurrentSong.shared.setCurrentSong(using: entry)
+      }
+    }
+    .onAppear {
+      currentSong = CurrentSong.shared.song
+    }
+    .task {
+      await subscribeToCurrentSong()
+    }
+   
   }
 }
-
-//extension MainPlayerView: View {
-//  public var body: some View {
-//    VStack {
-//      if let currentSong {
-//        NavigationStack {
-//          VStack {
-//            AlbumArt(artwork: CurrentSong.shared.artwork )
-//
-//            SongTextInfo(currentSong: currentSong)
-//
-//            Spacer()
-//
-//            SongScrubberView(currentSong: currentSong)
-//              .padding()
-//              .font(.headline)
-////              .tint(.primary)
-//            Spacer()
-//            ControlPanel()
-//            Spacer()
-//          }
-//          .navigationTitle(CurrentStation.shared.topTracksStation?.stationName ?? "Now Playing")
-//          .toolbar {
-//            if CurrentStation.shared.canShowRating {
-//              ToolbarItem(placement: .navigationBarTrailing) {
-//                SongRatingView()
-//
-//              }
-//            }
-////            ToolbarItem(placement: .navigationBarLeading) {
-////              SleepTimerView()
-////            }
-//          }
-//        }
-//
-//      }
-//
-//      else {
-//        ArtworkFiller(size: Constants.miniPlayerArtworkImageSize)
-//      }
-//
-//
-//    }
-//    .onChange(of: queue.currentEntry) { entry in
-//      if let entry {
-//        CurrentSong.shared.setCurrentSong(using: entry)
-//      }
-//    }
-//    .onAppear {
-//      currentSong = CurrentSong.shared.song
-//    }
-//    .task {
-//      await subscribeToCurrentSong()
-//    }
-//
-//  }
-//}
 
 extension MainPlayerView {
   private func subscribeToCurrentSong() async {
@@ -116,3 +55,34 @@ extension MainPlayerView {
 }
 
 
+//
+//
+//
+//extension MainPlayerView: View {
+//  public var body: some View {
+//    VStack {
+//      HStack {
+//        Button {
+//          CurrentActivity.shared.endImporting()
+//        } label: {
+//          Text("\(Image(systemName: "arrow.left")) Stations")
+//        }
+//        Spacer()
+//
+//      }
+//      Spacer()
+//      if let currentSong {
+//        SongTextInfo(currentSong: currentSong)
+//
+//      } else {
+//        Text("Main Player")
+//      }
+//      Spacer()
+//    }
+//    .onChange(of: queue.currentEntry) { entry in
+//      if let entry {
+//        CurrentSong.shared.setCurrentSong(using: entry)
+//      }
+//    }
+//  }
+//}

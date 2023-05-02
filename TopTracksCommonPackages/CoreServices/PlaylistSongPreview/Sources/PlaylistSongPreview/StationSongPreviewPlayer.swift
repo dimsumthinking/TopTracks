@@ -53,6 +53,14 @@ extension StationSongPreviewPlayer {
     audioPlayer = nil
 #endif
   }
+  
+  public var isNotPreviewing: Bool {
+    #if !os(macOS)
+    return true
+    #else
+    return audioPlayer == nil
+    #endif
+  }
 }
 
 fileprivate class PreviewPlayerDelegate:  NSObject, AVAudioPlayerDelegate {

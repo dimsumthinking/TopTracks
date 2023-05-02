@@ -11,6 +11,7 @@ struct StationListView {
   @ObservedObject  var stationLister: StationLister
   @State private var currentStation: TopTracksStation?
   @State private var isShowingAlert: Bool = false
+  @Binding var isShowingFullPlayer: Bool
 }
 
 extension StationListView: View {
@@ -80,16 +81,14 @@ extension StationListView: View {
             }
             
               Button {
-                CurrentActivity.shared.beginImporting()
+                isShowingFullPlayer = true
 
               } label: {
-
                   Image(systemName: "radio.fill")
+
               }
               .buttonStyle(.card)
-//            .navigationDestination(for: Bool.self) {_ in
-//              MainPlayerView()
-//            }
+
           }
         }
       }

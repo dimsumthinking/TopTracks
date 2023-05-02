@@ -17,8 +17,11 @@ extension ClockInfo: View {
 
         Text("The music begins at the top of this clock with a power song and then we move clockwise.")
         .multilineTextAlignment(.center)
-      
-      ClockView(hour: musicClock)
+      HStack {
+        Spacer()
+        ClockView(hour: musicClock)
+        Spacer()
+      }
       
       Text("As we move around the clock, you'll hear a song in the highlighted category that played longest ago.")
       

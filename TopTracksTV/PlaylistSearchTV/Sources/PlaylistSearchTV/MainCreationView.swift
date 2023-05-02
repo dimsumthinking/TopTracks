@@ -14,6 +14,9 @@ extension MainCreationView: View {
        HeaderView(title: "New Station Categories")
         PlaylistKindView()
       }
+      .onExitCommand {
+        CurrentActivity.shared.endCreating()
+      }
     }
   }
 }

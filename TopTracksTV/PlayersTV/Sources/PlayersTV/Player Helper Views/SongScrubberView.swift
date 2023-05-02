@@ -48,20 +48,21 @@ extension SongScrubberView: View {
     if let duration = currentSong.duration {
       //        
       HStack {
+        Spacer()
         Button {
           ApplicationMusicPlayer.shared.playbackTime = max(0, ApplicationMusicPlayer.shared.playbackTime - 15)
         } label: {
           Image(systemName: "gobackward.15")
         }
-        Spacer()
-        RoutePicker()
-          .frame(width: 20, height: 20)
+//        RoutePicker()
+//          .frame(width: 20, height: 20)
         Spacer()
         Button {
           ApplicationMusicPlayer.shared.playbackTime = min(duration, ApplicationMusicPlayer.shared.playbackTime + 30)
         } label: {
           Image(systemName: "goforward.30")
         }
+        Spacer()
       }
       //        .padding(.horizontal)
       //        //        .font(.title)
