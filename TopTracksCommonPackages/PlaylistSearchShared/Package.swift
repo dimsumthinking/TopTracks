@@ -1,13 +1,13 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.9
 
 import PackageDescription
 
 let package = Package(
     name: "PlaylistSearchShared",
     platforms: [
-      .macOS("13.3"),
-      .iOS("16.4"),
-      .tvOS("16.4")],
+      .macOS("14.0"),
+      .iOS("17.0"),
+      .tvOS("17.0")],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(

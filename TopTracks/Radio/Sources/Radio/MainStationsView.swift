@@ -20,14 +20,20 @@ extension MainStationsView: View {
       List {
         StationListView(stationLister: stationLister)
         if stationLister.stations.isEmpty {
-          HStack {
-            Text("Tap")
-            Image(systemName: "plus")
-            Text("to create a station")
-            Image(systemName: "arrow.up.right")
+          Button {
+            CurrentActivity.shared.beginCreating()
+          } label: {
+            HStack {
+              Text("Tap")
+              Image(systemName: "plus")
+              Text("to create a station")
+              Image(systemName: "arrow.up.right")
+            }
+            .font(.headline)
+            .foregroundColor(.yellow)
+            
           }
-          .font(.headline)
-          .foregroundColor(.yellow)
+
         }
         Rectangle()
           .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)

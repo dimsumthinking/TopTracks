@@ -1,12 +1,12 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.9
 
 import PackageDescription
 
 let package = Package(
     name: "StationUpdaters",
     platforms: [
-      .macOS("13.3"),
-      .iOS("16.4")],
+      .macOS("14.0"),
+      .iOS("17.0")],
     products: [
         .library(
             name: "StationUpdaters",

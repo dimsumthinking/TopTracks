@@ -21,7 +21,8 @@ extension TopTracksStation {
   
   private func songs(for rotationCategory: RotationCategory) -> [TopTracksSong] {
     guard let stack = stack(for: rotationCategory),
-          !stack.songs.isEmpty else { return [TopTracksSong]() }
+          let songs = stack.songs,
+          !songs.isEmpty else { return [TopTracksSong]() }
     return stack.orderedSongs
   }
   

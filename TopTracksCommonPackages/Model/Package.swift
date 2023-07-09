@@ -1,13 +1,13 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.9
 
 import PackageDescription
 
 let package = Package(
     name: "Model",
     platforms: [
-      .macOS("13.3"),
-      .iOS("16.4"),
-      .tvOS("16.4")],
+      .macOS("14.0"),
+      .iOS("17.0"),
+      .tvOS("17.0")],
     products: [
         .library(
             name: "Model",
@@ -18,8 +18,7 @@ let package = Package(
     targets: [
         .target(
             name: "Model",
-            dependencies: [],
-            resources: [.copy("Persistence/Stations.xcdatamodeld")]),
+            dependencies: []),
         .testTarget(
             name: "ModelTests",
             dependencies: ["Model"]),

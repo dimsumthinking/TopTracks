@@ -1,35 +1,41 @@
 import CarPlay
+import Model
+import ApplicationState
 
 public class CarRadio: NSObject, CPTemplateApplicationSceneDelegate {
   var interfaceController: CPInterfaceController?
-//  var carRadioStations = CarRadioStations()
+//  private var entryPoint = CarRadioEntryPoint()
+  private var currentStation: TopTracksStation?
+  private var stations = SimpleStationLister().stations
   
   
-
   
   // CarPlay connected
   
   public func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene,
-                                didConnect interfaceController: CPInterfaceController) {
+                                       didConnect interfaceController: CPInterfaceController) {
     self.interfaceController = interfaceController
-//    let listTemplate: CPListTemplate = CPListTemplate(title: "Stations", sections: [])
-    let listTemplate: CPListTemplate = CPListTemplate(title: "Stations", sections: [CPListSection(items: [CPListItem(text: "Item Revised", detailText: "Additional Detail Text")])])
-    Task {
-      do {
-        _ = try await interfaceController.setRootTemplate(listTemplate, animated: true)
-      } catch {
-        print("Error connecting template application scene to root")
-      }
+    let items = stations.map {station in
+      StationListItem(station: station,
+                                 interfaceController: interfaceController).item
+    }
+    let list = CPListTemplate(title: "Stations",
+                              sections: [CPListSection(items: items)])
+    
+    self.interfaceController?.setRootTemplate(list, animated: true, completion: nil)
+    if let _ = CurrentStation.shared.topTracksStation {
+      interfaceController.pushTemplate(CPNowPlayingTemplate.shared, animated: true, completion: nil)
     }
   }
+  
   // CarPlay disconnected
   public func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didDisconnectInterfaceController interfaceController: CPInterfaceController) {
     self.interfaceController = nil
-
+    
   }
-//  public func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene,
-//                                didDisconnect interfaceController: CPInterfaceController) {
-//    self.interfaceController = nil
-//  }
+  //  public func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene,
+  //                                didDisconnect interfaceController: CPInterfaceController) {
+  //    self.interfaceController = nil
+  //  }
   
 }

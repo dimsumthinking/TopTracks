@@ -1,12 +1,12 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.9
 
 import PackageDescription
 
 let package = Package(
   name: "NetworkMonitor",
   platforms: [
-    .iOS("16.3"),
-    .macOS("13.4")],
+    .iOS("17.0"),
+    .macOS("14.0")],
   products: [
     .library(
       name: "NetworkMonitor",
