@@ -2,7 +2,7 @@ import SwiftUI
 import ApplicationState
 
 struct SettingsView {
-  @Binding var isShowingSettings: Bool
+  @Binding var mainStationsSheet: MainStationsSheet?
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
   @Environment(\.colorScheme) private var colorScheme
 }
@@ -21,7 +21,7 @@ extension SettingsView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
-            isShowingSettings = false
+            mainStationsSheet = nil
           } label: {
             Text("Done")
           }

@@ -12,10 +12,11 @@ import SwiftData
 @main
 struct TopTracksApp {
   @State private var musicAuthorizationStatus = MusicAuthorization.Status.notDetermined
-  @StateObject private var networkMonitor = NetworkConnectionMonitor.shared
+  @State private var canPlayCatalogContent = false
+  
+  @State private var networkMonitor = NetworkConnectionMonitor.shared
   @Environment(\.scenePhase) private var scenePhase
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
-  @State private var canPlayCatalogContent = false
   let container = try! ModelContainer(for: Schema([TopTracksStation.self,
                                                    TopTracksStack.self,
                                                    TopTracksSong.self]),
@@ -23,7 +24,6 @@ struct TopTracksApp {
 }
 
 extension TopTracksApp: App {
-  
   var body: some Scene {
     WindowGroup {
       if networkMonitor.isNotConnected {
@@ -46,19 +46,18 @@ extension TopTracksApp: App {
       }
     }
     .modelContainer(container)
-    .onChange(of: musicAuthorizationStatus,
-              initial: true) { oldStatus, newStatus in
+    .onChange(of: musicAuthorizationStatus, initial: true) { oldStatus, newStatus in
       if newStatus == .authorized {
         Task {
           await checkSubscription()
         }
       }
     }
-              .onChange(of: scenePhase) { oldPhase, newPhase in
-                if newPhase == .background {
-                  songPreviewPlayer.stop()
-                }}
-    
+    .onChange(of: scenePhase, initial: true) { oldPhase, newPhase in
+      if newPhase == .background {
+        songPreviewPlayer.stop()
+      }
+    }
   }
 }
 

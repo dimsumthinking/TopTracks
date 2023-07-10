@@ -9,12 +9,8 @@ extension AddAPlaylist: View {
   var body: some View {
     
     VStack(alignment: .leading, spacing: 20) {
-//      HStack {
-//        Image(systemName: "plus")
-//          .foregroundColor(.accentColor)
-        Text("Tap the \(Image(systemName: "plus"))  button in the top right corner to select a playlist.")
-//      }
-      .padding()
+      Text("Tap the \(Image(systemName: "plus"))  button in the top right corner to select a playlist.")
+        .padding()
       Text("Songs will be split into these categories:")
         .padding()
       Grid (verticalSpacing: 10) {
@@ -42,15 +38,6 @@ extension AddAPlaylist: View {
           Divider()
         }
       }
-//      ForEach(stationStandardCategories) { category in
-//        HStack {
-//          Image(systemName: category.icon)
-//            .foregroundColor(category.color)
-//          Text (category.description)
-//            .foregroundColor(category.color)
-//          Text("repeats  ~ \(category.frequency)")
-//        }
-//      }
       VStack(alignment: .leading) {
         Text("< 50 songs: no Gold songs.").padding(.bottom)
         Text("> 40 songs: 10 songs in each of the top four categories.")

@@ -1,8 +1,7 @@
 import SwiftUI
-import ApplicationState
 
 struct InfoView {
-  @Binding var isShowingInfo: Bool
+  @Binding var mainStationsSheet: MainStationsSheet?
   @Environment(\.colorScheme) private var colorScheme
 }
 
@@ -21,7 +20,7 @@ extension InfoView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
-            isShowingInfo = false
+            mainStationsSheet = nil
           } label: {
             Text("Done")
           }

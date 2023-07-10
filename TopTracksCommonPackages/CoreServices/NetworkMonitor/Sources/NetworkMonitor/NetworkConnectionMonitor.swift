@@ -1,12 +1,13 @@
 import Network
-import Combine
+import Observation
 
-public class NetworkConnectionMonitor: ObservableObject {
+@Observable
+public class NetworkConnectionMonitor {
   public static var shared = NetworkConnectionMonitor()
   
   private let pathMonitor = NWPathMonitor()
-  @Published public private(set) var isNotConnected = false
-  @Published private(set) var isExpensive = false
+  public private(set) var isNotConnected = false
+  private(set) var isExpensive = false
   
   private init() {
     configurePathMonitor()
@@ -25,4 +26,3 @@ extension NetworkConnectionMonitor {
     pathMonitor.start(queue: queue)
   }
 }
-

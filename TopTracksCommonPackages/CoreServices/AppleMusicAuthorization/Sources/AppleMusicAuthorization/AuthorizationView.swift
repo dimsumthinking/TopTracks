@@ -4,9 +4,9 @@ import SwiftUI
 public struct  AuthorizationView {
   @Binding public var status: MusicAuthorization.Status
   
-  public init(status: Binding<MusicAuthorization.Status>) {
-    self._status = status
-  }
+//  public init(status: Binding<MusicAuthorization.Status>) {
+//    self._status = status
+//  }
 }
 
 extension AuthorizationView: View {
@@ -45,9 +45,7 @@ extension AuthorizationView {
   }
 }
 
-//struct AuthorizationView_Preview: PreviewProvider {
-//
-//  static var previews: some View {
-//    AuthorizationView(status: .constant(.denied))
-//  }
+//#Preview {
+//  AuthorizationView(status: .constant(.denied))
 //}
+

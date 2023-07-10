@@ -10,23 +10,21 @@ extension ColorSchemeChooserView: View {
   var body: some View {
     Section("Choose Application Color Scheme") {
       VStack {
-        Picker("Color Scheme Picker",
-               selection: $index) {
+        Picker("Color Scheme Picker", selection: $index) {
           ForEach(CurrentColorScheme.allCases) { colorScheme in
             Text(colorScheme.rawValue.capitalized).tag(colorScheme)
           }
         }
-               .onChange(of: index) { int in
-                 colorSchemeString = CurrentColorScheme.allCases[int].rawValue
-               }
-               .pickerStyle(.segmented)
-               .padding()
+        .onChange(of: index) { oldIndex, newIndex in
+          colorSchemeString = CurrentColorScheme.allCases[newIndex].rawValue
+        }
+        .pickerStyle(.segmented)
+        .padding()
       }
     }
     .onAppear {
       index = indexForColorScheme(from: colorSchemeString)
     }
-//    .preferredColorScheme(currentColorScheme(from:  colorSchemeString))
   }
 }
 

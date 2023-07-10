@@ -6,15 +6,13 @@ import Players
 import StationUpdaters
 
 struct MainView {
-  @State private var currentActivity = TopTracksAppActivity.enjoying
+  @State private var currentActivity = CurrentActivity.shared
 }
 
 extension MainView: View {
-  
-  
   var body: some View {
     Group {
-      switch currentActivity {
+      switch currentActivity.appActivity {
       case .enjoying:
         ZStack {
           MainStationsView()
@@ -25,27 +23,13 @@ extension MainView: View {
       case .importing(let url): PlaylistImporterView(url: url)
       }
     }
-    .task {
-      await registerForCurrentActivity()
-    }
     .onOpenURL { url in
       CurrentActivity.shared.beginImporting(url: url)
     }
-    
-  }
-}
-
-extension MainView {
-  private func registerForCurrentActivity() async {
-    for await activity in CurrentActivity.shared.activities {
-      currentActivity = activity
-    }
   }
 }
 
 
-struct MainView_Previews: PreviewProvider {
-  static var previews: some View {
-    MainView()
-  }
+#Preview {
+  MainView()
 }
