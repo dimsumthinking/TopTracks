@@ -4,30 +4,34 @@ import Constants
 import Model
 import ApplicationState
 import StationUpdaters
+import SwiftData
 
 struct StationListView {
   @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
-  @ObservedObject  var stationLister: StationLister
+//  @ObservedObject  var stationLister: StationLister
   @State private var currentStation: TopTracksStation?
+  @Query(sort: \.buttonPosition, order: .forward, animation: .bouncy) var stations: [TopTracksStation]
 }
 
 extension StationListView: View {
   var body: some View {
     
-    ForEach(stationLister.stations) {station in
+    ForEach(stations) {station in
       StationBillboard(station: station,
                        currentStation: currentStation)
       .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
       .swipeActions(allowsFullSwipe: true) {
         
         Button(role: .destructive) {
-          stationLister.deleteStation(station)
+          fatalError("missing station delete")
+//          stationLister.deleteStation(station)
         }  label: {
           Image(systemName: "trash.fill")
         }
-        if stationLister.stations.count > 1 {
+        if stations.count > 1 {
           Button {
-            stationLister.moveToTop(station)
+            fatalError("Missing move to top")
+//            stationLister.moveToTop(station)
           } label: {
             Image(systemName: "text.line.first.and.arrowtriangle.forward")
           }
@@ -47,19 +51,21 @@ extension StationListView: View {
     }
     .onDelete { indexSet in
       if let index = indexSet.first {
-        stationLister.deleteStation( stationLister.stations[index])
+        fatalError("missing delete station")
+//        stationLister.deleteStation( stationLister.stations[index])
       }
     }
     .onMove { indexSet, offset in
       if let fromLocation = indexSet.first {
-        stationLister.moveStation(from: fromLocation,
-                                  offset: offset)
+        fatalError("missing move station")
+//        stationLister.moveStation(from: fromLocation,
+//                                  offset: offset)
       }
     }
     
-    .animation(.default, value: stationLister.stations)
+    .animation(.default, value: stations)
     .onAppear {
-      stationLister.updateStationList()
+//      stationLister.updateStationList()
       currentStation = CurrentStation.shared.topTracksStation
     }
     .task {

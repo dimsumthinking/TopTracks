@@ -23,7 +23,7 @@ extension StationBillboard: View {
           StationNameView(station: station,
                           isChangingName: $isChangingName)
           if isNotCurrentStation && isNotEditing {
-            StationFeatured(featured: station.topArtists)
+            StationFeatured(featured: station.topSongs)
           }
         }
         if isCurrentStation {
@@ -40,7 +40,8 @@ extension StationBillboard: View {
           RotateMusicButton(station: station)
         }
         if let added = station.stack(for: .added),
-           (!station.isChart && added.songs.count > 4) {
+           let addedSongs = added.songs,
+           (!station.isChart && addedSongs.count > 4) {
           AddAndRotateMusicButton(station: station)
         }
       }

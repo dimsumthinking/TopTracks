@@ -18,7 +18,8 @@ extension MainStationsView: View {
   public var body: some View {
     NavigationStack {
       List {
-        StationListView(stationLister: stationLister)
+        StationListView()
+//        StationListView(stationLister: stationLister)
         if stationLister.stations.isEmpty {
           Button {
             CurrentActivity.shared.beginCreating()

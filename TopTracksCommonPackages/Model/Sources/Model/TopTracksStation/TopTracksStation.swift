@@ -6,18 +6,18 @@ import MusicKit
 
 @Model public class TopTracksStation {
     var playlistAsData: Data?
-    var playlistID: String?
+    public var playlistID: String?
     
     var allowRecommendations: Bool = false
-    var buttonPosition: Int16 = 0
+    public var buttonPosition: Int16 = 0
     var favorite: Bool = false
-    var isChart: Bool = false
+    public var isChart: Bool = false
     var lastTouched: Date = Date()
-    var playlistLastUpdated: Date = Date()
+    public var playlistLastUpdated: Date = Date()
     var stacksLastRotated: Date = Date()
-    var stationID: UUID = UUID()
+    public var stationID: UUID = UUID()
     var stationLastUpdated: Date = Date()
-    var stationName: String = "Station Name"
+    public var stationName: String = "Station Name"
     var updateAvailable: Bool = false
     @Relationship(inverse: \TopTracksStack.station) var stacks: [TopTracksStack]?
     

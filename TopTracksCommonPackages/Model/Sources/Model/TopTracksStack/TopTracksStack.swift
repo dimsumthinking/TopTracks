@@ -6,7 +6,7 @@ import MusicKit
 @Model public class TopTracksStack {
     var name: String = RotationCategory.medium.description
     
-    @Relationship(inverse: \TopTracksSong.stack) var songs: [TopTracksSong]?
+    @Relationship(inverse: \TopTracksSong.stack) public var songs: [TopTracksSong]?
     var station: TopTracksStation?
     
     init(category: RotationCategory,

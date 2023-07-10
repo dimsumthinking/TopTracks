@@ -28,15 +28,16 @@ extension CurrentStation {
 
 extension CurrentStation {
   public func setStation(to station: TopTracksStation) {
-    station.lastTouched = Date()
-    do {
-      try station.saveInContext()
-      topTracksStation = station
-    }
-    catch {
-      sharedViewContext.rollback()
-      print("Couldn't save station starting to play")
-    }
+    fatalError("last touched in station inaccessible and saveInContext not here")
+//    station.lastTouched = Date()
+//    do {
+//      try station.saveInContext()
+//      topTracksStation = station
+//    }
+//    catch {
+//      sharedViewContext.rollback()
+//      print("Couldn't save station starting to play")
+//    }
   }
 }
 

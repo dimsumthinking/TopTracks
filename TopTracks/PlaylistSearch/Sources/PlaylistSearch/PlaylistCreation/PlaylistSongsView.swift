@@ -87,11 +87,12 @@ extension PlaylistSongsView: View {
       }
     }
     .onAppear {
-      existingStation =
-        TopTracksStation.stationForPlaylist(id: playlist.id.rawValue)
-      playlistAlreadyExists = (existingStation != nil)
-      checkIsComplete = true
-      fetchSongs()
+//      existingStation =
+//        TopTracksStation.stationForPlaylist(id: playlist.id.rawValue)
+//      playlistAlreadyExists = (existingStation != nil)
+//      checkIsComplete = true
+//      fetchSongs()
+      fatalError("missing stationForPlaylist")
     }
     .onDisappear {
       songPreviewPlayer.stop()
@@ -120,15 +121,17 @@ extension PlaylistSongsView {
 
 extension PlaylistSongsView {
   func createStation() {
-    Task {
-      TopTracksStation.quickCreate(from: playlist,
-                                   with: songs)
-      didCreateStation = true
-      try? await Task.sleep(for: .seconds(2))
-      didCreateStation = false
-      
-      CurrentActivity.shared.endCreating()
-      
-    }
+    //    Task {
+    //      TopTracksStation.quickCreate(from: playlist,
+    //                                   with: songs)
+    //      didCreateStation = true
+    //      try? await Task.sleep(for: .seconds(2))
+    //      didCreateStation = false
+    //      
+    //      CurrentActivity.shared.endCreating()
+    //      
+    //    }
+    //  }
+    fatalError("Can't create station")
   }
 }

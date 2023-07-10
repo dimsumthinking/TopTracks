@@ -22,7 +22,8 @@ extension MainStationSongListView: View {
           .font(.headline)
         List(stationStandardCategories) {category in
           if let stack = station.stack(for: category),
-             !stack.songs.isEmpty {
+             let stacksSongs = stack.songs,
+             !stacksSongs.isEmpty {
             let songs = stack.orderedSongs.compactMap(\.song)
             Section(category.description) {
               ForEach(songs) {song in

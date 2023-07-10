@@ -8,58 +8,58 @@ import Foundation
 
 class StationLister: NSObject, ObservableObject {
   @Published private(set) var stations: [TopTracksStation] = []
-  private let fetchedResultsController: NSFetchedResultsController<TopTracksStation>
-  private let context = sharedViewContext
+//  private let fetchedResultsController: NSFetchedResultsController<TopTracksStation>
+//  private let context = sharedViewContext
   
   override init() {
-    let request = TopTracksStation.fetchRequest()
-    request.sortDescriptors = [NSSortDescriptor(key: "buttonPosition",
-                                                ascending: true)]
-    fetchedResultsController
-    = NSFetchedResultsController(fetchRequest: request,
-                                 managedObjectContext: context,
-                                 sectionNameKeyPath: nil,
-                                 cacheName: nil)
-    super.init()
-    fetchedResultsController.delegate = self
-    updateStationList()
+//    let request = TopTracksStation.fetchRequest()
+//    request.sortDescriptors = [NSSortDescriptor(key: "buttonPosition",
+//                                                ascending: true)]
+//    fetchedResultsController
+//    = NSFetchedResultsController(fetchRequest: request,
+//                                 managedObjectContext: context,
+//                                 sectionNameKeyPath: nil,
+//                                 cacheName: nil)
+//    super.init()
+//    fetchedResultsController.delegate = self
+//    updateStationList()
   }
   
 }
 
 extension StationLister: NSFetchedResultsControllerDelegate {
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    if let updatedStations = fetchedResultsController.fetchedObjects {
-      stations = updatedStations
-    }
+//    if let updatedStations = fetchedResultsController.fetchedObjects {
+//      stations = updatedStations
+//    }
   }
 }
 
 extension StationLister {
   func updateStationList() {
-    do {
-      try fetchedResultsController.performFetch()
-      if let updatedStations = fetchedResultsController.fetchedObjects {
-        normalizeButtonOrder(for: updatedStations)
-//        stations = updatedStations
-      }
-    }
-    catch {
-      print("Couldn't update station list:", error)
-    }
+//    do {
+//      try fetchedResultsController.performFetch()
+//      if let updatedStations = fetchedResultsController.fetchedObjects {
+//        normalizeButtonOrder(for: updatedStations)
+////        stations = updatedStations
+//      }
+//    }
+//    catch {
+//      print("Couldn't update station list:", error)
+    //}
   }
   
   private func normalizeButtonOrder(for orderedStations: [TopTracksStation]) {
-    for (index, station) in orderedStations.enumerated() {
-      station.buttonNumber = index
-    }
-    do {
-      try context.save()
-    } catch {
-      context.rollback()
-      
-    }
-    stations = orderedStations
+//    for (index, station) in orderedStations.enumerated() {
+//      station.buttonNumber = index
+//    }
+//    do {
+//      try context.save()
+//    } catch {
+//      context.rollback()
+//      
+//    }
+//    stations = orderedStations
   }
 }
 
@@ -68,8 +68,9 @@ extension StationLister {
 extension StationLister {
   func deleteStation(_ station: TopTracksStation) {
     CurrentQueue.shared.stopPlayingDeletedStation(station)
-    TopTracksStation.delete(topTracksStation: station,
-                            context: context)
+    fatalError("Missing station delete")
+//    TopTracksStation.delete(topTracksStation: station,
+//                            context: context)
   }
   
   
@@ -93,11 +94,11 @@ extension StationLister {
         station.buttonPosition += 1
       }
     }
-    do {
-      try context.save()
-    } catch {
-      fatalError("Couldn't renumber button positions")
-    }
+//    do {
+//      try context.save()
+//    } catch {
+//      fatalError("Couldn't renumber button positions")
+//    }
     print("After change")
     stations.forEach {station in
       print(station.buttonNumber, station.stationName)

@@ -9,7 +9,7 @@ import MusicKit
     var artistName: String = "Artist Name"
     public var id: UUID = UUID()
     var lastPlayed: Date = Date()
-    var motion: String = "added"
+    public var motion: String = "added"
     var rating: String = SongRating.neutral.description
     var title: String = "Song Title"
     

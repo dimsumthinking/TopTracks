@@ -10,19 +10,20 @@ class PlaylistUpdater {
 
 extension PlaylistUpdater {
   public func update(_ station: TopTracksStation) async throws {
-    guard let lastUpdated = station.playlistLastUpdated,
+    guard //let lastUpdated = station.playlistLastUpdated,
            let playlist = station.playlist else { return }
     Task {
       let updatedPlaylist = try await playlist.with([.tracks])
       guard let remoteLastUpdated = updatedPlaylist.lastModifiedDate,
-            remoteLastUpdated > lastUpdated else { return }
+            remoteLastUpdated > station.playlistLastUpdated else { return }
       var songs = [Song]()
       if let tracks = updatedPlaylist.tracks {
         songs = tracks.compactMap { track in
           guard case Track.song(let song) = track else {return nil}
           return song
         }
-        station.add(songs: songs, for: playlist)
+        fatalError("Station missing add songs for \(songs)")
+//        station.add(songs: songs, for: playlist)
       }
     }
   }

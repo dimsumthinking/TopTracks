@@ -17,13 +17,13 @@ struct TopTracksApp {
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
   @State private var canPlayCatalogContent = false
   let container = try! ModelContainer(for: Schema([TopTracksStation.self,
-                                                          TopTracksStack.self,
-                                                          TopTracksSong.self]),
-                                             ModelConfiguration(cloudKitContainerIdentifier: "iCloud.com.dimsumthinking.TopTracks"))
+                                                   TopTracksStack.self,
+                                                   TopTracksSong.self]),
+                                      ModelConfiguration(cloudKitContainerIdentifier: "iCloud.com.dimsumthinking.TopTracks"))
 }
 
 extension TopTracksApp: App {
-
+  
   var body: some Scene {
     WindowGroup {
       if networkMonitor.isNotConnected {
@@ -54,12 +54,11 @@ extension TopTracksApp: App {
         }
       }
     }
-
-    .onChange(of: scenePhase) {phase in
-      if phase == .background {
-        songPreviewPlayer.stop()
-      }
-    }
+              .onChange(of: scenePhase) { oldPhase, newPhase in
+                if newPhase == .background {
+                  songPreviewPlayer.stop()
+                }}
+    
   }
 }
 

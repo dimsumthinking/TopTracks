@@ -50,9 +50,10 @@ extension CurrentSong {
   
   
   public func removeCurrentSong() {
-    guard let topTracksStation = CurrentStation.shared.topTracksStation,
-          let topTracksSong else { return }
-    topTracksStation.remove(topTracksSong: topTracksSong)
+//    guard let topTracksStation = CurrentStation.shared.topTracksStation,
+//          let topTracksSong else { return }
+    fatalError("missing remove in top tracks station")
+//    topTracksStation.remove(topTracksSong: topTracksSong)
   }
 }
 
@@ -76,8 +77,9 @@ extension CurrentSong {
   }
   
   public func changeRating(to rating: SongRating) {
-    topTracksSong?.songRating = rating
-    topTracksSong?.station.saveIfPossible()    
+    fatalError("Missing save is possible in TopTracksSong")
+//    topTracksSong?.songRating = rating
+//    topTracksSong?.station.saveIfPossible()    
   }
 }
 
@@ -89,11 +91,11 @@ extension CurrentSong {
   }
   
   private func markSongAsPlayed() {
-    if let topTracksSong {
-      topTracksSong.lastPlayed = Date()
-      topTracksSong.saveIfPossible()
-    }
-    
+//    if let topTracksSong {
+//      topTracksSong.lastPlayed = Date()
+//      topTracksSong.saveIfPossible()
+//    }
+    fatalError("Missing save is possible in TopTracksSong")
   }
 }
 

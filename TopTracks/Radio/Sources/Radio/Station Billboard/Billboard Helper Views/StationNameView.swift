@@ -21,7 +21,8 @@ extension StationNameView: View {
 
       .onSubmit {
         isChangingName = false
-        station.changeStationName(to: stationName)
+        fatalError("missing changeStationName")
+//        station.changeStationName(to: stationName)
       }
       .onAppear {
         stationName = station.stationName
