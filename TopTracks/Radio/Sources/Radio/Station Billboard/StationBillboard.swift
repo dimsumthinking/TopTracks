@@ -7,10 +7,8 @@ import StationUpdaters
 
 public struct StationBillboard {
   let station: TopTracksStation
-  let currentStation: TopTracksStation?
+  @State private var currentStation = CurrentStation.shared
   @State private var isChangingName = false
-  @State private var stationName = ""
-  @Environment(\.editMode) private var editMode
 }
 
 extension StationBillboard: View {
@@ -21,8 +19,8 @@ extension StationBillboard: View {
         BillboardImage(artwork: artwork)
         VStack(alignment: .leading) {
           StationNameView(station: station,
-                          isChangingName: $isChangingName)
-          if isNotCurrentStation && isNotEditing {
+          isChangingName: $isChangingName)
+          if isNotCurrentStation  {
             StationFeatured(featured: station.topSongs)
           }
         }
@@ -31,9 +29,7 @@ extension StationBillboard: View {
         }
       }
       .listRowBackground(BillboardBackground(backgroundColor: backgroundColor,
-                                             isCurrentStation: isCurrentStation))
-      
-      //TODO:
+                                             isCurrentStation: isCurrentStation))      
       .swipeActions(edge: .leading, allowsFullSwipe: false) {
         ShowStacksButton(station: station)
         if !station.isChart && station.availableSongs.count > 24 {
@@ -47,11 +43,7 @@ extension StationBillboard: View {
       }
       .contentShape(Rectangle())
       .onTapGesture {
-        guard isNotEditing  else {
-          isChangingName.toggle()
-          return
-        }
-        guard isNotCurrentStation else { return }
+        guard isNotCurrentStation && !isChangingName else { return }
         print("Getting set to play", station.name)
         Task {
           do {
@@ -63,18 +55,14 @@ extension StationBillboard: View {
           }
         }
       }
-      .animation(.default, value: currentStation)
+      .animation(.default, value: currentStation.nowPlaying)
     }
   }
 }
 
 extension StationBillboard {
-  private var isNotEditing: Bool {
-    editMode?.wrappedValue.isEditing != true
-  }
-  
   private var isCurrentStation: Bool {
-    return station == currentStation
+    return station == currentStation.nowPlaying
   }
   
   private var isNotCurrentStation: Bool {

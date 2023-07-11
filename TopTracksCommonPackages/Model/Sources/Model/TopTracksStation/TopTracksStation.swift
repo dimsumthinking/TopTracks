@@ -12,7 +12,7 @@ import MusicKit
     public var buttonPosition: Int16 = 0
     var favorite: Bool = false
     public var isChart: Bool = false
-    var lastTouched: Date = Date()
+    public var lastTouched: Date = Date()
     public var playlistLastUpdated: Date = Date()
     var stacksLastRotated: Date = Date()
     public var stationID: UUID = UUID()
@@ -91,7 +91,7 @@ extension TopTracksStation {
         let songList = powerStack
             .map(\.title)
             .reduce("") {accumulatedSongs, nextSong in
-                accumulatedSongs + ", " + nextSong
+                accumulatedSongs + nextSong + ", "
             }
             .dropLast(2)
         return String(songList)

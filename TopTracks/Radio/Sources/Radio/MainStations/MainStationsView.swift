@@ -13,7 +13,6 @@ extension MainStationsView: View {
       .navigationTitle("Stations")
       .toolbar {
         ToolbarItemGroup(placement: .navigationBarTrailing) {
-          EditButton()
           AddStationButton()
         }
         ToolbarItemGroup(placement: .navigationBarLeading) {

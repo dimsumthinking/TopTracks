@@ -85,7 +85,7 @@ extension CurrentSong {
 
 extension CurrentSong {
   private var topTracksSong: TopTracksSong? {
-    guard let station = CurrentStation.shared.topTracksStation,
+    guard let station = CurrentStation.shared.nowPlaying,
           let song else { return nil }
     return station.topTracksSongMatching(song)
   }
@@ -95,7 +95,7 @@ extension CurrentSong {
 //      topTracksSong.lastPlayed = Date()
 //      topTracksSong.saveIfPossible()
 //    }
-    fatalError("Missing save is possible in TopTracksSong")
+    print("Missing save is possible in TopTracksSong")
   }
 }
 

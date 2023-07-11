@@ -7,7 +7,7 @@ struct StationFeatured {
 extension StationFeatured: View {
   var body: some View {
     Text(featured)
-      .font(.caption)
+//      .font(.caption)
       .multilineTextAlignment(.leading)
       .foregroundColor(.secondary)
       .lineLimit(3)

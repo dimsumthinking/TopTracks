@@ -27,9 +27,9 @@ extension MainPlayerView: View {
       }
     }
     .animation(.easeInOut, value: isShowingFullPlayer)
-    .onChange(of: queue.currentEntry) { entry in
-      if let entry {
-        CurrentSong.shared.setCurrentSong(using: entry)
+    .onChange(of: queue.currentEntry) { oldEntry, newEntry in
+      if let newEntry {
+        CurrentSong.shared.setCurrentSong(using: newEntry)
       }
     }
     .onAppear {

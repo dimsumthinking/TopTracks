@@ -14,7 +14,7 @@ class StationListItem  {
                                        animated: true,
                                        completion: nil)
       
-      if let currentStation = CurrentStation.shared.topTracksStation {
+      if let currentStation = CurrentStation.shared.nowPlaying {
         if currentStation != station {
           play(station: station)
         }

@@ -22,7 +22,7 @@ extension CurrentQueue {
   
   func refillQueue() {
     #if !os(macOS)
-    guard let currentStation = CurrentStation.shared.topTracksStation else { return }
+    guard let currentStation = CurrentStation.shared.nowPlaying else { return }
     let player = ApplicationMusicPlayer.shared
     Task {
       try await player.queue.insert(currentStation.nextHour(),
@@ -57,7 +57,7 @@ extension CurrentQueue {
 
 extension CurrentQueue {
   public func stopPlayingDeletedStation(_ station: TopTracksStation) {
-    guard CurrentStation.shared.topTracksStation == station else { return }
+    guard CurrentStation.shared.nowPlaying == station else { return }
     stopPlayingStation()
   }
   

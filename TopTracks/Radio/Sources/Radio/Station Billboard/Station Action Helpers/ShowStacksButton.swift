@@ -9,8 +9,7 @@ struct ShowStacksButton {
 extension ShowStacksButton: View {
   var body: some View {
     Button {
-      CurrentActivity.shared.beginStationgSongList(for: station)
-//      ApplicationState.shared.beginStationgSongList(for: station)
+      CurrentActivity.shared.beginStationSongList(for: station)
     } label: {
       Image(systemName: "music.note.list")
     }

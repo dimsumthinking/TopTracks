@@ -32,7 +32,7 @@ extension FullPlayerView: View {
           ControlPanel()
           Spacer()
         }
-        .navigationTitle(CurrentStation.shared.topTracksStation?.stationName ?? "Now Playing")
+        .navigationTitle(CurrentStation.shared.nowPlaying?.stationName ?? "Now Playing")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
           if CurrentStation.shared.canShowRating {

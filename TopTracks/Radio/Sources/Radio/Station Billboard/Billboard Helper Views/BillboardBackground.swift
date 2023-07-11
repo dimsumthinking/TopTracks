@@ -15,19 +15,8 @@ extension BillboardBackground: View {
                                                             colorScheme: colorScheme)],
                    startPoint: .topLeading,
                    endPoint: .bottomTrailing)
-    #if os(iOS)
+    #if !os(tvOS)
     .border(isCurrentStation ? ColorConstants.accentColor(for: colorScheme) : .clear, width: 2)
     #endif
   }
 }
-
-//extension BillboardBackground: View {
-//  var body: some View {
-//    LinearGradient(colors: [Color(backgroundColor).opacity(0.9),
-//                            Color(backgroundColor).opacity(0.2)],
-//                   startPoint: .topLeading,
-//                   endPoint: .bottomTrailing)
-//      .border(isCurrentStation ? .yellow : .clear, width: 2)
-//  }
-//}
-

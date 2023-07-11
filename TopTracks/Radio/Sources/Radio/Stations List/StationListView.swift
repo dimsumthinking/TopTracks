@@ -1,113 +1,85 @@
 import SwiftUI
-import MusicKit
-import Constants
 import Model
 import ApplicationState
-import StationUpdaters
 import SwiftData
+import Constants
 
 struct StationListView {
-  @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
-//  @ObservedObject  var stationLister: StationLister
-  @State private var currentStation: TopTracksStation?
   @Query(sort: \.buttonPosition, order: .forward, animation: .bouncy) var stations: [TopTracksStation]
+  @Environment(\.modelContext) private var modelContext
 }
 
 extension StationListView: View {
   var body: some View {
     List {
       ForEach(stations) {station in
-        StationBillboard(station: station,
-                         currentStation: currentStation)
-        .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
-        .swipeActions(allowsFullSwipe: true) {
-          
-          Button(role: .destructive) {
-            fatalError("missing station delete")
-            //          stationLister.deleteStation(station)
-          }  label: {
-            Image(systemName: "trash.fill")
-          }
-          if stations.count > 1 {
-            Button {
-              fatalError("Missing move to top")
-              //            stationLister.moveToTop(station)
-            } label: {
-              Image(systemName: "text.line.first.and.arrowtriangle.forward")
+        StationBillboard(station: station)
+          .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
+          .swipeActions(allowsFullSwipe: true) {
+            Button(role: .destructive) {
+              deleteStation(station)
+            }  label: {
+              Image(systemName: "trash.fill")
             }
-            .tint(.indigo)
+            if let playlistID = station.playlistID,
+               let url = URL(string: "toptracks://playlist?id=\(playlistID)") {
+              ShareLink("",
+                        item: url,
+                        subject: Text("Top Tracks Station \(station.playlist?.name ?? station.stationName)"),
+                        message: Text("\n Add \(station.playlist?.name ?? station.stationName) to your TopTracks Stations"),
+                        preview: SharePreview("\(station.playlist?.name ?? station.stationName)",
+                                              image: Image("AppIcon")))
+              .tint(.blue)
+            }
           }
-          if let url = URL(string: "toptracks://playlist?id=\(station.playlistID)") {
-            ShareLink("",
-                      item: url,
-                      subject: Text("Top Tracks Station \(station.playlist?.name ?? station.stationName)"),
-                      message: Text("\n Add \(station.playlist?.name ?? station.stationName) to your TopTracks Stations"),
-                      preview: SharePreview("\(station.playlist?.name ?? station.stationName)",
-                                            image: Image("AppIcon")))
-            .tint(.blue)
-          }
-        }
         
       }
-    
-    .onDelete { indexSet in
-      if let index = indexSet.first {
-        fatalError("missing delete station")
-//        stationLister.deleteStation( stationLister.stations[index])
+      .onMove { indexSet, offset in
+        if let fromLocation = indexSet.first {
+          moveStation(from: fromLocation,
+                      offset: offset)
+        }
+      }
+      if stations.isEmpty {
+        AddFirstStationButton()
+      }
+      if CurrentStation.shared.nowPlaying != nil {
+        Rectangle()
+          .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
+          .foregroundColor(.clear)
       }
     }
-    .onMove { indexSet, offset in
-      if let fromLocation = indexSet.first {
-        fatalError("missing move station")
-        //        stationLister.moveStation(from: fromLocation,
-        //                                  offset: offset)
-      }
-    }
-    }
-    
+    .listRowSeparatorTint(.clear)
+      .listStyle(.plain)
     .animation(.default, value: stations)
-    .onAppear {
-//      stationLister.updateStationList()
-      currentStation = CurrentStation.shared.topTracksStation
-    }
-    .task {
-      await subscribeToCurrentStation()
-    }
+
     
   }
 }
 
 extension StationListView {
-  private func subscribeToCurrentStation() async {
-    do {
-      let stations = try CurrentStation.shared.currentStationStream()
-      for await station in stations {
-        self.currentStation = station
+  func deleteStation(_ station: TopTracksStation) {
+    CurrentQueue.shared.stopPlayingDeletedStation(station)
+    modelContext.delete(station)
+  }
+}
+
+extension StationListView {
+  func moveStation(from currentPosition: Int,
+                   offset: Int) {
+    if currentPosition < offset {
+      stations[currentPosition].buttonNumber = offset - 1 // was just offset
+      for (index, station) in stations.enumerated() where index > currentPosition && index < offset {
+        station.buttonPosition -= 1
       }
-    } catch {
-      print(error)
+    } else {
+      stations[currentPosition].buttonNumber = offset
+      for (index, station) in stations.enumerated() where index >= offset && index < currentPosition {
+        station.buttonPosition += 1
+      }
     }
   }
 }
-//if stationLister.stations.isEmpty {
-//          Button {
-//            CurrentActivity.shared.beginCreating()
-//          } label: {
-//            HStack {
-//              Text("Tap")
-//              Image(systemName: "plus")
-//              Text("to create a station")
-//              Image(systemName: "arrow.up.right")
-//            }
-//            .font(.headline)
-//            .foregroundColor(.yellow)
-//
-//          }
-//
-//        }
-//  Rectangle()
-//    .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
-//    .foregroundColor(.clear)
-//    .listRowSeparatorTint(.clear)
-//      .listStyle(.plain)
+
+
 

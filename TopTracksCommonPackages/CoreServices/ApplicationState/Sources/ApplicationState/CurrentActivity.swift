@@ -32,7 +32,7 @@ extension CurrentActivity {
   
   public func beginImporting(url: URL) {
     backgroundCache = BackgroundCache(currentSong: CurrentSong.shared.song,
-                                      currentStation: CurrentStation.shared.topTracksStation)
+                                      currentStation: CurrentStation.shared.nowPlaying)
     appActivity = .importing(url: url)
   }
   
@@ -42,9 +42,9 @@ extension CurrentActivity {
   }
   #endif
   
-  public func beginStationgSongList(for topTracksStation: TopTracksStation) {
+  public func beginStationSongList(for topTracksStation: TopTracksStation) {
     backgroundCache = BackgroundCache(currentSong: CurrentSong.shared.song,
-                                      currentStation: CurrentStation.shared.topTracksStation)
+                                      currentStation: CurrentStation.shared.nowPlaying)
     appActivity = .viewingOrEditing(topTracksStation: topTracksStation)
   }
   
@@ -66,7 +66,7 @@ extension CurrentActivity {
       }
     } else {
       CurrentSong.shared.song = nil
-      CurrentStation.shared.topTracksStation = nil
+      CurrentStation.shared.nowPlaying = nil
     }
     backgroundCache = nil
     #endif
