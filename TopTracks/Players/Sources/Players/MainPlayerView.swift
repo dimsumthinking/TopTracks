@@ -6,7 +6,6 @@ import Constants
 
 public struct MainPlayerView {
   @State private var isShowingFullPlayer = false
-  @State private var currentSong: Song?
   @ObservedObject private var queue = ApplicationMusicPlayer.shared.queue
   public init() {}
 }
@@ -15,15 +14,13 @@ extension MainPlayerView: View {
   public var body: some View {
     VStack {
       if isShowingFullPlayer {
-        FullPlayerView(isShowingFullPlayer: $isShowingFullPlayer,
-                       currentSong: currentSong)
+        FullPlayerView(isShowingFullPlayer: $isShowingFullPlayer)
           .transition(.scale(scale: 0.05,
                              anchor: Constants.anchorPointForPlayerTransition))
       } else {
         
         Spacer()
-        MiniPlayerView(isShowingFullPlayer: $isShowingFullPlayer,
-                       currentSong: currentSong)
+        MiniPlayerView(isShowingFullPlayer: $isShowingFullPlayer)
       }
     }
     .animation(.easeInOut, value: isShowingFullPlayer)
@@ -31,26 +28,6 @@ extension MainPlayerView: View {
       if let newEntry {
         CurrentSong.shared.setCurrentSong(using: newEntry)
       }
-    }
-    .onAppear {
-      currentSong = CurrentSong.shared.song
-    }
-    .task {
-      await subscribeToCurrentSong()
-    }
-   
-  }
-}
-
-extension MainPlayerView {
-  private func subscribeToCurrentSong() async {
-    do {
-      let songs = try CurrentSong.shared.currentSongStream()
-      for await song in songs {
-        self.currentSong = song
-      }
-    } catch {
-      print(error)
     }
   }
 }

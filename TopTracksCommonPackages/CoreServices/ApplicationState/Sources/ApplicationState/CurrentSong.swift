@@ -1,36 +1,16 @@
 import Model
 import MusicKit
 import Foundation
+import SwiftData
+import Observation
 
+@Observable
 public class CurrentSong {
   public static let shared = CurrentSong()
-  
-  public internal(set) var song: Song? {
-    didSet {
-//      if let song {
-        continuation?.yield(song)
-//      }
-    }
-  }
-  private var hasNoStreamSubscriber = true
-  
-  private var continuation: AsyncStream<Song?>.Continuation?
+  public internal(set) var song: Song?
 }
 
 extension CurrentSong {
-  public func currentSongStream() throws -> AsyncStream<Song?> {
-    guard hasNoStreamSubscriber else {
-      throw HasCurrentSongStreamSubscriber()
-    }
-    return AsyncStream(Song?.self) { continuation in
-      self.continuation = continuation
-    }
-  }
-}
-
-
-extension CurrentSong {
-  #if !os(macOS)
   public func setCurrentSong(using entry: ApplicationMusicPlayer.Queue.Entry) {
     guard let item = entry.item else {return}
     switch item {
@@ -42,7 +22,6 @@ extension CurrentSong {
     }
     CurrentQueue.shared.refillQueueIfNeeded()
   }
-  #endif
   
   public func noSongSelected() {
     self.song = nil
@@ -50,10 +29,17 @@ extension CurrentSong {
   
   
   public func removeCurrentSong() {
-//    guard let topTracksStation = CurrentStation.shared.topTracksStation,
-//          let topTracksSong else { return }
-    fatalError("missing remove in top tracks station")
-//    topTracksStation.remove(topTracksSong: topTracksSong)
+    guard let topTracksSong,
+    let context = topTracksSong.context else { return }
+    do {
+      context.delete(topTracksSong)
+      try context.save()
+      Task {
+        try await ApplicationMusicPlayer.shared.skipToNextEntry()
+      }
+    } catch {
+      print("Unable to remove current song")
+    }
   }
 }
 
@@ -77,9 +63,14 @@ extension CurrentSong {
   }
   
   public func changeRating(to rating: SongRating) {
-    fatalError("Missing save is possible in TopTracksSong")
-//    topTracksSong?.songRating = rating
-//    topTracksSong?.station.saveIfPossible()    
+    guard let topTracksSong,
+          let context = topTracksSong.context else {return}
+    topTracksSong.songRating = rating
+    do {
+      try context.save()
+    } catch {
+      print("Unable to save rating")
+    }
   }
 }
 
@@ -91,12 +82,13 @@ extension CurrentSong {
   }
   
   private func markSongAsPlayed() {
-//    if let topTracksSong {
-//      topTracksSong.lastPlayed = Date()
-//      topTracksSong.saveIfPossible()
-//    }
-    print("Missing save is possible in TopTracksSong")
+    if let topTracksSong {
+      topTracksSong.lastPlayed = Date()
+      do {
+        try topTracksSong.context?.save()
+      } catch {
+        print("Unable to save song lastPlayed date")
+      }
+    }
   }
 }
-
-private struct HasCurrentSongStreamSubscriber: Error {}

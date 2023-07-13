@@ -134,26 +134,28 @@ extension TopTracksStation {
     }
 }
 
-//extension TopTracksStation {
-//  public func changeStack(for topTracksSong: TopTracksSong,
-//            to category: RotationCategory) {
-//    let startingStack = topTracksSong.stack
-//    guard startingStack.name != category.rawValue else { return }
-//    if let destinationStack = stacks.filter({ stack in stack.name == category.name}).first {
-//      destinationStack.addToSongs(topTracksSong)
-//      topTracksSong.stack = destinationStack
-//      startingStack.removeFromSongs(topTracksSong)
-//    }
-//  }
-//
-//  public func changeStack(for topTrackSongs: [TopTracksSong],
-//                   to category: RotationCategory) {
-//    for song in topTrackSongs {
-//      changeStack(for: song,
-//                  to: category)
-//    }
-//  }
-//
+extension TopTracksStation {
+  public func changeStack(for topTracksSong: TopTracksSong,
+                          to category: RotationCategory) {
+    if let destinationStack = stacks?.filter({ stack in stack.name == category.name}).first {
+      topTracksSong.stack = destinationStack
+      do {
+        try topTracksSong.context?.save()
+      } catch {
+        print("Couldn't save after changing stack")
+      }
+    }
+  }
+  
+  public func changeStack(for topTrackSongs: [TopTracksSong],
+                          to category: RotationCategory) {
+    for song in topTrackSongs {
+      changeStack(for: song,
+                  to: category)
+    }
+  }
+}
+
 
 //  public func changeStationName(to stationName: String) {
 //    self.stationName = stationName

@@ -1,7 +1,8 @@
 import MusicKit
 import Model
+import Foundation
 
-// updates non-chart playlists by checking the net for new tracks.
+// updates non-chart playlists by checking Apple Music for new tracks.
 
 class PlaylistUpdater {
   
@@ -10,8 +11,7 @@ class PlaylistUpdater {
 
 extension PlaylistUpdater {
   public func update(_ station: TopTracksStation) async throws {
-    guard //let lastUpdated = station.playlistLastUpdated,
-           let playlist = station.playlist else { return }
+    guard let playlist = station.playlist else { return }
     Task {
       let updatedPlaylist = try await playlist.with([.tracks])
       guard let remoteLastUpdated = updatedPlaylist.lastModifiedDate,
@@ -22,11 +22,14 @@ extension PlaylistUpdater {
           guard case Track.song(let song) = track else {return nil}
           return song
         }
-        fatalError("Station missing add songs for \(songs)")
-//        station.add(songs: songs, for: playlist)
+        station.add(songs: songs)
+        station.playlistLastUpdated = remoteLastUpdated
+        do {
+          try station.context?.save()
+        } catch {
+          print("Couldn't update last updated date after updating")
+        }
       }
     }
   }
-  
-  
 }

@@ -61,53 +61,5 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B9837C64-184E-451C-BC5D-BA18C469E5C8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TopTracksCommonPackages/CoreServices/ApplicationState/Sources/ApplicationState/CurrentSong.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "markSongAsPlayed()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B9837C64-184E-451C-BC5D-BA18C469E5C8 - 8179a2d4f2b8270f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ApplicationState.CurrentSong.markSongAsPlayed() -&gt; ()"
-                  moduleName = "TopTracks"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Macintosh%20HD/Users/dimsum/Developer/Music/TopTracks/TopTracksCommonPackages/CoreServices/ApplicationState/Sources/ApplicationState/CurrentSong.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "98"
-                  endingLineNumber = "98"
-                  offsetFromSymbolStart = "68">
-               </Location>
-               <Location
-                  uuid = "B9837C64-184E-451C-BC5D-BA18C469E5C8 - 8179a2d4f2b8270f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ApplicationState.CurrentSong.markSongAsPlayed() -&gt; ()"
-                  moduleName = "TopTracks"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Macintosh%20HD/Users/dimsum/Developer/Music/TopTracks/TopTracksCommonPackages/CoreServices/ApplicationState/Sources/ApplicationState/CurrentSong.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "98"
-                  endingLineNumber = "98"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

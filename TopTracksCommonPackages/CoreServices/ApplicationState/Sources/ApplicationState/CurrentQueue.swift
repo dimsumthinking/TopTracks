@@ -9,7 +9,7 @@ public class CurrentQueue {
 
 extension CurrentQueue {
   func refillQueueIfNeeded() {
-    #if !os(macOS)
+//    #if !os(macOS)
     let player = ApplicationMusicPlayer.shared
     let entries = player.queue.entries
     if let currentEntry = player.queue.currentEntry,
@@ -17,41 +17,41 @@ extension CurrentQueue {
        entries.distance(from: index, to: entries.endIndex) < 3 {
       refillQueue()
     }
-    #endif
+//    #endif
   }
   
   func refillQueue() {
-    #if !os(macOS)
+//    #if !os(macOS)
     guard let currentStation = CurrentStation.shared.nowPlaying else { return }
     let player = ApplicationMusicPlayer.shared
     Task {
       try await player.queue.insert(currentStation.nextHour(),
                                     position: .tail)
     }
-    #endif
+//    #endif
   }
 }
 
 
 extension CurrentQueue {
   public func playStation(_ station: TopTracksStation) async throws {
-    #if !os(macOS)
+//    #if !os(macOS)
     await MainActor.run {
       CurrentStation.shared.setStation(to: station)
     }
     ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: station.nextHour())
     try await setUpPlayer()
-    #endif
+//    #endif
   }
   
   func setUpPlayer(toPlayAt playbackTime: TimeInterval? = nil) async throws {
-    #if !os(macOS)
+//    #if !os(macOS)
     try await ApplicationMusicPlayer.shared.prepareToPlay()
     if let playbackTime {
       ApplicationMusicPlayer.shared.playbackTime = playbackTime
     }
     try await ApplicationMusicPlayer.shared.play()
-    #endif
+//    #endif
   }
 }
 
@@ -62,12 +62,12 @@ extension CurrentQueue {
   }
   
   public func stopPlayingStation() {
-    #if !os(macOS)
+//    #if !os(macOS)
     CurrentStation.shared.noStationSelected()
     ApplicationMusicPlayer.shared.stop()
     ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: [Song]())
     ApplicationMusicPlayer.shared.queue.currentEntry = nil
-    #endif
+//    #endif
   }
 }
 

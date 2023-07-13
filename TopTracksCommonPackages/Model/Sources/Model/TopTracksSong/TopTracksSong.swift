@@ -8,12 +8,11 @@ import MusicKit
     
     var artistName: String = "Artist Name"
     public var id: UUID = UUID()
-    var lastPlayed: Date = Date()
+    public var lastPlayed: Date = Date()
     public var motion: String = "added"
-    var rating: String = SongRating.neutral.description
+    public var rating: String = SongRating.neutral.description
     var title: String = "Song Title"
     
-//    @Relationship(inverse: \TopTracksStack.songs) var stack: TopTracksStack
     var stack: TopTracksStack?
     
     init(song: Song,

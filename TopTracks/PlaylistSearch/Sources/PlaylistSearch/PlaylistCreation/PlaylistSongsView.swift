@@ -32,9 +32,7 @@ extension PlaylistSongsView: View {
       }
       if checkIsComplete {
         Button("Create Station") {
-//        Button("Add \(playlist.name)") {
           createStation()
-//          CurrentActivity.shared.endCreating()
         }
         .buttonStyle(.borderedProminent)
         .disabled(songs.isEmpty || playlistAlreadyExists)
@@ -52,30 +50,22 @@ extension PlaylistSongsView: View {
     
     .alert("Station already Exists",
            isPresented: $playlistAlreadyExists) {
-      Button("Play the station", action: {
-        // TODO: play station
+      Button("Play the station") {
         if let station = existingStation {
-//          ApplicationState.shared.setStation(to: station)
           Task {
-            
             do {
               try await CurrentQueue.shared.playStation(station)
               CurrentStation.shared.setStation(to: station)
             } catch {
               print("Couldn't play station")
               CurrentQueue.shared.stopPlayingStation()
-              
             }
           }
-          
-          
         }
         CurrentActivity.shared.endCreating()
-//        ApplicationState.shared.endCreating()
-      })
+      }
       Button("Cancel") {
         CurrentActivity.shared.endCreating()
-//        ApplicationState.shared.endCreating()
       }
     }
 

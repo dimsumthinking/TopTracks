@@ -1,5 +1,6 @@
 import Model
 import MusicKit
+import SwiftData
 
 public class RotateExistingMusic {
   let station: TopTracksStation
@@ -19,8 +20,12 @@ extension RotateExistingMusic {
     categoriesOfSongs.forEach { category, songs in
       split(topTracksSongs: songs, from: category)
     }
-    fatalError("Station doesn't have saveIfPossible")
-    //station.saveIfPossible()
+    guard let context = station.context else { return }
+    do {
+      try context.save()
+    } catch {
+      print("Could not save station after rotate")
+    }
   }
     
   private func split(topTracksSongs: [TopTracksSong],
@@ -38,69 +43,60 @@ extension RotateExistingMusic {
 
 extension RotateExistingMusic {
   private func splitPower(topTracksSongs: [TopTracksSong]) {
-//    var songs = topTracksSongs
-//    station.changeStack(for: songs.removeFirst(), to: .medium)
-//    for _ in 1...3 {
-//      station.changeStack(for: songs.removeFirst(), to: .heavy)
-//    }
-//    markRemainingSame(songs)
-fatalError("need station changeStack")
+    var songs = topTracksSongs
+    station.changeStack(for: songs.removeFirst(), to: .medium)
+    for _ in 1...3 {
+      station.changeStack(for: songs.removeFirst(), to: .heavy)
+    }
+    markRemainingSame(songs)
   }
   
   private func splitHeavy(topTracksSongs: [TopTracksSong]) {
-//    var songs = topTracksSongs
-//    for _ in 1...2 {
-//      station.changeStack(for: songs.removeFirst(), to: .light)
-//    }
-//    for _ in 1...2 {
-//      station.changeStack(for: songs.removeFirst(), to: .medium)
-//    }
-//    for _ in 1...2 {
-//      station.changeStack(for: songs.removeLast(), to: .power)
-//    }
-//    markRemainingSame(songs)
-    fatalError("need station changeStack")
-
+    var songs = topTracksSongs
+    for _ in 1...2 {
+      station.changeStack(for: songs.removeFirst(), to: .light)
+    }
+    for _ in 1...2 {
+      station.changeStack(for: songs.removeFirst(), to: .medium)
+    }
+    for _ in 1...2 {
+      station.changeStack(for: songs.removeLast(), to: .power)
+    }
+    markRemainingSame(songs)
   }
   
   private func splitMedium(topTracksSongs: [TopTracksSong]) {
-//    var songs = topTracksSongs
-//    for _ in 1...2 {
-//      station.changeStack(for: songs.removeFirst(), to: .light)
-//    }
-//    for _ in 1...2 {
-//      station.changeStack(for: songs.removeLast(), to: .power)
-//    }
-//    for _ in 1...2 {
-//      station.changeStack(for: songs.removeLast(), to: .heavy)
-//    }
-//   markRemainingSame(songs)
-    fatalError("need station changeStack")
-
+    var songs = topTracksSongs
+    for _ in 1...2 {
+      station.changeStack(for: songs.removeFirst(), to: .light)
+    }
+    for _ in 1...2 {
+      station.changeStack(for: songs.removeLast(), to: .power)
+    }
+    for _ in 1...2 {
+      station.changeStack(for: songs.removeLast(), to: .heavy)
+    }
+   markRemainingSame(songs)
   }
   
   private func splitLight(topTracksSongs: [TopTracksSong]) {
-//    var songs = topTracksSongs
-//    for _ in 1...2 {
-//      station.changeStack(for: songs.removeFirst(), to: .gold)
-//    }
-//    station.changeStack(for: songs.removeLast(), to: .heavy)
-//    for _ in 1...3 {
-//      station.changeStack(for: songs.removeLast(), to: .medium)
-//    }
-//    markRemainingSame(songs)
-    fatalError("need station changeStack")
-
+    var songs = topTracksSongs
+    for _ in 1...2 {
+      station.changeStack(for: songs.removeFirst(), to: .gold)
+    }
+    station.changeStack(for: songs.removeLast(), to: .heavy)
+    for _ in 1...3 {
+      station.changeStack(for: songs.removeLast(), to: .medium)
+    }
+    markRemainingSame(songs)
   }
   
   private func splitGold(topTracksSongs: [TopTracksSong]) {
-//    var songs = topTracksSongs
-//    for _ in 1...2 {
-//      station.changeStack(for: songs.removeLast(), to: .light)
-//    }
-//    markRemainingSame(songs)
-    fatalError("need station changeStack")
-
+    var songs = topTracksSongs
+    for _ in 1...2 {
+      station.changeStack(for: songs.removeLast(), to: .light)
+    }
+    markRemainingSame(songs)
   }
 }
 

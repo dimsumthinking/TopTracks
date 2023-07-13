@@ -17,10 +17,10 @@ struct TopTracksApp {
   @State private var networkMonitor = NetworkConnectionMonitor.shared
   @Environment(\.scenePhase) private var scenePhase
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
-  let container = try! ModelContainer(for: Schema([TopTracksStation.self,
-                                                   TopTracksStack.self,
-                                                   TopTracksSong.self]),
-                                      ModelConfiguration(cloudKitContainerIdentifier: "iCloud.com.dimsumthinking.TopTracks"))
+//  let container = try! ModelContainer(for: Schema([TopTracksStation.self,
+//                                                   TopTracksStack.self,
+//                                                   TopTracksSong.self]),
+//                                      ModelConfiguration(cloudKitContainerIdentifier: "iCloud.com.dimsumthinking.TopTracks"))
 }
 
 extension TopTracksApp: App {
@@ -45,7 +45,9 @@ extension TopTracksApp: App {
         }
       }
     }
-    .modelContainer(container)
+    .modelContainer(CommonContainer.shared.container)
+//    .modelContainer(for: TopTracksStation.self)
+    //.modelContainer(container)
     .onChange(of: musicAuthorizationStatus, initial: true) { oldStatus, newStatus in
       if newStatus == .authorized {
         Task {

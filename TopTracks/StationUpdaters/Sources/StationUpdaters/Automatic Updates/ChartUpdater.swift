@@ -2,18 +2,11 @@ import Model
 import MusicKit
 
 public class ChartUpdater {
-//  private let topTracksStation: TopTracksStation
-//  
-//  public init(for station: TopTracksStation) {
-//    self.topTracksStation = station
-//  }
-  
 }
 
 extension ChartUpdater {
   public func update(_ station: TopTracksStation) async throws {
-    guard //let lastUpdated = station.playlistLastUpdated,
-           let playlist = station.playlist else { return }
+    guard  let playlist = station.playlist else { return }
     Task {
       let updatedPlaylist = try await playlist.with([.tracks])
       guard let remoteLastUpdated = updatedPlaylist.lastModifiedDate,
@@ -24,8 +17,7 @@ extension ChartUpdater {
           guard case Track.song(let song) = track else {return nil}
           return song
         }
-        fatalError("Missing updateWithSongs for \(songs)")
-//        station.updateWith(songs: songs, for: playlist)
+        station.updateWith(songs: songs, for: playlist)
       }
     }
   }

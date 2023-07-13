@@ -18,31 +18,31 @@ public class AddAndRotateMusic {
 
 extension AddAndRotateMusic {
   public func add() {
-    guard let added = station.stack(for: .added)?.songs else { return }
+    guard var added = station.stack(for: .added)?.songs else { return }
     stationEssentialCategories.forEach { category in  // add one to each
-      fatalError("ChangeStack is missing \(added)")
-      //station.changeStack(for: added.removeFirst(), to: category)
+      station.changeStack(for: added.removeFirst(), to: category)
     }
     if hasEight {
       for _ in 1...2 {
-        fatalError("ChangeStack is missing")
-//        station.changeStack(for: added.removeFirst(), to: .power)
+        station.changeStack(for: added.removeFirst(), to: .power)
       }
-//      station.changeStack(for: added.removeFirst(), to: .heavy)
-//      station.changeStack(for: added.removeFirst(), to: .medium)
+      station.changeStack(for: added.removeFirst(), to: .heavy)
+      station.changeStack(for: added.removeFirst(), to: .medium)
       
       categoriesOfSongs.forEach { category, songs in
         addAndMove(topTracksSongs: songs, for: category)
       }
-      fatalError("ChangeStack is missing")
 
     }
-//    station.saveIfPossible()
+    do {
+      try station.context?.save()
+    }
+    catch {
+      print("Couldn't save after adding")
+    }
     guard station.activeSongs.count > 24 else {return}
     let rotator = RotateExistingMusic(in: station)
     rotator.rotate()
-    fatalError("SaveIfPossible is missing")
-
   }
     
   private func addAndMove(topTracksSongs: [TopTracksSong],
@@ -60,61 +60,46 @@ extension AddAndRotateMusic {
 
 extension AddAndRotateMusic {
   private func splitPower(topTracksSongs: [TopTracksSong]) {
-    let songs = topTracksSongs
-    fatalError("ChangeStack is missing \(songs)")
+    var songs = topTracksSongs
 
-//    station.changeStack(for: songs.removeFirst(), to: .medium)
-//    for _ in 1...2 {
-////      station.changeStack(for: songs.removeFirst(), to: .heavy)
-//      fatalError("ChangeStack is missing")
-//
-//    }
+    station.changeStack(for: songs.removeFirst(), to: .medium)
+    for _ in 1...2 {
+      station.changeStack(for: songs.removeFirst(), to: .heavy)
+    }
   }
   
   private func splitHeavy(topTracksSongs: [TopTracksSong]) {
-    let songs = topTracksSongs
+    var songs = topTracksSongs
     for _ in 1...2 {
-      fatalError("ChangeStack is missing \(songs)")
-
-//      station.changeStack(for: songs.removeFirst(), to: .medium)
+      station.changeStack(for: songs.removeFirst(), to: .medium)
     }
-//    station.changeStack(for: songs.removeFirst(), to: .light)
-//    station.changeStack(for: songs.removeFirst(), to: .gold)
-    fatalError("ChangeStack is missing")
-
+    station.changeStack(for: songs.removeFirst(), to: .light)
+    station.changeStack(for: songs.removeFirst(), to: .gold)
   }
   
   private func splitMedium(topTracksSongs: [TopTracksSong]) {
-    let songs = topTracksSongs
+    var songs = topTracksSongs
     for _ in 1...2 {
-      fatalError("ChangeStack is missing \(songs)")
-
-//      station.changeStack(for: songs.removeFirst(), to: .light)
+      station.changeStack(for: songs.removeFirst(), to: .light)
     }
     for _ in 1...3 {
-      fatalError("ChangeStack is missing")
-
-//      station.changeStack(for: songs.removeFirst(), to: .gold)
+      station.changeStack(for: songs.removeFirst(), to: .gold)
     }
   }
   
   private func splitLight(topTracksSongs: [TopTracksSong]) {
-    let songs = topTracksSongs
+    var songs = topTracksSongs
     for _ in 1...4 {
-      fatalError("ChangeStack is missing \(songs)")
-
-//      station.changeStack(for: songs.removeFirst(), to: .gold)
+      station.changeStack(for: songs.removeFirst(), to: .gold)
     }
   }
   
   private func splitGold(topTracksSongs: [TopTracksSong]) {
-    let songs = topTracksSongs
+    var songs = topTracksSongs
     if songs.count > 60 {
       let excess = songs.count - 60
       for _ in 1...excess {
-        fatalError("ChangeStack is missing")
-
-//        station.changeStack(for: songs.removeFirst(), to: .archived)
+        station.changeStack(for: songs.removeFirst(), to: .archived)
       }
     }
     
