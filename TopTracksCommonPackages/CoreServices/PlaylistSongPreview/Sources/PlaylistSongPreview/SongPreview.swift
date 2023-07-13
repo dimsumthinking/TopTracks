@@ -42,13 +42,6 @@ extension SongPreview: View {
     .contentShape(Rectangle())
     .onTapGesture {
       playSong()
-//      if !isPlaying {
-//        songPreviewPlayer.play(song)
-//        currentSong = song
-//      } else {
-//        songPreviewPlayer.stop()
-//        currentSong = nil
-//      }
     }
   }
 }

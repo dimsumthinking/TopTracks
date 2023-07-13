@@ -7,10 +7,7 @@ public let songPreviewPlayer = StationSongPreviewPlayer()
 public class StationSongPreviewPlayer {
   
   private let previewPlayerDelegate = PreviewPlayerDelegate()
-  
-#if !os(macOS)
-  var audioPlayer: AVAudioPlayer?
-  
+    var audioPlayer: AVAudioPlayer?
   
   init() {
     let audioSession = AVAudioSession.sharedInstance()
@@ -20,18 +17,14 @@ public class StationSongPreviewPlayer {
       print("Setting category to AVAudioSessionCategoryPlayback failed.")
     }
   }
-#endif
 }
 
 
 extension StationSongPreviewPlayer {
   func play(_ song: Song) {
-#if !os(macOS)
-    
     if let url = song.previewAssets?.first?.url {
       NotificationCenter.default.post(name: Constants.previewPlayerBeginsNotification,
                                       object: nil)
-      
       Task {
         do {
           let (data, _) = try await URLSession.shared.data(from: url)
@@ -45,30 +38,21 @@ extension StationSongPreviewPlayer {
     } else {
       print("Can't get url for preview for \(song.title)")
     }
-#endif
   }
   
   public func stop() {
-#if !os(macOS)
     audioPlayer = nil
-#endif
   }
   
   public var isNotPreviewing: Bool {
-    #if !os(macOS)
-    return true
-    #else
     return audioPlayer == nil
-    #endif
   }
 }
 
 fileprivate class PreviewPlayerDelegate:  NSObject, AVAudioPlayerDelegate {
   
   func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-#if !os(macOS)
     songPreviewPlayer.audioPlayer = nil
-#endif
     NotificationCenter.default.post(name: Constants.previewPlayerEndsNotification,
                                     object: nil)
   }
