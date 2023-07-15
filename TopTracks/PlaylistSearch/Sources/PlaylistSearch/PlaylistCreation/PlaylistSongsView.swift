@@ -4,6 +4,7 @@ import Model
 import PlaylistSongPreview
 import ApplicationState
 import Constants
+import SwiftData
 
 public struct PlaylistSongsView {
   private let playlist: Playlist
@@ -13,6 +14,8 @@ public struct PlaylistSongsView {
   @State private var existingStation: TopTracksStation?
   @State private var currentSong: Song?
   @State private var didCreateStation = false
+  @Query private var topTrackStations: [TopTracksStation]
+  @Environment(\.modelContext) private var modelContext
   
   public init(playlist: Playlist) {
     self.playlist = playlist
@@ -77,12 +80,9 @@ extension PlaylistSongsView: View {
       }
     }
     .onAppear {
-//      existingStation =
-//        TopTracksStation.stationForPlaylist(id: playlist.id.rawValue)
-//      playlistAlreadyExists = (existingStation != nil)
-//      checkIsComplete = true
-//      fetchSongs()
-      fatalError("missing stationForPlaylist")
+      playlistAlreadyExists = topTrackStations.map(\.playlistID).contains(playlist.id.rawValue)
+      checkIsComplete = true
+      fetchSongs()
     }
     .onDisappear {
       songPreviewPlayer.stop()
@@ -111,17 +111,55 @@ extension PlaylistSongsView {
 
 extension PlaylistSongsView {
   func createStation() {
+    let topTracksStation = TopTracksStation(playlist: playlist,
+                                            buttonNumber: topTrackStations.count)
+    modelContext.insert(topTracksStation)
+    
+    let songsInStacks = splitSongsIntoCategories(songs: songs)
+    
+    for category in RotationCategory.allCases {
+      if let songsInCategory = songsInStacks[category] {
+        let topTracksStack = TopTracksStack(category: category)
+        modelContext.insert(topTracksStack)
+        topTracksStation.stacks?.append(topTracksStack)
+        topTracksStack.station = topTracksStation
+        
+        for songInCategory in songsInCategory {
+          let topTracksSong = TopTracksSong(song: songInCategory)
+          modelContext.insert(topTracksSong)
+          topTracksStack.songs?.append(topTracksSong)
+          topTracksSong.stack = topTracksStack
+        }
+      }
+    }
+
+//    if let stacks = topTracksStation.stacks {
+//
+//      for stack in stacks {
+//        if let songs = stack.songs {
+//          for song in songs {
+//            modelContext.insert(song)
+//          }
+//        }
+//        modelContext.insert(stack)
+//      }
+//
+//    }
+//    modelContext.insert(topTracksStation)
+
     //    Task {
     //      TopTracksStation.quickCreate(from: playlist,
     //                                   with: songs)
-    //      didCreateStation = true
-    //      try? await Task.sleep(for: .seconds(2))
-    //      didCreateStation = false
-    //      
-    //      CurrentActivity.shared.endCreating()
-    //      
+    Task {
+      didCreateStation = true
+      try? await Task.sleep(for: .seconds(1))
+      didCreateStation = false
+      
+      CurrentActivity.shared.endCreating()
+    }
+    //
     //    }
     //  }
-    fatalError("Can't create station")
+//    fatalError("Can't create station")
   }
 }

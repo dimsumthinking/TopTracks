@@ -6,17 +6,12 @@ import MusicKit
 @Model public class TopTracksStack {
     var name: String = RotationCategory.medium.description
     
-    @Relationship(inverse: \TopTracksSong.stack) public var songs: [TopTracksSong]?
-    var station: TopTracksStation?
-    
-    init(category: RotationCategory,
-                     songs: [Song],
-                     station: TopTracksStation) {
-      self.name = category.name
-      self.station = station
-      self.songs = topTrackSongs(songs: songs)
-      print(name, ":  \n", songs.map(\.title))
-    }
+    @Relationship(inverse: \TopTracksSong.stack) public var songs: [TopTracksSong]? = [TopTracksSong]()
+    public var station: TopTracksStation?
+  
+  public init(category: RotationCategory) {
+    self.name = category.name
+  }
 }
 
 extension TopTracksStack {
@@ -37,8 +32,9 @@ extension TopTracksStack {
   private func topTrackSongs(songs: [Song]) -> [TopTracksSong] {
     var topTracksSongs = [TopTracksSong]()
     for song in songs {
-      topTracksSongs.append(TopTracksSong(song: song,
-                                          stack: self))
+      let topTracksSong = TopTracksSong(song: song)
+      topTracksSongs.append(topTracksSong)
+      topTracksSong.stack = self
     }
     return topTracksSongs
   }

@@ -8,9 +8,8 @@ extension TopTracksStation {
     if let addedStack = stack(for: .added) {
       added = addedStack
     } else {
-      added = TopTracksStack(category: .added,
-                             songs: [Song](),
-                             station: self)
+      added = TopTracksStack(category: .added)
+      added.station = self
       do {
         try context?.save()
         stationLastUpdated = Date()
@@ -23,8 +22,10 @@ extension TopTracksStation {
     let ids = availableSongs.map(\.songID)
     for song in songsToAdd {
       if !ids.contains(song.id.rawValue) {
-        added.songs?.append(TopTracksSong(song: song,
-                                          stack: added))
+        let topTracksSong = TopTracksSong(song: song)
+        added.songs?.append(topTracksSong)
+        topTracksSong.stack = added
+        
       }
     }
     do {

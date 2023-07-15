@@ -10,7 +10,7 @@ import SwiftData
 
 
 @main
-struct TopTracksApp {
+ struct TopTracksApp {
   @State private var musicAuthorizationStatus = MusicAuthorization.Status.notDetermined
   @State private var canPlayCatalogContent = false
   

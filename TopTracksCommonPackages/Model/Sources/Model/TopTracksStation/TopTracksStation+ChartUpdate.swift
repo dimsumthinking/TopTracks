@@ -31,8 +31,9 @@ extension TopTracksStation {
       if let categorySongs = newStacks[topTracksStack.rotationCategory] {
         for song in categorySongs {
           if !movedSongs.contains(song) {
-            topTracksStack.songs?.append(TopTracksSong(song: song,
-                                              stack: topTracksStack))
+            let topTracksSong = TopTracksSong(song: song)
+            topTracksStack.songs?.append(topTracksSong)
+            topTracksSong.stack = topTracksStack
           }
         }
       }

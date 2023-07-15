@@ -1,7 +1,7 @@
 import MusicKit
 import CoreData
 
-func splitSongsIntoCategories(songs: [Song]) -> [RotationCategory: [Song]] {
+public func splitSongsIntoCategories(songs: [Song]) -> [RotationCategory: [Song]] {
   var songsInCategories = [RotationCategory: [Song]]()
   let proposedStackSize = songs.count.isMultiple(of: 4)   ? songs.count/4 : songs.count/4 + 1
   let stackSize = min(proposedStackSize, 10)

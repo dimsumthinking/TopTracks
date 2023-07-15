@@ -19,49 +19,20 @@ import MusicKit
     var stationLastUpdated: Date = Date()
     public var stationName: String = "Station Name"
     var updateAvailable: Bool = false
-    @Relationship(inverse: \TopTracksStack.station) var stacks: [TopTracksStack]?
-    
-    
-    init(playlist: Playlist,
-         songsInStacks: [RotationCategory: [Song]]) {
-        self.favorite = false
-        self.stationLastUpdated = Date()
-        self.playlistLastUpdated = playlist.lastModifiedDate ?? Date()
-        self.playlistID = playlist.id.rawValue
-        self.stationID = UUID()
-        self.stationName = playlist.name
-        self.updateAvailable = false
-        self.lastTouched = Date()
-        self.allowRecommendations = true
-        self.playlistAsData = try? PropertyListEncoder().encode(playlist)
-        self.stacks = topTracksStacks(songsInStacks: songsInStacks)
-        self.isChart = playlist.isChart ?? false
-        let numberOfStations: Int = 0
-        //TODO: Get number of stations
-        //    do {
-        //      numberOfStations = try context.count(for: TopTracksStation.fetchRequest())
-        //    } catch {
-        //      numberOfStations = 0
-        //    }
-        self.buttonPosition = Int16(numberOfStations)
-        self.stacksLastRotated = Date()
-    }
+    @Relationship(inverse: \TopTracksStack.station) public var stacks: [TopTracksStack]? = [TopTracksStack]()
+  
+  public init(playlist: Playlist,
+              buttonNumber: Int) {
+    self.playlistAsData = try? JSONEncoder().encode(playlist)
+    self.playlistID = playlist.id.rawValue
+
+    self.playlistLastUpdated = playlist.lastModifiedDate ?? Date()
+    self.stationName = playlist.name
+    self.isChart = playlist.isChart ?? false
+    self.buttonPosition = Int16(buttonNumber)
+  }
 }
 
-extension TopTracksStation {
-    private func topTracksStacks(songsInStacks: [RotationCategory: [Song]]) -> [TopTracksStack] {
-        var topTracksStacks = [TopTracksStack]()
-        for category in RotationCategory.allCases {
-            let songs = songsInStacks[category] ?? [Song]()
-            topTracksStacks.append(TopTracksStack(category: category,
-                                                  songs: songs,
-                                                  station: self))
-            print("Stack", category, "\n \t", songs.count.description)
-        }
-        return topTracksStacks
-    }
-    
-}
 
 extension TopTracksStation {
     public var name: String {
@@ -69,14 +40,15 @@ extension TopTracksStation {
     }
     
     public var playlist: Playlist? {
-        guard let playlistAsData,
-              let playlist = try? PropertyListDecoder().decode(Playlist.self, from: playlistAsData) else {return nil}
+      guard let playlistAsData else { return nil}
+      if let playlist = try? JSONDecoder().decode(Playlist.self, from: playlistAsData) {
         return playlist
+      } else {
+        return try? PropertyListDecoder().decode(Playlist.self, from: playlistAsData)
+      }
     }
     
     public var artwork: Artwork? {
-        //    guard let playlistAsData,
-        //          let playlist = try? PropertyListDecoder().decode(Playlist.self, from: playlistAsData) else {return nil}
         return playlist?.artwork
     }
     
@@ -155,48 +127,3 @@ extension TopTracksStation {
     }
   }
 }
-
-
-//  public func changeStationName(to stationName: String) {
-//    self.stationName = stationName
-////    guard let managedObjectContext else {return}
-////    saveIfPossible()
-////    do {
-////      try managedObjectContext.save()
-////    } catch {
-////      managedObjectContext.rollback()
-////      print("Couldn't change station name")
-////    }
-//  }
-
-
-
-
-//extension TopTracksStation {
-//  public func remove(topTracksSong: TopTracksSong) {
-//    changeStack(for: topTracksSong, to: .removed)
-//    if let added =  stack(for: .added)?.songs.first {
-//      changeStack(for: added, to: topTracksSong.stack.rotationCategory)
-//    } else if let gold = stack(for: .gold)?.songs.first {
-//      changeStack(for: gold, to: topTracksSong.stack.rotationCategory)
-//    } else if let archived = stack(for: .archived)?.songs.first {
-//      changeStack(for: archived, to: topTracksSong.stack.rotationCategory)
-//    }
-//    saveIfPossible()
-//  }
-//}
-
-//extension TopTracksStation {
-//  public func remove(song: Song) {
-//    guard let topTracksSong = allSongs.first(where:{ topTracksSong in topTracksSong.songID == song.id.rawValue}) else { return }
-//    changeStack(for: topTracksSong, to: .removed)
-//    if let added =  stack(for: .added)?.songs.first {
-//      changeStack(for: added, to: topTracksSong.stack.rotationCategory)
-//    } else if let gold = stack(for: .gold)?.songs.first {
-//      changeStack(for: gold, to: topTracksSong.stack.rotationCategory)
-//    } else if let archived = stack(for: .archived)?.songs.first {
-//      changeStack(for: archived, to: topTracksSong.stack.rotationCategory)
-//    }
-//    saveIfPossible()
-//  }
-//}
