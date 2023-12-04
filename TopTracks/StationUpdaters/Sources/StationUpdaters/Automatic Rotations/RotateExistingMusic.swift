@@ -16,85 +16,88 @@ public class RotateExistingMusic {
 }
 
 extension RotateExistingMusic {
-  public func rotate() {
-    categoriesOfSongs.forEach { category, songs in
-      split(topTracksSongs: songs, from: category)
-    }
-    guard let context = station.context else { return }
-    do {
-      try context.save()
-    } catch {
-      print("Could not save station after rotate")
-    }
+  public func rotate() throws {
+    throw TTImplementationError.notImplementedYet
   }
+//  public func rotate()  {
+//    categoriesOfSongs.forEach { category, songs in
+//      split(topTracksSongs: songs, from: category)
+//    }
+//    guard let context = station.context else { return }
+//    do {
+//      try context.save()
+//    } catch {
+//      print("Could not save station after rotate")
+//    }
+//  }
     
   private func split(topTracksSongs: [TopTracksSong],
-                     from category: RotationCategory) {
+                     from category: RotationCategory) throws {
     switch category {
-    case .power: splitPower(topTracksSongs: topTracksSongs)
-    case .heavy: splitHeavy(topTracksSongs: topTracksSongs)
-    case .medium: splitMedium(topTracksSongs: topTracksSongs)
-    case .light: splitLight(topTracksSongs: topTracksSongs)
-    case .gold: splitGold(topTracksSongs: topTracksSongs)
+    case .power: try splitPower(topTracksSongs: topTracksSongs)
+    case .heavy: try splitHeavy(topTracksSongs: topTracksSongs)
+    case .medium: try splitMedium(topTracksSongs: topTracksSongs)
+    case .light: try splitLight(topTracksSongs: topTracksSongs)
+    case .gold: try splitGold(topTracksSongs: topTracksSongs)
     default: return
     }
   }
 }
 
 extension RotateExistingMusic {
-  private func splitPower(topTracksSongs: [TopTracksSong]) {
+  private func splitPower(topTracksSongs: [TopTracksSong]) throws {
     var songs = topTracksSongs
-    station.changeStack(for: songs.removeFirst(), to: .medium)
+    try station.changeStack(for: songs.removeFirst(), to: .medium)
     for _ in 1...3 {
-      station.changeStack(for: songs.removeFirst(), to: .heavy)
+      try station.changeStack(for: songs.removeFirst(), to: .heavy)
     }
     markRemainingSame(songs)
   }
   
-  private func splitHeavy(topTracksSongs: [TopTracksSong]) {
+  private func splitHeavy(topTracksSongs: [TopTracksSong]) throws {
     var songs = topTracksSongs
     for _ in 1...2 {
-      station.changeStack(for: songs.removeFirst(), to: .light)
+      try station.changeStack(for: songs.removeFirst(), to: .light)
     }
     for _ in 1...2 {
-      station.changeStack(for: songs.removeFirst(), to: .medium)
+      try station.changeStack(for: songs.removeFirst(), to: .medium)
     }
     for _ in 1...2 {
-      station.changeStack(for: songs.removeLast(), to: .power)
+      try station.changeStack(for: songs.removeLast(), to: .power)
     }
     markRemainingSame(songs)
   }
   
-  private func splitMedium(topTracksSongs: [TopTracksSong]) {
+  private func splitMedium(topTracksSongs: [TopTracksSong]) throws {
     var songs = topTracksSongs
     for _ in 1...2 {
-      station.changeStack(for: songs.removeFirst(), to: .light)
+      try station.changeStack(for: songs.removeFirst(), to: .light)
     }
     for _ in 1...2 {
-      station.changeStack(for: songs.removeLast(), to: .power)
+      try station.changeStack(for: songs.removeLast(), to: .power)
     }
     for _ in 1...2 {
-      station.changeStack(for: songs.removeLast(), to: .heavy)
+      try station.changeStack(for: songs.removeLast(), to: .heavy)
     }
    markRemainingSame(songs)
   }
   
-  private func splitLight(topTracksSongs: [TopTracksSong]) {
+  private func splitLight(topTracksSongs: [TopTracksSong]) throws {
     var songs = topTracksSongs
     for _ in 1...2 {
-      station.changeStack(for: songs.removeFirst(), to: .gold)
+      try station.changeStack(for: songs.removeFirst(), to: .gold)
     }
-    station.changeStack(for: songs.removeLast(), to: .heavy)
+    try station.changeStack(for: songs.removeLast(), to: .heavy)
     for _ in 1...3 {
-      station.changeStack(for: songs.removeLast(), to: .medium)
+      try station.changeStack(for: songs.removeLast(), to: .medium)
     }
     markRemainingSame(songs)
   }
   
-  private func splitGold(topTracksSongs: [TopTracksSong]) {
+  private func splitGold(topTracksSongs: [TopTracksSong]) throws {
     var songs = topTracksSongs
     for _ in 1...2 {
-      station.changeStack(for: songs.removeLast(), to: .light)
+      try station.changeStack(for: songs.removeLast(), to: .light)
     }
     markRemainingSame(songs)
   }

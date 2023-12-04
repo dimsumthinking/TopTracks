@@ -11,12 +11,12 @@ public class CurrentSong {
 }
 
 extension CurrentSong {
-  public func setCurrentSong(using entry: ApplicationMusicPlayer.Queue.Entry) {
+  public func setCurrentSong(using entry: ApplicationMusicPlayer.Queue.Entry)  throws {
     guard let item = entry.item else {return}
     switch item {
     case .song(let song):
       self.song = song
-      markSongAsPlayed()
+      try markSongAsPlayed()
     default:
       print("Entry is not a song")
     }
@@ -26,21 +26,23 @@ extension CurrentSong {
   public func noSongSelected() {
     self.song = nil
   }
-  
-  
-  public func removeCurrentSong() {
-    guard let topTracksSong,
-    let context = topTracksSong.context else { return }
-    do {
-      context.delete(topTracksSong)
-      try context.save()
-      Task {
-        try await ApplicationMusicPlayer.shared.skipToNextEntry()
-      }
-    } catch {
-      print("Unable to remove current song")
-    }
+  public func removeCurrentSong() throws {
+    throw TTImplementationError.notImplementedYet
   }
+  
+//  public func removeCurrentSong() {
+//    guard let topTracksSong,
+//    let context = topTracksSong.context else { return }
+//    do {
+//      context.delete(topTracksSong)
+//      try context.save()
+//      Task {
+//        try await ApplicationMusicPlayer.shared.skipToNextEntry()
+//      }
+//    } catch {
+//      print("Unable to remove current song")
+//    }
+//  }
 }
 
 extension CurrentSong {
@@ -62,16 +64,20 @@ extension CurrentSong {
     topTracksSong?.songRating.name ?? "It's ok"
   }
   
-  public func changeRating(to rating: SongRating) {
-    guard let topTracksSong,
-          let context = topTracksSong.context else {return}
-    topTracksSong.songRating = rating
-    do {
-      try context.save()
-    } catch {
-      print("Unable to save rating")
-    }
+  public func changeRating(to rating: SongRating)  throws {
+    throw TTImplementationError.notImplementedYet
   }
+  
+//  public func changeRating(to rating: SongRating) {
+//    guard let topTracksSong,
+//          let context = topTracksSong.context else {return}
+//    topTracksSong.songRating = rating
+//    do {
+//      try context.save()
+//    } catch {
+//      print("Unable to save rating")
+//    }
+//  }
 }
 
 extension CurrentSong {
@@ -81,14 +87,18 @@ extension CurrentSong {
     return station.topTracksSongMatching(song)
   }
   
-  private func markSongAsPlayed() {
-    if let topTracksSong {
-      topTracksSong.lastPlayed = Date()
-      do {
-        try topTracksSong.context?.save()
-      } catch {
-        print("Unable to save song lastPlayed date")
-      }
-    }
+  private func markSongAsPlayed() throws {
+    throw TTImplementationError.notImplementedYet
   }
+  
+//  private func markSongAsPlayed() {
+//    if let topTracksSong {
+//      topTracksSong.lastPlayed = Date()
+//      do {
+//        try topTracksSong.context?.save()
+//      } catch {
+//        print("Unable to save song lastPlayed date")
+//      }
+//    }
+//  }
 }

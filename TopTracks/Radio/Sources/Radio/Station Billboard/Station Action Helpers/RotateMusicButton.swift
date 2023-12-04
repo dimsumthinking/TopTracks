@@ -10,7 +10,11 @@ extension RotateMusicButton: View {
   var body: some View {
     Button {
       let rotator = RotateExistingMusic(in: station)
-      rotator.rotate()
+      do {
+        try rotator.rotate()
+      } catch {
+        fatalError(TTImplementationError.notImplementedYet.localizedDescription)
+      }
     } label: {
       Image(systemName: "arrow.triangle.2.circlepath.circle")
     }

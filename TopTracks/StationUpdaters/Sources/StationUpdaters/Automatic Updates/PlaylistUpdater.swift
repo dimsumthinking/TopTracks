@@ -22,13 +22,14 @@ extension PlaylistUpdater {
           guard case Track.song(let song) = track else {return nil}
           return song
         }
-        station.add(songs: songs)
+        try station.add(songs: songs)
         station.playlistLastUpdated = remoteLastUpdated
-        do {
-          try station.context?.save()
-        } catch {
-          print("Couldn't update last updated date after updating")
-        }
+//        do {
+//          try station.context?.save()
+//        } catch {
+//          print("Couldn't update last updated date after updating")
+//        }
+        throw TTImplementationError.notImplementedYet
       }
     }
   }

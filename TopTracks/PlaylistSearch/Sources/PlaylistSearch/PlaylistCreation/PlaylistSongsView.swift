@@ -58,7 +58,7 @@ extension PlaylistSongsView: View {
           Task {
             do {
               try await CurrentQueue.shared.playStation(station)
-              CurrentStation.shared.setStation(to: station)
+              try CurrentStation.shared.setStation(to: station)
             } catch {
               print("Couldn't play station")
               CurrentQueue.shared.stopPlayingStation()

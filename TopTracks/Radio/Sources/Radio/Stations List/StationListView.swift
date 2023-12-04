@@ -5,7 +5,7 @@ import SwiftData
 import Constants
 
 struct StationListView {
-  @Query(sort: \.buttonPosition, order: .forward, animation: .bouncy) var stations: [TopTracksStation]
+  @Query(sort: \TopTracksStation.buttonPosition, order: .forward, animation: .bouncy) var stations: [TopTracksStation]
   @Environment(\.modelContext) private var modelContext
 }
 

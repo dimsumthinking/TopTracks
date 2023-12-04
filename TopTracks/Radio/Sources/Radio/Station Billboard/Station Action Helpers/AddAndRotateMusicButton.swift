@@ -10,7 +10,8 @@ extension AddAndRotateMusicButton: View {
   var body: some View {
     Button {
       let adder = AddAndRotateMusic(in: station)
-      adder.add()
+      do {try adder.add()}
+      catch { fatalError(TTImplementationError.notImplementedYet.localizedDescription)}
     } label: {
       Image(systemName: "goforward.plus")
     }

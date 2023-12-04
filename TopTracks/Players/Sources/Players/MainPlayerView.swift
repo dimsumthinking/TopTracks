@@ -3,6 +3,7 @@ import ApplicationState
 import AudioToolbox
 import MusicKit
 import Constants
+import Model
 
 public struct MainPlayerView {
   @State private var isShowingFullPlayer = false
@@ -26,7 +27,11 @@ extension MainPlayerView: View {
     .animation(.easeInOut, value: isShowingFullPlayer)
     .onChange(of: queue.currentEntry) { oldEntry, newEntry in
       if let newEntry {
-        CurrentSong.shared.setCurrentSong(using: newEntry)
+        do {
+          try CurrentSong.shared.setCurrentSong(using: newEntry)
+        } catch {
+          fatalError(TTImplementationError.notImplementedYet.localizedDescription)
+        }
       }
     }
   }

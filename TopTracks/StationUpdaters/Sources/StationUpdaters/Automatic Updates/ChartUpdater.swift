@@ -17,7 +17,7 @@ extension ChartUpdater {
           guard case Track.song(let song) = track else {return nil}
           return song
         }
-        station.updateWith(songs: songs, for: playlist)
+        try station.updateWith(songs: songs, for: playlist)
       }
     }
   }

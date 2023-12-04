@@ -108,22 +108,38 @@ extension TopTracksStation {
 
 extension TopTracksStation {
   public func changeStack(for topTracksSong: TopTracksSong,
-                          to category: RotationCategory) {
-    if let destinationStack = stacks?.filter({ stack in stack.name == category.name}).first {
-      topTracksSong.stack = destinationStack
-      do {
-        try topTracksSong.context?.save()
-      } catch {
-        print("Couldn't save after changing stack")
-      }
-    }
+                          to category: RotationCategory) throws {
+    throw TTImplementationError.notImplementedYet
   }
   
   public func changeStack(for topTrackSongs: [TopTracksSong],
-                          to category: RotationCategory) {
+                          to category: RotationCategory) throws {
     for song in topTrackSongs {
-      changeStack(for: song,
+      try changeStack(for: song,
                   to: category)
     }
   }
 }
+
+
+//extension TopTracksStation {
+//  public func changeStack(for topTracksSong: TopTracksSong,
+//                          to category: RotationCategory) {
+//    if let destinationStack = stacks?.filter({ stack in stack.name == category.name}).first {
+//      topTracksSong.stack = destinationStack
+//      do {
+//        try topTracksSong.context?.save()
+//      } catch {
+//        print("Couldn't save after changing stack")
+//      }
+//    }
+//  }
+//  
+//  public func changeStack(for topTrackSongs: [TopTracksSong],
+//                          to category: RotationCategory) {
+//    for song in topTrackSongs {
+//      changeStack(for: song,
+//                  to: category)
+//    }
+//  }
+//}
