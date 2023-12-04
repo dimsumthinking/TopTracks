@@ -23,7 +23,7 @@ public class CommonContainer {
   
   @MainActor
   func insert(_ object: any PersistentModel) {
-    container.mainContext.insert(object: object)
+    container.mainContext.insert(object)
     save()
   }
   
@@ -31,5 +31,13 @@ public class CommonContainer {
   func delete(_ object: any PersistentModel) {
     container.mainContext.delete(object)
     save()
+  }
+  
+  var newBackgroundContext: ModelContext {
+    ModelContext(container)
+  }
+  
+  static var newBackgroundContext: ModelContext {
+    ModelContext(CommonContainer.shared.container)
   }
 }
