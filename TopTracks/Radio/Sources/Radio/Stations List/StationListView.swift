@@ -41,7 +41,8 @@ extension StationListView: View {
         }
       }
       if stations.isEmpty {
-        AddFirstStationButton()
+        CloudActivityView()
+        //AddFirstStationButton()
       }
       if CurrentStation.shared.nowPlaying != nil {
         Rectangle()

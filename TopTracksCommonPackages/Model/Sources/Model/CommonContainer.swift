@@ -1,8 +1,10 @@
 import SwiftData
 
+
 public class CommonContainer {
   public static let shared = CommonContainer()
   public let container: ModelContainer
+  public let cloudActivity = CloudActivity()
   
   init() {
     do {
