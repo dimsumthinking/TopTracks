@@ -16,7 +16,9 @@ extension CurrentSong {
     switch item {
     case .song(let song):
       self.song = song
-      try markSongAsPlayed()
+      if let station = CurrentStation.shared.nowPlaying {
+        try station.markPlayed(for: song)
+      }
     default:
       print("Entry is not a song")
     }
@@ -86,19 +88,4 @@ extension CurrentSong {
           let song else { return nil }
     return station.topTracksSongMatching(song)
   }
-  
-  private func markSongAsPlayed() throws {
-    throw TTImplementationError.notImplementedYet
-  }
-  
-//  private func markSongAsPlayed() {
-//    if let topTracksSong {
-//      topTracksSong.lastPlayed = Date()
-//      do {
-//        try topTracksSong.context?.save()
-//      } catch {
-//        print("Unable to save song lastPlayed date")
-//      }
-//    }
-//  }
 }

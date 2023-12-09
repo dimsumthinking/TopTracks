@@ -11,17 +11,9 @@ public class CurrentStation {
 extension CurrentStation {
   
   public func setStation(to station: TopTracksStation) throws {
-    throw TTImplementationError.notImplementedYet
+    try station.startPlaying()
+    nowPlaying = station
   }
-//  public func setStation(to station: TopTracksStation) {
-//    station.lastTouched = Date()
-//    nowPlaying = station
-//    do {
-//      try station.context?.save()
-//    } catch {
-//      print("Didn't save station last touched")
-//    }
-//  }
 }
 
 extension CurrentStation {
