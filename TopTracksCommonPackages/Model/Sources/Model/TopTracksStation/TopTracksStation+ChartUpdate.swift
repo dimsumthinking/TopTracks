@@ -5,87 +5,76 @@ import Foundation
 extension TopTracksStation {
   public func updateWith(songs songsToAdd: [Song],
                          for playlist: Playlist) throws {
-    throw TTImplementationError.notImplementedYet
+    let context = backgroundModelActor.context
+    guard let station = context.model(for: self.persistentModelID) as? TopTracksStation else {return}
+    let categorizedSongs = categorized(songs: songsToAdd)
+    
+    let remainingSongs = try moveOrDeleteCurrentSongs(station: station,
+                                                      basedOn: categorizedSongs,
+                                                      context: context)
+    try addRemainingSongs(to: station,
+                          from: remainingSongs,
+                          context: context)
+    if let playlistLastModifiedDate = playlist.lastModifiedDate {
+      station.playlistLastUpdated = playlistLastModifiedDate
+    }
+    station.playlistAsData = try? JSONEncoder().encode(playlist)
+    station.stationLastUpdated = Date()
+    try context.save()
   }
   
   
- 
   
+  private func moveOrDeleteCurrentSongs(station: TopTracksStation,
+                                        basedOn categorizedSongs: [Song: RotationCategory],
+                                        context: ModelContext) throws -> [Song: RotationCategory] {
+    var moved = 0
+    var deleted = 0
+    var categorizedSongs = categorizedSongs
+    for topTracksSong in station.activeSongs {
+      if let song = topTracksSong.song,
+         let category = categorizedSongs[song],
+         let stack = station.stack(for: category) {
+        topTracksSong.stack = stack
+        categorizedSongs.removeValue(forKey: song)
+        moved += 1
+      } else {
+        context.delete(topTracksSong)
+        deleted += 1
+      }
+    }
+    StationUpdatersLogger.updatingChart.info("Updating \(station.stationName). Moved \(moved.description), Deleted \(deleted.description)")
+    return categorizedSongs
+    
+  }
   
-  
-  func categoryFor(songTitle: String, in categorizedSongs: [RotationCategory: [Song]] ) throws -> (RotationCategory?, [Song]) {
-    throw TTImplementationError.notImplementedYet
+  private func addRemainingSongs(to station: TopTracksStation,
+                                 from remainingSongs: [Song: RotationCategory],
+                                 context: ModelContext) throws {
+    var added = 0
+    for song in remainingSongs.keys {
+      if let category = remainingSongs[song],
+         let stack = station.stack(for: category) {
+        let topTracksSong = TopTracksSong(song: song)
+        topTracksSong.stack = stack
+        context.insert(topTracksSong)
+        added += 1
+      }
+    }
+    StationUpdatersLogger.updatingChart.info("Updating \(station.stationName). Added \(added.description)")
   }
 }
 
-
-//import SwiftData
-//import MusicKit
-//import Foundation
-//
-//extension TopTracksStation {
-//  public func updateWith(songs songsToAdd: [Song],
-//                         for playlist: Playlist) {
-//    guard let context,
-//    let playlistAsData = try? PropertyListEncoder().encode(playlist),
-//    let playlistLastModifiedDate = playlist.lastModifiedDate,
-//    let stacks else { return }
-//    self.playlistAsData = playlistAsData
-//    stationLastUpdated = Date()
-//    playlistLastUpdated = playlistLastModifiedDate
-//    var movedSongs = [Song]()
-//    var newStacks = splitSongsIntoCategories(songs: songsToAdd)
-//    for song in activeSongs { // moves or deletes current songs
-//      let (category, returnedSongs) = categoryFor(songTitle: song.title, in: newStacks)
-//      if let category  {
-//        changeStack(for: song, to: category)
-//        newStacks[category] = returnedSongs
-//        if let movedSong = song.song {
-//          movedSongs.append(movedSong)
-//        }
-//      } else {
-//        context.delete(song)
-//      }
-//    }
-//    
-//    for topTracksStack in stacks { // add remaining songs to station
-//      if let categorySongs = newStacks[topTracksStack.rotationCategory] {
-//        for song in categorySongs {
-//          if !movedSongs.contains(song) {
-//            let topTracksSong = TopTracksSong(song: song)
-//            topTracksStack.songs?.append(topTracksSong)
-//            topTracksSong.stack = topTracksStack
-//          }
-//        }
-//      }
-//    }
-//    do {
-//      try context.save()
-//    } catch {
-//      print("Unable to update chart")
-//    }
-//  }
-//  
-//  
-// 
-//  
-//  
-//  
-//  func categoryFor(songTitle: String, in categorizedSongs: [RotationCategory: [Song]] ) -> (RotationCategory?, [Song]) {
-//    var songsCategory: RotationCategory? = nil
-//    var returnedSongs: [Song] = []
-//    for (category, songsInCategory) in categorizedSongs {
-//      let titles = songsInCategory.map(\.title)
-//      if titles.contains(songTitle) {
-//        songsCategory = category
-//        if let index = titles.firstIndex(of: songTitle) {
-//          var songsInCategory = songsInCategory
-//          songsInCategory.remove(at: index)
-//          returnedSongs = songsInCategory
-//        }
-//        
-//      }
-//    }
-//    return (songsCategory, returnedSongs)
-//  }
-//}
+extension TopTracksStation {
+  private func categorized(songs:  [Song]) -> [Song: RotationCategory] {
+    var songsWithCategory = [Song: RotationCategory]()
+    let _ = splitSongsIntoCategories(songs: songs)
+      .map { category, songs in
+        for song in songs {
+          songsWithCategory[song] = category
+        }
+        return category
+      }
+    return songsWithCategory
+  }
+}

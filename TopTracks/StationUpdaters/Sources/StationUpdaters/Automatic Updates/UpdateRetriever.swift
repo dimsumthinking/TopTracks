@@ -7,13 +7,28 @@ public class UpdateRetriever {
 
 extension UpdateRetriever {
   public static func fetchUpdates(for station: TopTracksStation ) async throws {
-    if station.isChart {
-      let chartUpdater = ChartUpdater()
-      try await chartUpdater.update(station)
-    }
-    else {
-      let playlistUpdater = PlaylistUpdater()
-      try await playlistUpdater.update(station)
+    guard let playlist = station.playlist else { return }
+    Task {
+      let updatedPlaylist = try await playlist.with([.tracks])
+      guard let remoteLastUpdated = updatedPlaylist.lastModifiedDate,
+            remoteLastUpdated > station.playlistLastUpdated else { return }
+      var songs = [Song]()
+      if let tracks = updatedPlaylist.tracks {
+        songs = tracks.compactMap { track in
+          guard case Track.song(let song) = track else {return nil}
+          return song
+        }
+        try station.add(songs: songs,
+                        for: updatedPlaylist)
+      }
+      if station.isChart {
+        try station.updateWith(songs: songs,
+                               for: updatedPlaylist)
+      } else {
+        try station.add(songs: songs,
+                        for: updatedPlaylist)
+        
+      }
     }
   }
   

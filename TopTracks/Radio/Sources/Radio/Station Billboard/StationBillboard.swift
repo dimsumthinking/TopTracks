@@ -44,13 +44,13 @@ extension StationBillboard: View {
       .contentShape(Rectangle())
       .onTapGesture {
         guard isNotCurrentStation && !isChangingName else { return }
-        print("Getting set to play", station.name)
+        RadioLogger.playing.info("Geting set to play \(station.name)")
         Task {
           do {
             try await UpdateRetriever.fetchUpdates(for: station)
             try await CurrentQueue.shared.playStation(station)
           } catch {
-            print("Couldn't play station")
+            RadioLogger.playing.info("Couldn't play \(station.name) \n \(error.localizedDescription)")
             CurrentQueue.shared.stopPlayingStation()
           }
         }
