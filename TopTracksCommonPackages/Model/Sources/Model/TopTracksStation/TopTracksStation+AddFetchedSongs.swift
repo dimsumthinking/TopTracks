@@ -5,8 +5,10 @@ import Foundation
 extension TopTracksStation {
   public func add(songs songsToAdd: [Song],
                   for playlist: Playlist) throws {
-    let context = backgroundModelActor.context
-    guard let station = context.model(for: self.persistentModelID) as? TopTracksStation else {return}
+    let (station, context) = try background.station(from: self)
+
+//    let context = backgroundModelActor.context
+//    guard let station = context.model(for: self.persistentModelID) as? TopTracksStation else {return}
     let added = try addedStack(for: station, in: context)
     try add(songs: songsToAdd,
             to: added,

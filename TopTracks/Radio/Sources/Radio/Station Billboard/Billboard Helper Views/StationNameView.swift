@@ -1,10 +1,12 @@
 import SwiftUI
 import Model
+import SwiftData
 
 struct StationNameView {
   let station: TopTracksStation
   @Binding var isChangingName: Bool
   @State var stationName = ""
+  @Environment (\.modelContext) private var modelContext: ModelContext
 }
 
 extension StationNameView: View {
@@ -50,5 +52,17 @@ extension StationNameView: View {
         }
     }
 
+  }
+}
+
+extension StationNameView {
+  private func changeName() {
+    isChangingName = false
+    station.stationName = stationName
+    do {
+      try modelContext.save()
+    } catch {
+      RadioLogger.stationNameChange.info("Failed to change station name from \(station.stationName) to \(stationName)")
+    }
   }
 }

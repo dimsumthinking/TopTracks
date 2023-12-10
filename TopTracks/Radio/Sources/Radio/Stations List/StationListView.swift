@@ -61,6 +61,11 @@ extension StationListView {
   func deleteStation(_ station: TopTracksStation) {
     CurrentQueue.shared.stopPlayingDeletedStation(station)
     modelContext.delete(station)
+    do {
+      try modelContext.save()
+    } catch {
+      RadioLogger.stationDelete.info("Could not delete \(station.name)")
+    }
   }
 }
 
@@ -77,6 +82,11 @@ extension StationListView {
       for (index, station) in stations.enumerated() where index >= offset && index < currentPosition {
         station.buttonPosition += 1
       }
+    }
+    do {
+      try modelContext.save()
+    } catch {
+      RadioLogger.stationOrder.info("Couldn't move station by dragging")
     }
   }
 }

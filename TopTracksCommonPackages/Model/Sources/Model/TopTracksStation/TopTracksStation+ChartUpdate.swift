@@ -5,8 +5,7 @@ import Foundation
 extension TopTracksStation {
   public func updateWith(songs songsToAdd: [Song],
                          for playlist: Playlist) throws {
-    let context = backgroundModelActor.context
-    guard let station = context.model(for: self.persistentModelID) as? TopTracksStation else {return}
+    let (station, context) = try background.station(from: self)
     let categorizedSongs = categorized(songs: songsToAdd)
     
     let remainingSongs = try moveOrDeleteCurrentSongs(station: station,
