@@ -8,7 +8,6 @@ extension AppleMusicSubscriptionCantShowContent: View {
     Text("""
        This app requires an
        Apple Music Subscription
-       Individual, Student, or Family Plan
        to create playlists and play music.
        """)
     .multilineTextAlignment(.center)

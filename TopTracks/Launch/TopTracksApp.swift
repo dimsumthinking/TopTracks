@@ -17,10 +17,6 @@ import SwiftData
   @State private var networkMonitor = NetworkConnectionMonitor.shared
   @Environment(\.scenePhase) private var scenePhase
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
-//  let container = try! ModelContainer(for: Schema([TopTracksStation.self,
-//                                                   TopTracksStack.self,
-//                                                   TopTracksSong.self]),
-//                                      ModelConfiguration(cloudKitContainerIdentifier: "iCloud.com.dimsumthinking.TopTracks"))
 }
 
 extension TopTracksApp: App {

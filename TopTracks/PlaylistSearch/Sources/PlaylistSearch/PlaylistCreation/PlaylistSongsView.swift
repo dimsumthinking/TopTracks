@@ -35,7 +35,8 @@ extension PlaylistSongsView: View {
       }
       if checkIsComplete {
         Button("Create Station") {
-          createStation()
+//          createStation()
+
         }
         .buttonStyle(.borderedProminent)
         .disabled(songs.isEmpty || playlistAlreadyExists)
@@ -111,55 +112,19 @@ extension PlaylistSongsView {
 
 extension PlaylistSongsView {
   func createStation() {
-    let topTracksStation = TopTracksStation(playlist: playlist,
-                                            buttonNumber: topTrackStations.count)
-    modelContext.insert(topTracksStation)
-    
-    let songsInStacks = splitSongsIntoCategories(songs: songs)
-    
-    for category in RotationCategory.allCases {
-      if let songsInCategory = songsInStacks[category] {
-        let topTracksStack = TopTracksStack(category: category)
-        modelContext.insert(topTracksStack)
-        topTracksStation.stacks?.append(topTracksStack)
-        topTracksStack.station = topTracksStation
+    PlaylistSearchLogger.creating.info("Trying to create station \(playlist.name)")
+    do {
+      try TopTracksStation.createStation(playlist: playlist,
+                                         buttonNumber: topTrackStations.count, songs: songs)
+      Task {
+        didCreateStation = true
+        try? await Task.sleep(for: .seconds(1))
+        didCreateStation = false
         
-        for songInCategory in songsInCategory {
-          let topTracksSong = TopTracksSong(song: songInCategory)
-          modelContext.insert(topTracksSong)
-          topTracksStack.songs?.append(topTracksSong)
-          topTracksSong.stack = topTracksStack
-        }
+        CurrentActivity.shared.endCreating()
       }
+    } catch {
+      PlaylistSearchLogger.creating.info("Cannot create station \(playlist.name)")
     }
-
-//    if let stacks = topTracksStation.stacks {
-//
-//      for stack in stacks {
-//        if let songs = stack.songs {
-//          for song in songs {
-//            modelContext.insert(song)
-//          }
-//        }
-//        modelContext.insert(stack)
-//      }
-//
-//    }
-//    modelContext.insert(topTracksStation)
-
-    //    Task {
-    //      TopTracksStation.quickCreate(from: playlist,
-    //                                   with: songs)
-    Task {
-      didCreateStation = true
-      try? await Task.sleep(for: .seconds(1))
-      didCreateStation = false
-      
-      CurrentActivity.shared.endCreating()
-    }
-    //
-    //    }
-    //  }
-//    fatalError("Can't create station")
   }
 }

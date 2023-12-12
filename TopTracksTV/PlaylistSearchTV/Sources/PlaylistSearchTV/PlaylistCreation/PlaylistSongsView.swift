@@ -157,15 +157,21 @@ extension PlaylistSongsView {
 
 extension PlaylistSongsView {
   func createStation() {
-    Task {
-      TopTracksStation.quickCreate(from: playlist,
-                                   with: songs)
-      didCreateStation = true
-      try? await Task.sleep(for: .seconds(2))
-      didCreateStation = false
-      
-      CurrentActivity.shared.endCreating()
-      
+    PlaylistSearchLogger.creating.info("Trying to create station \(playlist.name)")
+    do {
+      try TopTracksStation.createStation(playlist: playlist,
+                                         buttonNumber: topTrackStations.count, songs: songs)
+      Task {
+        didCreateStation = true
+        try? await Task.sleep(for: .seconds(1))
+        didCreateStation = false
+        
+        CurrentActivity.shared.endCreating()
+      }
+    } catch {
+      PlaylistSearchLogger.creating.info("Cannot create station \(playlist.name)")
     }
   }
 }
+  
+

@@ -9,11 +9,10 @@ struct RotateMusicButton {
 extension RotateMusicButton: View {
   var body: some View {
     Button {
-      let rotator = RotateExistingMusic(in: station)
       do {
-        try rotator.rotate()
+        try station.rotate()
       } catch {
-        fatalError(TTImplementationError.notImplementedYet.localizedDescription)
+        RadioLogger.stationMusicRotator.info("Couldn't rotate the music for \(station.stationName)")
       }
     } label: {
       Image(systemName: "arrow.triangle.2.circlepath.circle")

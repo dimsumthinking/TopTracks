@@ -5,5 +5,5 @@ struct RadioLogger {
   static let stationDelete = Logger(subsystem: "Radio", category: "Station Delete")
   static let stationOrder = Logger(subsystem: "Radio", category: "Station Order")
   static let stationNameChange = Logger(subsystem: "Radio", category: "Station Name Change")
-
+  static let stationMusicRotator = Logger(subsystem: "Radio", category: "Station Music Rotator")
 }
