@@ -4,6 +4,7 @@ import Model
 import PlaylistSongPreview
 import ApplicationState
 import Constants
+import SwiftData
 
 public struct PlaylistSongsView {
   private let playlist: Playlist
@@ -13,6 +14,8 @@ public struct PlaylistSongsView {
   @State private var existingStation: TopTracksStation?
   @State private var currentSong: Song?
   @State private var didCreateStation = false
+  @Query private var topTrackStations: [TopTracksStation]
+
   
   public init(playlist: Playlist) {
     self.playlist = playlist
@@ -97,7 +100,7 @@ extension PlaylistSongsView: View {
             
             do {
               try await CurrentQueue.shared.playStation(station)
-              CurrentStation.shared.setStation(to: station)
+              try CurrentStation.shared.setStation(to: station)
             } catch {
               print("Couldn't play station")
               CurrentQueue.shared.stopPlayingStation()
@@ -124,9 +127,7 @@ extension PlaylistSongsView: View {
 //      }
 //    }
     .onAppear {
-      existingStation =
-        TopTracksStation.stationForPlaylist(id: playlist.id.rawValue)
-      playlistAlreadyExists = (existingStation != nil)
+      playlistAlreadyExists = topTrackStations.map(\.playlistID).contains(playlist.id.rawValue)
       checkIsComplete = true
       fetchSongs()
     }
@@ -157,7 +158,7 @@ extension PlaylistSongsView {
 
 extension PlaylistSongsView {
   func createStation() {
-    PlaylistSearchLogger.creating.info("Trying to create station \(playlist.name)")
+    PlaylistSearchTVLogger.creating.info("Trying to create station \(playlist.name)")
     do {
       try TopTracksStation.createStation(playlist: playlist,
                                          buttonNumber: topTrackStations.count, songs: songs)
@@ -169,7 +170,7 @@ extension PlaylistSongsView {
         CurrentActivity.shared.endCreating()
       }
     } catch {
-      PlaylistSearchLogger.creating.info("Cannot create station \(playlist.name)")
+      PlaylistSearchTVLogger.creating.info("Cannot create station \(playlist.name)")
     }
   }
 }

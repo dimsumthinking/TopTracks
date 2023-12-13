@@ -8,7 +8,8 @@ class BackgroundCache {
   private(set) var currentStation: TopTracksStation?
   private(set) var currentTime: TimeInterval
   
-  private var previewPlayerTask: Task<Void, Never>?
+  private var previewPlayerBeginsTask: Task<Void, Never>?
+
   private var previewPlayerHasNotStarted = true
   
   
@@ -24,19 +25,20 @@ class BackgroundCache {
   }
   
   deinit {
-    previewPlayerTask?.cancel()
+    previewPlayerBeginsTask?.cancel()
   }
 }
 
 extension BackgroundCache {
   private func listenForPreviewPlayerBeginning() {
-    previewPlayerTask = Task {
+    previewPlayerBeginsTask = Task {
       for await _ in NotificationCenter.default.notifications(named: Constants.previewPlayerBeginsNotification) {
         guard previewPlayerHasNotStarted else { return }
         previewPlayerHasNotStarted = false
         currentSong = CurrentSong.shared.song
 //        #if !os(macOS)
         currentTime = ApplicationMusicPlayer.shared.playbackTime
+        ApplicationMusicPlayer.shared.pause()
 //        #endif
       }
     }

@@ -31,15 +31,15 @@ extension TopTracksApp: App {
             .preferredColorScheme(currentColorScheme(from: colorSchemeString))
       }
     }
-    .onChange(of: musicAuthorizationStatus) { status in
-      if status == .authorized {
+    .onChange(of: musicAuthorizationStatus) { oldStatus, newStatus in
+      if newStatus == .authorized {
         Task {
           await checkSubscription()
         }
       }
     }
-    .onChange(of: scenePhase) {phase in
-      if phase == .background {
+    .onChange(of: scenePhase) { oldPhase, newPhase in
+      if newPhase == .background {
         songPreviewPlayer.stop()
       }
     }

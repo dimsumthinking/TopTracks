@@ -16,8 +16,8 @@ extension ColorSchemeChooserView: View {
             Text(colorScheme.rawValue.capitalized).tag(colorScheme)
           }
         }
-               .onChange(of: index) { int in
-                 colorSchemeString = CurrentColorScheme.allCases[int].rawValue
+               .onChange(of: index) { oldValue, newValue in
+                 colorSchemeString = CurrentColorScheme.allCases[newValue].rawValue
                }
                .pickerStyle(.segmented)
                .padding()

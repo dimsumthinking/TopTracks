@@ -15,10 +15,10 @@ extension SongRatingView: View {
       Text("Song Rating:")
       ForEach(SongRating.allCases, id: \.self) { rating in
         Button (role: rating == .remove ? .destructive : .none) {
-          if rating == .remove { isShowingAlert = true}
-          else {
-            do {try updateSong(rating: rating)}
-            catch {fatalError(TTImplementationError.notImplementedYet.localizedDescription)}
+          if rating == .remove {
+            isShowingAlert = true
+          } else {
+            updateSong(rating: rating)
           }
         } label: {
           HStack {
@@ -40,7 +40,7 @@ extension SongRatingView: View {
         do {
           try removeCurrentSong()
         } catch {
-          fatalError(TTImplementationError.notImplementedYet.localizedDescription)
+          PlayersLogger.removingSong.info("Can't remove \(CurrentSong.shared.song?.title ?? "song")")
         }
       } label: {
         Text("Permanently remove from this station")
@@ -61,9 +61,12 @@ extension SongRatingView: View {
 }
 
 extension SongRatingView {
-  private func updateSong(rating: SongRating) throws {
-    try CurrentSong.shared.changeRating(to: rating)
-    updatedAt = Date()
+  private func updateSong(rating: SongRating)  {
+    do {
+      try CurrentSong.shared.changeRating(to: rating)
+    } catch {
+      PlayersLogger.updatingSong.info("Can't update song")
+    }
   }
   private func removeCurrentSong() throws {
     try CurrentSong.shared.removeCurrentSong()

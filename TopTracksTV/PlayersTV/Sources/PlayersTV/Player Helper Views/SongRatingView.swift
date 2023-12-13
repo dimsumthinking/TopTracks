@@ -63,7 +63,12 @@ extension SongRatingView: View {
     .alert("Remove " + (CurrentSong.shared.song?.title ?? "this song") + "?",
            isPresented: $isShowingAlert) {
       Button(role: .destructive) {
-        removeCurrentSong()
+        do {
+          try removeCurrentSong()
+        } catch {
+          PlayersTVLogger.removingSong.info("Can't remove \(CurrentSong.shared.song?.title ?? "song")")
+
+        }
       } label: {
         Text("Permanently remove from this station")
       }
@@ -83,11 +88,14 @@ extension SongRatingView: View {
 }
 
 extension SongRatingView {
-  private func updateSong(rating: SongRating) {
-    CurrentSong.shared.changeRating(to: rating)
-    updatedAt = Date()
+  private func updateSong(rating: SongRating)  {
+    do {
+      try CurrentSong.shared.changeRating(to: rating)
+    } catch {
+      PlayersTVLogger.updatingSong.info("Couldn't update rating")
+    }
   }
-  private func removeCurrentSong() {
-    CurrentSong.shared.removeCurrentSong()
+  private func removeCurrentSong() throws {
+    try CurrentSong.shared.removeCurrentSong()
   }
 }

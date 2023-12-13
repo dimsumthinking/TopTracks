@@ -14,6 +14,14 @@ let background = BackgroundProvider()
      }
      return (station, newBackgroundContext)
    }
+   
+   func song(from existingSong: TopTracksSong) throws -> (TopTracksSong, ModelContext) {
+     let newBackgroundContext = context
+     guard let song = newBackgroundContext.model(for: existingSong.persistentModelID) as? TopTracksSong else {
+       throw TopTracksDataError.couldNotCreateSongOnBackgroundContext
+     }
+     return (song, newBackgroundContext)
+   }
 }
 
 

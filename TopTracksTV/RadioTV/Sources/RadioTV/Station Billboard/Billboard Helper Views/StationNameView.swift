@@ -21,13 +21,13 @@ extension StationNameView: View {
 
       .onSubmit {
         isChangingName = false
-        station.changeStationName(to: stationName)
+        station.stationName = stationName
       }
       .onAppear {
         stationName = station.stationName
       }
-      .onChange(of: isChangingName) { value in
-        userNameFocused = value
+      .onChange(of: isChangingName) { oldValue, newValue in
+        userNameFocused = newValue
       }
     } else {
       Text(station.name)

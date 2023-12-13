@@ -29,7 +29,9 @@ extension CurrentSong {
     self.song = nil
   }
   public func removeCurrentSong() throws {
-    throw TTImplementationError.notImplementedYet
+    if let ttSong = topTracksSong {
+      try ttSong.remove()
+    }
   }
   
 //  public func removeCurrentSong() {
@@ -67,7 +69,9 @@ extension CurrentSong {
   }
   
   public func changeRating(to rating: SongRating)  throws {
-    throw TTImplementationError.notImplementedYet
+    if let ttSong = topTracksSong {
+      try ttSong.changeRating(to: rating)
+    }
   }
   
 //  public func changeRating(to rating: SongRating) {

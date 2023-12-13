@@ -3,7 +3,6 @@ import Model
 import MusicKit
 import Constants
 import ApplicationState
-import StationUpdaters
 
 public struct StationBillboard {
   let station: TopTracksStation
@@ -27,7 +26,7 @@ extension StationBillboard: View {
           print("Getting set to play", station.name)
           Task {
             do {
-              try await UpdateRetriever.fetchUpdates(for: station)
+              try await station.fetchUpdates()
               try await CurrentQueue.shared.playStation(station)
             } catch {
               print("Couldn't play station")
@@ -42,7 +41,7 @@ extension StationBillboard: View {
                               isChangingName: $isChangingName)
               if isNotCurrentStation && isNotEditing {
                 HStack {
-                  StationFeatured(featured: station.topArtists)
+                  StationFeatured(featured: station.topSongs)
                   Spacer()
                 }
               }

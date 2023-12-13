@@ -11,7 +11,7 @@ extension AddAndRotateMusicButton: View {
       do {
         try station.addAndRotate()
       }
-      catch { RadioLoggerTV.stationMusicRotator.info("Couldn't add rotate the music for \(station.stationName)")
+      catch { RadioTVLogger.stationMusicRotator.info("Couldn't add rotate the music for \(station.stationName)")
       }
     } label: {
       Image(systemName: "goforward.plus")

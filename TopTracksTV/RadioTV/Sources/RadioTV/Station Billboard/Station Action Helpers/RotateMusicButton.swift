@@ -11,7 +11,7 @@ extension RotateMusicButton: View {
       do {
         try station.rotate()
       } catch {
-        RadioLoggerTV.stationMusicRotator.info("Couldn't rotate the music for \(station.stationName)")
+        RadioTVLogger.stationMusicRotator.info("Couldn't rotate the music for \(station.stationName)")
       }
     } label: {
       VerticalSpacedImage(systemName: "arrow.triangle.2.circlepath.circle")

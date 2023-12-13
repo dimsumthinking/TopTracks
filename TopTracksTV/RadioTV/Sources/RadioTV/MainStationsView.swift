@@ -3,11 +3,9 @@ import MusicKit
 import Constants
 import Model
 import ApplicationState
-import StationUpdaters
 
 public struct MainStationsView {
   @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
-  @StateObject private var stationLister = StationLister()
   @State private var isShowingSettings = false
   @State private var isShowingInfo = false
   @Environment(\.colorScheme) private var colorScheme
@@ -50,20 +48,7 @@ extension MainStationsView: View {
           }
           .padding()
           List {
-            StationListView(stationLister: stationLister,
-                            isShowingFullPlayer: $isShowingFullPlayer)
-            if stationLister.stations.isEmpty {
-              HStack {
-                Spacer()
-                Text("Tap")
-                Image(systemName: "plus")
-                Text("to create a station")
-                Image(systemName: "arrow.up.right")
-                Spacer()
-              }
-              .font(.headline)
-              .foregroundColor(.yellow)
-            }
+            StationListView(isShowingFullPlayer: $isShowingFullPlayer)
             Rectangle()
               .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
               .foregroundColor(.clear)

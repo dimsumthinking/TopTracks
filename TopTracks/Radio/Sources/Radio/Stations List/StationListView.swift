@@ -3,6 +3,7 @@ import Model
 import ApplicationState
 import SwiftData
 import Constants
+import MusicKit
 
 struct StationListView {
   @Query(sort: \TopTracksStation.buttonPosition, order: .forward, animation: .bouncy) var stations: [TopTracksStation]
@@ -52,6 +53,11 @@ extension StationListView: View {
     .listRowSeparatorTint(.clear)
       .listStyle(.plain)
     .animation(.default, value: stations)
+//    .task {
+//      if CurrentStation.shared.nowPlaying != nil {
+//        try? await ApplicationMusicPlayer.shared.play()
+//      }
+//    }
 
     
   }
