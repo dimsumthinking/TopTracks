@@ -39,7 +39,7 @@ extension MainView: View {
 
 extension MainView {
   private func playPause() {
-    #if !os(macOS)
+//    #if !os(macOS)
     if songPreviewPlayer.isNotPreviewing {
       switch ApplicationMusicPlayer.shared.state.playbackStatus {
       case .playing:
@@ -53,7 +53,7 @@ extension MainView {
       }
     
     }
-    #endif
+//    #endif
   }
 }
 

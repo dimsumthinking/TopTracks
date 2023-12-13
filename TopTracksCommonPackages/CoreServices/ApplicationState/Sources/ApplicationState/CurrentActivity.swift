@@ -54,7 +54,7 @@ extension CurrentActivity {
   }
   
   private func restartPlayer() {
-    #if !os(macOS)
+//    #if !os(macOS)
     guard (ApplicationMusicPlayer.shared.state.playbackStatus != .paused &&
            ApplicationMusicPlayer.shared.state.playbackStatus != .playing) else {return}
     if let cachedSong = backgroundCache?.currentSong {
@@ -69,7 +69,7 @@ extension CurrentActivity {
       CurrentStation.shared.nowPlaying = nil
     }
     backgroundCache = nil
-    #endif
+//    #endif
   }
 }
 
