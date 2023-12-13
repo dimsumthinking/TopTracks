@@ -15,13 +15,12 @@ let package = Package(
     dependencies: [
       .package(path: "../../TopTracksCommonPackages/Model"),
       .package(path: "../../TopTracksCommonPackages/CoreServices/ApplicationState"),
-      .package(path: "../../TopTracksCommonPackages/CoreServices/Constants"),
-      .package(path: "../StationUpdaters")
+      .package(path: "../../TopTracksCommonPackages/CoreServices/Constants")
     ],
     targets: [
         .target(
             name: "PlayersTV",
-            dependencies: ["Model", "ApplicationState", "Constants", "StationUpdaters"]),
+            dependencies: ["Model", "ApplicationState", "Constants"]),
         .testTarget(
             name: "PlayersTVTests",
             dependencies: ["PlayersTV"]),

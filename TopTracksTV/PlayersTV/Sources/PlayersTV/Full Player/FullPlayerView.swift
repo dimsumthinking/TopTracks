@@ -6,7 +6,7 @@ import MusicKit
 struct FullPlayerView {
   @Binding var isShowingFullPlayer: Bool
   //  @EnvironmentObject private var applicationState: ApplicationState
-  let currentSong: Song?
+  var currentSong = CurrentSong.shared.song
 }
 
 
@@ -14,7 +14,8 @@ extension FullPlayerView: View {
   var body: some View {
     VStack {
       ZStack {
-        Text(CurrentStation.shared.topTracksStation?.stationName ?? "Now Playing")
+        Text(CurrentStation.shared.nowPlaying?.stationName ?? "Now Playing")
+//        Text(CurrentStation.shared.topTracksStation?.stationName ?? "Now Playing")
         HStack {
           Button {
             isShowingFullPlayer = false

@@ -3,7 +3,6 @@ import PlaylistSearch
 import ApplicationState
 import Radio
 import Players
-import StationUpdaters
 import PlaylistSongPreview
 
 struct MainView {

@@ -3,7 +3,6 @@ import Model
 import MusicKit
 import Constants
 import ApplicationState
-import StationUpdaters
 
 public struct StationBillboard {
   let station: TopTracksStation
@@ -47,7 +46,8 @@ extension StationBillboard: View {
         RadioLogger.playing.info("Geting set to play \(station.name)")
         Task {
           do {
-            try await UpdateRetriever.fetchUpdates(for: station)
+//            try await UpdateRetriever.fetchUpdates(for: station)
+            try await station.fetchUpdates()
             try await CurrentQueue.shared.playStation(station)
           } catch {
             RadioLogger.playing.info("Couldn't play \(station.name) \n \(error.localizedDescription)")

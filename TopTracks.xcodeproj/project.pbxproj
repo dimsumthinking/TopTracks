@@ -27,7 +27,6 @@
 		62AC2A372A013E820073E539 /* RadioCar in Frameworks */ = {isa = PBXBuildFile; productRef = 62AC2A362A013E820073E539 /* RadioCar */; };
 		62BD8B3529F5639A009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3429F5639A009A528E /* TopTracksCore */; };
 		62BD8B3729F563C1009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3629F563C1009A528E /* TopTracksCore */; };
-		62E32B7A29C8C35400E43121 /* StationUpdaters in Frameworks */ = {isa = PBXBuildFile; productRef = 62E32B7929C8C35400E43121 /* StationUpdaters */; };
 		62EA329429F7119C00863F80 /* PlaylistSearchTV in Frameworks */ = {isa = PBXBuildFile; productRef = 62EA329329F7119C00863F80 /* PlaylistSearchTV */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +56,6 @@
 		62BD8B3229F56373009A528E /* TopTracksCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TopTracksCore; path = TopTracksCommonPackages/CoreServices/TopTracksCore; sourceTree = "<group>"; };
 		62BD8B3829F56406009A528E /* Players */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Players; path = TopTracks/Players; sourceTree = "<group>"; };
 		62BD8B3929F56421009A528E /* Radio */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Radio; path = TopTracks/Radio; sourceTree = "<group>"; };
-		62BD8B3B29F56442009A528E /* StationUpdaters */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StationUpdaters; path = TopTracks/StationUpdaters; sourceTree = "<group>"; };
 		62EA329229F7118F00863F80 /* PlaylistSearchTV */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PlaylistSearchTV; path = TopTracksTV/PlaylistSearchTV; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,7 +67,6 @@
 				620233812824003A00D7C63F /* StoreKit.framework in Frameworks */,
 				620BAE6A2A012B2F0044B9A6 /* CarPlay.framework in Frameworks */,
 				62BD8B3529F5639A009A528E /* TopTracksCore in Frameworks */,
-				62E32B7A29C8C35400E43121 /* StationUpdaters in Frameworks */,
 				6227AB2D29B92F1C00BDF230 /* Radio in Frameworks */,
 				623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */,
 				6222D986280DFFAF009DEA8A /* NetworkExtension.framework in Frameworks */,
@@ -98,7 +95,6 @@
 				62BD8B3229F56373009A528E /* TopTracksCore */,
 				62BD8B3829F56406009A528E /* Players */,
 				62BD8B3929F56421009A528E /* Radio */,
-				62BD8B3B29F56442009A528E /* StationUpdaters */,
 				620FF5A629F573CB0036C059 /* PlaylistSearch */,
 				62732F6B29F603A10092C35C /* RadioTV */,
 				62EA329229F7118F00863F80 /* PlaylistSearchTV */,
@@ -231,7 +227,6 @@
 			name = TopTracks;
 			packageProductDependencies = (
 				6227AB2C29B92F1C00BDF230 /* Radio */,
-				62E32B7929C8C35400E43121 /* StationUpdaters */,
 				624C170F29D73623003BAE44 /* Players */,
 				62BD8B3429F5639A009A528E /* TopTracksCore */,
 				620FF5A729F573DA0036C059 /* PlaylistSearch */,
@@ -674,10 +669,6 @@
 		62BD8B3629F563C1009A528E /* TopTracksCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TopTracksCore;
-		};
-		62E32B7929C8C35400E43121 /* StationUpdaters */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = StationUpdaters;
 		};
 		62EA329329F7119C00863F80 /* PlaylistSearchTV */ = {
 			isa = XCSwiftPackageProductDependency;

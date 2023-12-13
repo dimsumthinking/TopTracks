@@ -30,7 +30,7 @@ extension MainPlayerView: View {
         do {
           try CurrentSong.shared.setCurrentSong(using: newEntry)
         } catch {
-          fatalError(TTImplementationError.notImplementedYet.localizedDescription)
+          PlayersLogger.updatingSong.info("Unable to set current song to \(newEntry)")
         }
       }
     }

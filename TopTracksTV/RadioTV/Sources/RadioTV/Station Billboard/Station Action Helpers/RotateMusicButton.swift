@@ -1,6 +1,5 @@
 import SwiftUI
 import Model
-import StationUpdaters
 
 struct RotateMusicButton {
   let station: TopTracksStation
@@ -9,8 +8,11 @@ struct RotateMusicButton {
 extension RotateMusicButton: View {
   var body: some View {
     Button {
-      let rotator = RotateExistingMusic(in: station)
-      rotator.rotate()
+      do {
+        try station.rotate()
+      } catch {
+        RadioLoggerTV.stationMusicRotator.info("Couldn't rotate the music for \(station.stationName)")
+      }
     } label: {
       VerticalSpacedImage(systemName: "arrow.triangle.2.circlepath.circle")
     }
