@@ -2,9 +2,6 @@ import SwiftData
 import MusicKit
 import Foundation
 
-
-
-
 extension  TopTracksStation {
   public func rotate()  throws {
     let (station, context) = try background.station(from: self)
@@ -21,39 +18,39 @@ extension  TopTracksStation {
     try context.save() 
   }
   
-  private func startingStacksAndSongs(from topTrackStacks: [TopTracksStack]) -> [(RotationCategory, [TopTracksSong])] {
-    var stacksAndSongs = [(RotationCategory, [TopTracksSong])]()
-    for stack in topTrackStacks {
-      stacksAndSongs.append((stack.rotationCategory, orderedSongs(stack.songs)))
-    }
-    return stacksAndSongs
-  }
+//  private func startingStacksAndSongs(from topTrackStacks: [TopTracksStack]) -> [(RotationCategory, [TopTracksSong])] {
+//    var stacksAndSongs = [(RotationCategory, [TopTracksSong])]()
+//    for stack in topTrackStacks {
+//      stacksAndSongs.append((stack.rotationCategory, orderedSongs(stack.songs)))
+//    }
+//    return stacksAndSongs
+//  }
   
-  private func dictionaryOfStacks(from topTrackStacks: [TopTracksStack]) throws
-  -> [RotationCategory: TopTracksStack] {
-    var stacksFromCategories = [RotationCategory: TopTracksStack]()
-    for stack in topTrackStacks {
-      guard stationStandardCategories.contains(stack.rotationCategory) else {
-        throw TopTracksDataError.stationMissingStandardRotationCategory
-      }
-      stacksFromCategories[stack.rotationCategory] = stack
-    }
-    return stacksFromCategories
-  }
+//  private func dictionaryOfStacks(from topTrackStacks: [TopTracksStack]) throws
+//  -> [RotationCategory: TopTracksStack] {
+//    var stacksFromCategories = [RotationCategory: TopTracksStack]()
+//    for stack in topTrackStacks {
+//      guard stationStandardCategories.contains(stack.rotationCategory) else {
+//        throw TopTracksDataError.stationMissingStandardRotationCategory
+//      }
+//      stacksFromCategories[stack.rotationCategory] = stack
+//    }
+//    return stacksFromCategories
+//  }
   
-  private func orderedSongs(_ topTracksSongs: [TopTracksSong]?) -> [TopTracksSong] {
-    guard let songs = topTracksSongs else { return [TopTracksSong]() }
-    return songs
-      .sorted { $0.songRating  < $1.songRating }
-      .sorted { $0.songMotion  < $1.songMotion }
-      .sorted { $0.songRating  < $1.songRating }
-  }
+//  private func orderedSongs(_ topTracksSongs: [TopTracksSong]?) -> [TopTracksSong] {
+//    guard let songs = topTracksSongs else { return [TopTracksSong]() }
+//    return songs
+//      .sorted { $0.songRating  < $1.songRating }
+//      .sorted { $0.songMotion  < $1.songMotion }
+//      .sorted { $0.songRating  < $1.songRating }
+//  }
   
-  private func markRemainingSame(songs: [TopTracksSong]) {
-    for song in songs {
-      song.motion = SongMotion.same.name
-    }
-  }
+//  private func markRemainingSame(songs: [TopTracksSong]) {
+//    for song in songs {
+//      song.motion = SongMotion.same.name
+//    }
+//  }
 
     
   private func split(topTracksSongs: [TopTracksSong],
@@ -75,18 +72,18 @@ extension  TopTracksStation {
   }
 }
 
-extension TopTracksStation {
-  private func changeStack(for topTracksSong: TopTracksSong,
-                           to category: RotationCategory,
-                           dictionaryOfStacks: [RotationCategory: TopTracksStack],
-                           motion: SongMotion) throws {
-    guard let stack = dictionaryOfStacks[category] else {
-      throw TopTracksDataError.stationMissingStandardRotationCategory
-    }
-    topTracksSong.stack = stack
-    topTracksSong.motion = motion.name
-  }
-}
+//extension TopTracksStation {
+//  private func changeStack(for topTracksSong: TopTracksSong,
+//                           to category: RotationCategory,
+//                           dictionaryOfStacks: [RotationCategory: TopTracksStack],
+//                           motion: SongMotion) throws {
+//    guard let stack = dictionaryOfStacks[category] else {
+//      throw TopTracksDataError.stationMissingStandardRotationCategory
+//    }
+//    topTracksSong.stack = stack
+//    topTracksSong.motion = motion.name
+//  }
+//}
 
 extension TopTracksStation {
   private func splitPower(topTracksSongs: [TopTracksSong],

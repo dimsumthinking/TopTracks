@@ -9,12 +9,15 @@ struct AddAndRotateMusicButton {
 extension AddAndRotateMusicButton: View {
   var body: some View {
     Button {
-      let adder = AddAndRotateMusic(in: station)
-      do {try adder.add()}
-      catch { fatalError(TTImplementationError.notImplementedYet.localizedDescription)}
+      do {
+        try station.addAndRotate()
+      }
+      catch { RadioLogger.stationMusicRotator.info("Couldn't add rotate the music for \(station.stationName)")
+      }
     } label: {
       Image(systemName: "goforward.plus")
     }
     .tint(.mint)
   }
 }
+

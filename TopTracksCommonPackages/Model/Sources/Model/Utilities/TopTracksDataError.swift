@@ -3,4 +3,6 @@ public enum TopTracksDataError: Error {
   case couldNotChangeOrderOfStations
   case couldNotGetStacksForStation
   case stationMissingStandardRotationCategory
+  case stationMissingAddedCategory
+  case stationMissingGoldOrArchived
 }
