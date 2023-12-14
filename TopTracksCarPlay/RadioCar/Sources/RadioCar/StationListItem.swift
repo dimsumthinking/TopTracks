@@ -20,17 +20,7 @@ class StationListItem  {
         }
       } else {
         play(station: station)
-      }
-      //           Task {
-      //             do {
-      //               try await CurrentQueue.shared.playStation(station)
-      //             } catch {
-      //               print("Couldn't play station")
-      //               CurrentQueue.shared.stopPlayingStation()
-      //             }
-      //           }
-      //}
-      
+      }      
       completion()
     }
   }
@@ -42,7 +32,7 @@ fileprivate func play(station: TopTracksStation) {
     do {
       try await CurrentQueue.shared.playStation(station)
     } catch {
-      print("Couldn't play station")
+      RadioCarLogger.playingStation.info("Can't play station \(station.name)")
       CurrentQueue.shared.stopPlayingStation()
     }
   }

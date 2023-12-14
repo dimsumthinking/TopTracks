@@ -20,8 +20,11 @@ struct StationListView {
 
 extension StationListView: View {
   var body: some View {
-    
+    if stations.isEmpty {
+      CloudActivityView()
+    }
     ForEach(stations) {station in
+ 
       HStack {
         StationBillboard(station: station,
                          currentStation: currentStation)

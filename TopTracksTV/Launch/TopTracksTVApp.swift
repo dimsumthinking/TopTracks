@@ -4,14 +4,16 @@ import PlaylistSongPreview
 import AppleMusicAuthorization
 import AppleMusicSubscription
 import ApplicationState
+import Model
 
 
 @main
 struct TopTracksApp {
   @State private var musicAuthorizationStatus = MusicAuthorization.Status.notDetermined
+  @State private var canPlayCatalogContent = false
+
   @Environment(\.scenePhase) private var scenePhase
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
-  @State private var canPlayCatalogContent = false
 }
 
 extension TopTracksApp: App {
@@ -31,6 +33,7 @@ extension TopTracksApp: App {
             .preferredColorScheme(currentColorScheme(from: colorSchemeString))
       }
     }
+    .modelContainer(CommonContainer.shared.container)
     .onChange(of: musicAuthorizationStatus) { oldStatus, newStatus in
       if newStatus == .authorized {
         Task {
