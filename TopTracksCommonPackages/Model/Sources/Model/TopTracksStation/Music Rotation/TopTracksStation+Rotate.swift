@@ -9,11 +9,14 @@ extension  TopTracksStation {
       throw TopTracksDataError.couldNotGetStacksForStation
     }
     let dictionaryOfStacks = try dictionaryOfStacks(from: stacks)
+    StationUpdatersLogger.rotatingStation.info("Here's power pre-rotation: \(station.topSongs)")
     for (category, songs) in startingStacksAndSongs(from: stacks) {
       try split(topTracksSongs: songs,
                 from: category,
                 dictionaryOfStacks: dictionaryOfStacks)
     }
+    StationUpdatersLogger.rotatingStation.info("Here's power post-rotation: \(station.topSongs)")
+
     station.stationLastUpdated = Date()
     try context.save() 
   }

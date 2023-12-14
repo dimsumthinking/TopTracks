@@ -21,6 +21,7 @@ extension  TopTracksStation {
     let dictionaryOfStacks = try dictionaryOfStacks(from: stacks)
     for (category, songs) in startingStacksAndSongs(from: stacks) where stationStandardCategories.contains(category) {
       guard let songToDemote = songs.first else {return}
+      StationUpdatersLogger.addingSongsToStation.info("Replacing \(songToDemote.title) from \(category.name) with \(addedSongs.first?.title ?? "")")
       try demote(topTracksSong: songToDemote,
                  dictionaryOfStacks: dictionaryOfStacks)
       try changeStack(for: addedSongs.removeFirst(),

@@ -11,13 +11,20 @@ extension TopTracksStation {
     return stacksAndSongs
   }
   
+  private func checkStandardStacksContained(in topTrackStacks: [TopTracksStack]) throws {
+    let topTrackStacksCategories = topTrackStacks.map(\.rotationCategory)
+    for category in stationStandardCategories {
+      guard topTrackStacksCategories.contains(category) else {
+        throw TopTracksDataError.stationMissingStandardRotationCategory
+      }
+    }
+  }
+  
   func dictionaryOfStacks(from topTrackStacks: [TopTracksStack]) throws
   -> [RotationCategory: TopTracksStack] {
     var stacksFromCategories = [RotationCategory: TopTracksStack]()
+    try checkStandardStacksContained(in: topTrackStacks)
     for stack in topTrackStacks {
-      guard stationStandardCategories.contains(stack.rotationCategory) else {
-        throw TopTracksDataError.stationMissingStandardRotationCategory
-      }
       stacksFromCategories[stack.rotationCategory] = stack
     }
     return stacksFromCategories

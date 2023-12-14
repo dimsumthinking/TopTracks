@@ -7,7 +7,7 @@ public class CarRadio: NSObject, CPTemplateApplicationSceneDelegate {
   var interfaceController: CPInterfaceController?
   private var currentStation: TopTracksStation? = CurrentStation.shared.nowPlaying
   private var context = CommonContainer.shared.container.mainContext
-  
+
   private var stations = [TopTracksStation]()
   
   
