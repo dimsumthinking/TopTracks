@@ -35,7 +35,7 @@ extension PlaylistSongsView: View {
       }
       if checkIsComplete {
         Button("Create Station") {
-//          createStation()
+          createStation()
 
         }
         .buttonStyle(.borderedProminent)
@@ -115,7 +115,8 @@ extension PlaylistSongsView {
     PlaylistSearchLogger.creating.info("Trying to create station \(playlist.name)")
     do {
       try TopTracksStation.createStation(playlist: playlist,
-                                         buttonNumber: topTrackStations.count, songs: songs)
+                                         buttonNumber: topTrackStations.count, 
+                                         songs: songs)
       Task {
         didCreateStation = true
         try? await Task.sleep(for: .seconds(1))

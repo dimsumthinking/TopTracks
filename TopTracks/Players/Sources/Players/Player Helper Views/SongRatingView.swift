@@ -4,9 +4,10 @@ import Model
 
 
 struct SongRatingView {
-//  @EnvironmentObject private var applicationState: ApplicationState
+  //  @EnvironmentObject private var applicationState: ApplicationState
   @State private var isShowingAlert = false
- @State private var updatedAt = Date()
+  @State private var updatedAt = Date()
+  @State private var ratingIconName = CurrentSong.shared.ratingIconName
 }
 
 extension SongRatingView: View {
@@ -29,10 +30,13 @@ extension SongRatingView: View {
       }
     } label: {
       VStack {
-        Image(systemName: CurrentSong.shared.ratingIconName)
+        Image(systemName: ratingIconName)
         Text(updatedAt, style: .relative).foregroundColor(.clear)
           .font(.caption2)
       }
+    }
+    .onChange(of: CurrentSong.shared.song) { oldValue, newValue in
+        ratingIconName = CurrentSong.shared.ratingIconName
     }
     .alert("Remove " + (CurrentSong.shared.song?.title ?? "this song") + "?",
            isPresented: $isShowingAlert) {
@@ -64,6 +68,7 @@ extension SongRatingView {
   private func updateSong(rating: SongRating)  {
     do {
       try CurrentSong.shared.changeRating(to: rating)
+      ratingIconName = rating.icon
     } catch {
       PlayersLogger.updatingSong.info("Can't update song")
     }
