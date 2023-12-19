@@ -13,6 +13,22 @@ struct StationListView {
 extension StationListView: View {
   var body: some View {
     List {
+      if stations.count > 2 {
+        Button {
+            Task {
+              try await CurrentQueue.shared.playRandomStation(stations)
+            }
+          
+        } label: {
+          HStack {
+            Spacer()
+            Image(systemName: "dice")
+            Text("Play Random Station")
+            Image(systemName: "dice")
+            Spacer()
+          }
+        }
+      }
       ForEach(stations) {station in
         StationBillboard(station: station)
           .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
@@ -41,6 +57,7 @@ extension StationListView: View {
                       offset: offset)
         }
       }
+
       if stations.isEmpty {
         CloudActivityView()
       }
@@ -53,13 +70,6 @@ extension StationListView: View {
     .listRowSeparatorTint(.clear)
       .listStyle(.plain)
     .animation(.default, value: stations)
-//    .task {
-//      if CurrentStation.shared.nowPlaying != nil {
-//        try? await ApplicationMusicPlayer.shared.play()
-//      }
-//    }
-
-    
   }
 }
 

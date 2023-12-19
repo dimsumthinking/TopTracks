@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,20 +15,41 @@
 		6221ABBD2912A8F20088F0F2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221ABBC2912A8F20088F0F2 /* MainView.swift */; };
 		6222D986280DFFAF009DEA8A /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6222D985280DFFAF009DEA8A /* NetworkExtension.framework */; };
 		6227AB2D29B92F1C00BDF230 /* Radio in Frameworks */ = {isa = PBXBuildFile; productRef = 6227AB2C29B92F1C00BDF230 /* Radio */; };
+		6231B5202B2F82DE00BD6F34 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = 6231B51F2B2F82DE00BD6F34 /* Model */; };
 		623B99EF276AC4F0004C17AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99EE276AC4F0004C17AE /* Assets.xcassets */; };
 		623B99F2276AC4F0004C17AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99F1276AC4F0004C17AE /* Preview Assets.xcassets */; };
 		623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623CAFA4278CFA6500B8FC48 /* CloudKit.framework */; };
 		624C171029D73623003BAE44 /* Players in Frameworks */ = {isa = PBXBuildFile; productRef = 624C170F29D73623003BAE44 /* Players */; };
+		625D26F32B31C0FF003CB185 /* WatchStationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625D26F22B31C0FF003CB185 /* WatchStationListView.swift */; };
 		62615EF929F48B7F005FC1A1 /* TopTracksTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62615EF829F48B7F005FC1A1 /* TopTracksTVApp.swift */; };
 		62615EFB29F48B7F005FC1A1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62615EFA29F48B7F005FC1A1 /* MainView.swift */; };
 		62615EFD29F48B7F005FC1A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62615EFC29F48B7F005FC1A1 /* Assets.xcassets */; };
 		62615F0029F48B7F005FC1A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62615EFF29F48B7F005FC1A1 /* Preview Assets.xcassets */; };
 		62732F6D29F603C20092C35C /* RadioTV in Frameworks */ = {isa = PBXBuildFile; productRef = 62732F6C29F603C20092C35C /* RadioTV */; };
+		628785E92B2F34C100C47B4C /* TopTracksWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628785E82B2F34C100C47B4C /* TopTracksWatchApp.swift */; };
+		628785EB2B2F34C100C47B4C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628785EA2B2F34C100C47B4C /* MainView.swift */; };
+		628785ED2B2F34C200C47B4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628785EC2B2F34C200C47B4C /* Assets.xcassets */; };
+		628785F02B2F34C200C47B4C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628785EF2B2F34C200C47B4C /* Preview Assets.xcassets */; };
+		628785F32B2F34C200C47B4C /* TopTracksWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 628785E62B2F34C100C47B4C /* TopTracksWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		62A65F1A2B2F81F80093D5E2 /* RadioWatchLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A65F182B2F81F80093D5E2 /* RadioWatchLogger.swift */; };
+		62A65F1B2B2F81F80093D5E2 /* WatchConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A65F192B2F81F80093D5E2 /* WatchConnector.swift */; };
+		62A65F1D2B2F82450093D5E2 /* WatchConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A65F192B2F81F80093D5E2 /* WatchConnector.swift */; };
+		62A65F1E2B2F82490093D5E2 /* RadioWatchLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A65F182B2F81F80093D5E2 /* RadioWatchLogger.swift */; };
 		62AC2A372A013E820073E539 /* RadioCar in Frameworks */ = {isa = PBXBuildFile; productRef = 62AC2A362A013E820073E539 /* RadioCar */; };
 		62BD8B3529F5639A009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3429F5639A009A528E /* TopTracksCore */; };
 		62BD8B3729F563C1009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3629F563C1009A528E /* TopTracksCore */; };
 		62EA329429F7119C00863F80 /* PlaylistSearchTV in Frameworks */ = {isa = PBXBuildFile; productRef = 62EA329329F7119C00863F80 /* PlaylistSearchTV */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		628785F12B2F34C200C47B4C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 623B99DF276AC4F0004C17AE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 628785E52B2F34C100C47B4C;
+			remoteInfo = "TopTracksWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		625899502B2BB8F90033801B /* Embed Watch Content */ = {
@@ -37,6 +58,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
+				628785F32B2F34C200C47B4C /* TopTracksWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,12 +81,22 @@
 		623CAFA2278CF98000B8FC48 /* TopTracks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TopTracks.entitlements; sourceTree = "<group>"; };
 		623CAFA4278CFA6500B8FC48 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		623DD1E029F959FD002A3E75 /* TopTracksTV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TopTracksTV.entitlements; sourceTree = "<group>"; };
+		625D26F02B31BE28003CB185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		625D26F12B31BE40003CB185 /* TopTracksWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TopTracksWatch.entitlements; sourceTree = "<group>"; };
+		625D26F22B31C0FF003CB185 /* WatchStationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchStationListView.swift; sourceTree = "<group>"; };
 		62615EF629F48B7F005FC1A1 /* TopTracksTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopTracksTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62615EF829F48B7F005FC1A1 /* TopTracksTVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksTVApp.swift; sourceTree = "<group>"; };
 		62615EFA29F48B7F005FC1A1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		62615EFC29F48B7F005FC1A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62615EFF29F48B7F005FC1A1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		62732F6B29F603A10092C35C /* RadioTV */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = RadioTV; path = TopTracksTV/RadioTV; sourceTree = "<group>"; };
+		628785E62B2F34C100C47B4C /* TopTracksWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopTracksWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		628785E82B2F34C100C47B4C /* TopTracksWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksWatchApp.swift; sourceTree = "<group>"; };
+		628785EA2B2F34C100C47B4C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		628785EC2B2F34C200C47B4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		628785EF2B2F34C200C47B4C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		62A65F182B2F81F80093D5E2 /* RadioWatchLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioWatchLogger.swift; sourceTree = "<group>"; };
+		62A65F192B2F81F80093D5E2 /* WatchConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnector.swift; sourceTree = "<group>"; };
 		62AC2A352A013E670073E539 /* RadioCar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = RadioCar; path = TopTracksCarPlay/RadioCar; sourceTree = "<group>"; };
 		62BD8B3229F56373009A528E /* TopTracksCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TopTracksCore; path = TopTracksCommonPackages/CoreServices/TopTracksCore; sourceTree = "<group>"; };
 		62BD8B3829F56406009A528E /* Players */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Players; path = TopTracks/Players; sourceTree = "<group>"; };
@@ -96,6 +128,14 @@
 				62732F6D29F603C20092C35C /* RadioTV in Frameworks */,
 				62EA329429F7119C00863F80 /* PlaylistSearchTV in Frameworks */,
 				62BD8B3729F563C1009A528E /* TopTracksCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		628785E32B2F34C100C47B4C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6231B5202B2F82DE00BD6F34 /* Model in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +183,7 @@
 				6207E2B32926AB7F00DD5A81 /* Packages */,
 				623B99E9276AC4F0004C17AE /* TopTracks */,
 				62615EF729F48B7F005FC1A1 /* TopTracksTV */,
+				628785E72B2F34C100C47B4C /* TopTracksWatch */,
 				623B99E8276AC4F0004C17AE /* Products */,
 				623CAFA3278CFA6500B8FC48 /* Frameworks */,
 			);
@@ -153,6 +194,7 @@
 			children = (
 				623B99E7276AC4F0004C17AE /* TopTracks.app */,
 				62615EF629F48B7F005FC1A1 /* TopTracksTV.app */,
+				628785E62B2F34C100C47B4C /* TopTracksWatch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -222,6 +264,38 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
+		628785E72B2F34C100C47B4C /* TopTracksWatch */ = {
+			isa = PBXGroup;
+			children = (
+				625D26F12B31BE40003CB185 /* TopTracksWatch.entitlements */,
+				625D26F02B31BE28003CB185 /* Info.plist */,
+				62A65F1C2B2F82320093D5E2 /* Connectivity */,
+				628785E82B2F34C100C47B4C /* TopTracksWatchApp.swift */,
+				625D26F22B31C0FF003CB185 /* WatchStationListView.swift */,
+				628785EA2B2F34C100C47B4C /* MainView.swift */,
+				628785EC2B2F34C200C47B4C /* Assets.xcassets */,
+				628785EE2B2F34C200C47B4C /* Preview Content */,
+			);
+			path = TopTracksWatch;
+			sourceTree = "<group>";
+		};
+		628785EE2B2F34C200C47B4C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				628785EF2B2F34C200C47B4C /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		62A65F1C2B2F82320093D5E2 /* Connectivity */ = {
+			isa = PBXGroup;
+			children = (
+				62A65F182B2F81F80093D5E2 /* RadioWatchLogger.swift */,
+				62A65F192B2F81F80093D5E2 /* WatchConnector.swift */,
+			);
+			path = Connectivity;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -237,6 +311,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				628785F22B2F34C200C47B4C /* PBXTargetDependency */,
 			);
 			name = TopTracks;
 			packageProductDependencies = (
@@ -272,6 +347,26 @@
 			productReference = 62615EF629F48B7F005FC1A1 /* TopTracksTV.app */;
 			productType = "com.apple.product-type.application";
 		};
+		628785E52B2F34C100C47B4C /* TopTracksWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 628785F62B2F34C200C47B4C /* Build configuration list for PBXNativeTarget "TopTracksWatch" */;
+			buildPhases = (
+				628785E22B2F34C100C47B4C /* Sources */,
+				628785E32B2F34C100C47B4C /* Frameworks */,
+				628785E42B2F34C100C47B4C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TopTracksWatch;
+			packageProductDependencies = (
+				6231B51F2B2F82DE00BD6F34 /* Model */,
+			);
+			productName = "TopTracksWatch Watch App";
+			productReference = 628785E62B2F34C100C47B4C /* TopTracksWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -289,6 +384,9 @@
 					62615EF529F48B7F005FC1A1 = {
 						CreatedOnToolsVersion = 14.3;
 					};
+					628785E52B2F34C100C47B4C = {
+						CreatedOnToolsVersion = 15.1;
+					};
 				};
 			};
 			buildConfigurationList = 623B99E2276AC4F0004C17AE /* Build configuration list for PBXProject "TopTracks" */;
@@ -301,6 +399,7 @@
 			);
 			mainGroup = 623B99DE276AC4F0004C17AE;
 			packageReferences = (
+				6231B51E2B2F82D200BD6F34 /* XCLocalSwiftPackageReference "TopTracksCommonPackages/Model" */,
 			);
 			productRefGroup = 623B99E8276AC4F0004C17AE /* Products */;
 			projectDirPath = "";
@@ -308,6 +407,7 @@
 			targets = (
 				623B99E6276AC4F0004C17AE /* TopTracks */,
 				62615EF529F48B7F005FC1A1 /* TopTracksTV */,
+				628785E52B2F34C100C47B4C /* TopTracksWatch */,
 			);
 		};
 /* End PBXProject section */
@@ -331,6 +431,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		628785E42B2F34C100C47B4C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				628785F02B2F34C200C47B4C /* Preview Assets.xcassets in Resources */,
+				628785ED2B2F34C200C47B4C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -339,6 +448,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				620BAE682A00B03D0044B9A6 /* CarRadio.swift in Sources */,
+				62A65F1E2B2F82490093D5E2 /* RadioWatchLogger.swift in Sources */,
+				62A65F1D2B2F82450093D5E2 /* WatchConnector.swift in Sources */,
 				6221ABBB2912A8CA0088F0F2 /* TopTracksApp.swift in Sources */,
 				6221ABBD2912A8F20088F0F2 /* MainView.swift in Sources */,
 			);
@@ -353,7 +464,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		628785E22B2F34C100C47B4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62A65F1A2B2F81F80093D5E2 /* RadioWatchLogger.swift in Sources */,
+				62A65F1B2B2F81F80093D5E2 /* WatchConnector.swift in Sources */,
+				628785EB2B2F34C100C47B4C /* MainView.swift in Sources */,
+				625D26F32B31C0FF003CB185 /* WatchStationListView.swift in Sources */,
+				628785E92B2F34C100C47B4C /* TopTracksWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		628785F22B2F34C200C47B4C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 628785E52B2F34C100C47B4C /* TopTracksWatch */;
+			targetProxy = 628785F12B2F34C200C47B4C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		623B99F8276AC4F0004C17AE /* Debug */ = {
@@ -417,6 +548,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TVOS_DEPLOYMENT_TARGET = 17.2;
+				WATCHOS_DEPLOYMENT_TARGET = 10.2;
 			};
 			name = Debug;
 		};
@@ -475,6 +607,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TVOS_DEPLOYMENT_TARGET = 17.2;
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.2;
 			};
 			name = Release;
 		};
@@ -627,6 +760,79 @@
 			};
 			name = Release;
 		};
+		628785F42B2F34C200C47B4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = TopTracksWatch/TopTracksWatch.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TopTracksWatch/Preview Content\"";
+				DEVELOPMENT_TEAM = MG5SW9CY8D;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TopTracksWatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TopTracksWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.dimsumthinking.TopTracks;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dimsumthinking.TopTracks.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Debug;
+		};
+		628785F52B2F34C200C47B4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = TopTracksWatch/TopTracksWatch.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TopTracksWatch/Preview Content\"";
+				DEVELOPMENT_TEAM = MG5SW9CY8D;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TopTracksWatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TopTracksWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.dimsumthinking.TopTracks;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dimsumthinking.TopTracks.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -657,7 +863,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		628785F62B2F34C200C47B4C /* Build configuration list for PBXNativeTarget "TopTracksWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				628785F42B2F34C200C47B4C /* Debug */,
+				628785F52B2F34C200C47B4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		6231B51E2B2F82D200BD6F34 /* XCLocalSwiftPackageReference "TopTracksCommonPackages/Model" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = TopTracksCommonPackages/Model;
+		};
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		620FF5A729F573DA0036C059 /* PlaylistSearch */ = {
@@ -667,6 +889,11 @@
 		6227AB2C29B92F1C00BDF230 /* Radio */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Radio;
+		};
+		6231B51F2B2F82DE00BD6F34 /* Model */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6231B51E2B2F82D200BD6F34 /* XCLocalSwiftPackageReference "TopTracksCommonPackages/Model" */;
+			productName = Model;
 		};
 		624C170F29D73623003BAE44 /* Players */ = {
 			isa = XCSwiftPackageProductDependency;

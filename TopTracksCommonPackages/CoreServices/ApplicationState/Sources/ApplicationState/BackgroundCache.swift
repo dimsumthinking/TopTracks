@@ -36,10 +36,8 @@ extension BackgroundCache {
         guard previewPlayerHasNotStarted else { return }
         previewPlayerHasNotStarted = false
         currentSong = CurrentSong.shared.song
-//        #if !os(macOS)
         currentTime = ApplicationMusicPlayer.shared.playbackTime
         ApplicationMusicPlayer.shared.pause()
-//        #endif
       }
     }
   }

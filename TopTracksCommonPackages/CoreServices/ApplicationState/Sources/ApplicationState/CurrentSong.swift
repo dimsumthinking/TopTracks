@@ -25,6 +25,7 @@ extension CurrentSong {
     CurrentQueue.shared.refillQueueIfNeeded()
   }
   
+  
   public func noSongSelected() {
     self.song = nil
   }

@@ -36,12 +36,18 @@ extension CurrentQueue {
 extension CurrentQueue {
   public func playStation(_ station: TopTracksStation) async throws {
 //    #if !os(macOS)
+    ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: station.nextHour())
+    try await setUpPlayer()
     try await MainActor.run {
       try CurrentStation.shared.setStation(to: station)
     }
-    ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: station.nextHour())
-    try await setUpPlayer()
 //    #endif
+  }
+  
+  public func playRandomStation(_ stations: [TopTracksStation]) async throws {
+    if let randomStation = stations.randomElement() {
+      try await playStation(randomStation)
+    }
   }
   
   func setUpPlayer(toPlayAt playbackTime: TimeInterval? = nil) async throws {

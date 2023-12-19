@@ -17,6 +17,8 @@ import SwiftData
   @State private var networkMonitor = NetworkConnectionMonitor.shared
   @Environment(\.scenePhase) private var scenePhase
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
+   
+
 }
 
 extension TopTracksApp: App {
