@@ -1,6 +1,7 @@
 import Model
 import MusicKit
 import Foundation
+import Constants
 
 public class CurrentQueue {
   public static let shared = CurrentQueue()
@@ -37,17 +38,42 @@ extension CurrentQueue {
   public func playStation(_ station: TopTracksStation) async throws {
 //    #if !os(macOS)
     ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: station.nextHour())
-    try await setUpPlayer()
-    try await MainActor.run {
-      try CurrentStation.shared.setStation(to: station)
+    let cachedStation = StationChangeCache(currentSong: CurrentSong.shared.song,
+                                           currentStation: CurrentStation.shared.nowPlaying, 
+                                           currentTime: ApplicationMusicPlayer.shared.playbackTime)
+    do {
+      try await setUpPlayer()
+      try await MainActor.run {
+        try CurrentStation.shared.setStation(to: station)
+      }
+    } catch {
+      NotificationCenter.default.post(name: Constants.stationWontPlayNotification,
+                                      object: self,
+                                      userInfo: [Constants.stationThatWontPlayKey: station.name])
+      restartPlayer(cache: cachedStation)
     }
+
 //    #endif
   }
   
-  public func playRandomStation(_ stations: [TopTracksStation]) async throws {
-    if let randomStation = stations.randomElement() {
-      try await playStation(randomStation)
+  private func restartPlayer(cache: StationChangeCache) {
+    if let cachedSong = cache.currentSong,
+       let cachedStation = cache.currentStation {
+      let playbackTime = cache.currentTime
+      ApplicationMusicPlayer.shared.queue =  ApplicationMusicPlayer.Queue(for: [cachedSong])
+      CurrentQueue.shared.refillQueue()
+      Task {
+        try await CurrentQueue.shared.setUpPlayer(toPlayAt: playbackTime)
+        try await MainActor.run {
+          try CurrentStation.shared.setStation(to: cachedStation)
+        }
+      }
     }
+  }
+  
+  public func playRandomStation(_ stations: [TopTracksStation]) async throws  {
+    guard let randomStation = stations.randomElement() else { return }
+    try await playStation(randomStation)
   }
   
   func setUpPlayer(toPlayAt playbackTime: TimeInterval? = nil) async throws {

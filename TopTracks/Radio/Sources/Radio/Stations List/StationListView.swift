@@ -8,68 +8,73 @@ import MusicKit
 struct StationListView {
   @Query(sort: \TopTracksStation.buttonPosition, order: .forward, animation: .bouncy) var stations: [TopTracksStation]
   @Environment(\.modelContext) private var modelContext
+  @State private var searchingForRandomStation: Bool = false
 }
 
 extension StationListView: View {
   var body: some View {
-    List {
+    VStack {
       if stations.count > 2 {
         Button {
-            Task {
-              try await CurrentQueue.shared.playRandomStation(stations)
-            }
-          
+          Task {
+            searchingForRandomStation = true
+            try await CurrentQueue.shared.playRandomStation(stations)
+            searchingForRandomStation = false
+          }          
         } label: {
           HStack {
             Spacer()
             Image(systemName: "dice")
-            Text("Play Random Station")
+            Text(searchingForRandomStation ? "Searching ..." : "Play Random Station")
             Image(systemName: "dice")
             Spacer()
           }
         }
+        .disabled(searchingForRandomStation)
       }
-      ForEach(stations) {station in
-        StationBillboard(station: station)
-          .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
-          .swipeActions(allowsFullSwipe: true) {
-            Button(role: .destructive) {
-              deleteStation(station)
-            }  label: {
-              Image(systemName: "trash.fill")
+      List {
+        ForEach(stations) {station in
+          StationBillboard(station: station)
+            .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
+            .swipeActions(allowsFullSwipe: true) {
+              Button(role: .destructive) {
+                deleteStation(station)
+              }  label: {
+                Image(systemName: "trash.fill")
+              }
+              if let playlistID = station.playlistID,
+                 let url = URL(string: "toptracks://playlist?id=\(playlistID)") {
+                ShareLink("",
+                          item: url,
+                          subject: Text("Top Tracks Station \(station.playlist?.name ?? station.stationName)"),
+                          message: Text("\n Add \(station.playlist?.name ?? station.stationName) to your TopTracks Stations"),
+                          preview: SharePreview("\(station.playlist?.name ?? station.stationName)",
+                                                image: Image("AppIcon")))
+                .tint(.blue)
+              }
             }
-            if let playlistID = station.playlistID,
-               let url = URL(string: "toptracks://playlist?id=\(playlistID)") {
-              ShareLink("",
-                        item: url,
-                        subject: Text("Top Tracks Station \(station.playlist?.name ?? station.stationName)"),
-                        message: Text("\n Add \(station.playlist?.name ?? station.stationName) to your TopTracks Stations"),
-                        preview: SharePreview("\(station.playlist?.name ?? station.stationName)",
-                                              image: Image("AppIcon")))
-              .tint(.blue)
-            }
+          
+        }
+        .onMove { indexSet, offset in
+          if let fromLocation = indexSet.first {
+            moveStation(from: fromLocation,
+                        offset: offset)
           }
+        }
         
-      }
-      .onMove { indexSet, offset in
-        if let fromLocation = indexSet.first {
-          moveStation(from: fromLocation,
-                      offset: offset)
+        if stations.isEmpty {
+          CloudActivityView()
+        }
+        if CurrentStation.shared.nowPlaying != nil {
+          Rectangle()
+            .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
+            .foregroundColor(.clear)
         }
       }
-
-      if stations.isEmpty {
-        CloudActivityView()
-      }
-      if CurrentStation.shared.nowPlaying != nil {
-        Rectangle()
-          .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
-          .foregroundColor(.clear)
-      }
-    }
-    .listRowSeparatorTint(.clear)
+      .listRowSeparatorTint(.clear)
       .listStyle(.plain)
-    .animation(.default, value: stations)
+      .animation(.default, value: stations)
+    }
   }
 }
 

@@ -58,6 +58,8 @@ extension Constants {
   
   public static let previewPlayerEndsNotification = Notification.Name("PreviewPlayerEnded")
 
+  public static let stationWontPlayNotification = Notification.Name("StationWontPlay")
+  public static let stationThatWontPlayKey = "stationThatWontPlay"
 
 }
 

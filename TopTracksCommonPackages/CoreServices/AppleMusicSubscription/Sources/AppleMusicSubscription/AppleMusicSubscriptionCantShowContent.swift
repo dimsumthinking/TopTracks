@@ -9,6 +9,10 @@ extension AppleMusicSubscriptionCantShowContent: View {
        This app requires an
        Apple Music Subscription
        to create playlists and play music.
+       
+       If you have one already,
+       you may have to open Apple Music
+       to proceed with this app.
        """)
     .multilineTextAlignment(.center)
   }

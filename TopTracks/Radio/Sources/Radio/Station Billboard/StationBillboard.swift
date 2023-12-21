@@ -20,7 +20,8 @@ extension StationBillboard: View {
           StationNameView(station: station,
           isChangingName: $isChangingName)
           if isNotCurrentStation  {
-            StationFeatured(featured: station.topSongs)
+            StationFeatured(featured: station.topSongs,
+                            stationName: station.name)
           }
         }
         if isCurrentStation {
