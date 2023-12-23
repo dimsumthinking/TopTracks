@@ -3,6 +3,7 @@ import MusicKit
 import Constants
 import Model
 import ApplicationState
+import SwiftData
 
 public struct MainStationsView {
   @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
@@ -10,6 +11,9 @@ public struct MainStationsView {
   @State private var isShowingInfo = false
   @Environment(\.colorScheme) private var colorScheme
   @Binding var isShowingFullPlayer: Bool
+  @Query(sort: \TopTracksStation.buttonPosition, order: .forward, animation: .bouncy)  var stations: [TopTracksStation]
+  @State private var searchingForRandomStation: Bool = false
+
   public init(isShowingFullPlayer: Binding<Bool>) {
     self._isShowingFullPlayer = isShowingFullPlayer
   }
@@ -40,6 +44,22 @@ extension MainStationsView: View {
               } label: {
                 Image(systemName: "plus")
               }
+             //=========
+              if stations.count > 2 {
+                  Button {
+                    Task {
+                      searchingForRandomStation = true
+                      try await CurrentQueue.shared.playRandomStation(stations)
+                      try await Task.sleep(for: .seconds(2))
+                      searchingForRandomStation = false
+                    }
+                  } label: {
+                    Image(systemName: "dice")
+                  }
+                  .disabled(searchingForRandomStation)
+              }
+              
+              //========
               
               
             }
