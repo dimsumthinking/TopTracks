@@ -11,4 +11,6 @@ struct StationUpdatersLogger {
                                       category: "adding songs to station")
   static let changedSongRating = Logger(subsystem: "Model",
                                       category: "changed song rating")
+  static let markingSongAsPlayed = Logger(subsystem: "Model",
+                                         category: "marking song as played")
 }

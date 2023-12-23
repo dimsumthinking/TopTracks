@@ -60,6 +60,6 @@ extension Constants {
 
   public static let stationWontPlayNotification = Notification.Name("StationWontPlay")
   public static let stationThatWontPlayKey = "stationThatWontPlay"
-
+  public static let missingArtworkSymbolName = "antenna.radiowaves.left.and.right.circle"
 }
 

@@ -6,41 +6,29 @@ struct PlayAStation {
 extension PlayAStation: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 20) {
-      HStack {
-        Spacer()
-        Text("Choose your music player")
-        Spacer()
-      }
+      Text("On your iPhone, iPad, or Mac:").underline()
       .padding(.vertical)
-      .padding(.vertical)
-      VStack(alignment: .leading, spacing: 20) {
-        
-        Text("The ") + Text("mini player").underline() + Text(" displays the essential song information.")
-        Text("Use it to play, pause or skip to the next song.")
-        Text("Swipe up to use the full player.")
-      }
-      .padding(.bottom)
-      .padding(.bottom)
+      
+      Text("Tap a specific station in the station list to play a station. ")
+       + Text("Tap the ") + Text("\(Image(systemName: "dice"))").foregroundStyle(Color.accentColor) + Text(" in the upper right corner to play a random station.")
 
-      VStack(alignment: .leading, spacing: 20) {
-        Text("The ") + Text("full player").underline() + Text(" includes more options and information.")
-        HStack {
-          Image(systemName: "heart")
-            .foregroundColor(.blue)
-          Text("Rate the songs.")// to hear them more or less often.")
-        }.padding(.leading)
-        HStack {
-          Image(systemName: "powersleep")
-            .foregroundColor(.blue)
-          Text("Set the sleep timer.")
-        }.padding(.leading)
-        
-        Text("Swipe down to return to the station list and mini player")
-      }
+      
+      Text("If installed on the Watch:").underline()
+            .padding(.vertical)
+      
+      Text("Make sure app is running on paired device.\n") +
+      Text("Tap 'Play Random Station' to play a random station.") +
+      Text("Tap a specific station in the station list to play a station.")
+      
+      Text("If a station doesn't play:").underline()
+      .padding(.vertical)
+      
+      Text("Try it again. If it still doesn't work, ") +
+      Text("you may need to remove the station and re-add it.")
     }
     .padding()
     .font(.headline)
     
-    .navigationTitle("Info - The Players")
+    .navigationTitle("Info - Select a station")
   }
 }

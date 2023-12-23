@@ -12,10 +12,8 @@ public struct StationBillboard {
 
 extension StationBillboard: View {
   public var body: some View {
-    if let artwork = station.artwork,
-       let backgroundColor = artwork.backgroundColor {
       HStack(alignment: isCurrentStation ? .center : .top) {
-        BillboardImage(artwork: artwork)
+        BillboardImage(artwork: station.artwork)
         VStack(alignment: .leading) {
           StationNameView(station: station,
           isChangingName: $isChangingName)
@@ -47,7 +45,6 @@ extension StationBillboard: View {
         RadioLogger.playing.info("Geting set to play \(station.name)")
         Task {
           do {
-//            try await UpdateRetriever.fetchUpdates(for: station)
             try await station.fetchUpdates()
             try await CurrentQueue.shared.playStation(station)
           } catch {
@@ -58,7 +55,6 @@ extension StationBillboard: View {
       }
       .animation(.default, value: currentStation.nowPlaying)
     }
-  }
 }
 
 extension StationBillboard {
@@ -68,6 +64,17 @@ extension StationBillboard {
   
   private var isNotCurrentStation: Bool {
     !isCurrentStation
+  }
+}
+
+extension StationBillboard {
+  private var backgroundColor: CGColor {
+    if let artwork = station.artwork,
+       let backgroundColor = artwork.backgroundColor {
+      return backgroundColor
+    } else {
+      return ColorConstants.color(for: station.name)
+    }
   }
 }
 

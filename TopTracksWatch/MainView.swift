@@ -7,6 +7,7 @@ import SwiftData
 struct MainView {
   @ObservedObject private(set) var watchConnector: WatchConnector
   @Query private var stations: [TopTracksStation]
+  @State private var cantPlayRandomStation = false
 }
 
 extension MainView: View {
@@ -22,8 +23,14 @@ extension MainView: View {
           }
         }
         Button("Play Random Station") {
-          watchConnector.requestRandomStation()
+          Task {
+            cantPlayRandomStation = true
+            watchConnector.requestRandomStation()
+            try await Task.sleep(for: .seconds(5))
+            cantPlayRandomStation = false
+          }
         }
+        .disabled(cantPlayRandomStation)
       }
       .navigationTitle("Top Tracks")
     }

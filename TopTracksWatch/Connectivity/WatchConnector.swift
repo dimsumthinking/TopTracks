@@ -2,6 +2,7 @@ import Foundation
 import WatchConnectivity
 import Model
 
+
 public class WatchConnector: NSObject, ObservableObject, WCSessionDelegate  {
   public private(set) var setStation: (TopTracksStation) async throws -> Void
   @Published public private(set) var topTrackStations: [TopTracksStation] = []
@@ -117,8 +118,10 @@ extension WatchConnector {
   private func playRandomStation() async {
       do {
         if let stationToPlay = topTrackStations.randomElement() {
-          self.selectedStation = stationToPlay
           try await setStation(stationToPlay)
+          await MainActor.run {
+            self.selectedStation = stationToPlay
+          }
           RadioWatchLogger.receivingStations.info("Playing random station")
           
         }

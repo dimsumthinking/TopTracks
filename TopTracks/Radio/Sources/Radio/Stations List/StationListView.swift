@@ -13,67 +13,64 @@ struct StationListView {
 
 extension StationListView: View {
   var body: some View {
-    VStack {
-      if stations.count > 2 {
-        Button {
-          Task {
-            searchingForRandomStation = true
-            try await CurrentQueue.shared.playRandomStation(stations)
-            searchingForRandomStation = false
-          }          
-        } label: {
-          HStack {
-            Spacer()
-            Image(systemName: "dice")
-            Text(searchingForRandomStation ? "Searching ..." : "Play Random Station")
-            Image(systemName: "dice")
-            Spacer()
-          }
-        }
-        .disabled(searchingForRandomStation)
-      }
-      List {
-        ForEach(stations) {station in
-          StationBillboard(station: station)
-            .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
-            .swipeActions(allowsFullSwipe: true) {
-              Button(role: .destructive) {
-                deleteStation(station)
-              }  label: {
-                Image(systemName: "trash.fill")
-              }
-              if let playlistID = station.playlistID,
-                 let url = URL(string: "toptracks://playlist?id=\(playlistID)") {
-                ShareLink("",
-                          item: url,
-                          subject: Text("Top Tracks Station \(station.playlist?.name ?? station.stationName)"),
-                          message: Text("\n Add \(station.playlist?.name ?? station.stationName) to your TopTracks Stations"),
-                          preview: SharePreview("\(station.playlist?.name ?? station.stationName)",
-                                                image: Image("AppIcon")))
-                .tint(.blue)
-              }
+    List {
+      ForEach(stations) {station in
+        StationBillboard(station: station)
+          .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
+          .swipeActions(allowsFullSwipe: true) {
+            Button(role: .destructive) {
+              deleteStation(station)
+            }  label: {
+              Image(systemName: "trash.fill")
             }
-          
-        }
-        .onMove { indexSet, offset in
-          if let fromLocation = indexSet.first {
-            moveStation(from: fromLocation,
-                        offset: offset)
+            if let playlistID = station.playlistID,
+               let url = URL(string: "toptracks://playlist?id=\(playlistID)") {
+              ShareLink("",
+                        item: url,
+                        subject: Text("Top Tracks Station \(station.playlist?.name ?? station.stationName)"),
+                        message: Text("\n Add \(station.playlist?.name ?? station.stationName) to your TopTracks Stations"),
+                        preview: SharePreview("\(station.playlist?.name ?? station.stationName)",
+                                              image: Image("AppIcon")))
+              .tint(.blue)
+            }
           }
-        }
         
-        if stations.isEmpty {
-          CloudActivityView()
-        }
-        if CurrentStation.shared.nowPlaying != nil {
-          Rectangle()
-            .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
-            .foregroundColor(.clear)
+      }
+      .onMove { indexSet, offset in
+        if let fromLocation = indexSet.first {
+          moveStation(from: fromLocation,
+                      offset: offset)
         }
       }
-      .listRowSeparatorTint(.clear)
-      .listStyle(.plain)
-      .animation(.default, value: stations)
+      
+      if stations.isEmpty {
+        CloudActivityView()
+      }
+      if CurrentStation.shared.nowPlaying != nil {
+        Rectangle()
+          .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
+          .foregroundColor(.clear)
+      }
+    }
+    .listRowSeparatorTint(.clear)
+    .listStyle(.plain)
+    .animation(.default, value: stations)
+    .toolbar {
+      if stations.count > 2 {
+        ToolbarItem(placement: .topBarTrailing) {
+          Button {
+            Task {
+              searchingForRandomStation = true
+              try await CurrentQueue.shared.playRandomStation(stations)
+              try await Task.sleep(for: .seconds(2))
+              searchingForRandomStation = false
+            }
+          } label: {
+            Image(systemName: "dice")
+          }
+          .disabled(searchingForRandomStation)
+        }
+      }
     }
   }
 }

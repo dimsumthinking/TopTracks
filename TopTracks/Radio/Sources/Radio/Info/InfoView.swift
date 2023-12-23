@@ -12,6 +12,7 @@ extension InfoView: View {
          AddAPlaylist()
           ClockInfo()
           PlayAStation()
+          MusicPlayers()
           RatingInfo()
           WorkWithStations()
         }

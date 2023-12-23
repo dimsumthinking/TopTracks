@@ -13,6 +13,7 @@ extension TopTracksStation {
     let (station, context) = try background.station(from: self)
     guard let topTracksSong = station.topTracksSongMatching(song) else {return}
     topTracksSong.lastPlayed = Date()
+    StationUpdatersLogger.markingSongAsPlayed.info("Marking \(topTracksSong.title) as played on station: \(station.stationName)")
     try context.save()
   }
 

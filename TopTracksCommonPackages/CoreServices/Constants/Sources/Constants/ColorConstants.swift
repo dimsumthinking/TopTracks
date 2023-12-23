@@ -32,4 +32,23 @@ extension ColorConstants {
       return Color(backgroundColor).opacity(0.2)
     }
   }
+  
+  public static func color(for stationName: String) -> CGColor {
+    var stationName = stationName.lowercased().trimmingCharacters(in: .lowercaseLetters.inverted)
+    let first = stationName.removeFirst()
+    let _ = stationName.removeFirst()
+    let second = stationName.removeFirst()
+    let _ = stationName.removeFirst()
+    let third = stationName.removeFirst()
+    return CGColor(red: float(for: first),
+                   green: float(for: second),
+                   blue: float(for: third),
+                   alpha: 1.0)
+    
+  }
+  
+  private static func float(for letter: Character) -> Double {
+    guard let ascii = letter.asciiValue else {return 1.0}
+    return Double(ascii - 97)/26
+  }
 }

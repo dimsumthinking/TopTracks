@@ -6,4 +6,5 @@ public enum TopTracksDataError: Error {
   case stationMissingStandardRotationCategory
   case stationMissingAddedCategory
   case stationMissingGoldOrArchived
+  case couldNotUpdateArtwork
 }

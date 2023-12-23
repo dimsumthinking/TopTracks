@@ -9,8 +9,9 @@ extension AddAPlaylist: View {
   var body: some View {
     
     VStack(alignment: .leading, spacing: 20) {
-      Text("Tap the \(Image(systemName: "plus"))  button in the top right corner to select a playlist.")
-        .padding()
+      Text("Tap") + Text(" \(Image(systemName: "plus"))").foregroundStyle(Color.accentColor) + Text(" in the upper right corner and navigate to select a playlist.")
+
+
       Text("Songs will be split into these categories:")
         .padding()
       Grid (verticalSpacing: 10) {
