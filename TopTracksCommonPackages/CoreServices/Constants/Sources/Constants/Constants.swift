@@ -31,7 +31,7 @@ extension Constants {
   public static let fullPlayerArtworkImageSize =
   max(min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 1 / 2, 260)
   public static let playlistListImageSize = max(UIScreen.main.bounds.width * 1 / 6, 80)
-  public static let stationListImageSize = max(UIScreen.main.bounds.width * 1 / 6, 80)
+  public static let stationListImageSize = 80.0//max(UIScreen.main.bounds.width * 1 / 6, 80)
   //  public static let fullPlayerSwipe = min(UIScreen.main.bounds.width * 1 / 4, 80)
   
 #elseif os(tvOS)

@@ -18,5 +18,6 @@ extension BillboardBackground {
     #if !os(tvOS)
     .border(isCurrentStation ? ColorConstants.accentColor(for: colorScheme) : .clear, width: 2)
     #endif
+    .shadow(radius: 20.0)
   }
 }

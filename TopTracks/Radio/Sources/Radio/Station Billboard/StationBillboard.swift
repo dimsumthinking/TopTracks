@@ -12,16 +12,10 @@ public struct StationBillboard: View {
 
 extension StationBillboard {
   public var body: some View {
-      HStack(alignment: isCurrentStation ? .center : .top) {
+    HStack {
         BillboardImage(artwork: station.artwork)
-        VStack(alignment: .leading) {
-          StationNameView(station: station,
-          isChangingName: $isChangingName)
-          if isNotCurrentStation  {
-            StationFeatured(featured: station.topSongs,
-                            stationName: station.name)
-          }
-        }
+        StationNameView(name: station.name,
+                        isCurrentStation: isCurrentStation)
         if isCurrentStation {
           CurrentStationIndicator()
         }
