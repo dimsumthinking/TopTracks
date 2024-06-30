@@ -1,11 +1,11 @@
 import SwiftUI
 import Model
 
-struct AddAndRotateMusicButton {
+struct AddAndRotateMusicButton: View {
   let station: TopTracksStation
 }
 
-extension AddAndRotateMusicButton: View {
+extension AddAndRotateMusicButton {
   var body: some View {
     Button {
       do {

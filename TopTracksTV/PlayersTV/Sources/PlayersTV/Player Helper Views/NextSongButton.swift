@@ -1,11 +1,11 @@
 import SwiftUI
 import MusicKit
 
-struct NextSongButton {
+struct NextSongButton: View {
 }
 
 
-extension NextSongButton: View {
+extension NextSongButton {
   var body: some View {
     Button {
       Task {

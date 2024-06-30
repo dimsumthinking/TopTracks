@@ -1,12 +1,12 @@
 import SwiftUI
 import ApplicationState
 
-struct InfoView {
+struct InfoView: View {
   @Binding var isShowingInfo: Bool
   @Environment(\.colorScheme) private var colorScheme
 }
 
-extension InfoView: View {
+extension InfoView {
   var body: some View {
     VStack {
         Text("About")

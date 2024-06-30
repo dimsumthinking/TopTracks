@@ -2,13 +2,13 @@ import SwiftUI
 import Constants
 import Foundation
 
-struct StationFeatured {
+struct StationFeatured: View {
   let featured: String
   let stationName: String
   @State private var unableToPlay = false
 }
 
-extension StationFeatured: View {
+extension StationFeatured {
   var body: some View {
     Text(unableToPlay ? cantPlayWarning : featured)
 //      .font(.caption)
@@ -19,7 +19,7 @@ extension StationFeatured: View {
         for await stationName in NotificationCenter.default
           .notifications(named: Constants.stationWontPlayNotification)
           .compactMap(\.userInfo)
-          .compactMap({$0[Constants.stationThatWontPlayKey] as? String}) {
+          .compactMap({$0[await Constants.stationThatWontPlayKey] as? String}) {
           if self.stationName == stationName {
             unableToPlay = true
             try? await Task.sleep(for: .seconds(5))

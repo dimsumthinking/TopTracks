@@ -1,11 +1,11 @@
 import SwiftUI
 import ApplicationState
 
-struct HeaderView {
+struct HeaderView: View {
   let title: String
 }
 
-extension HeaderView: View {
+extension HeaderView {
   var body: some View {
     ZStack {
       HStack {

@@ -2,6 +2,7 @@ import CarPlay
 import Model
 import ApplicationState
 
+@MainActor
 class StationListItem  {
   let item: CPListItem
   
@@ -16,24 +17,35 @@ class StationListItem  {
       
       if let currentStation = CurrentStation.shared.nowPlaying {
         if currentStation != station {
-          play(station: station)
+          self.play(station: station)
         }
       } else {
-        play(station: station)
+        self.play(station: station)
       }      
       completion()
     }
   }
-}
-
-
-fileprivate func play(station: TopTracksStation) {
-  Task {
-    do {
-      try await CurrentQueue.shared.playStation(station)
-    } catch {
-      RadioCarLogger.playingStation.info("Can't play station \(station.name)")
-      CurrentQueue.shared.stopPlayingStation()
+  
+  fileprivate func play(station: TopTracksStation) {
+    Task {
+      do {
+        try await CurrentQueue.shared.playStation(station)
+      } catch {
+        RadioCarLogger.playingStation.info("Can't play station \(station.name)")
+        CurrentQueue.shared.stopPlayingStation()
+      }
     }
   }
 }
+
+
+//fileprivate func play(station: TopTracksStation) {
+//  Task {
+//    do {
+//      try await CurrentQueue.shared.playStation(station)
+//    } catch {
+//      RadioCarLogger.playingStation.info("Can't play station \(station.name)")
+//      CurrentQueue.shared.stopPlayingStation()
+//    }
+//  }
+//}

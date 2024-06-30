@@ -2,14 +2,14 @@ import SwiftUI
 import MusicKit
 import ApplicationState
 
-struct SleepTimerView {
+struct SleepTimerView: View {
   private let times = [5, 15, 30, 60]
   @State private var endTime: Date?
   @State private var sleepsAfterSong = false
   @State private var sleepTimerIsSet = false
 }
 
-extension SleepTimerView: View {
+extension SleepTimerView {
   var body: some View {
     Menu {
       if let endTime {//} = CurrentQueue.shared.endTime {

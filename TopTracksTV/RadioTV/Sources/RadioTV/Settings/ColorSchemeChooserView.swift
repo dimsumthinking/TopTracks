@@ -1,12 +1,12 @@
 import SwiftUI
 import ApplicationState
 
-struct ColorSchemeChooserView {
+struct ColorSchemeChooserView: View {
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
   @State private var index = 0
 }
 
-extension ColorSchemeChooserView: View {
+extension ColorSchemeChooserView {
   var body: some View {
     Section("Choose Application Color Scheme") {
       VStack {

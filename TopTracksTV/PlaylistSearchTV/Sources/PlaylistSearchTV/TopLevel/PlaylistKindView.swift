@@ -2,12 +2,12 @@ import SwiftUI
 import ApplicationState
 import PlaylistSearchShared
 
-public struct PlaylistKindView {
+public struct PlaylistKindView: View {
   let columns = [GridItem(.flexible()), GridItem(.flexible())]
   public init() {}
 }
 
-extension PlaylistKindView: View {
+extension PlaylistKindView {
   public var body: some View {
     VStack {
       Spacer()

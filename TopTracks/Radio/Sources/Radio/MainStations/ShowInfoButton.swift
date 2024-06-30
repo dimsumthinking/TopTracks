@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct ShowInfoButton {
+struct ShowInfoButton: View {
   @Binding var mainStationsSheet: MainStationsSheet?
 }
 
-extension ShowInfoButton: View {
+extension ShowInfoButton {
   var body: some View {
     Button {
       mainStationsSheet = .info

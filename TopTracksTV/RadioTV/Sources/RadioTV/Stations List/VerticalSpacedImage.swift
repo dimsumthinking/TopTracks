@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct VerticalSpacedImage {
+struct VerticalSpacedImage: View {
   let systemName: String
 }
 
-extension VerticalSpacedImage: View {
+extension VerticalSpacedImage {
   var body: some View {
     VStack {
       Spacer()

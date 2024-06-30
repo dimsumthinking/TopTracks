@@ -1,12 +1,12 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 
 import PackageDescription
 
 let package = Package(
     name: "RadioCar",
     platforms: [
-      .iOS("17.0"),
-      .macOS("14.0")],
+      .iOS("18.0"),
+      .macOS("15.0")],
     products: [
         .library(
             name: "RadioCar",
@@ -19,7 +19,8 @@ let package = Package(
     targets: [
         .target(
             name: "RadioCar",
-        dependencies: ["Model", "ApplicationState"]),
+        dependencies: ["Model", "ApplicationState"],
+            swiftSettings: [.swiftLanguageVersion(.v6)]),
         .testTarget(
             name: "RadioCarTests",
             dependencies: ["RadioCar"]),

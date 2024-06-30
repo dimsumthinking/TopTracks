@@ -2,7 +2,7 @@ import SwiftUI
 import MusicKit
 import Constants
 
-struct PlaylistListView {
+struct PlaylistListView: View {
   let filteredPlaylists: [Playlist]
   @Environment(\.colorScheme) private var colorScheme
   let columns = [GridItem(.flexible()), GridItem(.flexible())]
@@ -12,7 +12,7 @@ struct PlaylistListView {
   }
 }
 
-extension PlaylistListView: View {
+extension PlaylistListView {
   var body: some View {
     ScrollView {
       LazyVGrid(columns: columns) {

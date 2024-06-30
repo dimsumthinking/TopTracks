@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct CellUsageSettingsView {
+struct CellUsageSettingsView: View {
   
 }
 
-extension CellUsageSettingsView: View {
+extension CellUsageSettingsView {
   var body: some View {
     Section("Cellular Data Usage") {
       HStack {

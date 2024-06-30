@@ -1,7 +1,7 @@
 import SwiftUI
 import Model
 
-struct StationNameView {
+struct StationNameView: View {
   let station: TopTracksStation
   @Binding var isChangingName: Bool
   @State var stationName = ""
@@ -9,7 +9,8 @@ struct StationNameView {
   @Environment(\.editMode) private var editMode
 }
 
-extension StationNameView: View {
+extension StationNameView {
+  @ViewBuilder
   var body: some View {
     if editMode?.wrappedValue.isEditing == true {
       TextField(station.name, text: $stationName)

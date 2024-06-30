@@ -1,12 +1,12 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 
 import PackageDescription
 
 let package = Package(
     name: "StationUpdaters",
     platforms: [
-      .macOS("14.0"),
-      .iOS("17.0")],
+      .macOS("15.0"),
+      .iOS("18.0")],
     products: [
         .library(
             name: "StationUpdaters",
@@ -20,7 +20,8 @@ let package = Package(
     targets: [
         .target(
             name: "StationUpdaters",
-            dependencies: ["Model", "ApplicationState", "PlaylistSongPreview"]),
+            dependencies: ["Model", "ApplicationState", "PlaylistSongPreview"],
+            swiftSettings: [.swiftLanguageVersion(.v6)]),
         .testTarget(
             name: "StationUpdatersTests",
             dependencies: ["StationUpdaters"]),

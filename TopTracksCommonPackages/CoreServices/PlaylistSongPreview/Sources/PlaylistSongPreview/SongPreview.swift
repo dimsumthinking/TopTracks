@@ -3,7 +3,7 @@ import MusicKit
 import Constants
 
 
-public struct SongPreview {
+public struct SongPreview: View {
   let song: Song
   @Binding private var currentSong: Song?
   @Environment(\.colorScheme) private var colorScheme
@@ -17,7 +17,7 @@ public struct SongPreview {
   }
 }
 
-extension SongPreview: View {
+extension SongPreview  {
   public var body: some View {
     HStack {
       if let artwork = song.artwork {

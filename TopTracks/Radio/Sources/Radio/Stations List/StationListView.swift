@@ -5,13 +5,13 @@ import SwiftData
 import Constants
 import MusicKit
 
-struct StationListView {
+struct StationListView: View {
   @Query(sort: \TopTracksStation.buttonPosition, order: .forward, animation: .bouncy) var stations: [TopTracksStation]
   @Environment(\.modelContext) private var modelContext
   @State private var searchingForRandomStation: Bool = false
 }
 
-extension StationListView: View {
+extension StationListView {
   var body: some View {
     List {
       ForEach(stations) {station in

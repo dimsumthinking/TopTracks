@@ -1,12 +1,13 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 
 import PackageDescription
 
 let package = Package(
     name: "PlayersTV",
     platforms: [
-      .macOS("14.0"),
-      .iOS("17.0")],
+      .macOS("15.0"),
+      .iOS("18.0"),
+      .tvOS("18.0")],
     products: [
         .library(
             name: "PlayersTV",
@@ -20,7 +21,8 @@ let package = Package(
     targets: [
         .target(
             name: "PlayersTV",
-            dependencies: ["Model", "ApplicationState", "Constants"]),
+            dependencies: ["Model", "ApplicationState", "Constants"],
+            swiftSettings: [.swiftLanguageVersion(.v6)]),
         .testTarget(
             name: "PlayersTVTests",
             dependencies: ["PlayersTV"]),

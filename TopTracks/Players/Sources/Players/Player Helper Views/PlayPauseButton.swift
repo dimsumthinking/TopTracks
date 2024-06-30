@@ -3,12 +3,12 @@ import Constants
 import ApplicationState
 import MusicKit
 
-struct PlayPauseButton {
+struct PlayPauseButton: View {
   @ObservedObject var state =  ApplicationMusicPlayer.shared.state
 }
 
 
-extension PlayPauseButton: View {
+extension PlayPauseButton  {
   var body: some View {
     Group {
       switch state.playbackStatus {

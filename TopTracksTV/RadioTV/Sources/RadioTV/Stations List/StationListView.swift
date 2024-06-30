@@ -6,7 +6,7 @@ import ApplicationState
 import PlayersTV
 import SwiftData
 
-struct StationListView {
+struct StationListView: View {
   @Binding var isShowingFullPlayer: Bool
   @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
   private var currentStation = CurrentStation.shared.nowPlaying
@@ -18,7 +18,8 @@ struct StationListView {
   }
 }
 
-extension StationListView: View {
+extension StationListView {
+  @ViewBuilder
   var body: some View {
     if stations.isEmpty {
       CloudActivityView()

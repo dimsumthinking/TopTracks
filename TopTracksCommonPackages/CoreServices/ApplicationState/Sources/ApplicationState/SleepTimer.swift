@@ -25,7 +25,7 @@ extension SleepTimer {
       sleepTimerTask = Task {
         try? await Task.sleep(for: .seconds(timeInterval))
         try Task.checkCancellation()
-        if let duration = CurrentSong.shared.song?.duration,
+        if let duration =  await CurrentSong.shared.song?.duration,
            afterSong {
           try? await Task.sleep(for: .seconds(duration - ApplicationMusicPlayer.shared.playbackTime - 1))
         }

@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct PlayAStation {
+struct PlayAStation: View {
 }
 
-extension PlayAStation: View {
+extension PlayAStation {
   var body: some View {
     VStack(alignment: .leading, spacing: 20) {
       Text("On your iPhone, iPad, or Mac:").underline()

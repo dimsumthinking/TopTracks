@@ -2,11 +2,11 @@ import SwiftUI
 import MusicKit
 import ApplicationState
 
-struct StationPlayButton {
+struct StationPlayButton: View {
   
 }
 
-extension StationPlayButton: View {
+extension StationPlayButton {
   var body: some View {
     Button {
       Task {

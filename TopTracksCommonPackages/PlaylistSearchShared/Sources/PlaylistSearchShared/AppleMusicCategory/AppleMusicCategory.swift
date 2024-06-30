@@ -29,7 +29,7 @@ import Foundation
 //    .morning, .motivation, .outdoors, .party, .romance, .sleep, .social, .sports, .summertimeSounds,
 //    .vacation, .weekend, .wellbeing, .work ]
 
-public enum AppleMusicCategory: String, CaseIterable {
+public enum AppleMusicCategory: String, CaseIterable, Sendable {
   // Spatial
   case spatialAudio = "Spatial Audio"
   

@@ -3,14 +3,14 @@ import Constants
 import ApplicationState
 import MusicKit
 
-struct FullPlayerView {
+struct FullPlayerView: View {
   @Binding var isShowingFullPlayer: Bool
   //  @EnvironmentObject private var applicationState: ApplicationState
   var currentSong = CurrentSong.shared.song
 }
 
 
-extension FullPlayerView: View {
+extension FullPlayerView {
   var body: some View {
     VStack {
       ZStack {

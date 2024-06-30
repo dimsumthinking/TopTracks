@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct MusicPlayers {
+struct MusicPlayers: View {
 }
 
-extension MusicPlayers: View {
+extension MusicPlayers {
   var body: some View {
     VStack(alignment: .leading, spacing: 20) {
       HStack {

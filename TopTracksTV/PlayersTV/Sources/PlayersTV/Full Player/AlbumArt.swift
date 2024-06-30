@@ -2,11 +2,12 @@ import SwiftUI
 import MusicKit
 import Constants
 
-struct AlbumArt {
+struct AlbumArt: View {
   let artwork: Artwork?
 }
 
-extension AlbumArt: View {
+extension AlbumArt {
+  @ViewBuilder
   var body: some View {
     if let artwork {
       ArtworkImage(artwork,

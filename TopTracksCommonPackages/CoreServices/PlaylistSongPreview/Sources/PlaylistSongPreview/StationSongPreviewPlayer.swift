@@ -2,8 +2,10 @@ import AVFAudio
 import MusicKit
 import Constants
 
+@MainActor
 public let songPreviewPlayer = StationSongPreviewPlayer()
 
+@MainActor
 public class StationSongPreviewPlayer {
   
   private let previewPlayerDelegate = PreviewPlayerDelegate()
@@ -52,8 +54,10 @@ extension StationSongPreviewPlayer {
 fileprivate class PreviewPlayerDelegate:  NSObject, AVAudioPlayerDelegate {
   
   func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-    songPreviewPlayer.audioPlayer = nil
-    NotificationCenter.default.post(name: Constants.previewPlayerEndsNotification,
-                                    object: nil)
+    Task { @MainActor in
+      songPreviewPlayer.audioPlayer = nil
+      NotificationCenter.default.post(name: Constants.previewPlayerEndsNotification,
+                                      object: nil)
+    }
   }
 }

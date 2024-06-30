@@ -1,11 +1,11 @@
 import SwiftUI
 import MusicKit
 
-struct StationPauseButton {
+struct StationPauseButton: View {
   
 }
 
-extension StationPauseButton: View {
+extension StationPauseButton {
   var body: some View {
 
       

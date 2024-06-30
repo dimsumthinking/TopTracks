@@ -6,7 +6,8 @@ let package = Package(
     name: "Constants",
     platforms: [
       .macOS("15.0"),
-      .iOS("18.0")],
+      .iOS("18.0"),
+      .tvOS("18.0")],
     products: [
         .library(
             name: "Constants",

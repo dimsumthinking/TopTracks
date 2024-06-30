@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct StationFeatured {
+struct StationFeatured: View {
   let featured: String
 }
 
-extension StationFeatured: View {
+extension StationFeatured {
   var body: some View {
     Text(featured)
       .font(.caption)

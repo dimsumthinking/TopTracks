@@ -1,15 +1,17 @@
 import SwiftUI
 import Model
 
-struct CloudActivityView {
-  @State private var activity: CloudActivity?
+struct CloudActivityView: View {
+//  @State private var activity: CloudActivity?
+  @State private var activity: Bool = true
 }
 
-extension CloudActivityView: View {
+extension CloudActivityView {
   var body: some View {
     HStack {
       Spacer()
-      if let _ = self.activity {
+//      if let _ = self.activity {
+      if activity {
         Image(systemName: "icloud.and.arrow.down")
           .imageScale(.large)
         Text("Checking iCloud for stations")
@@ -18,9 +20,9 @@ extension CloudActivityView: View {
       Spacer()
     }
     .task {
-      self.activity = CommonContainer.shared.cloudActivity
+//      self.activity = await CommonContainer.shared.cloudActivity
       try? await Task.sleep(for: .seconds(10))
-      self.activity = nil
+      self.activity = false
     }
   }
 }

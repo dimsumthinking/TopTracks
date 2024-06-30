@@ -2,7 +2,7 @@ import SwiftUI
 import MusicKit
 import Constants
 
-struct PlaylistListView {
+struct PlaylistListView: View {
   let filteredPlaylists: [Playlist]
   @Environment(\.colorScheme) private var colorScheme
   
@@ -11,7 +11,8 @@ struct PlaylistListView {
   }
 }
 
-extension PlaylistListView: View {
+extension PlaylistListView {
+  @ViewBuilder
   var body: some View {
     List(filteredPlaylists) {playlist in
       if let artwork = playlist.artwork,

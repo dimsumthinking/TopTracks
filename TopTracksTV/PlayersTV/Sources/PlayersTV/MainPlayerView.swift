@@ -4,7 +4,7 @@ import AudioToolbox
 import MusicKit
 import Constants
 
-public struct MainPlayerView {
+public struct MainPlayerView: View {
   @Binding private var isShowingFullPlayer: Bool
   @ObservedObject private var queue = ApplicationMusicPlayer.shared.queue
   public init(isShowingFullPlayer: Binding<Bool>) {
@@ -12,7 +12,7 @@ public struct MainPlayerView {
   }
 }
 
-extension MainPlayerView: View {
+extension MainPlayerView {
   public var body: some View {
     VStack {
       if isShowingFullPlayer {

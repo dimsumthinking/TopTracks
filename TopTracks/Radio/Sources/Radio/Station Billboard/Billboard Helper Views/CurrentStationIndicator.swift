@@ -1,11 +1,11 @@
 import SwiftUI
 import Constants
 
-struct CurrentStationIndicator {
+struct CurrentStationIndicator: View {
   @Environment(\.colorScheme) private var colorScheme
 }
 
-extension CurrentStationIndicator: View {
+extension CurrentStationIndicator {
   var body: some View {
     HStack {
       Spacer()

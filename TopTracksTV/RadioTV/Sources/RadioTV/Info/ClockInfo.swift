@@ -1,10 +1,10 @@
 import SwiftUI
 import Model
 
-struct ClockInfo {
+struct ClockInfo: View {
 }
 
-extension ClockInfo: View {
+extension ClockInfo {
   var body: some View {
     
     VStack(alignment: .leading, spacing: 20) {

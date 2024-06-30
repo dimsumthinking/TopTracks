@@ -3,13 +3,14 @@ import Constants
 import ApplicationState
 import MusicKit
 
-struct FullPlayerView {
+struct FullPlayerView: View {
   @Binding var isShowingFullPlayer: Bool
   var currentSong = CurrentSong.shared.song
 }
 
 
-extension FullPlayerView: View {
+extension FullPlayerView  {
+  @ViewBuilder
   var body: some View {
     if let currentSong { //} = CurrentSong.shared.song {
       NavigationStack {

@@ -4,7 +4,7 @@ import Foundation
 import ApplicationState
 import PlaylistSearchShared
 
-public struct PlaylistImporterView {
+public struct PlaylistImporterView: View {
   let url: URL
   @State private var message = ""
   @State private var playlist: Playlist?
@@ -15,7 +15,7 @@ public struct PlaylistImporterView {
   }
 }
 
-extension PlaylistImporterView: View {
+extension PlaylistImporterView {
   public var body: some View {
     NavigationStack {
       if let playlist {

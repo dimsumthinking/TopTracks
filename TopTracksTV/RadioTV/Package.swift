@@ -1,12 +1,13 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 
 import PackageDescription
 
 let package = Package(
     name: "RadioTV",
     platforms: [
-      .macOS("14.0"),
-      .iOS("17.0")],
+      .macOS("15.0"),
+      .iOS("18.0"),
+      .tvOS("18.0")],
     products: [
         .library(
             name: "RadioTV",
@@ -21,7 +22,8 @@ let package = Package(
     targets: [
         .target(
             name: "RadioTV",
-            dependencies: ["Model", "ApplicationState", "Constants",  "PlayersTV"]),
+            dependencies: ["Model", "ApplicationState", "Constants",  "PlayersTV"],
+            swiftSettings: [.swiftLanguageVersion(.v6)]),
         .testTarget(
             name: "RadioTVTests",
             dependencies: ["RadioTV"]),

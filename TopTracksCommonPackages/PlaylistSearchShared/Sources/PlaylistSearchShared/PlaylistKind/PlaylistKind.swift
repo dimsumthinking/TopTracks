@@ -2,7 +2,7 @@ import Foundation
 
 public let mainPlaylistKinds = [PlaylistKind.top, .cityCharts, .countryTop100, .byGenre, .moodAndActivity, .decade, .international, .openSearch]
 
-public enum PlaylistKind: String, CaseIterable, Hashable, Equatable {
+public enum PlaylistKind: String, CaseIterable, Hashable, Equatable, Sendable {
   case top
   case cityCharts
   case countryTop100

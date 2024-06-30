@@ -1,6 +1,7 @@
 import Model
 import MusicKit
 
+@MainActor
 public class UpdateRetriever {
   public init() {}
 }

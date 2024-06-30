@@ -1,4 +1,4 @@
-import CarPlay
+@preconcurrency import CarPlay
 
 public class CarRadio: NSObject, CPTemplateApplicationSceneDelegate {
   var interfaceController: CPInterfaceController?
@@ -8,7 +8,7 @@ public class CarRadio: NSObject, CPTemplateApplicationSceneDelegate {
 
   
   // CarPlay connected
-  
+  nonisolated
   public func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene,
                                 didConnect interfaceController: CPInterfaceController) {
     self.interfaceController = interfaceController
@@ -23,6 +23,7 @@ public class CarRadio: NSObject, CPTemplateApplicationSceneDelegate {
     }
   }
   // CarPlay disconnected
+  nonisolated
   public func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didDisconnectInterfaceController interfaceController: CPInterfaceController) {
     self.interfaceController = nil
 

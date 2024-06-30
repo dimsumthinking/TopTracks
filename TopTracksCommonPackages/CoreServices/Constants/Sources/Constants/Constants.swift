@@ -5,7 +5,7 @@ import UIKit
 #endif
 import SwiftUI
 
-
+@MainActor
 extension Constants {
 #if os(tvOS)
   public static let playlistGridImageSize = 200.0

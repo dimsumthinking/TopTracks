@@ -2,7 +2,7 @@ import SwiftUI
 import ApplicationState
 import PlaylistSearchShared
 
-struct AppleMusicCategoryChooserView {
+struct AppleMusicCategoryChooserView: View {
   let categories: [AppleMusicCategory]
   @State private var filterString = ""
   private let playlistKind: PlaylistKind
@@ -14,7 +14,7 @@ struct AppleMusicCategoryChooserView {
   }
 }
 
-extension AppleMusicCategoryChooserView: View {
+extension AppleMusicCategoryChooserView {
   var body: some View {
       List(filteredCategories) {category in
         NavigationLink {

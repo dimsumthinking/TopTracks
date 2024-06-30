@@ -3,7 +3,7 @@ import MusicKit
 import ApplicationState
 import PlaylistSearchShared
 
-public struct ChartChooserView {
+public struct ChartChooserView: View {
   @StateObject  var lister: ChartLister
   @State private var filterString = ""
   
@@ -13,7 +13,8 @@ public struct ChartChooserView {
 }
 
 
-extension ChartChooserView: View {
+extension ChartChooserView {
+  @ViewBuilder
   public var body: some View {
     if lister.playlists.isEmpty {
       ProgressView()

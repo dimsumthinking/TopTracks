@@ -1,13 +1,13 @@
 import SwiftUI
 import ApplicationState
 
-public struct MainCreationView {
+public struct MainCreationView: View {
   public init() {
     
   }
 }
 
-extension MainCreationView: View {
+extension MainCreationView {
   public var body: some View {
     NavigationStack {
       VStack {

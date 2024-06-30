@@ -1,10 +1,10 @@
 import SwiftData
 
 
-public actor CommonContainer {
+public struct CommonContainer: Sendable {
   public static let shared = CommonContainer()
   public let container: ModelContainer
-  public let cloudActivity = CloudActivity()
+//  public let cloudActivity = CloudActivity()
   
   init() {
     do {

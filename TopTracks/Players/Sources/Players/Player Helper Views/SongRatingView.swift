@@ -3,14 +3,14 @@ import ApplicationState
 import Model
 
 
-struct SongRatingView {
+struct SongRatingView: View {
   //  @EnvironmentObject private var applicationState: ApplicationState
   @State private var isShowingAlert = false
   @State private var updatedAt = Date()
   @State private var ratingIconName = CurrentSong.shared.ratingIconName
 }
 
-extension SongRatingView: View {
+extension SongRatingView {
   var body: some View {
     Menu {
       Text("Song Rating:")

@@ -1,11 +1,11 @@
 import SwiftUI
 import ApplicationState
 
-struct AddStationButton {
+struct AddStationButton: View {
   
 }
 
-extension AddStationButton: View {
+extension AddStationButton {
   var body: some View {
     Button {
       CurrentActivity.shared.beginCreating()

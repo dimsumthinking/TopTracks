@@ -3,14 +3,15 @@ import MusicKit
 import ApplicationState
 import PlaylistSearchShared
 
-public struct PlaylistSearchRequestView {
+public struct PlaylistSearchRequestView: View {
   @State private var searchTerm = ""
   @State private var startSearch = false
   @StateObject private var searchSuggester = PlaylistSearchSuggestion()
   @FocusState private var enteringSearch: Bool
 }
 
-extension PlaylistSearchRequestView: View {
+extension PlaylistSearchRequestView {
+  
   public var body: some View {
     VStack {
       ZStack {

@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct ControlPanel {
+struct ControlPanel: View {
   
 }
 
-extension ControlPanel: View {
+extension ControlPanel {
   var body: some View {
     HStack {
       PreviousSongButton()

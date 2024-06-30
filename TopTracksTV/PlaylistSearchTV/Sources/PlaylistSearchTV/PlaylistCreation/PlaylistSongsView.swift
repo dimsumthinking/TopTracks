@@ -6,7 +6,7 @@ import ApplicationState
 import Constants
 import SwiftData
 
-public struct PlaylistSongsView {
+public struct PlaylistSongsView: View {
   private let playlist: Playlist
   @State private var songs = [Song]()
   @State private var checkIsComplete = false
@@ -22,7 +22,7 @@ public struct PlaylistSongsView {
   }
 }
 
-extension PlaylistSongsView: View {
+extension PlaylistSongsView {
   public var body: some View {
     VStack {
       if checkIsComplete {

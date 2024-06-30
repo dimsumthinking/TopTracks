@@ -3,7 +3,7 @@ import MusicKit
 import ApplicationState
 import PlaylistSearchShared
 
-public struct PlaylistSearchResultsView {
+public struct PlaylistSearchResultsView: View {
   @StateObject  var lister: PlaylistSearch
   @State private var filterString = ""
 
@@ -11,7 +11,8 @@ public struct PlaylistSearchResultsView {
     _lister = StateObject(wrappedValue: PlaylistSearch(term: term))
   }
 }
-extension PlaylistSearchResultsView: View {
+extension PlaylistSearchResultsView {
+  @ViewBuilder
   public var body: some View {
     if lister.playlists.isEmpty {
       ProgressView()

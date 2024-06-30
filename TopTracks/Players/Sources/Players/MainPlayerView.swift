@@ -5,13 +5,13 @@ import MusicKit
 import Constants
 import Model
 
-public struct MainPlayerView {
+public struct MainPlayerView: View {
   @State private var isShowingFullPlayer = false
   @ObservedObject private var queue = ApplicationMusicPlayer.shared.queue
   public init() {}
 }
 
-extension MainPlayerView: View {
+extension MainPlayerView {
   public var body: some View {
     VStack {
       if isShowingFullPlayer {

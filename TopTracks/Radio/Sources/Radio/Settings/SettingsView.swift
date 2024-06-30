@@ -1,13 +1,13 @@
 import SwiftUI
 import ApplicationState
 
-struct SettingsView {
+struct SettingsView: View {
   @Binding var mainStationsSheet: MainStationsSheet?
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
   @Environment(\.colorScheme) private var colorScheme
 }
 
-extension SettingsView: View {
+extension SettingsView {
   var body: some View {
     NavigationStack {
       VStack {

@@ -1,11 +1,11 @@
 import SwiftUI
 import Model
 
-struct RatingInfo {
+struct RatingInfo: View {
   
 }
 
-extension RatingInfo: View {
+extension RatingInfo {
   var body: some View {
     
     VStack(alignment: .leading) {

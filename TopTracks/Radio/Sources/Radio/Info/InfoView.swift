@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct InfoView {
+struct InfoView: View {
   @Binding var mainStationsSheet: MainStationsSheet?
   @Environment(\.colorScheme) private var colorScheme
 }
 
-extension InfoView: View {
+extension InfoView {
   var body: some View {
     NavigationStack {
         TabView {

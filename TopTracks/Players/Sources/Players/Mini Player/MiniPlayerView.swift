@@ -3,13 +3,14 @@ import Constants
 import ApplicationState
 import MusicKit
 
-struct MiniPlayerView {
+struct MiniPlayerView: View {
   @Binding var isShowingFullPlayer: Bool
   var currentSong = CurrentSong.shared.song
 }
 
 
-extension MiniPlayerView: View {
+extension MiniPlayerView  {
+  @ViewBuilder
   var body: some View {
     if let currentSong {
       HStack(spacing: 4) {

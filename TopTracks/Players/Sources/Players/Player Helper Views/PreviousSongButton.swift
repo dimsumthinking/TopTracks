@@ -1,11 +1,12 @@
 import SwiftUI
 import MusicKit
 
-struct PreviousSongButton {
+struct PreviousSongButton: View {
 }
 
 
-extension PreviousSongButton: View {
+extension PreviousSongButton {
+  @ViewBuilder
   var body: some View {
     let player = ApplicationMusicPlayer.shared
     Button {

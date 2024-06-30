@@ -3,7 +3,7 @@ import ApplicationState
 import Model
 
 
-struct SongRatingView {
+struct SongRatingView: View {
 //  @EnvironmentObject private var applicationState: ApplicationState
   @State private var isShowingRatingMenu = false
   @State private var isShowingAlert = false
@@ -11,7 +11,7 @@ struct SongRatingView {
   @State private var ratingIconName = CurrentSong.shared.ratingIconName
 }
 
-extension SongRatingView: View {
+extension SongRatingView {
   var body: some View {
     Button {
       isShowingRatingMenu = true

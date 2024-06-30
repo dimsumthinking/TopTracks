@@ -4,13 +4,13 @@ import MusicKit
 import Constants
 import ApplicationState
 
-public struct StationBillboard {
+public struct StationBillboard: View {
   let station: TopTracksStation
   @State private var currentStation = CurrentStation.shared
   @State private var isChangingName = false
 }
 
-extension StationBillboard: View {
+extension StationBillboard {
   public var body: some View {
       HStack(alignment: isCurrentStation ? .center : .top) {
         BillboardImage(artwork: station.artwork)

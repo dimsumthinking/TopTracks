@@ -1,13 +1,13 @@
 import SwiftUI
 import Constants
 
-struct BillboardBackground {
+struct BillboardBackground: View {
   let backgroundColor: CGColor
   let isCurrentStation: Bool
   @Environment(\.colorScheme) var colorScheme
 }
 
-extension BillboardBackground: View {
+extension BillboardBackground {
   var body: some View {
     LinearGradient(colors: [ColorConstants.gradientStartColor(backgroundColor: backgroundColor,
                                                         colorScheme: colorScheme),

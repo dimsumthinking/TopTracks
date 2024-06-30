@@ -1,13 +1,13 @@
 import SwiftUI
 
 
-public struct MainStationsView {
+public struct MainStationsView: View {
   @State private var mainStationsSheet: MainStationsSheet? = nil
   @Environment(\.colorScheme) private var colorScheme
   public init() {}
 }
 
-extension MainStationsView: View {
+extension MainStationsView {
   public var body: some View {
     NavigationStack {
         StationListView()

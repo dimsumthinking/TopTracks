@@ -1,11 +1,11 @@
 import SwiftUI
 
 
-struct ArtworkFiller {
+struct ArtworkFiller: View {
   let size: Double
 }
 
-extension ArtworkFiller: View {
+extension ArtworkFiller {
   var body: some View {
     Image(systemName: "person.crop.square")
       .resizable()

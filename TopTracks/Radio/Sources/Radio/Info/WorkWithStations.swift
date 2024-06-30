@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct WorkWithStations {
+struct WorkWithStations: View {
 }
 
-extension WorkWithStations: View {
+extension WorkWithStations {
   var body: some View {
     
     VStack(alignment: .leading, spacing: 20) {

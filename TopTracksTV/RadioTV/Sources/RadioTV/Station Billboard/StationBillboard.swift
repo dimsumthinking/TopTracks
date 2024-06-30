@@ -4,7 +4,7 @@ import MusicKit
 import Constants
 import ApplicationState
 
-public struct StationBillboard {
+public struct StationBillboard: View {
   let station: TopTracksStation
   let currentStation: TopTracksStation?
   @State private var isChangingName = false
@@ -12,7 +12,7 @@ public struct StationBillboard {
   @Environment(\.editMode) private var editMode
 }
 
-extension StationBillboard: View {
+extension StationBillboard {
   public var body: some View {
     
     HStack {

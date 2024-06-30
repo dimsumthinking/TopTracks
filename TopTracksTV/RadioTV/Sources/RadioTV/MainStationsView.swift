@@ -5,7 +5,7 @@ import Model
 import ApplicationState
 import SwiftData
 
-public struct MainStationsView {
+public struct MainStationsView: View {
   @ObservedObject private var playerState = ApplicationMusicPlayer.shared.state
   @State private var isShowingSettings = false
   @State private var isShowingInfo = false
@@ -19,7 +19,8 @@ public struct MainStationsView {
   }
 }
 
-extension MainStationsView: View {
+extension MainStationsView {
+  @ViewBuilder
   public var body: some View {
     if isShowingFullPlayer {
       EmptyView()

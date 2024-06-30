@@ -20,7 +20,9 @@ extension CurrentStation {
 extension CurrentStation {
   public func noStationSelected() {
    nowPlaying = nil
-    CurrentSong.shared.noSongSelected()
+    Task {@MainActor in 
+      await CurrentSong.shared.noSongSelected()
+    }
   }
   public var canShowRating: Bool {
     guard let nowPlaying else { return false }

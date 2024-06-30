@@ -2,11 +2,11 @@ import SwiftUI
 import ApplicationState
 import PlaylistSearchShared
 
-public struct PlaylistKindView {
+public struct PlaylistKindView: View {
   public init() {}
 }
 
-extension PlaylistKindView: View {
+extension PlaylistKindView {
   public var body: some View {
     Grid(alignment: .leading) {
       ForEach(mainPlaylistKinds) { playlistKind in

@@ -2,14 +2,15 @@ import SwiftUI
 import Model
 import SwiftData
 
-struct StationNameView {
+struct StationNameView: View {
   let station: TopTracksStation
   @Binding var isChangingName: Bool
   @State var stationName = ""
-  @Environment (\.modelContext) private var modelContext: ModelContext
+  @Environment(\.modelContext) private var modelContext: ModelContext
 }
 
-extension StationNameView: View {
+extension StationNameView {
+  @ViewBuilder
   var body: some View {
     if isChangingName {
       Form {

@@ -1,11 +1,11 @@
 import SwiftUI
 import Model
 
-struct AddAPlaylist {
+struct AddAPlaylist: View {
   
 }
 
-extension AddAPlaylist: View {
+extension AddAPlaylist {
   var body: some View {
     
     VStack(alignment: .leading, spacing: 20) {

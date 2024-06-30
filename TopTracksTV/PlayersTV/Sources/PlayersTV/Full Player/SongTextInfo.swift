@@ -1,13 +1,13 @@
 import SwiftUI
 import MusicKit
 
-struct SongTextInfo {
+struct SongTextInfo: View {
   let currentSong: Song
 }
 
 // no popover
 
-extension SongTextInfo: View {
+extension SongTextInfo {
   var body: some View {
       VStack {
         Text(currentSong.title)

@@ -5,9 +5,9 @@ import PackageDescription
 let package = Package(
     name: "Model",
     platforms: [
-      .macOS("14.0"),
-      .iOS("17.0"),
-      .tvOS("17.0")],
+      .macOS("15.0"),
+      .iOS("18.0"),
+      .tvOS("18.0")],
     products: [
         .library(
             name: "Model",

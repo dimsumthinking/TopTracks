@@ -2,7 +2,7 @@ import SwiftUI
 import MusicKit
 import Constants
 
-struct ChartListView {
+struct ChartListView: View {
   let filteredPlaylists: [Playlist]
   @Environment(\.colorScheme) private var colorScheme
   private let columns = [GridItem(.adaptive(minimum: Constants.playlistGridGridSize * 3/4,
@@ -13,7 +13,8 @@ struct ChartListView {
   }
 }
 
-extension ChartListView: View {
+extension ChartListView {
+  @ViewBuilder
   var body: some View {
     ScrollView {
       LazyVGrid(columns: columns) {

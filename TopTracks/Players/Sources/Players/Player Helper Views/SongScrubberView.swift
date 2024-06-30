@@ -1,7 +1,7 @@
 import SwiftUI
 import MusicKit
 
-struct SongScrubberView {
+struct SongScrubberView: View {
   let currentSong: Song
   @State private var currentTime: TimeInterval = 0
 //  @State private var duration: TimeInterval = 5 * 60
@@ -9,7 +9,7 @@ struct SongScrubberView {
   @State private var isDraggingSlider = false
 }
 
-extension SongScrubberView: View {
+extension SongScrubberView {
   var body: some View {
     VStack {
 
