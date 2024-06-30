@@ -6,12 +6,12 @@ import PlayersTV
 import PlaylistSongPreview
 import MusicKit
 
-struct MainView {
+struct MainView: View {
   @State private var currentActivity = CurrentActivity.shared
   @State private var isShowingFullPlayer = false
 }
 
-extension MainView: View {
+extension MainView {
   var body: some View {
     Group {
       switch currentActivity.appActivity {

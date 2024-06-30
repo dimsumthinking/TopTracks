@@ -7,13 +7,13 @@ import PlaylistSongPreview
 import Model
 import SwiftData
 
-struct MainView {
+struct MainView: View {
   @State private var currentActivity = CurrentActivity.shared
   @StateObject private var watchConnector = WatchConnector(action: CurrentQueue.shared.playStation)
   @Query(sort: \TopTracksStation.buttonPosition, order: .forward, animation: .bouncy) var stations: [TopTracksStation]
 }
 
-extension MainView: View {
+extension MainView {
   var body: some View {
     Group {
       switch currentActivity.appActivity {

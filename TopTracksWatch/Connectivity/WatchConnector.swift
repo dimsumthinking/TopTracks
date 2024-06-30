@@ -1,8 +1,8 @@
 import Foundation
-import WatchConnectivity
+@preconcurrency import WatchConnectivity
 import Model
 
-
+@MainActor
 public class WatchConnector: NSObject, ObservableObject, WCSessionDelegate  {
   public private(set) var setStation: (TopTracksStation) async throws -> Void
   @Published public private(set) var topTrackStations: [TopTracksStation] = []
@@ -86,38 +86,45 @@ extension WatchConnector {
 
 #if os(iOS)
 extension WatchConnector {
+  nonisolated
   public func session(_ session: WCSession,
                       didReceiveUserInfo userInfo: [String: Any] = [:]) {
     RadioWatchLogger.connecting.info("Session activation state: \(session.activationState == WCSessionActivationState.activated) (on iOS)")
     
-    Task { @MainActor in
-      if let stationName = userInfo["selectStation"] as? String {
+    if let stationName = userInfo["selectStation"] as? String {
+      Task { @MainActor in
         if stationName == "none" { await playRandomStation() }
         else { await playStation(named: stationName)}
       }
     }
   }
-        
+  
   private func playStation(named name: String) async {
     if let station = topTrackStations.first(where: { $0.name == name}) {
-      do {
-        try await setStation(station)
-        await MainActor.run {
+      //      do {
+      //        try await setStation(station)
+      Task { @MainActor in
+        do {
+          
+          try await setStation(station)
           self.selectedStation = station
+          
+          RadioWatchLogger.selectingStation.info("Selected station \(station.name)")
+        } catch {
+          
+          RadioWatchLogger.selectingStation.info("Couldn't play \(station.name)")
+          
         }
-        RadioWatchLogger.selectingStation.info("Selected station \(station.name)")
-      } catch {
-        
-        RadioWatchLogger.selectingStation.info("Couldn't play \(station.name)")
-
       }
     }
   }
-
+  
   
   private func playRandomStation() async {
-      do {
-        if let stationToPlay = topTrackStations.randomElement() {
+    //      do {
+    if let stationToPlay = topTrackStations.randomElement() {
+      Task { @MainActor in
+        do {
           try await setStation(stationToPlay)
           await MainActor.run {
             self.selectedStation = stationToPlay
@@ -125,57 +132,15 @@ extension WatchConnector {
           RadioWatchLogger.receivingStations.info("Playing random station")
           
         }
-      } catch {
-        RadioWatchLogger.receivingStations.info("Couldn't play random station")
+        catch {
+          RadioWatchLogger.receivingStations.info("Couldn't play random station")
+        }
       }
+    }
+    
+    
+    
   }
-
-  
-//  public func session(_ session: WCSession,
-//                      didReceiveUserInfo userInfo: [String: Any] = [:]) {
-//    RadioWatchLogger.connecting.info("Session activation state: \(session.activationState == WCSessionActivationState.activated) (on iOS)")
-//    
-//    Task { @MainActor in
-//      if let selectedStation = userInfo["selectStation"] as? TopTracksStation {
-//        let context = CommonContainer.shared.container.mainContext
-//        do {
-//          if let stationToSet = context.model(for: selectedStation.persistentModelID) as? TopTracksStation {
-//            self.selectedStation = stationToSet
-//            try await setStation(stationToSet)
-//            RadioWatchLogger.selectingStation.info("Selected station \(stationToSet.name)")
-//          }
-//        } catch {
-//          RadioWatchLogger.selectingStation.info("Couldn't play \(selectedStation.name)")
-//          
-//        }
-//      } else {
-//        do {
-//          if let stationToPlay = topTrackStations.randomElement() {
-//            self.selectedStation = stationToPlay
-//            try await setStation(stationToPlay)
-//            RadioWatchLogger.receivingStations.info("Playing random station")
-//
-//          }
-//        } catch {
-//          RadioWatchLogger.receivingStations.info("Couldn't play random station")
-//        }
-//      }
-//    }
-//  }
-
-  
-  
-//  public func session(_ session: WCSession,
-//                      didReceiveMessage message: [String: Any], 
-//                      replyHandler: @escaping ([String: Any]) -> Void) {
-//    Task { @MainActor in
-//      RadioWatchLogger.receivingStations.info("Got request for stations")
-//      if let messageText = message["request"] as? String,
-//         messageText == "stations" {
-//        transferUserInfo(["stations": self.topTrackStations])
-//      }
-//    }
-//  }
 }
 #endif
 
@@ -184,7 +149,7 @@ extension WatchConnector {
 extension WatchConnector {
   
 #if os(iOS)
-  
+  nonisolated
   public func session(_ session: WCSession,
                       activationDidCompleteWith
                       activationState: WCSessionActivationState, error: Error?) {
@@ -203,12 +168,12 @@ extension WatchConnector {
       }
     }
   }
-  
+  nonisolated
   public func sessionDidBecomeInactive(_ session: WCSession) {
     RadioWatchLogger.connecting.info("Session did become inactive")
     
   }
-  
+  nonisolated
   public func sessionDidDeactivate(_ session: WCSession) {
     session.activate()
     RadioWatchLogger.connecting.info("Session did deactivate")

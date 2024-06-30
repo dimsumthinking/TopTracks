@@ -28,7 +28,7 @@ extension StationWontPlayView: View {
       for await stationName in NotificationCenter.default
         .notifications(named: Constants.stationWontPlayNotification)
         .compactMap(\.userInfo)
-        .compactMap({$0[Constants.stationThatWontPlayKey] as? String}) {
+        .compactMap({await $0[Constants.stationThatWontPlayKey] as? String}) {
         self.stationName = stationName
         isHidden = false
         try? await Task.sleep(for: .seconds(5))

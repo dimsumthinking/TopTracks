@@ -1,7 +1,8 @@
 @preconcurrency import CarPlay
 
+@MainActor
 public class CarRadio: NSObject, CPTemplateApplicationSceneDelegate {
-  var interfaceController: CPInterfaceController?
+//  var interfaceController: CPInterfaceController?
 //  var carRadioStations = CarRadioStations()
  
   
@@ -11,7 +12,7 @@ public class CarRadio: NSObject, CPTemplateApplicationSceneDelegate {
   nonisolated
   public func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene,
                                 didConnect interfaceController: CPInterfaceController) {
-    self.interfaceController = interfaceController
+//    self.interfaceController = interfaceController
 //    let listTemplate: CPListTemplate = CPListTemplate(title: "Stations", sections: [])
     let listTemplate: CPListTemplate = CPListTemplate(title: "Stations", sections: [CPListSection(items: [CPListItem(text: "Item Text", detailText: "Detail Text")])])
     Task {
@@ -25,7 +26,7 @@ public class CarRadio: NSObject, CPTemplateApplicationSceneDelegate {
   // CarPlay disconnected
   nonisolated
   public func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didDisconnectInterfaceController interfaceController: CPInterfaceController) {
-    self.interfaceController = nil
+//    self.interfaceController = nil
 
   }
 //  public func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene,
