@@ -1,6 +1,5 @@
 import MusicKit
 import Combine
-import PlaylistSearchShared
 
 @MainActor
 public class PlaylistLister: ObservableObject {

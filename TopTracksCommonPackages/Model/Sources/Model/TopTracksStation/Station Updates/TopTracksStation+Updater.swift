@@ -1,12 +1,14 @@
 import MusicKit
 
+@MainActor
 extension TopTracksStation {
   public func fetchUpdates() async throws {
     guard let playlist  else { return }
+    let updated = playlistLastUpdated
     Task {
       let updatedPlaylist = try await playlist.with([.tracks])
       guard let remoteLastUpdated = updatedPlaylist.lastModifiedDate,
-            remoteLastUpdated > playlistLastUpdated else { return }
+            remoteLastUpdated > updated else { return }
       var songs = [Song]()
       if let tracks = updatedPlaylist.tracks {
         songs = tracks.compactMap { track in

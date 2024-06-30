@@ -1,7 +1,7 @@
 import SwiftData
 
 
-public class CommonContainer {
+public actor CommonContainer {
   public static let shared = CommonContainer()
   public let container: ModelContainer
   public let cloudActivity = CloudActivity()

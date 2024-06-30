@@ -37,3 +37,7 @@ extension StationWontPlayView: View {
     }
   }
 }
+
+#Preview {
+  StationWontPlayView()
+}

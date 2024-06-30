@@ -1,12 +1,12 @@
 import SwiftUI
 import MusicKit
-import NetworkMonitor
 import PlaylistSongPreview
 import AppleMusicAuthorization
 import AppleMusicSubscription
 import ApplicationState
 import Model
 import SwiftData
+import Network
 
 
 @main
@@ -14,9 +14,10 @@ import SwiftData
   @State private var musicAuthorizationStatus = MusicAuthorization.Status.notDetermined
   @State private var canPlayCatalogContent = false
   
-  @State private var networkMonitor = NetworkConnectionMonitor.shared
   @Environment(\.scenePhase) private var scenePhase
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
+   @State private var networkIsNotConnected = false
+   
    
 
 }
@@ -24,7 +25,7 @@ import SwiftData
 extension TopTracksApp: App {
   var body: some Scene {
     WindowGroup {
-      if networkMonitor.isNotConnected {
+      if networkIsNotConnected {
         OfflineWarningView()
           .preferredColorScheme(currentColorScheme(from: colorSchemeString))
       } else {
@@ -33,6 +34,11 @@ extension TopTracksApp: App {
           if canPlayCatalogContent {
             MainView()
               .preferredColorScheme(currentColorScheme(from: colorSchemeString))
+              .task {
+                for await path in NWPathMonitor() {
+                  networkIsNotConnected = !( path.status == .satisfied)
+                }
+              }
           } else {
             AppleMusicSubscriberView()
               .preferredColorScheme(currentColorScheme(from: colorSchemeString))

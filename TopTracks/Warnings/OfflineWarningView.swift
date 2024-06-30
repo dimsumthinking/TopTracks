@@ -23,8 +23,6 @@ extension OfflineWarningView: View {
   }
 }
 
-struct OfflineWarningView_Previews: PreviewProvider {
-  static var previews: some View {
-    OfflineWarningView()
-  }
+#Preview {
+  OfflineWarningView()
 }

@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 
 import PackageDescription
 
@@ -18,7 +18,8 @@ let package = Package(
     targets: [
         .target(
             name: "Model",
-            dependencies: []),
+            dependencies: [],
+            swiftSettings: [.swiftLanguageVersion(.v6)]),
         .testTarget(
             name: "ModelTests",
             dependencies: ["Model"]),

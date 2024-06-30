@@ -10,8 +10,8 @@ extension  TopTracksStation {
     guard let stacks = station.stacks else {
       throw TopTracksDataError.couldNotGetStacksForStation
     }
-    guard let added = stacks.filter{ $0.rotationCategory == .added }.first,
-     var addedSongs = added.songs?.sorted{$0.lastPlayed < $1.lastPlayed},
+    guard let added = stacks.filter({ $0.rotationCategory == .added }).first,
+          var addedSongs = added.songs?.sorted(by: {$0.lastPlayed < $1.lastPlayed}),
         addedSongs.count > 5 else {
           try rotate()
           return

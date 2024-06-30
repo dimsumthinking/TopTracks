@@ -5,7 +5,7 @@ public let stationStandardCategories: [RotationCategory] = [.power, .heavy, .med
 public let stationExtendedCategories: [RotationCategory] = [.power, .heavy, .medium, .light, .gold, .added]
 //let fullStationCreationCategories: [RotationCategory] = [.power, .heavy, .medium, .light, .gold, .recommended]
 
-public enum RotationCategory: String, CaseIterable, Hashable, Equatable, Identifiable {
+public enum RotationCategory: String, CaseIterable, Hashable, Equatable, Identifiable, Sendable {
   case power
   case heavy
   case medium

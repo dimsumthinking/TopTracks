@@ -35,6 +35,7 @@ extension MainView: View {
     .onOpenURL { url in
       CurrentActivity.shared.beginImporting(url: url)
     }
+
   }
 }
 

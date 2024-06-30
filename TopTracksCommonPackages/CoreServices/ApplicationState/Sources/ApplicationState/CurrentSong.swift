@@ -4,6 +4,7 @@ import Foundation
 import SwiftData
 import Observation
 
+@MainActor
 @Observable
 public class CurrentSong {
   public static let shared = CurrentSong()

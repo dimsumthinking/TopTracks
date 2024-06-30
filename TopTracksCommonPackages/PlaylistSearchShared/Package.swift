@@ -1,13 +1,13 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 
 import PackageDescription
 
 let package = Package(
     name: "PlaylistSearchShared",
     platforms: [
-      .macOS("14.0"),
-      .iOS("17.0"),
-      .tvOS("17.0")],
+      .macOS("15.0"),
+      .iOS("18.0"),
+      .tvOS("18.0")],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -18,7 +18,8 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "PlaylistSearchShared"),
+            name: "PlaylistSearchShared",
+            swiftSettings: [.swiftLanguageVersion(.v6)]),
         .testTarget(
             name: "PlaylistSearchSharedTests",
             dependencies: ["PlaylistSearchShared"]),

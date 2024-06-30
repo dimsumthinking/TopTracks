@@ -39,6 +39,7 @@
 		62AC2A372A013E820073E539 /* RadioCar in Frameworks */ = {isa = PBXBuildFile; productRef = 62AC2A362A013E820073E539 /* RadioCar */; };
 		62BD8B3529F5639A009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3429F5639A009A528E /* TopTracksCore */; };
 		62BD8B3729F563C1009A528E /* TopTracksCore in Frameworks */ = {isa = PBXBuildFile; productRef = 62BD8B3629F563C1009A528E /* TopTracksCore */; };
+		62CA5B772C30AD380004C345 /* OfflineWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CA5B762C30AD2E0004C345 /* OfflineWarningView.swift */; };
 		62EA329429F7119C00863F80 /* PlaylistSearchTV in Frameworks */ = {isa = PBXBuildFile; productRef = 62EA329329F7119C00863F80 /* PlaylistSearchTV */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,7 @@
 		62BD8B3229F56373009A528E /* TopTracksCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TopTracksCore; path = TopTracksCommonPackages/CoreServices/TopTracksCore; sourceTree = "<group>"; };
 		62BD8B3829F56406009A528E /* Players */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Players; path = TopTracks/Players; sourceTree = "<group>"; };
 		62BD8B3929F56421009A528E /* Radio */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Radio; path = TopTracks/Radio; sourceTree = "<group>"; };
+		62CA5B762C30AD2E0004C345 /* OfflineWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineWarningView.swift; sourceTree = "<group>"; };
 		62EA329229F7118F00863F80 /* PlaylistSearchTV */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PlaylistSearchTV; path = TopTracksTV/PlaylistSearchTV; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,7 +177,6 @@
 				6221ABBA2912A8CA0088F0F2 /* TopTracksApp.swift */,
 				6221ABBC2912A8F20088F0F2 /* MainView.swift */,
 				620BAE672A00B03D0044B9A6 /* CarRadio.swift */,
-				624273272B3477F600BC4380 /* StationWontPlayView.swift */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -206,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				6221ABBF2912A9300088F0F2 /* Launch */,
+				62CA5B752C30AD060004C345 /* Warnings */,
 				6221ABBE2912A91C0088F0F2 /* Support */,
 			);
 			path = TopTracks;
@@ -297,6 +299,15 @@
 				62A65F192B2F81F80093D5E2 /* WatchConnector.swift */,
 			);
 			path = Connectivity;
+			sourceTree = "<group>";
+		};
+		62CA5B752C30AD060004C345 /* Warnings */ = {
+			isa = PBXGroup;
+			children = (
+				62CA5B762C30AD2E0004C345 /* OfflineWarningView.swift */,
+				624273272B3477F600BC4380 /* StationWontPlayView.swift */,
+			);
+			path = Warnings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -453,6 +464,7 @@
 				620BAE682A00B03D0044B9A6 /* CarRadio.swift in Sources */,
 				62A65F1E2B2F82490093D5E2 /* RadioWatchLogger.swift in Sources */,
 				62A65F1D2B2F82450093D5E2 /* WatchConnector.swift in Sources */,
+				62CA5B772C30AD380004C345 /* OfflineWarningView.swift in Sources */,
 				6221ABBB2912A8CA0088F0F2 /* TopTracksApp.swift in Sources */,
 				6221ABBD2912A8F20088F0F2 /* MainView.swift in Sources */,
 				624273282B3477F600BC4380 /* StationWontPlayView.swift in Sources */,

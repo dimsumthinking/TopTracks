@@ -26,6 +26,8 @@ extension AppleMusicAuthorizationView: View {
 }
 
 //#Preview {
-//  AppleMusicAuthorizationView(musicAuthorizationStatus: .constant(.denied))
+//  @Previewable
+//  @State var musicAutorizationStatus: MusicAuthorization.Status = .denied
+//  AppleMusicAuthorizationView(musicAuthorizationStatus: $musicAutorizationStatus)
 //}
 

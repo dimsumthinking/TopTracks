@@ -4,6 +4,7 @@ import Observation
 
 @Observable
 public class CurrentStation {
+  @MainActor
   public static let shared = CurrentStation()
   public internal(set) var nowPlaying: TopTracksStation?
 }

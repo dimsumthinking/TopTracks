@@ -3,6 +3,7 @@ import MusicKit
 import Foundation
 import Constants
 
+@MainActor
 public class CurrentQueue {
   public static let shared = CurrentQueue()
   private var sleepTimer: SleepTimer?

@@ -71,8 +71,8 @@ extension TopTracksStation {
 
 extension TopTracksStation {
   func checkForAddedCategoryWithAtLeast8Songs(in stacks: [TopTracksStack]) throws {
-  guard let added = stacks.filter{ $0.rotationCategory == .added }.first,
-  let addedSongs = added.songs?.sorted{$0.lastPlayed < $1.lastPlayed},
+    guard let added = stacks.filter({ $0.rotationCategory == .added }).first,
+    let addedSongs = added.songs?.sorted(by: {$0.lastPlayed < $1.lastPlayed}),
       addedSongs.count > 8 else {
         try rotate()
         return
@@ -82,7 +82,7 @@ extension TopTracksStation {
   func addArchivedStackIfNeeded(station: TopTracksStation,
                                context: ModelContext) throws {
     guard let stacks = station.stacks,
-          stacks.filter{$0.rotationCategory == .archived}.isEmpty else {return}
+          stacks.filter({$0.rotationCategory == .archived}).isEmpty else {return}
     let archived = TopTracksStack(category: .archived)
     context.insert(archived)
     archived.station = station

@@ -18,6 +18,8 @@ class SleepTimer {
 
 extension SleepTimer {
   func sleep() async {
+    let timeInterval = self.timeInterval
+    let afterSong = self.afterSong
     await withCheckedContinuation { continuation in
       sleepTimerTask?.cancel()
       sleepTimerTask = Task {

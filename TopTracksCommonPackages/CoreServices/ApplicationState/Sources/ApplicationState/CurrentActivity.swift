@@ -3,6 +3,7 @@ import MediaPlayer
 import MusicKit
 import Observation
 
+@MainActor
 @Observable
 public class CurrentActivity {
   public static let shared = CurrentActivity()

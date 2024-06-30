@@ -3,7 +3,6 @@ import SwiftData
 import MusicKit
 
 
-
 @Model public class TopTracksStation {
     var playlistAsData: Data?
     public var playlistID: String?

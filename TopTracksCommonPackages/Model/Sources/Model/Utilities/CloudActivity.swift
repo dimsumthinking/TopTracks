@@ -1,9 +1,11 @@
 import Observation
 import CoreData
 
+
 @Observable
 public class CloudActivity {
-  public var isDownloading = false
+  @MainActor
+  public static var isDownloading = false
   private var task: Task<Void, Never>?
   
   init() {
@@ -16,7 +18,10 @@ public class CloudActivity {
           as? NSPersistentCloudKitContainer.Event}) {
         if Task.isCancelled {break}
         if event.type == .setup || event.type == .import {
-          self.isDownloading = !event.succeeded
+          let isDownloading = !event.succeeded
+          Task { @MainActor in
+            CloudActivity.isDownloading = isDownloading
+          }
         }
       }
     }

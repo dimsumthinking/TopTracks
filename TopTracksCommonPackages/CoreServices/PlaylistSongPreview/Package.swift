@@ -1,12 +1,12 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 
 import PackageDescription
 
 let package = Package(
     name: "PlaylistSongPreview",
     platforms: [
-      .macOS("14.0"),
-      .iOS("17.0")],
+      .macOS("15.0"),
+      .iOS("18.0")],
     products: [
         .library(
             name: "PlaylistSongPreview",
@@ -20,7 +20,8 @@ let package = Package(
     targets: [
         .target(
             name: "PlaylistSongPreview",
-        dependencies: ["Constants", "ApplicationState", "Model"]),
+        dependencies: ["Constants", "ApplicationState", "Model"],
+            swiftSettings: [.swiftLanguageVersion(.v6)]),
         .testTarget(
             name: "PlaylistSongPreviewTests",
             dependencies: ["PlaylistSongPreview"]),
