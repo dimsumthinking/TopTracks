@@ -43,10 +43,12 @@ extension CurrentQueue {
                                            currentStation: CurrentStation.shared.nowPlaying, 
                                            currentTime: ApplicationMusicPlayer.shared.playbackTime)
     do {
-      try await setUpPlayer()
+//      try await setUpPlayer()
       try await MainActor.run {
         try CurrentStation.shared.setStation(to: station)
       }
+      try await setUpPlayer()
+
     } catch {
       NotificationCenter.default.post(name: Constants.stationWontPlayNotification,
                                       object: self,

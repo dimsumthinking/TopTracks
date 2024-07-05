@@ -16,7 +16,8 @@ extension StationListView {
     List {
       ForEach(stations) {station in
         StationBillboard(station: station)
-          .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
+//          .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
+          .listRowInsets(EdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6))
           .swipeActions(allowsFullSwipe: true) {
             Button(role: .destructive) {
               deleteStation(station)
@@ -52,7 +53,7 @@ extension StationListView {
           .foregroundColor(.clear)
       }
     }
-    .listRowSeparatorTint(.clear)
+//    .listRowSeparatorTint(.clear)
     .listStyle(.plain)
     .animation(.default, value: stations)
     .toolbar {

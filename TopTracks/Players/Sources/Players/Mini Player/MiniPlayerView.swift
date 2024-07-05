@@ -36,6 +36,9 @@ extension MiniPlayerView  {
           isShowingFullPlayer = true
         }
         Spacer()
+        PreviousSongButton()
+          .font(.headline)
+          .padding()
         PlayPauseButton()
           .font(.title)
         NextSongButton()

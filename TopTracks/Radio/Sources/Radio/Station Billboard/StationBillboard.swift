@@ -1,13 +1,11 @@
 import SwiftUI
 import Model
-import MusicKit
 import Constants
 import ApplicationState
 
 public struct StationBillboard: View {
   let station: TopTracksStation
   @State private var currentStation = CurrentStation.shared
-  @State private var isChangingName = false
 }
 
 extension StationBillboard {
@@ -35,7 +33,7 @@ extension StationBillboard {
       }
       .contentShape(Rectangle())
       .onTapGesture {
-        guard isNotCurrentStation && !isChangingName else { return }
+        guard isNotCurrentStation else { return }
         RadioLogger.playing.info("Geting set to play \(station.name)")
         Task {
           do {

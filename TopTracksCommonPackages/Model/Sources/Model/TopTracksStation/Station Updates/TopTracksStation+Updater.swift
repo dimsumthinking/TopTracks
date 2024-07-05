@@ -1,9 +1,11 @@
 import MusicKit
+import Foundation
 
 @MainActor
 extension TopTracksStation {
   public func fetchUpdates() async throws {
-    guard let playlist  else { return }
+    guard let playlist,
+          playlistLastUpdated > Date().addingTimeInterval(-(isChart ? 23 : 7 * 24 ) * 60 * 60) else { return }
     let updated = playlistLastUpdated
     Task {
       let updatedPlaylist = try await playlist.with([.tracks])

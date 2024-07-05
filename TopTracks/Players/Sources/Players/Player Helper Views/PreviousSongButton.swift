@@ -20,6 +20,5 @@ extension PreviousSongButton {
     } label: {
       Image(systemName: "backward.fill")
     }
-    
   }
 }
