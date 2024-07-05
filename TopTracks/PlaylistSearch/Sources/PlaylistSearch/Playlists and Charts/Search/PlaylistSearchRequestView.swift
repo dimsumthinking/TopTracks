@@ -6,7 +6,7 @@ import PlaylistSearchShared
 public struct PlaylistSearchRequestView: View {
   @State private var searchTerm = ""
   @State private var startSearch = false
-  @StateObject private var searchSuggester = PlaylistSearchSuggestion()
+  @State private var searchSuggester = PlaylistSearchSuggestion()
   @FocusState private var enteringSearch: Bool
 }
 

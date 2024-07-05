@@ -1,9 +1,10 @@
 import MusicKit
-import Combine
+import Observation
 
 @MainActor
-public class PlaylistSearch: ObservableObject {
-  @Published public private(set) var playlists =  MusicItemCollection<Playlist>()
+@Observable
+public class PlaylistSearch {
+  public private(set) var playlists =  MusicItemCollection<Playlist>()
   public init(term: String) {
     Task {
       try await playlistSearch(term: term)

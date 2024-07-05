@@ -1,9 +1,10 @@
 import MusicKit
-import Combine
+import Observation
 
 @MainActor
-public class ChartLister: ObservableObject {
-  @Published public private(set) var playlists =  MusicItemCollection<Playlist>()
+@Observable
+public class ChartLister {
+  public private(set) var playlists =  MusicItemCollection<Playlist>()
   public let kind: MusicCatalogChartKind
   public init(kind: MusicCatalogChartKind) {
     self.kind = kind

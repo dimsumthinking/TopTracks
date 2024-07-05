@@ -6,6 +6,9 @@ struct PlaylistListView: View {
   let filteredPlaylists: [Playlist]
   @Environment(\.colorScheme) private var colorScheme
   
+  init(_ filteredPlaylists: MusicItemCollection<Playlist>) {
+    self.filteredPlaylists = filteredPlaylists.map{$0}
+  }
   init(_ filteredPlaylists: [Playlist]) {
     self.filteredPlaylists = filteredPlaylists
   }

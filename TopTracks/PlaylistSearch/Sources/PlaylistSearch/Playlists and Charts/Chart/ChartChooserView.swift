@@ -4,11 +4,11 @@ import ApplicationState
 import PlaylistSearchShared
 
 public struct ChartChooserView: View {
-  @StateObject  var lister: ChartLister
-  @State private var filterString = ""
+  @State var lister: ChartLister
+//  @State private var filterString = ""
   
   init(kind: MusicCatalogChartKind) {
-    _lister = StateObject(wrappedValue: {ChartLister(kind: kind)}())
+    _lister = State(wrappedValue: {ChartLister(kind: kind)}())
   }
 }
 
@@ -21,22 +21,24 @@ extension ChartChooserView {
     } else {
       Group {
         if lister.kind == .mostPlayed {
-          PlaylistListView(filter(lister.playlists, using: filterString))
+          PlaylistListView(lister.playlists)
+
+//          PlaylistListView(filter(lister.playlists, using: filterString))
         } else {
-          ChartListView(filter(lister.playlists, using: filterString))
+          ChartListView(lister.playlists)
+
+//          ChartListView(filter(lister.playlists, using: filterString))
         }
       }
       
-//      PlaylistListView(filter(lister.playlists, using: filterString))
         .toolbar {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button("Cancel") {
               CurrentActivity.shared.endCreating()
-//              ApplicationState.shared.endCreating()
             }
           }
         }
-      .searchable(text: $filterString)
+//      .searchable(text: $filterString)
     }
   }
 }

@@ -7,7 +7,6 @@ public func shortenedNameFor(playlist: Playlist) -> String {
     .replacingOccurrences(of: "Daily 100:", with: "")
 }
 
-
 public func filter(_ playlists: MusicItemCollection<Playlist>,
             using filterString: String,
             playlistKind: PlaylistKind = .openSearch,

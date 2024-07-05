@@ -4,11 +4,10 @@ import ApplicationState
 import PlaylistSearchShared
 
 public struct PlaylistChooserView: View {
-  @StateObject  var lister: PlaylistLister
-  @State private var filterString = ""
+  @State  var lister: PlaylistLister
 
   init(category: AppleMusicCategory) {
-    _lister = StateObject(wrappedValue: PlaylistLister(category: category))
+    _lister = State(wrappedValue: PlaylistLister(category: category))
   }
 }
 extension PlaylistChooserView {
@@ -17,16 +16,15 @@ extension PlaylistChooserView {
     if lister.playlists.isEmpty {
       ProgressView()
     } else {
-      PlaylistListView(filter(lister.playlists, using: filterString) )
+      PlaylistListView(lister.playlists )
+
         .toolbar {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button("Cancel") {
               CurrentActivity.shared.endCreating()
-//              ApplicationState.shared.endCreating()
             }
           }
         }
-      .searchable(text: $filterString)
     }
   }
 }

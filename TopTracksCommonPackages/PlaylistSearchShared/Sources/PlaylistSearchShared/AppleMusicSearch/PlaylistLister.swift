@@ -1,9 +1,10 @@
 import MusicKit
-import Combine
+import Observation
 
 @MainActor
-public class PlaylistLister: ObservableObject {
-  @Published public private(set) var playlists =  MusicItemCollection<Playlist>()
+@Observable
+public class PlaylistLister {
+  public private(set) var playlists =  MusicItemCollection<Playlist>()
   public init(category: AppleMusicCategory) {
     Task {
       try await playlistSearch(category: category)
@@ -25,51 +26,13 @@ extension PlaylistLister {
 }
 
 extension PlaylistLister {
-private func downloadMorePlaylists() async throws {
-  while playlists.hasNextBatch && playlists.count < 200 {
-    let addedPlaylists = (try? await playlists.nextBatch()) ?? MusicItemCollection<Playlist>()
-    await MainActor.run {
-      self.playlists += addedPlaylists
+  private func downloadMorePlaylists() async throws {
+    while playlists.hasNextBatch && playlists.count < 200 {
+      let addedPlaylists = (try? await playlists.nextBatch()) ?? MusicItemCollection<Playlist>()
+      await MainActor.run {
+        self.playlists += addedPlaylists
+      }
     }
   }
 }
-}
 
-
-
-//import MusicKit
-//import Combine
-//
-//@MainActor
-//class PlaylistLister: ObservableObject {
-//  @Published var playlists =  MusicItemCollection<Playlist>()
-//  init() { //(kind: MusicCatalogChartKind) {
-//    Task {
-//      try await chartSearch()//kind: kind)
-//    }
-//  }
-//}
-//
-//extension PlaylistLister {
-//  private func chartSearch() async throws {
-////    let request = MusicCatalogSearchRequest(term:, types: [Playlist]) (kinds: [kind],
-////                                            types: [Playlist.self])
-////    let response = try await request.response()
-////    if let listOfTopPlaylists = response.playlistCharts.filter({$0.kind == kind}).first?.items {
-////      playlists = listOfTopPlaylists
-////      Task.detached {
-////        try await self.downloadMorePlaylists(needsSorting: kind == .mostPlayed)
-////      }
-////    }
-//  }
-//
-//
-//  private func downloadMorePlaylists(needsSorting: Bool) async throws {
-//    while playlists.hasNextBatch && playlists.count < 200 {
-//      let addedPlaylists = (try? await playlists.nextBatch()) ?? MusicItemCollection<Playlist>()
-//      await MainActor.run {
-//        self.playlists += addedPlaylists
-//      }
-//    }
-//  }
-//}

@@ -1,13 +1,14 @@
 
 import MusicKit
-import Combine
+import Observation
 
 @MainActor
-public class PlaylistSearchSuggestion: ObservableObject {
-  @Published public private(set) var searchSuggestions: [String: String] = [:] // displayterm, searchterm
+@Observable
+public class PlaylistSearchSuggestion {
+  public private(set) var searchSuggestions: [String: String] = [:] // displayterm, searchterm
   private var haveNotSearchedSubTerms = true
   
-  @Published public private(set) var suggestions: [MusicCatalogSearchSuggestionsResponse.Suggestion] = []
+  public private(set) var suggestions: [MusicCatalogSearchSuggestionsResponse.Suggestion] = []
   public init(){}
 }
 
