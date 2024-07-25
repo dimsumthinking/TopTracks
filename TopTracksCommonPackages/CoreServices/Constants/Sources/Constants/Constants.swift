@@ -12,8 +12,8 @@ extension Constants {
   public static let playlistGridGridSize = 240.0
   public static let playlistGridRowSpacing = 40.0
 #elseif os(iOS)
-  public static let playlistGridImageSize =  max(UIScreen.main.bounds.width * 1 / 4, 120)
-  public static let playlistGridGridSize = max(UIScreen.main.bounds.width * 1 / 3, 140)
+  public static let playlistGridImageSize =  120.0//max(UIScreen.main.bounds.width * 1 / 4, 120)
+  public static let playlistGridGridSize = 140.0//max(UIScreen.main.bounds.width * 1 / 3, 140)
   public static let playlistGridRowSpacing = 20.0
 #endif
   
@@ -26,11 +26,10 @@ extension Constants {
   
   
 #if os(iOS)
-  public static let songListImageSize = max(UIScreen.main.bounds.width * 1 / 6, 80)
-  public static let miniPlayerArtworkImageSize = max(UIScreen.main.bounds.width * 1 / 6, 80)
-  public static let fullPlayerArtworkImageSize =
-  max(min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 1 / 2, 260)
-  public static let playlistListImageSize = max(UIScreen.main.bounds.width * 1 / 6, 80)
+  public static let songListImageSize = 80.0 //max(UIScreen.main.bounds.width * 1 / 6, 80)
+  public static let miniPlayerArtworkImageSize = 80.0 //max(UIScreen.main.bounds.width * 1 / 6, 80)
+  public static let fullPlayerArtworkImageSize = 260.0//  max(min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 1 / 2, 260)
+  public static let playlistListImageSize = 80.0//max(UIScreen.main.bounds.width * 1 / 6, 80)
   public static let stationListImageSize = 80.0//max(UIScreen.main.bounds.width * 1 / 6, 80)
   //  public static let fullPlayerSwipe = min(UIScreen.main.bounds.width * 1 / 4, 80)
   

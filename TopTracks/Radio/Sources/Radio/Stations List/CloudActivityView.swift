@@ -21,7 +21,7 @@ extension CloudActivityView {
     }
     .task {
 //      self.activity = await CommonContainer.shared.cloudActivity
-      try? await Task.sleep(for: .seconds(10))
+      try? await Task.sleep(for: .seconds(60))
       self.activity = false
     }
   }

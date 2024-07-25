@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ArtworkFiller: View {
   let size: Double
+  
 }
 
 extension ArtworkFiller {

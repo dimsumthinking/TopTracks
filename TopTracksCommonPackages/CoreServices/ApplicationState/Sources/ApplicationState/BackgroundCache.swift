@@ -5,7 +5,7 @@ import Constants
 
 @MainActor
 class BackgroundCache {
-  private(set) var currentSong: Song?
+  private(set) var currentSong: TopTracksSong?
   private(set) var currentStation: TopTracksStation?
   private(set) var currentTime: TimeInterval
   
@@ -15,7 +15,7 @@ class BackgroundCache {
   
   
   
-  init(currentSong: Song?,
+  init(currentSong: TopTracksSong?,
        currentStation: TopTracksStation?,
        currentTime: TimeInterval = 0) {
     self.currentSong = currentSong
@@ -36,7 +36,7 @@ extension BackgroundCache {
       for await _ in NotificationCenter.default.notifications(named: Constants.previewPlayerBeginsNotification) {
         guard previewPlayerHasNotStarted else { return }
         self.previewPlayerHasNotStarted = false
-        currentSong =  CurrentSong.shared.song
+        currentSong =  CurrentSong.shared.nowPlaying
         currentTime = ApplicationMusicPlayer.shared.playbackTime
         ApplicationMusicPlayer.shared.pause()
       }

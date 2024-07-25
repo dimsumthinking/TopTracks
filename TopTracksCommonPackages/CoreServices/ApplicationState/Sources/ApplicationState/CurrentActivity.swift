@@ -32,7 +32,7 @@ extension CurrentActivity {
   #else
   
   public func beginImporting(url: URL) {
-    backgroundCache = BackgroundCache(currentSong: CurrentSong.shared.song,
+    backgroundCache = BackgroundCache(currentSong: CurrentSong.shared.nowPlaying,
                                       currentStation: CurrentStation.shared.nowPlaying)
     appActivity = .importing(url: url)
   }
@@ -44,7 +44,7 @@ extension CurrentActivity {
   #endif
   
   public func beginStationSongList(for topTracksStation: TopTracksStation) {
-    backgroundCache = BackgroundCache(currentSong: CurrentSong.shared.song,
+    backgroundCache = BackgroundCache(currentSong: CurrentSong.shared.nowPlaying,
                                       currentStation: CurrentStation.shared.nowPlaying)
     appActivity = .viewingOrEditing(topTracksStation: topTracksStation)
   }
@@ -58,7 +58,7 @@ extension CurrentActivity {
 //    #if !os(macOS)
     guard (ApplicationMusicPlayer.shared.state.playbackStatus != .paused &&
            ApplicationMusicPlayer.shared.state.playbackStatus != .playing) else {return}
-    if let cachedSong = backgroundCache?.currentSong {
+    if let cachedSong = backgroundCache?.currentSong?.song {
       let playbackTime = backgroundCache?.currentTime
       ApplicationMusicPlayer.shared.queue =  ApplicationMusicPlayer.Queue(for: [cachedSong])
       CurrentQueue.shared.refillQueue()
@@ -66,7 +66,7 @@ extension CurrentActivity {
         try await CurrentQueue.shared.setUpPlayer(toPlayAt: playbackTime)
       }
     } else {
-      CurrentSong.shared.song = nil
+      CurrentSong.shared.nowPlaying = nil
       CurrentStation.shared.nowPlaying = nil
     }
     backgroundCache = nil

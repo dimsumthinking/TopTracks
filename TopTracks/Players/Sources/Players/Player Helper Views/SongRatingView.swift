@@ -4,10 +4,7 @@ import Model
 
 
 struct SongRatingView: View {
-  //  @EnvironmentObject private var applicationState: ApplicationState
   @State private var isShowingAlert = false
-  @State private var updatedAt = Date()
-  @State private var ratingIconName = CurrentSong.shared.ratingIconName
 }
 
 extension SongRatingView {
@@ -15,36 +12,21 @@ extension SongRatingView {
     Menu {
       Text("Song Rating:")
       ForEach(SongRating.allCases, id: \.self) { rating in
-        Button (role: rating == .remove ? .destructive : .none) {
-          if rating == .remove {
-            isShowingAlert = true
-          } else {
-            updateSong(rating: rating)
-          }
-        } label: {
-          HStack {
-            Image(systemName: rating.icon)
-            Text(rating.name)
-          }
-        }
+        RatingButton(rating: rating,
+                     isShowingAlert: $isShowingAlert,
+                     action: updateSong)
       }
     } label: {
-      VStack {
-        Image(systemName: ratingIconName)
-        Text(updatedAt, style: .relative).foregroundColor(.clear)
-          .font(.caption2)
-      }
+      Image(systemName: CurrentSong.shared.ratingIconName)
     }
-    .onChange(of: CurrentSong.shared.song) { oldValue, newValue in
-        ratingIconName = CurrentSong.shared.ratingIconName
-    }
-    .alert("Remove " + (CurrentSong.shared.song?.title ?? "this song") + "?",
+
+    .alert("Remove " + (CurrentSong.shared.nowPlaying?.song?.title ?? "this song") + "?",
            isPresented: $isShowingAlert) {
       Button(role: .destructive) {
         do {
           try removeCurrentSong()
         } catch {
-          PlayersLogger.removingSong.info("Can't remove \(CurrentSong.shared.song?.title ?? "song")")
+          PlayersLogger.removingSong.info("Can't remove \(CurrentSong.shared.nowPlaying?.song?.title ?? "song")")
         }
       } label: {
         Text("Permanently remove from this station")
@@ -68,7 +50,6 @@ extension SongRatingView {
   private func updateSong(rating: SongRating)  {
     do {
       try CurrentSong.shared.changeRating(to: rating)
-      ratingIconName = rating.icon
     } catch {
       PlayersLogger.updatingSong.info("Can't update song")
     }
@@ -77,3 +58,4 @@ extension SongRatingView {
     try CurrentSong.shared.removeCurrentSong()
   }
 }
+

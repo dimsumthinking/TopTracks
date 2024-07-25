@@ -1,14 +1,14 @@
 import Model
 import MusicKit
-import Foundation
-import SwiftData
 import Observation
+import SwiftData
 
 @MainActor
 @Observable
 public class CurrentSong {
   public static let shared = CurrentSong()
-  public internal(set) var song: Song?
+  public internal(set) var nowPlaying: TopTracksSong?
+  private let songUpdater = CurrentSongUpdater()
 }
 
 extension CurrentSong {
@@ -16,82 +16,59 @@ extension CurrentSong {
     guard let item = entry.item else {return}
     switch item {
     case .song(let song):
-      self.song = song
-      if let station = CurrentStation.shared.nowPlaying {
-        try station.markPlayed(for: song)
+      nowPlaying = CurrentStation.shared.nowPlaying?.topTracksSongMatching(song)
+      if let persistentModelID = nowPlaying?.persistentModelID {
+        Task {
+          await songUpdater.markPlayed(songWithID: persistentModelID)
+        }
       }
     default:
       print("Entry is not a song")
     }
     CurrentQueue.shared.refillQueueIfNeeded()
   }
-  
+   
   
   public func noSongSelected() {
-    self.song = nil
-  }
-  public func removeCurrentSong() throws {
-    if let ttSong = topTracksSong {
-      try ttSong.remove()
-    }
+    self.nowPlaying = nil
   }
   
-//  public func removeCurrentSong() {
-//    guard let topTracksSong,
-//    let context = topTracksSong.context else { return }
-//    do {
-//      context.delete(topTracksSong)
-//      try context.save()
-//      Task {
-//        try await ApplicationMusicPlayer.shared.skipToNextEntry()
-//      }
-//    } catch {
-//      print("Unable to remove current song")
-//    }
-//  }
+  public func removeCurrentSong() throws {
+    if let persistentModelID = nowPlaying?.persistentModelID {
+      Task {
+        await songUpdater.remove(songWithID: persistentModelID)
+        try await ApplicationMusicPlayer.shared.skipToNextEntry()
+      }
+    }
+  }
 }
 
 extension CurrentSong {
   public var artwork: Artwork? {
-    if let storedArtwork = topTracksSong?.song?.artwork {
-      return storedArtwork
-    } else {
-      return song?.artwork
-    }
+    nowPlaying?.song?.artwork
   }
 }
 
 extension CurrentSong {
   public var ratingIconName: String {
-    topTracksSong?.songRating.icon ?? "heart"
+    nowPlaying?.songRating.icon ?? "heart"
   }
   
   public var ratingName: String {
-    topTracksSong?.songRating.name ?? "It's ok"
+    nowPlaying?.songRating.name ?? "It's ok"
+  }
+  
+  public var duration: Double {
+    nowPlaying?.song?.duration ?? 0
   }
   
   public func changeRating(to rating: SongRating)  throws {
-    if let ttSong = topTracksSong {
-      try ttSong.changeRating(to: rating)
+    if let persistentModelID = nowPlaying?.persistentModelID {
+      Task {
+        await songUpdater.changeRatingFor(songWithID: persistentModelID,
+                                          to: rating)
+      }
     }
   }
-  
-//  public func changeRating(to rating: SongRating) {
-//    guard let topTracksSong,
-//          let context = topTracksSong.context else {return}
-//    topTracksSong.songRating = rating
-//    do {
-//      try context.save()
-//    } catch {
-//      print("Unable to save rating")
-//    }
-//  }
 }
 
-extension CurrentSong {
-  private var topTracksSong: TopTracksSong? {
-    guard let station = CurrentStation.shared.nowPlaying,
-          let song else { return nil }
-    return station.topTracksSongMatching(song)
-  }
-}

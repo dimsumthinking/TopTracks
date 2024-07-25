@@ -22,21 +22,6 @@ import MusicKit
       self.artistName = song.artistName
       self.title = song.title
   }
-    
-//    public init(song: Song,
-//         stack: TopTracksStack) {
-//        self.songID = song.id.rawValue
-//        self.songAsData = try? PropertyListEncoder().encode(song)
-//        
-//        self.artistName = song.artistName
-//        self.id = UUID()
-//        self.lastPlayed = Date()
-//        self.rating = SongRating.neutral.description
-//        self.motion = "added"
-//        self.title = song.title
-//
-//        self.stack = stack
-//    }
 }
 
 extension TopTracksSong {

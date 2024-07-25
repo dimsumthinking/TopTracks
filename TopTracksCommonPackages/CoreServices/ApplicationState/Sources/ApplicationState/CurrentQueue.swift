@@ -11,7 +11,6 @@ public class CurrentQueue {
 
 extension CurrentQueue {
   func refillQueueIfNeeded() {
-//    #if !os(macOS)
     let player = ApplicationMusicPlayer.shared
     let entries = player.queue.entries
     if let currentEntry = player.queue.currentEntry,
@@ -19,57 +18,47 @@ extension CurrentQueue {
        entries.distance(from: index, to: entries.endIndex) < 3 {
       refillQueue()
     }
-//    #endif
   }
   
   func refillQueue() {
-//    #if !os(macOS)
     guard let currentStation = CurrentStation.shared.nowPlaying else { return }
     let player = ApplicationMusicPlayer.shared
     Task {
       try await player.queue.insert(currentStation.nextHour(),
                                     position: .tail)
     }
-//    #endif
   }
 }
 
 
 extension CurrentQueue {
   public func playStation(_ station: TopTracksStation) async throws {
-//    #if !os(macOS)
     ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: station.nextHour())
-    let cachedStation = StationChangeCache(currentSong: CurrentSong.shared.song,
-                                           currentStation: CurrentStation.shared.nowPlaying, 
+    let cachedStation = StationChangeCache(currentSong: CurrentSong.shared.nowPlaying,
+                                           currentStation: CurrentStation.shared.nowPlaying,
                                            currentTime: ApplicationMusicPlayer.shared.playbackTime)
     do {
-//      try await setUpPlayer()
-      try await MainActor.run {
-        try CurrentStation.shared.setStation(to: station)
-      }
+      try CurrentStation.shared.setStation(to: station)
       try await setUpPlayer()
-
+      
     } catch {
       NotificationCenter.default.post(name: Constants.stationWontPlayNotification,
                                       object: self,
                                       userInfo: [Constants.stationThatWontPlayKey: station.name])
       restartPlayer(cache: cachedStation)
     }
-
-//    #endif
+    
   }
   
   private func restartPlayer(cache: StationChangeCache) {
-    if let cachedSong = cache.currentSong,
+    if let cachedSong = cache.currentSong?.song,
        let cachedStation = cache.currentStation {
       let playbackTime = cache.currentTime
       ApplicationMusicPlayer.shared.queue =  ApplicationMusicPlayer.Queue(for: [cachedSong])
       CurrentQueue.shared.refillQueue()
       Task {
         try await CurrentQueue.shared.setUpPlayer(toPlayAt: playbackTime)
-        try await MainActor.run {
-          try CurrentStation.shared.setStation(to: cachedStation)
-        }
+        try CurrentStation.shared.setStation(to: cachedStation)
       }
     }
   }
@@ -80,13 +69,11 @@ extension CurrentQueue {
   }
   
   func setUpPlayer(toPlayAt playbackTime: TimeInterval? = nil) async throws {
-//    #if !os(macOS)
     try await ApplicationMusicPlayer.shared.prepareToPlay()
     if let playbackTime {
       ApplicationMusicPlayer.shared.playbackTime = playbackTime
     }
     try await ApplicationMusicPlayer.shared.play()
-//    #endif
   }
 }
 
@@ -97,12 +84,10 @@ extension CurrentQueue {
   }
   
   public func stopPlayingStation() {
-//    #if !os(macOS)
     CurrentStation.shared.noStationSelected()
     ApplicationMusicPlayer.shared.stop()
     ApplicationMusicPlayer.shared.queue = ApplicationMusicPlayer.Queue(for: [Song]())
     ApplicationMusicPlayer.shared.queue.currentEntry = nil
-//    #endif
   }
 }
 

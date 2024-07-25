@@ -5,7 +5,7 @@ import MusicKit
 
 struct FullPlayerView: View {
   @Binding var isShowingFullPlayer: Bool
-  var currentSong = CurrentSong.shared.song
+  var currentSong = CurrentSong.shared.nowPlaying?.song
 }
 
 

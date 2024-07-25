@@ -51,7 +51,9 @@ extension PlaylistListView {
                                           colorScheme: colorScheme)],
                                           startPoint: .topLeading,
                                           endPoint: .bottomTrailing))
-        .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
+//        .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
+        .listRowInsets(EdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6))
+
 
       }
     }

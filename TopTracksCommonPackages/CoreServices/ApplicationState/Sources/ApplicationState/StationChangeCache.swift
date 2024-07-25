@@ -4,14 +4,14 @@ import Foundation
 import Constants
 
 class StationChangeCache {
-  private(set) var currentSong: Song?
+  private(set) var currentSong: TopTracksSong?
   private(set) var currentStation: TopTracksStation?
   private(set) var currentTime: TimeInterval
   
   
   
   
-  init(currentSong: Song?,
+  init(currentSong: TopTracksSong?,
        currentStation: TopTracksStation?,
        currentTime: TimeInterval = 0) {
     self.currentSong = currentSong

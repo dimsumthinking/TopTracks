@@ -32,7 +32,7 @@ extension TopTracksApp: App {
         switch musicAuthorizationStatus {
         case .authorized:
           if canPlayCatalogContent {
-            MainView()
+              MainView()
               .preferredColorScheme(currentColorScheme(from: colorSchemeString))
               .task {
                 for await path in NWPathMonitor() {
@@ -50,7 +50,6 @@ extension TopTracksApp: App {
       }
     }
     .modelContainer(CommonContainer.shared.container)
-//    .modelContainer(for: TopTracksStation.self)
     //.modelContainer(container)
     .onChange(of: musicAuthorizationStatus, initial: true) { oldStatus, newStatus in
       if newStatus == .authorized {
