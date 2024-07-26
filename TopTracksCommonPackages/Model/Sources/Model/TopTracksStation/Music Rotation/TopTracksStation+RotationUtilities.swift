@@ -69,6 +69,7 @@ extension TopTracksStation {
   }
 }
 
+@MainActor
 extension TopTracksStation {
   func checkForAddedCategoryWithAtLeast8Songs(in stacks: [TopTracksStack]) throws {
     guard let added = stacks.filter({ $0.rotationCategory == .added }).first,

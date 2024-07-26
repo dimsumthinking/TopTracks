@@ -2,10 +2,15 @@ import SwiftData
 import MusicKit
 import Foundation
 
+
 extension TopTracksStation {
+  @MainActor
   public func updateWith(songs songsToAdd: [Song],
                          for playlist: Playlist) throws {
-    let (station, context) = try background.station(from: self)
+    let context = CommonContainer.shared.container.mainContext
+    guard let station =  context.model(for: persistentModelID) as? TopTracksStation else {
+      throw TopTracksDataError.stationMissingAddedCategory
+    }
     let categorizedSongs = categorized(songs: songsToAdd)
     
     let remainingSongs = try moveOrDeleteCurrentSongs(station: station,
@@ -21,6 +26,26 @@ extension TopTracksStation {
     station.stationLastUpdated = Date()
     try context.save()
   }
+
+//extension TopTracksStation {
+//  public func updateWith(songs songsToAdd: [Song],
+//                         for playlist: Playlist) throws {
+//    let (station, context) = try background.station(from: self)
+//    let categorizedSongs = categorized(songs: songsToAdd)
+//    
+//    let remainingSongs = try moveOrDeleteCurrentSongs(station: station,
+//                                                      basedOn: categorizedSongs,
+//                                                      context: context)
+//    try addRemainingSongs(to: station,
+//                          from: remainingSongs,
+//                          context: context)
+//    if let playlistLastModifiedDate = playlist.lastModifiedDate {
+//      station.playlistLastUpdated = playlistLastModifiedDate
+//    }
+//    station.playlistAsData = try? JSONEncoder().encode(playlist)
+//    station.stationLastUpdated = Date()
+//    try context.save()
+//  }
   
   
   

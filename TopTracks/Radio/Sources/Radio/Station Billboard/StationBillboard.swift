@@ -12,11 +12,13 @@ extension StationBillboard {
   public var body: some View {
     HStack {
         BillboardImage(artwork: station.artwork)
-        StationNameView(name: station.name,
-                        isCurrentStation: isCurrentStation)
-        if isCurrentStation {
-          CurrentStationIndicator()
-        }
+        StationNameView(name: station.name)//,
+//                        isCurrentStation: isCurrentStation)
+//        if isCurrentStation {
+//          CurrentStationIndicator()
+//        }
+      CurrentStationIndicator(isCurrentStation: isCurrentStation)
+
       }
       .listRowBackground(BillboardBackground(backgroundColor: backgroundColor,
                                              isCurrentStation: isCurrentStation))      

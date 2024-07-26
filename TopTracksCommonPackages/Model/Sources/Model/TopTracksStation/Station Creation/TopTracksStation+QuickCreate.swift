@@ -2,11 +2,12 @@ import SwiftData
 import MusicKit
 import Foundation
 
+@MainActor
 extension TopTracksStation {
   public static func createStation(playlist: Playlist,
                                    buttonNumber: Int,
                                    songs: [Song]) throws {
-    let context = background.context
+    let context = CommonContainer.shared.container.mainContext
     let station = TopTracksStation(playlist: playlist,
                                    buttonNumber: buttonNumber)
     context.insert(station)
@@ -15,6 +16,20 @@ extension TopTracksStation {
                  context: context)
     try context.save()
   }
+
+//extension TopTracksStation {
+//  public static func createStation(playlist: Playlist,
+//                                   buttonNumber: Int,
+//                                   songs: [Song]) throws {
+//    let context = background.context
+//    let station = TopTracksStation(playlist: playlist,
+//                                   buttonNumber: buttonNumber)
+//    context.insert(station)
+//    createStacks(for: station,
+//                 songs: songs,
+//                 context: context)
+//    try context.save()
+//  }
   
   private static func createStacks(for station: TopTracksStation,
                                    songs: [Song],

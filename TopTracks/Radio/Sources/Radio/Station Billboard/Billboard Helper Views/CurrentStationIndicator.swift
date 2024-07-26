@@ -3,6 +3,7 @@ import Constants
 
 struct CurrentStationIndicator: View {
   @Environment(\.colorScheme) private var colorScheme
+  let isCurrentStation: Bool
 }
 
 extension CurrentStationIndicator {
@@ -13,7 +14,7 @@ extension CurrentStationIndicator {
       Image(systemName: "antenna.radiowaves.left.and.right")
         .padding(.trailing)
         .font(.largeTitle)
-        .foregroundColor(ColorConstants.accentColor(for: colorScheme))
+        .foregroundStyle(isCurrentStation ? ColorConstants.accentColor(for: colorScheme) : .clear)
     }
   }
 }

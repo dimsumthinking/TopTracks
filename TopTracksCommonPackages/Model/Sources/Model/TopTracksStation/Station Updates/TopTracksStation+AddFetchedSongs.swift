@@ -2,13 +2,13 @@ import SwiftData
 import MusicKit
 import Foundation
 
+
+@MainActor
 extension TopTracksStation {
   public func add(songs songsToAdd: [Song],
                   for playlist: Playlist) throws {
-    let (station, context) = try background.station(from: self)
-
-//    let context = backgroundModelActor.context
-//    guard let station = context.model(for: self.persistentModelID) as? TopTracksStation else {return}
+    let context = CommonContainer.shared.container.mainContext
+    guard let station = context.model(for: self.persistentModelID) as? TopTracksStation else {return}
     let added = try addedStack(for: station, in: context)
     try add(songs: songsToAdd,
             to: added,
@@ -20,6 +20,25 @@ extension TopTracksStation {
     station.stationLastUpdated = Date()
     try context.save()
   }
+
+//extension TopTracksStation {
+//  public func add(songs songsToAdd: [Song],
+//                  for playlist: Playlist) throws {
+//    let (station, context) = try background.station(from: self)
+//
+////    let context = backgroundModelActor.context
+////    guard let station = context.model(for: self.persistentModelID) as? TopTracksStation else {return}
+//    let added = try addedStack(for: station, in: context)
+//    try add(songs: songsToAdd,
+//            to: added,
+//            in: context)
+//    if let playlistLastModifiedDate = playlist.lastModifiedDate {
+//      station.playlistLastUpdated = playlistLastModifiedDate
+//    }
+//    station.playlistAsData = try? JSONEncoder().encode(playlist)
+//    station.stationLastUpdated = Date()
+//    try context.save()
+//  }
   
   private func addedStack(for station: TopTracksStation,
                           in context: ModelContext) throws -> TopTracksStack {

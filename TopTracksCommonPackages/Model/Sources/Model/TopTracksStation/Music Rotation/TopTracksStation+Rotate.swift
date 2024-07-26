@@ -3,9 +3,11 @@ import MusicKit
 import Foundation
 
 extension  TopTracksStation {
+  @MainActor
   public func rotate()  throws {
-    let (station, context) = try background.station(from: self)
-    guard let stacks = station.stacks else {
+    let context = CommonContainer.shared.container.mainContext
+    guard let station =  context.model(for: persistentModelID) as? TopTracksStation,
+      let stacks = station.stacks else {
       throw TopTracksDataError.couldNotGetStacksForStation
     }
     let dictionaryOfStacks = try dictionaryOfStacks(from: stacks)
@@ -18,8 +20,27 @@ extension  TopTracksStation {
     StationUpdatersLogger.rotatingStation.info("Here's power post-rotation: \(station.topSongs)")
 
     station.stationLastUpdated = Date()
-    try context.save() 
+    try context.save()
   }
+
+//extension  TopTracksStation {
+//  public func rotate()  throws {
+//    let (station, context) = try background.station(from: self)
+//    guard let stacks = station.stacks else {
+//      throw TopTracksDataError.couldNotGetStacksForStation
+//    }
+//    let dictionaryOfStacks = try dictionaryOfStacks(from: stacks)
+//    StationUpdatersLogger.rotatingStation.info("Here's power pre-rotation: \(station.topSongs)")
+//    for (category, songs) in startingStacksAndSongs(from: stacks) {
+//      try split(topTracksSongs: songs,
+//                from: category,
+//                dictionaryOfStacks: dictionaryOfStacks)
+//    }
+//    StationUpdatersLogger.rotatingStation.info("Here's power post-rotation: \(station.topSongs)")
+//
+//    station.stationLastUpdated = Date()
+//    try context.save() 
+//  }
   
 //  private func startingStacksAndSongs(from topTrackStacks: [TopTracksStack]) -> [(RotationCategory, [TopTracksSong])] {
 //    var stacksAndSongs = [(RotationCategory, [TopTracksSong])]()

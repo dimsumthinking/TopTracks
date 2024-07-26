@@ -4,19 +4,20 @@ import SwiftData
 
 struct StationNameView: View {
   let name: String
-  let isCurrentStation: Bool
+//  let isCurrentStation: Bool
 }
 
 extension StationNameView {
   var body: some View {
     HStack {
-      if !isCurrentStation {
-        Spacer()
-      }
+//      if !isCurrentStation {
+//        Spacer()
+//      }
       
       Text(name)
-        .padding(.trailing, 8)
-        .multilineTextAlignment(isCurrentStation ? .trailing : .leading)
+        .padding(.horizontal, 8)
+//        .multilineTextAlignment(isCurrentStation ? .trailing : .leading)
+        .multilineTextAlignment(.leading)
         .lineLimit(3)
         .font(.headline)
     }
@@ -24,6 +25,5 @@ extension StationNameView {
 }
 
 #Preview {
-  StationNameView(name: "90's Rock Classics",
-                  isCurrentStation: true)
+  StationNameView(name: "90's Rock Classics")
 }
