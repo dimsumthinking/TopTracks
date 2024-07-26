@@ -40,12 +40,18 @@ extension CurrentQueue {
     do {
       try CurrentStation.shared.setStation(to: station)
       try await setUpPlayer()
+      if station.playbackFailed {
+        station.playbackFailed = false
+        try? CommonContainer.shared.container.mainContext.save()
+      }
       
     } catch {
       NotificationCenter.default.post(name: Constants.stationWontPlayNotification,
                                       object: self,
                                       userInfo: [Constants.stationThatWontPlayKey: station.name])
+      station.playbackFailed = true
       restartPlayer(cache: cachedStation)
+      try? CommonContainer.shared.container.mainContext.save()
     }
     
   }
@@ -57,8 +63,8 @@ extension CurrentQueue {
       ApplicationMusicPlayer.shared.queue =  ApplicationMusicPlayer.Queue(for: [cachedSong])
       CurrentQueue.shared.refillQueue()
       Task {
-        try await CurrentQueue.shared.setUpPlayer(toPlayAt: playbackTime)
         try CurrentStation.shared.setStation(to: cachedStation)
+        try await CurrentQueue.shared.setUpPlayer(toPlayAt: playbackTime)
       }
     }
   }

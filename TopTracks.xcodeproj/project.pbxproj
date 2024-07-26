@@ -18,6 +18,8 @@
 		6231B5202B2F82DE00BD6F34 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = 6231B51F2B2F82DE00BD6F34 /* Model */; };
 		623B99EF276AC4F0004C17AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99EE276AC4F0004C17AE /* Assets.xcassets */; };
 		623B99F2276AC4F0004C17AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623B99F1276AC4F0004C17AE /* Preview Assets.xcassets */; };
+		623C09932C5435610054AFA6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 623C09922C5435610054AFA6 /* PrivacyInfo.xcprivacy */; };
+		623C09952C54356F0054AFA6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 623C09942C54356F0054AFA6 /* PrivacyInfo.xcprivacy */; };
 		623CAFA5278CFA6500B8FC48 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623CAFA4278CFA6500B8FC48 /* CloudKit.framework */; };
 		624C171029D73623003BAE44 /* Players in Frameworks */ = {isa = PBXBuildFile; productRef = 624C170F29D73623003BAE44 /* Players */; };
 		625D26F32B31C0FF003CB185 /* WatchStationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625D26F22B31C0FF003CB185 /* WatchStationListView.swift */; };
@@ -78,6 +80,9 @@
 		623B99E7276AC4F0004C17AE /* TopTracks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopTracks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		623B99EE276AC4F0004C17AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		623B99F1276AC4F0004C17AE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		623C09912C54355B0054AFA6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		623C09922C5435610054AFA6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		623C09942C54356F0054AFA6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		623CAF9F278C764000B8FC48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623CAFA2278CF98000B8FC48 /* TopTracks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TopTracks.entitlements; sourceTree = "<group>"; };
 		623CAFA4278CFA6500B8FC48 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -204,6 +209,7 @@
 		623B99E9276AC4F0004C17AE /* TopTracks */ = {
 			isa = PBXGroup;
 			children = (
+				623C09942C54356F0054AFA6 /* PrivacyInfo.xcprivacy */,
 				6221ABBF2912A9300088F0F2 /* Launch */,
 				62CA5B752C30AD060004C345 /* Warnings */,
 				6221ABBE2912A91C0088F0F2 /* Support */,
@@ -233,6 +239,7 @@
 		62615EF729F48B7F005FC1A1 /* TopTracksTV */ = {
 			isa = PBXGroup;
 			children = (
+				623C09912C54355B0054AFA6 /* PrivacyInfo.xcprivacy */,
 				623DD1E029F959FD002A3E75 /* TopTracksTV.entitlements */,
 				62113B3A29F56CCA00927FAA /* Info.plist */,
 				62615F0929F55A53005FC1A1 /* Launch */,
@@ -270,6 +277,7 @@
 		628785E72B2F34C100C47B4C /* TopTracksWatch */ = {
 			isa = PBXGroup;
 			children = (
+				623C09922C5435610054AFA6 /* PrivacyInfo.xcprivacy */,
 				625D26F12B31BE40003CB185 /* TopTracksWatch.entitlements */,
 				625D26F02B31BE28003CB185 /* Info.plist */,
 				62A65F1C2B2F82320093D5E2 /* Connectivity */,
@@ -386,7 +394,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					623B99E6276AC4F0004C17AE = {
 						CreatedOnToolsVersion = 13.2;
@@ -428,6 +436,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				623C09952C54356F0054AFA6 /* PrivacyInfo.xcprivacy in Resources */,
 				623B99F2276AC4F0004C17AE /* Preview Assets.xcassets in Resources */,
 				623B99EF276AC4F0004C17AE /* Assets.xcassets in Resources */,
 			);
@@ -446,6 +455,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				623C09932C5435610054AFA6 /* PrivacyInfo.xcprivacy in Resources */,
 				628785F02B2F34C200C47B4C /* Preview Assets.xcassets in Resources */,
 				628785ED2B2F34C200C47B4C /* Assets.xcassets in Resources */,
 			);
@@ -628,14 +638,13 @@
 		623B99FB276AC4F0004C17AE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TopTracks/Support/TopTracks.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TopTracks/Support/Preview Content\"";
 				DEVELOPMENT_TEAM = MG5SW9CY8D;
 				ENABLE_PREVIEWS = YES;
@@ -654,7 +663,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimsumthinking.TopTracks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -668,14 +677,13 @@
 		623B99FC276AC4F0004C17AE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TopTracks/Support/TopTracks.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TopTracks/Support/Preview Content\"";
 				DEVELOPMENT_TEAM = MG5SW9CY8D;
 				ENABLE_PREVIEWS = YES;
@@ -694,7 +702,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimsumthinking.TopTracks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

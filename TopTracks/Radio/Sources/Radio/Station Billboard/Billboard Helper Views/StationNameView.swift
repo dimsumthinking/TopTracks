@@ -4,7 +4,7 @@ import SwiftData
 
 struct StationNameView: View {
   let name: String
-//  let isCurrentStation: Bool
+  let playbackFailed: Bool
 }
 
 extension StationNameView {
@@ -15,15 +15,18 @@ extension StationNameView {
 //      }
       
       Text(name)
+        .strikethrough(playbackFailed, color: .red)
         .padding(.horizontal, 8)
 //        .multilineTextAlignment(isCurrentStation ? .trailing : .leading)
         .multilineTextAlignment(.leading)
         .lineLimit(3)
         .font(.headline)
+        
     }
   }
 }
 
 #Preview {
-  StationNameView(name: "90's Rock Classics")
+  StationNameView(name: "90's Rock Classics",
+                  playbackFailed: true)
 }

@@ -12,7 +12,8 @@ extension StationBillboard {
   public var body: some View {
     HStack {
         BillboardImage(artwork: station.artwork)
-        StationNameView(name: station.name)//,
+        StationNameView(name: station.name,
+                        playbackFailed: station.playbackFailed)//,
 //                        isCurrentStation: isCurrentStation)
 //        if isCurrentStation {
 //          CurrentStationIndicator()
