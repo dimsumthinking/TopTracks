@@ -114,8 +114,11 @@ extension PlaylistSongsView {
   func createStation() {
     PlaylistSearchLogger.creating.info("Trying to create station \(playlist.name)")
     do {
-      try TopTracksStation.createStation(playlist: playlist,
-                                         buttonNumber: topTrackStations.count, 
+//      try TopTracksStation.createStation(playlist: playlist,
+//                                         buttonNumber: topTrackStations.count, 
+//                                         songs: songs)
+      try TopTracksStation.createStation(from: playlist,
+                                         before: topTrackStations,
                                          songs: songs)
       Task {
         didCreateStation = true

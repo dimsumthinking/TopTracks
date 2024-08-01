@@ -80,9 +80,12 @@ extension StationListView {
 extension StationListView {
   func deleteStation(_ station: TopTracksStation) {
     CurrentQueue.shared.stopPlayingDeletedStation(station)
-    
     modelContext.delete(station)
     do {
+      try modelContext.save()
+      for (index, station) in stations.enumerated() {
+        station.buttonNumber = index
+      }
       try modelContext.save()
     } catch {
       RadioLogger.stationDelete.info("Could not delete \(station.name)")

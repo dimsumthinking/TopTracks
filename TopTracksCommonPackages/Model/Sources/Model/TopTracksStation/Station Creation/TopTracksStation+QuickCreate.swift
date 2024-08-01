@@ -4,6 +4,24 @@ import Foundation
 
 @MainActor
 extension TopTracksStation {
+  public static func createStation(from playlist: Playlist,
+                                   before stations: [TopTracksStation],
+                                   songs: [Song])  throws {
+    let context = CommonContainer.shared.container.mainContext
+    let station = TopTracksStation(playlist: playlist,
+                                   buttonNumber: 0)
+    context.insert(station)
+    createStacks(for: station,
+                 songs: songs,
+                 context: context)
+      try context.save()
+      for (index, existingStation) in stations.enumerated() {
+        existingStation.buttonNumber = index + 1
+      }
+      try context.save()
+  }
+  
+  
   public static func createStation(playlist: Playlist,
                                    buttonNumber: Int,
                                    songs: [Song]) throws {
@@ -16,6 +34,8 @@ extension TopTracksStation {
                  context: context)
     try context.save()
   }
+  
+  
 
 //extension TopTracksStation {
 //  public static func createStation(playlist: Playlist,
