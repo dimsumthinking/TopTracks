@@ -17,7 +17,7 @@ import MusicKit
   
   public init(song: Song) {
       self.songID = song.id.rawValue
-      self.songAsData = try? JSONEncoder().encode<Song>(song)
+      self.songAsData = try? JSONEncoder().encode(song)
       
       self.artistName = song.artistName
       self.title = song.title
