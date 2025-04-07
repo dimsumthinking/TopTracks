@@ -10,14 +10,9 @@ struct StationNameView: View {
 extension StationNameView {
   var body: some View {
     HStack {
-//      if !isCurrentStation {
-//        Spacer()
-//      }
-      
       Text(name)
         .strikethrough(playbackFailed, color: .red)
         .padding(.horizontal, 8)
-//        .multilineTextAlignment(isCurrentStation ? .trailing : .leading)
         .multilineTextAlignment(.leading)
         .lineLimit(3)
         .font(.headline)

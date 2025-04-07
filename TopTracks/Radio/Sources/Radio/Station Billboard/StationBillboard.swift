@@ -11,45 +11,42 @@ public struct StationBillboard: View {
 extension StationBillboard {
   public var body: some View {
     HStack {
-        BillboardImage(artwork: station.artwork)
-        StationNameView(name: station.name,
-                        playbackFailed: station.playbackFailed)//,
-//                        isCurrentStation: isCurrentStation)
-//        if isCurrentStation {
-//          CurrentStationIndicator()
-//        }
+      BillboardImage(artwork: station.artwork)
+      StationNameView(name: station.name,
+                      playbackFailed: station.playbackFailed)
+      Spacer()
       CurrentStationIndicator(isCurrentStation: isCurrentStation)
-
-      }
-      .listRowBackground(BillboardBackground(backgroundColor: backgroundColor,
-                                             isCurrentStation: isCurrentStation))      
-      .swipeActions(edge: .leading, allowsFullSwipe: false) {
-        ShowStacksButton(station: station)
-        if !station.isChart && station.availableSongs.count > 24 {
-          RotateMusicButton(station: station)
-        }
-        if let added = station.stack(for: .added),
-           let addedSongs = added.songs,
-           (!station.isChart && addedSongs.count > 4) {
-          AddAndRotateMusicButton(station: station)
-        }
-      }
-      .contentShape(Rectangle())
-      .onTapGesture {
-        guard isNotCurrentStation else { return }
-        RadioLogger.playing.info("Geting set to play \(station.name)")
-        Task {
-          do {
-            try await station.fetchUpdates()
-            try await CurrentQueue.shared.playStation(station)
-          } catch {
-            RadioLogger.playing.info("Couldn't play \(station.name) \n \(error.localizedDescription)")
-            CurrentQueue.shared.stopPlayingStation()
-          }
-        }
-      }
-      .animation(.default, value: currentStation.nowPlaying)
+      
     }
+    .listRowBackground(BillboardBackground(backgroundColor: backgroundColor,
+                                           isCurrentStation: isCurrentStation))
+    .swipeActions(edge: .leading, allowsFullSwipe: false) {
+      ShowStacksButton(station: station)
+      if !station.isChart && station.availableSongs.count > 24 {
+        RotateMusicButton(station: station)
+      }
+      if let added = station.stack(for: .added),
+         let addedSongs = added.songs,
+         (!station.isChart && addedSongs.count > 4) {
+        AddAndRotateMusicButton(station: station)
+      }
+    }
+    .contentShape(Rectangle())
+    .onTapGesture {
+      guard isNotCurrentStation else { return }
+      RadioLogger.playing.info("Geting set to play \(station.name)")
+      Task {
+        do {
+          try await station.fetchUpdates()
+          try await CurrentQueue.shared.playStation(station)
+        } catch {
+          RadioLogger.playing.info("Couldn't play \(station.name) \n \(error.localizedDescription)")
+          CurrentQueue.shared.stopPlayingStation()
+        }
+      }
+    }
+    .animation(.default, value: currentStation.nowPlaying)
+  }
 }
 
 extension StationBillboard {

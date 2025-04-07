@@ -8,13 +8,9 @@ struct CurrentStationIndicator: View {
 
 extension CurrentStationIndicator {
   var body: some View {
-    HStack {
-      Spacer()
-      
-      Image(systemName: "antenna.radiowaves.left.and.right")
-        .padding(.trailing)
-        .font(.largeTitle)
-        .foregroundStyle(isCurrentStation ? ColorConstants.accentColor(for: colorScheme) : .clear)
-    }
+    Image(systemName: "antenna.radiowaves.left.and.right")
+      .padding(.trailing)
+      .font(.largeTitle)
+      .foregroundStyle(isCurrentStation ? ColorConstants.accentColor(for: colorScheme) : .clear)
   }
 }
