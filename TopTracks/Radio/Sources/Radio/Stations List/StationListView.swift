@@ -15,11 +15,10 @@ struct StationListView: View {
 
 extension StationListView {
   var body: some View {
-    ScrollView { 
+    ScrollView {
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 375, maximum: 440))]) {
         ForEach(stations) {station in
           StationBillboard(station: station)
-            .listRowInsets(EdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6))
         }
         .onDelete { indexSet in
           if let index = indexSet.first {
@@ -34,14 +33,6 @@ extension StationListView {
         Rectangle()
           .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
           .foregroundColor(.clear)
-      }
-    }
-    .listStyle(.plain)
-    .animation(.default, value: stations)
-    
-    .toolbar {
-      ToolbarItem(placement: .primaryAction) {
-        EditButton()
       }
     }
   }
