@@ -15,24 +15,27 @@ struct StationListView: View {
 
 extension StationListView {
   var body: some View {
-    List {
-      ForEach(stations) {station in
-        StationBillboard(station: station)
-          .listRowInsets(EdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6))
-      }
-      .onDelete { indexSet in
-        if let index = indexSet.first {
-          deleteStation(stations[index])
+    ScrollView { 
+      LazyVGrid(columns: [GridItem(.adaptive(minimum: 375, maximum: 440))]) {
+        ForEach(stations) {station in
+          StationBillboard(station: station)
+            .listRowInsets(EdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6))
+        }
+        .onDelete { indexSet in
+          if let index = indexSet.first {
+            deleteStation(stations[index])
+          }
         }
       }
-      if stations.isEmpty {
-        CloudActivityView()
+      LazyVGrid(columns: [GridItem(.flexible())]) {
+        if stations.isEmpty {
+          CloudActivityView()
+        }
+        Rectangle()
+          .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
+          .foregroundColor(.clear)
       }
-      Rectangle()
-        .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
-        .foregroundColor(.clear)
     }
-    //    .listRowSeparatorTint(.clear)
     .listStyle(.plain)
     .animation(.default, value: stations)
     

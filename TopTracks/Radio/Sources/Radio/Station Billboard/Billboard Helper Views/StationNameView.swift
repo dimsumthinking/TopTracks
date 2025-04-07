@@ -9,14 +9,15 @@ struct StationNameView: View {
 
 extension StationNameView {
   var body: some View {
-    HStack {
+    VStack {
+      Spacer()
       Text(name)
         .strikethrough(playbackFailed, color: .red)
         .padding(.horizontal, 8)
         .multilineTextAlignment(.leading)
         .lineLimit(3)
         .font(.headline)
-        
+      Spacer()
     }
   }
 }

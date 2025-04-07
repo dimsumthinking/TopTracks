@@ -6,20 +6,30 @@ import ApplicationState
 public struct StationBillboard: View {
   let station: TopTracksStation
   @State private var currentStation = CurrentStation.shared
+  @Environment(\.colorScheme) var colorScheme
+
 }
 
 extension StationBillboard {
   public var body: some View {
-    HStack {
-      BillboardImage(artwork: station.artwork)
-      StationNameView(name: station.name,
-                      playbackFailed: station.playbackFailed)
-      Spacer()
-      CurrentStationIndicator(isCurrentStation: isCurrentStation)
-      
+    ZStack {
+      BillboardBackground(backgroundColor: backgroundColor,
+                          isCurrentStation: isCurrentStation)
+      HStack {
+        BillboardImage(artwork: station.artwork)
+        HStack {
+          StationNameView(name: station.name,
+                          playbackFailed: station.playbackFailed)
+          Spacer()
+          CurrentStationIndicator(isCurrentStation: isCurrentStation)
+        }
+
+        
+      }
+#if !os(tvOS)
+        .border(isCurrentStation ? ColorConstants.accentColor(for: colorScheme) : .clear, width: 4)
+#endif
     }
-    .listRowBackground(BillboardBackground(backgroundColor: backgroundColor,
-                                           isCurrentStation: isCurrentStation))
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
       ShowStacksButton(station: station)
       if !station.isChart && station.availableSongs.count > 24 {
