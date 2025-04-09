@@ -20,11 +20,6 @@ extension StationListView {
         ForEach(stations) {station in
           StationBillboard(station: station)
         }
-        .onDelete { indexSet in
-          if let index = indexSet.first {
-            deleteStation(stations[index])
-          }
-        }
       }
       LazyVGrid(columns: [GridItem(.flexible())]) {
         if stations.isEmpty {
@@ -35,25 +30,22 @@ extension StationListView {
           .foregroundColor(.clear)
       }
     }
+    .onChange(of: stations, initial: true) { _,_ in reorderButtons()}
   }
 }
 
 extension StationListView {
-  func deleteStation(_ station: TopTracksStation) {
-    CurrentQueue.shared.stopPlayingDeletedStation(station)
-    modelContext.delete(station)
+  private func reorderButtons() {
     do {
-      try modelContext.save()
       for (index, station) in stations.enumerated() {
         station.buttonNumber = index
       }
       try modelContext.save()
     } catch {
-      RadioLogger.stationDelete.info("Could not delete \(station.name)")
+      RadioLogger.stationOrder.info("Could not reorder statoins")
     }
   }
 }
-
 
 
 

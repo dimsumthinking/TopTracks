@@ -15,9 +15,6 @@ extension BillboardBackground {
                                                             colorScheme: colorScheme)],
                    startPoint: .topLeading,
                    endPoint: .bottomTrailing)
-//    #if !os(tvOS)
-//    .border(isCurrentStation ? ColorConstants.accentColor(for: colorScheme) : .clear, width: 2)
-//    #endif
     .shadow(radius: 20.0)
   }
 }
