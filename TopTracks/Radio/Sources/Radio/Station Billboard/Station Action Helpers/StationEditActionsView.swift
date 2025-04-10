@@ -13,17 +13,20 @@ public struct StationEditActionsView: View {
 extension StationEditActionsView {
   public var body: some View {
     VStack {
+      Button ("View" + (station.isChart ? "" : "/Manage") + " Playlist") {
+        dismiss()
+        CurrentActivity.shared.beginStationSongList(for: station)
+      }
       if !station.isChart {
         Button("Auto-Rotate Playlist") {
           do {
             try station.addAndRotate()
+            dismiss()
           }
           catch { RadioLogger.stationMusicRotator.info("Couldn't add and rotate the music for \(station.stationName)")
           }
         }
-        Button ("View/Manage Playlist") {
-          CurrentActivity.shared.beginStationSongList(for: station)
-        }
+        
       }
       Button("Delete Station",
              role: .destructive) {
