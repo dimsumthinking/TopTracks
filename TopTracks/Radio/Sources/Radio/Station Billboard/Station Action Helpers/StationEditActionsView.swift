@@ -13,10 +13,19 @@ public struct StationEditActionsView: View {
 extension StationEditActionsView {
   public var body: some View {
     VStack {
-      Button ("Manage Playlist") {
-        
+      if !station.isChart {
+        Button("Auto-Rotate Playlist") {
+          do {
+            try station.addAndRotate()
+          }
+          catch { RadioLogger.stationMusicRotator.info("Couldn't add and rotate the music for \(station.stationName)")
+          }
+        }
+        Button ("View/Manage Playlist") {
+          CurrentActivity.shared.beginStationSongList(for: station)
+        }
       }
-      Button("Delete",
+      Button("Delete Station",
              role: .destructive) {
         delete()
         dismiss()
@@ -35,10 +44,6 @@ extension StationEditActionsView {
     modelContext.delete(station)
     do {
       try modelContext.save()
-      //      for (index, station) in stations.enumerated() {
-      //        station.buttonNumber = index
-      //      }
-//      try modelContext.save()
     } catch {
       RadioLogger.stationDelete.info("Could not delete \(station.name)")
     }

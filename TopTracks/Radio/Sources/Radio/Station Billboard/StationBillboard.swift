@@ -25,17 +25,6 @@ extension StationBillboard {
 #if !os(tvOS)
         .border(isCurrentStation ? ColorConstants.accentColor(for: colorScheme) : .clear, width: 4)
 #endif
-    .swipeActions(edge: .leading, allowsFullSwipe: false) {
-      ShowStacksButton(station: station)
-      if !station.isChart && station.availableSongs.count > 24 {
-        RotateMusicButton(station: station)
-      }
-      if let added = station.stack(for: .added),
-         let addedSongs = added.songs,
-         (!station.isChart && addedSongs.count > 4) {
-        AddAndRotateMusicButton(station: station)
-      }
-    }
     .contentShape(Rectangle())
     .onTapGesture {
       guard isNotCurrentStation else { return }

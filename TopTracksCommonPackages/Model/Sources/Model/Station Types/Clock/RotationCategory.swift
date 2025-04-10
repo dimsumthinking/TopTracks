@@ -70,6 +70,11 @@ extension RotationCategory: CustomStringConvertible {
     return rawValue
   }
   public var description: String {
-    return rawValue.capitalized
+    let suffix = switch self {
+    case .added, .archived, .removed:
+      " (not active)"
+    default: ""
+    }
+    return rawValue.capitalized + suffix
   }
 }
