@@ -3,6 +3,7 @@ import Foundation
 public let stationEssentialCategories: [RotationCategory] = [.power, .heavy, .medium, .light]
 public let stationStandardCategories: [RotationCategory] = [.power, .heavy, .medium, .light, .gold]
 public let stationExtendedCategories: [RotationCategory] = [.power, .heavy, .medium, .light, .gold, .added]
+public let stationAllCategories: [RotationCategory] = RotationCategory.allCases
 //let fullStationCreationCategories: [RotationCategory] = [.power, .heavy, .medium, .light, .gold, .recommended]
 
 public enum RotationCategory: String, CaseIterable, Hashable, Equatable, Identifiable, Sendable {
@@ -71,8 +72,10 @@ extension RotationCategory: CustomStringConvertible {
   }
   public var description: String {
     let suffix = switch self {
-    case .added, .archived, .removed:
-      " (not active)"
+    case .archived, .removed:
+      " (no longer active)"
+    case .added:
+      " (not yet active)"
     default: ""
     }
     return rawValue.capitalized + suffix

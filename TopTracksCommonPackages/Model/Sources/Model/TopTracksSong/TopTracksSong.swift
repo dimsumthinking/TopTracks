@@ -11,7 +11,7 @@ import MusicKit
     public var lastPlayed: Date = Date()
     public var motion: String = "added"
     public var rating: String = SongRating.neutral.description
-    var title: String = "Song Title"
+    public var title: String = "Song Title"
     
     public var stack: TopTracksStack?
   

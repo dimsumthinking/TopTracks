@@ -20,8 +20,7 @@ let package = Package(
     targets: [
         .target(
             name: "PlaylistSongPreview",
-        dependencies: ["Constants", "ApplicationState", "Model"],
-            swiftSettings: [.swiftLanguageVersion(.v6)]),
+        dependencies: ["Constants", "ApplicationState", "Model"]),
         .testTarget(
             name: "PlaylistSongPreviewTests",
             dependencies: ["PlaylistSongPreview"]),
