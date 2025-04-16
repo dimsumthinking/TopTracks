@@ -1,5 +1,5 @@
 import MusicKit
-import CoreData
+//import CoreData
 
 public func splitSongsIntoCategories(songs: [Song]) -> [RotationCategory: [Song]] {
   var songsInCategories = [RotationCategory: [Song]]()

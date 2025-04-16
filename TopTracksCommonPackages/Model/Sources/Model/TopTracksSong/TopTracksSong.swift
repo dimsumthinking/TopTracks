@@ -53,7 +53,49 @@ extension TopTracksSong {
   }
     
     public var rotationCategory: RotationCategory {
+      get {
         stack?.rotationCategory ?? .power
+      } set {
+        do {
+          if rotationCategory == .archived || rotationCategory == .removed {
+            createStack(for: rotationCategory)
+          }
+          try changeStack(to: newValue)
+        } catch {
+          StationUpdatersLogger.rotatingStation.info("Couldn't change  song's category to \(newValue)")
+        }
+      }
     }
+  
+  public func changeStack(to rotationCategory: RotationCategory) throws {
+    if let station = station,
+      let newStack = station.stacks?.first(where: {$0.rotationCategory == rotationCategory}) {
+      self.stack = newStack
+      try station.modelContext?.save()
+      StationUpdatersLogger.rotatingStation.info("Changed  song's category to \(rotationCategory)")
+    } else {
+      StationUpdatersLogger.rotatingStation.info("Couldn't change  song's category to \(rotationCategory)")  
+    }
+  }
+  
+  private func createStack(for rotationCategory: RotationCategory)  {
+    guard let station = station,
+          let stacks = station.stacks,
+          let context = station.modelContext,
+          stacks.filter{$0.rotationCategory == rotationCategory}.isEmpty else {
+            StationUpdatersLogger.rotatingStation.info(" \(rotationCategory) already exists")
+            return
+          }
+    let newStack = TopTracksStack(category: rotationCategory)
+    context.insert(newStack)
+    newStack.station = station
+    do {
+      try context.save()
+      StationUpdatersLogger.rotatingStation.info("Created category  \(rotationCategory)")
+    } catch {
+      StationUpdatersLogger.rotatingStation.info("Couldn't create \(rotationCategory)")
+    }
+    
+  }
 }
 

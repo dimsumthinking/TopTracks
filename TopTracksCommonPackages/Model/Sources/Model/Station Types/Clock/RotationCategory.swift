@@ -48,8 +48,8 @@ extension RotationCategory {
 
 
 extension RotationCategory {
-  public var id: Int {
-    hashValue
+  public var id: Self {
+    self
   }
 }
 
