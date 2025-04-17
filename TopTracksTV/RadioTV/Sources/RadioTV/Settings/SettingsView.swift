@@ -14,9 +14,7 @@ extension SettingsView {
         .font(.title)
       List {
         ColorSchemeChooserView()
-#if os(iOS)
-        CellUsageSettingsView()
-#endif
+        InfoView()
         
       }
     }

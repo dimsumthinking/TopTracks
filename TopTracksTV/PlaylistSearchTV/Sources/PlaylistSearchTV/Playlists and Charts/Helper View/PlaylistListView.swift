@@ -48,60 +48,19 @@ extension PlaylistListView {
                 }
                 .padding()
               }
+              #if !os(macOS)
               .buttonStyle(.card)
+              #endif
             }
           }
         }
       }
     }
     .navigationDestination(for: Playlist.self) {playlist in
-//      VStack {
-//        HeaderView(title: playlist.name)
-        
-        PlaylistSongsView(playlist: playlist)
-//      }
+
       
     }
       
-      //    List(filteredPlaylists) {playlist in
-      //      if let artwork = playlist.artwork,
-      //         let backgroundColor = artwork.backgroundColor {
-      //        HStack(alignment: .top) {
-      //          NavigationLink {
-      //            PlaylistSongsView(playlist: playlist)
-      //              .navigationTitle(playlist.name)
-      //          } label: {
-      //            ArtworkImage(artwork,
-      //                         width: Constants.playlistListImageSize,
-      //                         height: Constants.playlistListImageSize)
-      //            VStack(alignment: .leading) {
-      //              Text(playlist.name)
-      //                .font(.headline)
-      //              if let curatorName = playlist.curatorName {
-      //                Text(curatorName)
-      //                  .font(.subheadline)
-      //              }
-      //              if let shortDescription = playlist.shortDescription {
-      //                Text(shortDescription)
-      //                  .lineLimit(3)
-      //                  .font(.caption)
-      //                  .foregroundColor(.secondary)
-      //              }
-      //            }
-      //          }
-      //        }
-      //        .listRowBackground(LinearGradient(colors: [
-      //          ColorConstants.gradientStartColor(backgroundColor: backgroundColor,
-      //                                            colorScheme: colorScheme),
-      //          ColorConstants.gradientEndColor(backgroundColor: backgroundColor,
-      //                                          colorScheme: colorScheme)],
-      //                                          startPoint: .topLeading,
-      //                                          endPoint: .bottomTrailing))
-      //        .listRowInsets(EdgeInsets(top: 20, leading: 6, bottom: 20, trailing: 6))
-      //
-      //      }
-      //    }
-      //    .listStyle(.plain)
       
     }
   }

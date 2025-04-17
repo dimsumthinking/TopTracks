@@ -11,6 +11,7 @@ extension InfoView  {
           .multilineTextAlignment(.center)
         
         ClockView(hour: musicClock)
+          .aspectRatio(1.0, contentMode: .fit)
         
         Text("Play begins at the top of the clock with a power song. As we move around the clock, you'll hear a song in that category that played longest ago.")
           .multilineTextAlignment(.center)

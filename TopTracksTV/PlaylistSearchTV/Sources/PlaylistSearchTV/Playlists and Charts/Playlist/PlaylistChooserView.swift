@@ -4,11 +4,11 @@ import ApplicationState
 import PlaylistSearchShared
 
 public struct PlaylistChooserView: View {
-  @StateObject  var lister: PlaylistLister
+  @State var lister: PlaylistLister
   @State private var filterString = ""
 
   init(category: AppleMusicCategory) {
-    _lister = StateObject(wrappedValue: PlaylistLister(category: category))
+    _lister = State(wrappedValue: PlaylistLister(category: category))
   }
 }
 extension PlaylistChooserView {

@@ -28,7 +28,9 @@ extension PlaylistKindView {
               .font(.headline)
               .padding()
             }
+            #if !os(macOS)
             .buttonStyle(.card)
+            #endif
           }
         }
 

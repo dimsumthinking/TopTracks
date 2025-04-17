@@ -29,8 +29,9 @@ extension ChartListView {
                 .padding()
                 
               }
+              #if !os(macOS)
               .buttonStyle(.card)
-              
+              #endif
             }
           }
         }

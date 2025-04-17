@@ -4,11 +4,11 @@ import ApplicationState
 import PlaylistSearchShared
 
 public struct ChartChooserView: View {
-  @StateObject  var lister: ChartLister
+  @State  var lister: ChartLister
   @State private var filterString = ""
   
   init(kind: MusicCatalogChartKind) {
-    _lister = StateObject(wrappedValue: {ChartLister(kind: kind)}())
+    _lister = State(wrappedValue: {ChartLister(kind: kind)}())
   }
 }
 

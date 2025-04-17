@@ -3,10 +3,11 @@ import Constants
 import ApplicationState
 import MusicKit
 
+
 struct FullPlayerView: View {
   @Binding var isShowingFullPlayer: Bool
   //  @EnvironmentObject private var applicationState: ApplicationState
-  var currentSong = CurrentSong.shared.song
+  var currentSong = CurrentSong.shared.nowPlaying?.song
 }
 
 
@@ -23,13 +24,6 @@ extension FullPlayerView {
             Text("\(Image(systemName: "arrow.left")) Stations")
           }
           Spacer()
-          
-          RoutePicker()
-            .frame(width: 20, height: 20)
-          SongRatingView()
-            .padding(.horizontal)
-          
-          
         }
       }
       if let currentSong { //} = CurrentSong.shared.song {

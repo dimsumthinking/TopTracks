@@ -15,7 +15,7 @@ extension MainView {
   var body: some View {
     Group {
       switch currentActivity.appActivity {
-      case .enjoying, .importing:
+      case .enjoying:
         ZStack {
           MainStationsView(isShowingFullPlayer: $isShowingFullPlayer)
           MainPlayerView(isShowingFullPlayer: $isShowingFullPlayer)
