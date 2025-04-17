@@ -24,7 +24,6 @@ extension MainView {
         }
       case .creating:  MainCreationView()
       case .viewingOrEditing(let station): MainStationSongListView(station)
-      case .importing(let url): PlaylistImporterView(url: url)
       }
     }
     .onChange(of: stations, initial: true) { oldValue, newValue in
@@ -32,9 +31,7 @@ extension MainView {
 
       watchConnector.setStations(to: newValue)
     }
-    .onOpenURL { url in
-      CurrentActivity.shared.beginImporting(url: url)
-    }
+
 
   }
 }
