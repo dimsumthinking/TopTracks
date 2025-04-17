@@ -1,12 +1,12 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 
 import PackageDescription
 
 let package = Package(
     name: "AppleMusicSubscription",
     platforms: [
-      .iOS("18.0"),
-      .macOS("15.0")
+      .iOS("18.4"),
+      .macOS("15.4")
     ],
     products: [
         .library(
@@ -16,8 +16,7 @@ let package = Package(
     targets: [
         .target(
             name: "AppleMusicSubscription",
-            dependencies: [],
-            swiftSettings: [.swiftLanguageVersion(.v6)]),
+            dependencies: []),
         .testTarget(
             name: "AppleMusicSubscriptionTests",
             dependencies: ["AppleMusicSubscription"]),

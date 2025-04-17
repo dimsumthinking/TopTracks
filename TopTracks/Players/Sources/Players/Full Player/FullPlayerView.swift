@@ -32,6 +32,7 @@ extension FullPlayerView  {
           ControlPanel()
           Spacer()
         }
+        #if !os(macOS)
         .navigationTitle(CurrentStation.shared.nowPlaying?.stationName ?? "Now Playing")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -45,6 +46,7 @@ extension FullPlayerView  {
             SleepTimerView()
           }
         }
+        #endif
         
         .gesture(DragGesture().onChanged { drag in
           if drag.location.y - drag.startLocation.y > Constants.fullPlayerSwipe {

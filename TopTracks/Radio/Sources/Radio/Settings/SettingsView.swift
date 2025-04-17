@@ -2,34 +2,36 @@ import SwiftUI
 import ApplicationState
 
 struct SettingsView: View {
-  @Binding var mainStationsSheet: MainStationsSheet?
   @AppStorage("colorScheme") private var colorSchemeString = "dark"
   @Environment(\.colorScheme) private var colorScheme
+  @Environment(\.dismiss) private var dismiss
 }
 
 extension SettingsView {
   var body: some View {
     NavigationStack {
-      VStack {
-        List {
-          ColorSchemeChooserView()
-          #if os(iOS)
-          CellUsageSettingsView()
-          #endif
-        }
+      List {
+        ColorSchemeChooserView()
+#if os(iOS)
+        CellUsageSettingsView()
+#endif
+        InfoView()
       }
+      
+#if !os(macOS)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
-            mainStationsSheet = nil
+            dismiss()
           } label: {
             Text("Done")
           }
         }
       }
+#endif
       .navigationTitle("Settings")
-          .preferredColorScheme(currentColorScheme(from:  colorSchemeString) ?? colorScheme)
-
+      .preferredColorScheme(currentColorScheme(from:  colorSchemeString) ?? colorScheme)
+      
     }
   }
 }

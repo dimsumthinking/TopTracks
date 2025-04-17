@@ -30,6 +30,7 @@ extension PlaylistImporterView {
             .foregroundColor(isError ? .red : .primary)
           Spacer()
         }
+        #if !os(macOS)
         .toolbar {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button {
@@ -39,6 +40,7 @@ extension PlaylistImporterView {
             }
           }
         }
+        #endif
       }
     }
     .task {

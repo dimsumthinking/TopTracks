@@ -1,12 +1,12 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 
 import PackageDescription
 
 let package = Package(
     name: "TopTracksCore",
     platforms: [
-      .macOS("15.0"),
-      .iOS("18.0")],
+      .macOS("15.4"),
+      .iOS("18.4")],
     products: [
         .library(
             name: "TopTracksCore",
@@ -26,8 +26,7 @@ let package = Package(
                           "AppleMusicSubscription",
                           "Constants",
                           "PlaylistSongPreview",
-                          "ApplicationState"],
-            swiftSettings: [.swiftLanguageVersion(.v6)]),
+                          "ApplicationState"]),
         .testTarget(
             name: "TopTracksCoreTests",
             dependencies: ["TopTracksCore"]),

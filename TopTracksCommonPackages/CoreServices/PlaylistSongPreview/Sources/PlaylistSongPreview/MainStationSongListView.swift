@@ -22,8 +22,9 @@ extension MainStationSongListView: View {
           PlaylistPreview(station)
         }
       }
+      #if !os(macOS)
       .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
+        ToolbarItem(placement: .topBarLeading) {
           Button(role: .cancel) {
             CurrentActivity.shared.endStationSongList()
           } label: {
@@ -31,6 +32,7 @@ extension MainStationSongListView: View {
           }
         }
       }
+      #endif
       .onDisappear {
         songPreviewPlayer.stop()
       }

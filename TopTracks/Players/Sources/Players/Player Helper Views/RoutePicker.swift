@@ -1,3 +1,4 @@
+#if !os(macOS)
 import SwiftUI
 import UIKit
 import AVKit
@@ -15,3 +16,4 @@ struct RoutePicker: UIViewRepresentable {
   func updateUIView(_ uiView: AVRoutePickerView, context: Context) {}
 }
 
+#endif

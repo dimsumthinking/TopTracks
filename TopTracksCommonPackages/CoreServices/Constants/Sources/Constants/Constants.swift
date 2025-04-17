@@ -15,6 +15,10 @@ extension Constants {
   public static let playlistGridImageSize =  120.0//max(UIScreen.main.bounds.width * 1 / 4, 120)
   public static let playlistGridGridSize = 140.0//max(UIScreen.main.bounds.width * 1 / 3, 140)
   public static let playlistGridRowSpacing = 20.0
+  #elseif os(macOS)
+  public static let playlistGridImageSize =  120.0//max(UIScreen.main.bounds.width * 1 / 4, 120)
+  public static let playlistGridGridSize = 140.0//max(UIScreen.main.bounds.width * 1 / 3, 140)
+  public static let playlistGridRowSpacing = 20.0
 #endif
   
   //  public static let playlistListImageSize = 80.0 // was 60
@@ -43,8 +47,8 @@ extension Constants {
   
   
 #else
-  public static let miniPlayerArtworkImageSize = 80
-  public static let fullPlayerArtworkImageSize = 300
+  public static let miniPlayerArtworkImageSize = 80.0
+  public static let fullPlayerArtworkImageSize = 300.0
   public static let playlistListImageSize = 80.0 // was 60
   public static let stationListImageSize = 80.0
   public static let songListImageSize = 80.0

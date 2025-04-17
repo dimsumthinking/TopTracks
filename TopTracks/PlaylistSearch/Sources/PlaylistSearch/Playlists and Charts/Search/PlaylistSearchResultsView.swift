@@ -18,6 +18,7 @@ extension PlaylistSearchResultsView {
       ProgressView()
     } else {
       PlaylistListView(filter(lister.playlists, using: filterString, appleOnly: false) )
+      #if !os(macOS)
         .toolbar {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button("Cancel") {
@@ -25,6 +26,7 @@ extension PlaylistSearchResultsView {
             }
           }
         }
+      #endif
       .searchable(text: $filterString)
     }
   }

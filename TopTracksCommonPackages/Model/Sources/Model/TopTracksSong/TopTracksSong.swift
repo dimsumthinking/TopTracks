@@ -68,8 +68,12 @@ extension TopTracksSong {
     }
   
   public func changeStack(to rotationCategory: RotationCategory) throws {
+    
     if let station = station,
       let newStack = station.stacks?.first(where: {$0.rotationCategory == rotationCategory}) {
+      self.motion = motionMoving(from: self.rotationCategory,
+                                 to: rotationCategory,
+                                 given: songMotion).name
       self.stack = newStack
       try station.modelContext?.save()
       StationUpdatersLogger.rotatingStation.info("Changed  song's category to \(rotationCategory)")
@@ -82,7 +86,7 @@ extension TopTracksSong {
     guard let station = station,
           let stacks = station.stacks,
           let context = station.modelContext,
-          stacks.filter{$0.rotationCategory == rotationCategory}.isEmpty else {
+          stacks.filter({$0.rotationCategory == rotationCategory}).isEmpty else {
             StationUpdatersLogger.rotatingStation.info(" \(rotationCategory) already exists")
             return
           }

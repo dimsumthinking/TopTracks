@@ -6,6 +6,9 @@ struct CellUsageSettingsView: View {
 
 extension CellUsageSettingsView {
   var body: some View {
+#if os(macOS)
+    Text("Can't set Cellular Data Usage")
+    #else
     Section("Cellular Data Usage") {
       HStack {
         Spacer()
@@ -34,5 +37,6 @@ extension CellUsageSettingsView {
       //      }
       //      .padding()
     }
+#endif
   }
 }

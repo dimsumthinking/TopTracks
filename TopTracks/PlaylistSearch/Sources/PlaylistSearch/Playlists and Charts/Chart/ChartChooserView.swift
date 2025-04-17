@@ -30,7 +30,7 @@ extension ChartChooserView {
 //          ChartListView(filter(lister.playlists, using: filterString))
         }
       }
-      
+      #if !os(macOS)
         .toolbar {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button("Cancel") {
@@ -38,6 +38,7 @@ extension ChartChooserView {
             }
           }
         }
+      #endif
 //      .searchable(text: $filterString)
     }
   }

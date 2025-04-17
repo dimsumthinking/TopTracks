@@ -12,6 +12,7 @@ extension MainCreationView {
     NavigationStack {
       PlaylistKindView()
         .navigationTitle("Kinds of Playlists")
+      #if !os(macOS)
         .toolbar {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button("Cancel") {
@@ -19,6 +20,7 @@ extension MainCreationView {
             }
           }
         }
+      #endif
     }
   }
 }

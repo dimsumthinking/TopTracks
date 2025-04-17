@@ -25,6 +25,7 @@ extension AppleMusicCategoryChooserView {
         }
       }
       .searchable(text: $filterString)
+    #if !os(macOS)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button("Cancel") {
@@ -32,6 +33,7 @@ extension AppleMusicCategoryChooserView {
           }
         }
       }
+    #endif
   }
 }
 

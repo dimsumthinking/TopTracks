@@ -2,7 +2,7 @@ import SwiftUI
 
 
 public struct MainStationsView: View {
-  @State private var mainStationsSheet: MainStationsSheet? = nil
+  @State private var isShowingSettings = false
   @Environment(\.colorScheme) private var colorScheme
   public init() {}
 }
@@ -12,26 +12,20 @@ extension MainStationsView {
     NavigationStack {
         StationListView()
       .navigationTitle("Stations")
+      #if !os(macOS)
       .toolbar {
         ToolbarItemGroup(placement: .navigationBarTrailing) {
           AddStationButton()
         }
         ToolbarItemGroup(placement: .navigationBarLeading) {
-          ShowSettingsButton(mainStationsSheet: $mainStationsSheet)
-          ShowInfoButton(mainStationsSheet: $mainStationsSheet)
+          ShowSettingsButton(isShowingSettings: $isShowingSettings)
         }
       }
-      .sheet(item: $mainStationsSheet) {
-        mainStationsSheet = nil
-      } content: { mainStationsSheet in
-        switch mainStationsSheet {
-        case .settings:
-          SettingsView(mainStationsSheet: $mainStationsSheet)
+      #endif
+      .sheet(isPresented: $isShowingSettings) {
+          SettingsView()
             .environment(\.colorScheme, colorScheme)
-        case .info:
-          InfoView(mainStationsSheet: $mainStationsSheet)
-            .environment(\.colorScheme, colorScheme)
-        }
+       
       }
     }
   }

@@ -72,7 +72,7 @@ extension PlaylistSongsView {
         CurrentActivity.shared.endCreating()
       }
     }
-
+    #if !os(macOS)
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button("Cancel") {
@@ -80,6 +80,7 @@ extension PlaylistSongsView {
         }
       }
     }
+    #endif
     .onAppear {
       playlistAlreadyExists = topTrackStations.map(\.playlistID).contains(playlist.id.rawValue)
       checkIsComplete = true

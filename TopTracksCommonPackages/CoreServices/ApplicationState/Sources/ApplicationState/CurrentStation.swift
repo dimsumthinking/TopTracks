@@ -14,9 +14,8 @@ extension CurrentStation {
   public func setStation(to station: TopTracksStation) throws {
     let persistentModelID = station.persistentModelID
     nowPlaying = station
-    Task {
-      await stationUpdater.markPlayed(stationWithID: persistentModelID)
-    }
+    stationUpdater.markPlayed(stationWithID: persistentModelID)
+    
   }
 }
 

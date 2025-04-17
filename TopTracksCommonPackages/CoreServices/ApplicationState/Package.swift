@@ -1,13 +1,13 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 
 import PackageDescription
 
 let package = Package(
     name: "ApplicationState",
     platforms: [
-      .macOS("15.0"),
-      .iOS("18.0"),
-      .tvOS("18.0")],
+      .macOS("15.4"),
+      .iOS("18.4"),
+      .tvOS("18.4")],
     products: [
         .library(
             name: "ApplicationState",
@@ -20,8 +20,7 @@ let package = Package(
     targets: [
         .target(
             name: "ApplicationState",
-            dependencies: ["Model", "Constants"],
-            swiftSettings: [.swiftLanguageVersion(.v6)]),
+            dependencies: ["Model", "Constants"]),
         .testTarget(
             name: "ApplicationStateTests",
             dependencies: ["ApplicationState"]),

@@ -12,12 +12,15 @@ public class StationSongPreviewPlayer {
     var audioPlayer: AVAudioPlayer?
   
   init() {
+#if !os(macOS)
     let audioSession = AVAudioSession.sharedInstance()
     do {
       try audioSession.setCategory(.playback)
     } catch {
       print("Setting category to AVAudioSessionCategoryPlayback failed.")
     }
+#endif
+
   }
 }
 

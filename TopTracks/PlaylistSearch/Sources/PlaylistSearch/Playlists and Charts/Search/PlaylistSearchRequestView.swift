@@ -67,6 +67,7 @@ extension PlaylistSearchRequestView {
 
     }
     .navigationTitle("Playlist Search")
+    #if !os(macOS)
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button("Cancel") {
@@ -74,6 +75,7 @@ extension PlaylistSearchRequestView {
         }
       }
     }
+    #endif
     .navigationDestination(isPresented: $startSearch) {
       PlaylistSearchResultsView(term: escapedSearchTerm)
         .navigationTitle(searchTerm)

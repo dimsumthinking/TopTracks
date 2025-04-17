@@ -33,3 +33,21 @@ public func stackSizes(from totalNumberOfSongs: Int) -> [(RotationCategory, Int)
     
   }
 }
+
+public func categoryStackSize(from arrayOfTuples: [(RotationCategory, Int)]) -> [RotationCategory: Int] {
+  var result = [RotationCategory: Int]()
+  for element in arrayOfTuples {
+    result[element.0] = element.1
+  }
+  return result
+}
+
+extension TopTracksStation {
+  public var numberOfAvailableSongs: Int {
+    guard let stacks else { return 0 }
+    return stacks
+      .filter{stationExtendedCategories.contains($0.rotationCategory)}
+      .compactMap {$0.songs?.count}
+      .reduce(0, +)
+  }
+}

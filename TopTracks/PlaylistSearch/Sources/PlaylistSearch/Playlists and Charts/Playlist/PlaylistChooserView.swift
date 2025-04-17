@@ -17,7 +17,7 @@ extension PlaylistChooserView {
       ProgressView()
     } else {
       PlaylistListView(lister.playlists )
-
+      #if !os(macOS)
         .toolbar {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button("Cancel") {
@@ -25,6 +25,7 @@ extension PlaylistChooserView {
             }
           }
         }
+      #endif
     }
   }
 }

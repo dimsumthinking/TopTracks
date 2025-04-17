@@ -18,9 +18,7 @@ extension CurrentSong {
     case .song(let song):
       nowPlaying = CurrentStation.shared.nowPlaying?.topTracksSongMatching(song)
       if let persistentModelID = nowPlaying?.persistentModelID {
-        Task {
-          await songUpdater.markPlayed(songWithID: persistentModelID)
-        }
+        songUpdater.markPlayed(songWithID: persistentModelID)
       }
     default:
       print("Entry is not a song")
@@ -36,7 +34,7 @@ extension CurrentSong {
   public func removeCurrentSong() throws {
     if let persistentModelID = nowPlaying?.persistentModelID {
       Task {
-        await songUpdater.remove(songWithID: persistentModelID)
+        songUpdater.remove(songWithID: persistentModelID)
         try await ApplicationMusicPlayer.shared.skipToNextEntry()
       }
     }
@@ -64,10 +62,8 @@ extension CurrentSong {
   
   public func changeRating(to rating: SongRating)  throws {
     if let persistentModelID = nowPlaying?.persistentModelID {
-      Task {
-        await songUpdater.changeRatingFor(songWithID: persistentModelID,
+      songUpdater.changeRatingFor(songWithID: persistentModelID,
                                           to: rating)
-      }
     }
   }
 }

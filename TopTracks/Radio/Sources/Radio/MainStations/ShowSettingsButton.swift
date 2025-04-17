@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct ShowSettingsButton: View {
-  @Binding var mainStationsSheet: MainStationsSheet?
+  @Binding var isShowingSettings: Bool
 }
 
 extension ShowSettingsButton {
   var body: some View {
     Button {
-      mainStationsSheet = .settings
+      isShowingSettings = true
     } label: {
       Image(systemName: "gear")
     }
