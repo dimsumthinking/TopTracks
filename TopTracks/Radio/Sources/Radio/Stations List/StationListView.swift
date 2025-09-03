@@ -11,13 +11,14 @@ struct StationListView: View {
          animation: .bouncy)
   var stations: [TopTracksStation]
   @Environment(\.modelContext) private var modelContext
+  @State private var searchFilter = ""
 }
 
 extension StationListView {
   var body: some View {
     ScrollView {
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 375, maximum: 440))]) {
-        ForEach(stations) {station in
+        ForEach(filteredStations) {station in
           StationBillboard(station: station)
         }
       }
@@ -30,6 +31,7 @@ extension StationListView {
           .foregroundColor(.clear)
       }
     }
+    .searchable(text: $searchFilter, placement: .navigationBarDrawer)
     .onChange(of: stations, initial: true) { _,_ in reorderButtons()}
   }
 }
@@ -43,6 +45,17 @@ extension StationListView {
       try modelContext.save()
     } catch {
       RadioLogger.stationOrder.info("Could not reorder statoins")
+    }
+  }
+}
+
+extension StationListView {
+  private var filteredStations: [TopTracksStation] {
+    guard !searchFilter.isEmpty else {
+      return stations
+    }
+    return stations.filter { station in
+      station.name.localizedCaseInsensitiveContains(searchFilter)
     }
   }
 }

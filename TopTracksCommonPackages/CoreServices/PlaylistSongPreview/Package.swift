@@ -1,12 +1,12 @@
-// swift-tools-version: 6.1
+// swift-tools-version: 6.2
 
 import PackageDescription
 
 let package = Package(
     name: "PlaylistSongPreview",
     platforms: [
-      .macOS("15.4"),
-      .iOS("18.4")],
+      .macOS("26"),
+      .iOS("26")],
     products: [
         .library(
             name: "PlaylistSongPreview",

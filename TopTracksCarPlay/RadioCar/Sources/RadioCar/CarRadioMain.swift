@@ -1,5 +1,6 @@
 import CarPlay
 
+@MainActor
 class CarRadioMain {
   let tabs: CPTabBarTemplate
   

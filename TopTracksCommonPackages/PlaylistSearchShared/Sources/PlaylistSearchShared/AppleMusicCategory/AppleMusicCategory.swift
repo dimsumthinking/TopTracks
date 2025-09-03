@@ -35,16 +35,26 @@ public enum AppleMusicCategory: String, CaseIterable, Sendable {
   
   // Essentials
   case essentials
+  
+  // Coming Soon
+  case comingSoon = "Coming Soon"
+  
+  
+  // Charts
+  case charts
 
   
   // Decades
   case decades
   case oldies
+  case twenties = "20s"
+  case thirties = "30s"
+  case forties = "40s"
   case fifties = "50s"
-  case sixties = "60s"
-  case seventies = "70s"
-  case eighties = "80s"
-  case nineties = "90s"
+  case sixties = "'60s"
+  case seventies = "'70s"
+  case eighties = "'80s"
+  case nineties = "'90s"
   case twoThousands = "2000s"
   case twentyTens = "2010s"
 //  case twentyTwenties = "2020s"
@@ -55,6 +65,7 @@ public enum AppleMusicCategory: String, CaseIterable, Sendable {
   case alternative
   case americana
   case anime
+  case appleMusicRadio = "Apple Music Radio"
   case behindTheSongs = "Behind the Songs"
   case blues
   case christian
@@ -75,8 +86,7 @@ public enum AppleMusicCategory: String, CaseIterable, Sendable {
   case indie
   case jazz
   case kids
-  case latin
-  case live
+  case live = "Live Music"
   case metal
   case pop
   case pride
@@ -88,11 +98,11 @@ public enum AppleMusicCategory: String, CaseIterable, Sendable {
   case samba
   case soulFunk = "Soul/Funk"
   case upNext = "Up Next"
-  case urbanoLatino = "Urbano Latino"
 
   // Worldwide (not listed above)
   case african = "African Music"
   case afrikaans
+  case amapiano
   case arabic
   case baileFunk = "Baile Funk"
   case bollywood
@@ -117,10 +127,11 @@ public enum AppleMusicCategory: String, CaseIterable, Sendable {
   case jHipHop = "J-Hip-Hop"
   case jPop = "J-Pop"
   case jRock = "J-Rock"
-  case japan
+  case japanese = "Japanese Music"
   case kPop = "K-Pop"
   case kannada
   case kayokyoku
+  case latin
   case malayalam
   case malaysianMusic = "Malaysian Music"
   case mandopop
@@ -129,7 +140,7 @@ public enum AppleMusicCategory: String, CaseIterable, Sendable {
   case musiqueFrancophone = "Musique francophone"
   case musicaMexicana = "Música Mexicana"
   case musicaTropical = "Música Tropical"
-  case pilipino
+  case pilipino = "Original Pilipino Music"
   case popItaliano = "Pop Italiano"
   case popLatino = "Pop Latino"
   case punjabi
@@ -148,8 +159,9 @@ public enum AppleMusicCategory: String, CaseIterable, Sendable {
   case telugu
   case thaiMusic = "Thai Music"
   case tpop = "T=Pop"
+  case urbanoLatino = "Urbano Latino"
   case valienato
-  case vietnamese
+  case vietnamese = "Vietnamese Music"
   case worldwide
 
   // Moods and Activities
@@ -158,7 +170,7 @@ public enum AppleMusicCategory: String, CaseIterable, Sendable {
   case aloneTime = "Alone Time"
   case chill
   case commuting
-  case eatingAndCooking = "Eating and Cooking"
+  case eatingAndCooking = "Eating & Cooking"
   case evening
   case feelGood = "Feel Good"
   case feelingBlue = "Feeling Blue"
@@ -172,6 +184,7 @@ public enum AppleMusicCategory: String, CaseIterable, Sendable {
   case outdoors
   case party
   case romance
+  case sing
   case sleep
   case social
   case sports
@@ -200,28 +213,28 @@ extension AppleMusicCategory {
   public static let appleMusicSpatial = AppleMusicCategory.spatialAudio
   public static let appleMusicEssentials = AppleMusicCategory.essentials
   public static let appleMusicDecades: [AppleMusicCategory]
-  = [.oldies, .fifties, .sixties, .seventies, .eighties, .nineties, .twoThousands, .twentyTens]//, .twentyTwenties]
+  = [.decades, .oldies, .twenties, .thirties, .forties, .fifties, .sixties, .seventies, .eighties, .nineties, .twoThousands, .twentyTens]//, .twentyTwenties]
   public static let appleMusicGenres: [AppleMusicCategory]
-  = [.spatialAudio, .essentials, .acoustic, .afrobeats, .alternative, .americana, .anime, .behindTheSongs, .blues, .christian,
+  = [.spatialAudio, .essentials, .charts, .comingSoon, .acoustic, .afrobeats, .alternative, .americana, .anime, .appleMusicRadio, .behindTheSongs, .blues, .christian,
      .classicRock, .classical, .country, .dance, .devotional, .djMixes, .electronic, .family,
      .filmTVStage, .gospel, .hardRock, .hits, .hipHop, .holiday, .indie, .jazz,
-     .kids, .latin, .live, .metal, .pop, .pride, .punk,
+     .kids, .live, .metal, .pop, .pride, .punk,
      .radio, .rAndB, .reggae, .rock,  .samba, .soulFunk, .upNext, .worldwide]
 
   public static let appleMusicWorldwide: [AppleMusicCategory]
-  = [.african, .afrikaans, .afrobeats, .arabic, .baileFunk, .bollywood, .brazilianPop, .brazilianRock, .brazilianHipHop, .cPop,
+  = [.african, .afrikaans, .afrobeats, .amapiano, .arabic, .baileFunk, .bollywood, .brazilianPop, .brazilianRock, .brazilianHipHop, .cPop,
      .canadian, .cantopop,  .catalana, .deutschpop, .deutschrap, .firstNationsAustralia,
      .flamenco, .frenchPop, .frenchRap, .halk, .horspiele, .indianIndependent, .indonesianMusic,
-     .islamic, .jHipHop, .jPop, .jRock, .japan, .kPop, .kannada, .kayokyoku, .malayalam, .malaysianMusic,
+     .islamic, .jHipHop, .jPop, .jRock, .japanese, .kPop, .kannada, .kayokyoku, .latin, .malayalam, .malaysianMusic,
      .mandopop, .mizrahi, .mpb, .musicaMexicana, .musicaTropical, .musiqueFrancophone, .pilipino,
      .popItaliano, .popLatino, .punjabi, .rapItaliano, .religiKetuhanan, .rockInSpanish, .rockYAlternativo,
      .russian, .russianHipHop, .russianPop, .russianRock, .sanat, .schlager, .sertanejo,
-     .tamil, .telugu, .thaiMusic, .tpop, .valienato, .vietnamese, .worldwide]
+     .tamil, .telugu, .thaiMusic, .tpop, .valienato, .urbanoLatino, .vietnamese, .worldwide]
 
   public static let appleMusicMoodsAndActivities: [AppleMusicCategory]
   = [ .afterHours, .aloneTime, .chill, .commuting, .eatingAndCooking, .evening,
       .feelGood, .feelingBlue, .fitness, .focus, .gaming, .heartbreak, .home,
-      .morning, .motivation, .outdoors, .party, .romance, .sleep, .social, .sports, .summertimeSounds,
+      .morning, .motivation, .outdoors, .party, .romance, .sing, .sleep, .social, .sports, .summertimeSounds,
       .vacation, .weekend, .wellbeing, .work ]
   
   public static let appleMusicClassical: [AppleMusicCategory]

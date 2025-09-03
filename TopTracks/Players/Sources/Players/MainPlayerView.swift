@@ -21,7 +21,7 @@ extension MainPlayerView {
       } else {
         
         Spacer()
-        MiniPlayerView(isShowingFullPlayer: $isShowingFullPlayer)
+          MiniPlayerView(isShowingFullPlayer: $isShowingFullPlayer)
       }
     }
     .animation(.easeInOut, value: isShowingFullPlayer)

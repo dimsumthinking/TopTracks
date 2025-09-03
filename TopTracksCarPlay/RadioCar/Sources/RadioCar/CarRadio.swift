@@ -17,7 +17,7 @@ public class CarRadio: NSObject, CPTemplateApplicationSceneDelegate {
         do {
           stations = try CommonContainer.shared.container.mainContext
             .fetch(FetchDescriptor<TopTracksStation>())
-            .sorted { $0.buttonPosition < $1.buttonPosition}
+            .sorted { $0.lastTouched > $1.lastTouched}
         } catch {
           RadioCarLogger.fetchingStations.info("Couldn't fetch stations")
         }

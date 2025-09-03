@@ -12,50 +12,67 @@ struct MiniPlayerView: View {
 extension MiniPlayerView  {
   @ViewBuilder
   var body: some View {
-    if let currentSong {
-      HStack(spacing: 4) {
-        if let artwork = CurrentSong.shared.artwork {
-          ArtworkImage(artwork,
-                       width: 2 * Constants.miniPlayerArtworkImageSize/3,
-                       height: 2 * Constants.miniPlayerArtworkImageSize/3)
-          .padding()
-          .onTapGesture {
-            isShowingFullPlayer = true
+      if let currentSong {
+        ZStack {
+          VStack {
+            Spacer()
+            
+            Rectangle()
+              .frame(height: Constants.miniPlayerArtworkImageSize * 3/2)
+              .glassEffect(.regular, in: .rect)
           }
-        } else {
-          ArtworkFiller(size: 0.66 * Constants.miniPlayerArtworkImageSize )
-        }
-        VStack (alignment: .leading) {
-          Text(currentSong.title)
-            .lineLimit(2)
-          Text(currentSong.artistName)
-            .lineLimit(2)
-            .foregroundColor(.secondary)
-        }
-        .onTapGesture {
-          isShowingFullPlayer = true
-        }
-        Spacer()
-        PreviousSongButton()
-          .font(.headline)
-          .padding()
-        PlayPauseButton()
-          .font(.title)
-        NextSongButton()
-          .font(.headline)
-          .padding()
+          .ignoresSafeArea()
+          VStack {
+            Spacer()
+            HStack(spacing: 4) {
+              if let artwork = CurrentSong.shared.artwork {
+                ArtworkImage(artwork,
+                             width: 2 * Constants.miniPlayerArtworkImageSize/3,
+                             height: 2 * Constants.miniPlayerArtworkImageSize/3)
+                .padding()
+                .onTapGesture {
+                  isShowingFullPlayer = true
+                }
+              } else {
+                ArtworkFiller(size: 0.66 * Constants.miniPlayerArtworkImageSize )
+              }
+              VStack (alignment: .leading) {
+                Text(currentSong.title)
+                  .lineLimit(2)
+                Text(currentSong.artistName)
+                  .lineLimit(2)
+                  .foregroundColor(.secondary)
+              }
+              .onTapGesture {
+                isShowingFullPlayer = true
+              }
+              Spacer()
+              PreviousSongButton()
+              //            .font(.headline)
+                .padding()
+              PlayPauseButton()
+              //            .font(.body)
+              NextSongButton()
+              //            .font(.body)
+                .padding()
+                .padding(.trailing)
+            }
+            .background(in: .capsule)
+            .padding()
+            //        .scrollEdgeEffectStyle(.soft, for: .bottom)
+            //        .padding(.vertical, 20)
+            //        .glassEffect(.regular, in: .rect)
+          }
+          .ignoresSafeArea()
+
+
+        
       }
-      .tint(.secondary)
-      .background(.regularMaterial)
-      .shadow( radius: 20, x: 0, y: -10)
-      .gesture(DragGesture().onChanged { drag in
-        if  drag.startLocation.y - drag.location.y > Constants.fullPlayerSwipe {
-          isShowingFullPlayer = true
-        }
+        
+      } else {
+        ArtworkFiller(size: Constants.miniPlayerArtworkImageSize)
       }
-      )
-    } else {
-      ArtworkFiller(size: Constants.miniPlayerArtworkImageSize)
-    }
+
+    
   }
 }

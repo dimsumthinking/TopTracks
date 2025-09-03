@@ -1,5 +1,6 @@
 import CarPlay
 
+@MainActor
 class CarRadioRecents {
   let grid: CPGridTemplate
   

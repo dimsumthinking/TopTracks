@@ -9,7 +9,7 @@ public class CarRadio: NSObject, CPTemplateApplicationSceneDelegate {
 
   
   // CarPlay connected
-  nonisolated
+//  nonisolated
   public func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene,
                                 didConnect interfaceController: CPInterfaceController) {
 //    self.interfaceController = interfaceController

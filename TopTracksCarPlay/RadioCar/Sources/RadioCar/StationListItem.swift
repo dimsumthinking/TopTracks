@@ -37,15 +37,3 @@ class StationListItem  {
     }
   }
 }
-
-
-//fileprivate func play(station: TopTracksStation) {
-//  Task {
-//    do {
-//      try await CurrentQueue.shared.playStation(station)
-//    } catch {
-//      RadioCarLogger.playingStation.info("Can't play station \(station.name)")
-//      CurrentQueue.shared.stopPlayingStation()
-//    }
-//  }
-//}

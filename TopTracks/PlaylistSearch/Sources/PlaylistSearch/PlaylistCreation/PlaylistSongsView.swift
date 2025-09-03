@@ -13,7 +13,6 @@ public struct PlaylistSongsView: View {
   @State private var playlistAlreadyExists = false
   @State private var existingStation: TopTracksStation?
   @State private var currentSong: Song?
-  @State private var didCreateStation = false
   @Query private var topTrackStations: [TopTracksStation]
   @Environment(\.modelContext) private var modelContext
   
@@ -43,35 +42,15 @@ extension PlaylistSongsView {
         .padding()
       }
     }
-    .sheet(isPresented: $didCreateStation) {
-      Text("Added new station: \(playlist.name)")
-        .presentationDetents([.fraction(0.25)])
-        .presentationDragIndicator(.hidden)
-        .interactiveDismissDisabled(true)
-        .background(.thinMaterial)
 
-    }
-    
     .alert("Station already Exists",
            isPresented: $playlistAlreadyExists) {
-      Button("Play the station") {
-        if let station = existingStation {
-          Task {
-            do {
-              try await CurrentQueue.shared.playStation(station)
-              try CurrentStation.shared.setStation(to: station)
-            } catch {
-              print("Couldn't play station")
-              CurrentQueue.shared.stopPlayingStation()
-            }
-          }
-        }
+      Button("Dismiss") {
         CurrentActivity.shared.endCreating()
       }
-      Button("Cancel") {
-        CurrentActivity.shared.endCreating()
-      }
+      .glassEffect(.regular)
     }
+    
     #if !os(macOS)
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
@@ -115,19 +94,11 @@ extension PlaylistSongsView {
   func createStation() {
     PlaylistSearchLogger.creating.info("Trying to create station \(playlist.name)")
     do {
-//      try TopTracksStation.createStation(playlist: playlist,
-//                                         buttonNumber: topTrackStations.count, 
-//                                         songs: songs)
       try TopTracksStation.createStation(from: playlist,
                                          before: topTrackStations,
                                          songs: songs)
-      Task {
-        didCreateStation = true
-        try? await Task.sleep(for: .seconds(1))
-        didCreateStation = false
-        
-        CurrentActivity.shared.endCreating()
-      }
+      CurrentActivity.shared.endCreating()
+
     } catch {
       PlaylistSearchLogger.creating.info("Cannot create station \(playlist.name)")
     }
