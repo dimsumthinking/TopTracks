@@ -16,11 +16,12 @@ let package = Package(
       .package(path: "../../TopTracksCommonPackages/Model"),
       .package(path: "../../TopTracksCommonPackages/CoreServices/ApplicationState"),
       .package(path: "../../TopTracksCommonPackages/CoreServices/Constants"),
+      .package(path: "../Players")
     ],
     targets: [
         .target(
             name: "Radio",
-            dependencies: ["Model", "ApplicationState", "Constants" ]),
+            dependencies: ["Model", "ApplicationState", "Constants", "Players" ]),
         .testTarget(
             name: "RadioTests",
             dependencies: ["Radio"]),

@@ -26,6 +26,10 @@ extension StationBillboard {
         .border(isCurrentStation ? ColorConstants.accentColor(for: colorScheme) : .clear, width: 4)
 #endif
     .contentShape(Rectangle())
+    .accessibilityElement(children: .ignore)
+    .accessibilityLabel("\(station.name)")
+    .accessibilityAddTraits(.isButton)
+    .accessibilityValue(isCurrentStation ? "Currently playing" : "")
     .onTapGesture {
       guard isNotCurrentStation else { return }
       playStation()

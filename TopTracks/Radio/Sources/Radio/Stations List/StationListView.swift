@@ -24,10 +24,11 @@ extension StationListView {
       }
       LazyVGrid(columns: [GridItem(.flexible())]) {
         if stations.isEmpty {
-          CloudActivityView()
+//          CloudActivityView()
+          Text("Tap + to add a station")
         }
         Rectangle()
-          .frame(height: Constants.miniPlayerArtworkImageSize * 3 / 2)
+          .frame(height: Constants.miniPlayerArtworkImageSize *  2)
           .foregroundColor(.clear)
       }
     }

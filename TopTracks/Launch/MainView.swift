@@ -2,7 +2,6 @@ import SwiftUI
 import PlaylistSearch
 import ApplicationState
 import Radio
-import Players
 import PlaylistSongPreview
 import Model
 import SwiftData
@@ -16,16 +15,11 @@ extension MainView {
   var body: some View {
     Group {
       switch currentActivity.appActivity {
-      case .enjoying:
-        ZStack {
-          MainStationsView()
-          MainPlayerView()
-        }
+      case .enjoying: MainStationsView()
       case .creating:  MainCreationView()
       case .viewingOrEditing(let station): MainStationSongListView(station)
       }
     }
-
   }
 }
 

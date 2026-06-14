@@ -3,23 +3,19 @@ import Constants
 import ApplicationState
 import MusicKit
 
-struct FullPlayerView: View {
-  @Binding var isShowingFullPlayer: Bool
+public struct FullPlayerView: View {
   var currentSong = CurrentSong.shared.nowPlaying?.song
+  public init() {}
 }
 
 
 extension FullPlayerView  {
   @ViewBuilder
-  var body: some View {
-    if let currentSong { //} = CurrentSong.shared.song {
+  public var body: some View {
+    if let currentSong {
       NavigationStack {
         VStack {
           AlbumArt(artwork: CurrentSong.shared.artwork )
-            .onTapGesture {
-              isShowingFullPlayer = false
-            }
-          
           SongTextInfo(currentSong: currentSong)
           
           Spacer()
@@ -32,7 +28,7 @@ extension FullPlayerView  {
           ControlPanel()
           Spacer()
         }
-        #if !os(macOS)
+#if !os(macOS)
         .navigationTitle(CurrentStation.shared.nowPlaying?.stationName ?? "Now Playing")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -46,21 +42,11 @@ extension FullPlayerView  {
             SleepTimerView()
           }
         }
-        #endif
-        
-        .gesture(DragGesture().onChanged { drag in
-          if drag.location.y - drag.startLocation.y > Constants.fullPlayerSwipe {
-            isShowingFullPlayer = false
-          }
-        }
-        )
+#endif
       }
-      
     }
-    
     else {
       ArtworkFiller(size: Constants.miniPlayerArtworkImageSize)
     }
-    
   }
 }
