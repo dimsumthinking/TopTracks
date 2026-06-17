@@ -24,8 +24,13 @@ extension CurrentQueue {
     guard let currentStation = CurrentStation.shared.nowPlaying else { return }
     let player = ApplicationMusicPlayer.shared
     Task {
-      try await player.queue.insert(currentStation.nextHour(),
-                                    position: .tail)
+        do {
+            try await player.queue.insert(currentStation.nextHour(),
+                                          position: .tail)
+        } catch {
+            ApplicationStateLogger.creatingNextHour.info("Error creating the next hour")
+
+        }
     }
   }
 }
